@@ -2,15 +2,6 @@
 
 Hey Guys,
 
-hab jetzt so git in Code laufen....mehr oder weniger :D
+you can find information about our project here: https://nextsmartidea.wordpress.com/
 
-jetzt versuchte ich das ganze über die gui
-ach echt
- 
-so lange läuft die ganze sache etwas besser hab ich das gefühl
-
-das wurde online bearbeitet, mal schauen ob das unten ankommt....
-
- jap kamm an!!
- 
- viele grüße, fabi
+link to our web-app: https://smartevent-a3c4f.firebaseapp.com/
