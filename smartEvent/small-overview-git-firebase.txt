@@ -1,0 +1,82 @@
+https://firebase.google.com/docs/cli/
+
+1. Node.js download and install (latest Version v.6.8.0)
+2. open cmd.exe
+3. npm install -g firebase-tools
+4. firebase login 
+5. Go to a location
+6. firbase init
+7. select Hosting...
+8. ...follow steps...
+9. firbase deploy
+
+
+
+Git commands:
+
+-git add [file]  //adds the file to git
+-git status      //giving status
+-git commit -m "committing with a message" // <--
+-git push        //upload changes after commit
+-git pull        //download changes
+
+
+-git add .	//add everything in this directory
+-git add -A	//add All
+
+
+-git branch  //show my branch
+-git branch [newBranchName] //copy this branch into new branch [newBranchName] 
+-git checkout [newBranchName] //switch to the branch [newBranchName]
+-git push --set-upstream origin [newBranchName]	//push and change the upstream branch to [newBranchName]
+
+-git merge [branchFromWitchYouWantTheThings]	//merging into your branch (branch which is checked out)
+
+
+
+
++  Firebase initialization complete!                                                                 
+                                                                                                     
+C:\Projects\Firebase\nextsmartidea\fire>git add fire                                                 
+fatal: pathspec 'fire' did not match any files                                                       
+                                                                                                     
+C:\Projects\Firebase\nextsmartidea\fire>cd ..                                                        
+                                                                                                     
+C:\Projects\Firebase\nextsmartidea>git add fire                                                      
+warning: LF will be replaced by CRLF in fire/.firebaserc.                                            
+The file will have its original line endings in your working directory.                              
+warning: LF will be replaced by CRLF in fire/database.rules.json.                                    
+The file will have its original line endings in your working directory.                              
+warning: LF will be replaced by CRLF in fire/firebase.json.                                          
+The file will have its original line endings in your working directory.                              
+warning: LF will be replaced by CRLF in fire/public/index.html.                                      
+The file will have its original line endings in your working directory.                              
+                                                                                                     
+C:\Projects\Firebase\nextsmartidea>git status                                                        
+On branch master                                                                                     
+Your branch is up-to-date with 'origin/master'.                                                      
+Changes to be committed:                                                                             
+  (use "git reset HEAD <file>..." to unstage)                                                        
+                                                                                                     
+        new file:   fire/.firebaserc                                                                 
+        new file:   fire/database.rules.json                                                         
+        new file:   fire/firebase.json                                                               
+        new file:   fire/public/index.html                                                           
+                                                                                                     
+                                                                                                     
+C:\Projects\Firebase\nextsmartidea>git commit -m "test: add firebase to github"                      
+[master ca2412c] test: add firebase to github                                                        
+ 4 files changed, 94 insertions(+)                                                                   
+ create mode 100644 fire/.firebaserc                                                                 
+ create mode 100644 fire/database.rules.json                                                         
+ create mode 100644 fire/firebase.json                                                               
+ create mode 100644 fire/public/index.html                                                           
+                                                                                                     
+C:\Projects\Firebase\nextsmartidea>git push                                                          
+Counting objects: 8, done.                                                                           
+Delta compression using up to 4 threads.                                                             
+Compressing objects: 100% (7/7), done.                                                               
+Writing objects: 100% (8/8), 1.45 KiB | 0 bytes/s, done.                                             
+Total 8 (delta 0), reused 0 (delta 0)                                                                
+To https://github.com/SebastianBrehme/nextsmartidea.git                                              
+   f2e0bc8..ca2412c  master -> master     
