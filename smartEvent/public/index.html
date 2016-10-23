@@ -1,25 +1,43 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>SmartEvent</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
 
-    <!-- Polyfill(s) for older browsers -->
-    <script src="node_modules/core-js/client/shim.min.js"></script>
+<head>
+	<title>SmartEvent</title>
+	<base href="/">
 
-    <script src="node_modules/zone.js/dist/zone.js"></script>
-    <script src="node_modules/reflect-metadata/Reflect.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="styles.css">
 
-    <script src="systemjs.config.js"></script>
-    <script>
+	<!-- Polyfill(s) for older browsers -->
+	<script src="node_modules/core-js/client/shim.min.js"></script>
+
+	<script src="node_modules/zone.js/dist/zone.js"></script>
+	<script src="node_modules/reflect-metadata/Reflect.js"></script>
+	<script src="node_modules/systemjs/dist/system.src.js"></script>
+
+	<script src="systemjs.config.js"></script>
+	<script>
       System.import('app').catch(function(err){ console.error(err); });
     </script>
-  </head>
 
-  <body>
-    <my-app>Loading...</my-app>
-  </body>
+
+	<script src="https://www.gstatic.com/firebasejs/3.5.1/firebase.js"></script>
+	<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyBZ-7a6yO3JrQzDDJdMXgcb-sVF5y92a88",
+    authDomain: "smartevent-a3c4f.firebaseapp.com",
+    databaseURL: "https://smartevent-a3c4f.firebaseio.com",
+    storageBucket: "smartevent-a3c4f.appspot.com",
+    messagingSenderId: "53833519020"
+  };
+  firebase.initializeApp(config);
+</script>
+</head>
+
+<body>
+	<my-app>Loading...</my-app>
+</body>
+
 </html>
