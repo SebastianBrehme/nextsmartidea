@@ -50,6 +50,7 @@ export class FirebaseService {
             this.user.setLogedIn(true);
             this.router.navigate(['/dashboard']);
         } else {
+            this.user.setLogedIn(false);
             this.router.navigate(['/login']);
         }
     }
