@@ -22,7 +22,6 @@ export class DashboardComponent {
     doLogout(): void {
         let result = this.firebase.signOut();
         if(result == true){
-            this.router.navigate(['/login']);
         }else{
             //Todo Fehler anzeigen
         }
