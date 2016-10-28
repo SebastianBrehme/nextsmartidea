@@ -8,10 +8,11 @@ import { LoginComponent } from './login.component';
 import { FirebaseService } from './firebase.service';
 import { NavBarComponent} from './nav-bar.component';
 import { UserService} from './user.service';
+import { EventComponent } from './event/event.component'
 
 @NgModule({
   imports: [BrowserModule, FormsModule, RoutingModule],
-  declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent],
+  declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, EventComponent],
   providers: [FirebaseService, UserService],
   bootstrap: [AppComponent]
 })

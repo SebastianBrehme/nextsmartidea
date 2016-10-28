@@ -10,7 +10,7 @@ https://firebase.google.com/docs/cli/
 8. ...follow steps...
 9. firbase deploy
 
-
+npm install ng2-bootstrap --save
 
 Git commands:
 

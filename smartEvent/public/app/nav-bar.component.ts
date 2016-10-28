@@ -48,4 +48,15 @@ export class NavBarComponent implements OnInit,OnChanges{
         let result = this.firebase.signOut();
     }
     
+    onCreateEventClicked():void{
+        this.router.navigate(['/event']);
+    }
+
+    onJoinEventClicked():void{
+        this.router.navigate(['/event']);
+    }
+
+    onBrandClicked():void{ //onSmartEventClicked
+        this.router.navigate(['/']);
+    }
 }
