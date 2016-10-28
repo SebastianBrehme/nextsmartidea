@@ -1,7 +1,6 @@
 import {Component,OnInit} from '@angular/core';
 import {FirebaseService} from './firebase.service';
 import {Router} from '@angular/router';
-import {User} from './user';
 
 @Component({
     moduleId: module.id,

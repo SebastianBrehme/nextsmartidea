@@ -1,7 +1,7 @@
 import {Component,OnInit,OnChanges} from '@angular/core';
 import {Router} from '@angular/router';
 import {FirebaseService} from './firebase.service';
-import {User} from './user';
+import { UserService } from './user.service';
 
 @Component({
     moduleId: module.id,
@@ -11,16 +11,29 @@ import {User} from './user';
 
 export class NavBarComponent implements OnInit,OnChanges{
 
-    loggedIn: any = false;
+    loggedIn: boolean = false;
 
     constructor(
         private firebase: FirebaseService,
         private router: Router,
+        private user: UserService,
         ){}
 
-    ngOnInit() { this.loggedIn = this.firebase.user.logedIn }
+    ngOnInit() { 
+        if(this.user.isLogedIn()){
+            this.loggedIn = this.user.isLogedIn() 
+        }else{
+            this.loggedIn = false;
+        }
+    }
 
-    ngOnChanges() { this.loggedIn = this.firebase.user.logedIn }
+    ngOnChanges() { 
+        if(this.user.isLogedIn()){
+            this.loggedIn = this.user.isLogedIn() 
+        }else{
+            this.loggedIn = false;
+        } 
+    }
 
     doLogin():void{
        let response = this.firebase.signIn();
@@ -34,6 +47,7 @@ export class NavBarComponent implements OnInit,OnChanges{
     doLogout(): void {
         let result = this.firebase.signOut();
         if(result == true){
+            this.user.setLogedIn(false);
             this.router.navigate(['/login']);
         }else{
             //Todo Fehler anzeigen

@@ -1,4 +1,4 @@
-export class User{
+export class UserService{
 
     logedIn: boolean;
     user: any;
@@ -13,5 +13,10 @@ export class User{
 
     setUser(user:any):void{
         this.user = user;
+        console.log("user setUser:"+user.displayName);
+    }
+
+    getUser():any{
+        return this.user;
     }
 }
