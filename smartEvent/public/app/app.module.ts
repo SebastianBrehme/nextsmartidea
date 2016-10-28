@@ -6,10 +6,11 @@ import { RoutingModule } from './routing-module';
 import { DashboardComponent } from './dashboard.component';
 import { LoginComponent } from './login.component';
 import { FirebaseService } from './firebase.service';
+import {NavBarComponent} from './nav-bar.component';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, RoutingModule],
-  declarations: [AppComponent, DashboardComponent, LoginComponent],
+  declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent],
   providers: [FirebaseService],
   bootstrap: [AppComponent]
 })
