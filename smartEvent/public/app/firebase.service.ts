@@ -44,8 +44,8 @@ export class FirebaseService {
     }
 
     onAuthStateChanged(user: any): void {
+        console.log('firebaseservice: onAuthStateChanged');
         if (user) {
-            console.log('dashboard');
             this.user.setUser(user);
             this.user.setLogedIn(true);
             this.router.navigate(['/dashboard']);
@@ -56,11 +56,17 @@ export class FirebaseService {
     }
 
     getEvent():void{
-        let database = firebase.database().ref(this.user.getUser().uid);
+        console.log('firebaseservice: getEvent')
+        console.log('database connect ');
+        console.log(this.user.getUser().uid);
+        let database = firebase.database().ref('/USER/'+this.user.getUser().uid);
+        console.log('getData function ');
         let getData = function(data:any){
             console.log(data);
             console.log(data.val());
         }
-        database.on('child_added', getData);        
+        console.log('database.on ');
+        database.on('child_added', getData); 
+        console.log('getEvent finished ');
     }
 }

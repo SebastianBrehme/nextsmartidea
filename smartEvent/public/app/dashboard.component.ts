@@ -26,4 +26,9 @@ export class DashboardComponent {
             //Todo Fehler anzeigen
         }
     }
+
+    doEvent(): void{
+        console.log('dashboard: doEvent');
+        this.firebase.getEvent();
+    }
 }
