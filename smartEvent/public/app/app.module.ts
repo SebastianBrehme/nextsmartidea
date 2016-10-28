@@ -6,11 +6,12 @@ import { RoutingModule } from './routing-module';
 import { DashboardComponent } from './dashboard.component';
 import { LoginComponent } from './login.component';
 import { FirebaseService } from './firebase.service';
+import { UserService} from './user.service';
 
 @NgModule({
   imports: [BrowserModule, FormsModule, RoutingModule],
   declarations: [AppComponent, DashboardComponent, LoginComponent],
-  providers: [FirebaseService],
+  providers: [FirebaseService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

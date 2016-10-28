@@ -1,3 +1,9 @@
 <h1>Welcome to SmartEvent</h1>
 <h2>You successfully loged in!</h2>
 <button (click)="doLogout()">Logout</button>
+<br>
+<br>
+<!--div>Name {{user.getUser().displayName}}</div>-->
+<div *ngIf="user.getUser()">
+  <h2>{{user.getUser().displayName}} details!</h2>
+</div>

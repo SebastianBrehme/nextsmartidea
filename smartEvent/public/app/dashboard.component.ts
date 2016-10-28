@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FirebaseService } from './firebase.service';
 import { Router } from '@angular/router';
-import { User} from './user';
+import { UserService} from './user.service';
 
 @Component({
     moduleId: module.id,
@@ -11,11 +11,11 @@ import { User} from './user';
 
 export class DashboardComponent {
 
-    user: User;
 
     constructor(
         private firebase: FirebaseService,
         private router: Router,
+        private user: UserService,
     ) { }
 
 
