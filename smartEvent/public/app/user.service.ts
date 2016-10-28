@@ -14,6 +14,7 @@ export class UserService{
     setUser(user:any):void{
         this.user = user;
         console.log("user setUser:"+user.displayName);
+        console.log('user setUser:'+user.photoURL);
     }
 
     getUser():any{

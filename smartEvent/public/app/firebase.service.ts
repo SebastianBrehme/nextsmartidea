@@ -53,4 +53,13 @@ export class FirebaseService {
             this.router.navigate(['/login']);
         }
     }
+
+    getEvent():void{
+        let database = firebase.database().ref(this.user.getUser().uid);
+        let getData = function(data:any){
+            console.log(data);
+            console.log(data.val());
+        }
+        database.on('child_added', getData);        
+    }
 }
