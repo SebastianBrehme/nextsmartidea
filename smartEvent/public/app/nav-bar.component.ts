@@ -1,4 +1,4 @@
-import {Component,OnInit,OnChanges} from '@angular/core';
+import {Component,OnInit,OnChanges, AfterContentChecked} from '@angular/core';
 import {Router} from '@angular/router';
 import {FirebaseService} from './firebase.service';
 import { UserService } from './user.service';
@@ -7,9 +7,10 @@ import { UserService } from './user.service';
     moduleId: module.id,
     selector: 'nav-bar',
     templateUrl: 'nav-bar.component.html',
+    styleUrls: ['nav-bar.component.css']
 })
 
-export class NavBarComponent implements OnInit,OnChanges{
+export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
 
     loggedIn: boolean = false;
 
@@ -20,19 +21,15 @@ export class NavBarComponent implements OnInit,OnChanges{
         ){}
 
     ngOnInit() { 
-        if(this.user.isLogedIn()){
-            this.loggedIn = this.user.isLogedIn() 
-        }else{
-            this.loggedIn = false;
-        }
+        this.checkLoggedIn();
+    }
+
+    ngAfterContentChecked(){
+        this.checkLoggedIn();
     }
 
     ngOnChanges() { 
-        if(this.user.isLogedIn()){
-            this.loggedIn = this.user.isLogedIn() 
-        }else{
-            this.loggedIn = false;
-        } 
+        this.checkLoggedIn();
     }
 
     doLogin():void{
@@ -47,6 +44,14 @@ export class NavBarComponent implements OnInit,OnChanges{
     doLogout(): void {
         let result = this.firebase.signOut();
     }
+
+    checkLoggedIn(): void{
+        if(this.user.isLogedIn()){
+            this.loggedIn = this.user.isLogedIn() 
+        }else{
+            this.loggedIn = false;
+        }
+    }
     
     onCreateEventClicked():void{
         this.router.navigate(['/event']);
@@ -58,5 +63,9 @@ export class NavBarComponent implements OnInit,OnChanges{
 
     onBrandClicked():void{ //onSmartEventClicked
         this.router.navigate(['/']);
+    }
+
+    onContactClicked():void{
+        this.router.navigate(['/contact']);
     }
 }
