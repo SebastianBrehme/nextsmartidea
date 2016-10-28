@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User } from './user';
+import { UserService } from './user.service';
 import { Router } from '@angular/router';
 
 declare var firebase: any;
@@ -8,10 +8,10 @@ declare var firebase: any;
 export class FirebaseService {
 
     auth: any;
-    user: User;
 
     constructor(
         private router: Router,
+        private user: UserService,
     ) { 
          firebase.auth().onAuthStateChanged(this.onAuthStateChanged.bind(this));
          console.log('constructor');
@@ -21,10 +21,13 @@ export class FirebaseService {
         console.log('signin');
         let provider = new firebase.auth.GoogleAuthProvider();
         firebase.auth().signInWithRedirect(provider).then(function (result: any) {
+            console.log('signedin');
             if (result.credential) {
+                //Attention: This code is never executed, don't know why...
                 let token = result.credential.accessToken;
                 this.user.setUser(result.user);
                 this.user.setLogedIn(true);
+                console.log(result.user.displayName);
                 return true;
             }
         }).catch(function (error: any) {
@@ -43,6 +46,8 @@ export class FirebaseService {
     onAuthStateChanged(user: any): void {
         if (user) {
             console.log('dashboard');
+            this.user.setUser(user);
+            this.user.setLogedIn(true);
             this.router.navigate(['/dashboard']);
         } else {
             this.router.navigate(['/login']);
