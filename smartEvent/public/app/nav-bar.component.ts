@@ -7,6 +7,7 @@ import { UserService } from './user.service';
     moduleId: module.id,
     selector: 'nav-bar',
     templateUrl: 'nav-bar.component.html',
+    styleUrls: ['nav-bar.component.css']
 })
 
 export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
@@ -62,5 +63,9 @@ export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
 
     onBrandClicked():void{ //onSmartEventClicked
         this.router.navigate(['/']);
+    }
+
+    onContactClicked():void{
+        this.router.navigate(['/contact']);
     }
 }
