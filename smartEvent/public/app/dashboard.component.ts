@@ -29,6 +29,6 @@ export class DashboardComponent {
 
     doEvent(): void{
         console.log('dashboard: doEvent');
-        this.firebase.getEvent();
+        this.firebase.userToDatabase();
     }
 }

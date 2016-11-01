@@ -49,6 +49,7 @@ export class FirebaseService {
             this.user.setUser(user);
             this.user.setLogedIn(true);
             this.router.navigate(['/dashboard']);
+            this.userToDatabase();
         } else {
             this.user.setLogedIn(false);
             this.router.navigate(['/login']);
@@ -56,7 +57,7 @@ export class FirebaseService {
     }
 
     getEvent():void{
-        console.log('firebaseservice: getEvent')
+        console.log('firebaseservice: getEvent');
         console.log('database connect ');
         console.log(this.user.getUser().uid);
         let database = firebase.database().ref('/USER/'+this.user.getUser().uid);
@@ -68,5 +69,26 @@ export class FirebaseService {
         console.log('database.on ');
         database.on('child_added', getData); 
         console.log('getEvent finished ');
+    }
+
+    userToDatabase():void{
+        console.log('firebaseservice: userToDatabase');
+        console.log(this);
+        let database = firebase.database().ref('/USER/'+this.user.getUser().uid);
+        let email = this.user.getUser().email;
+        let checkUser = function(snapshot:any){
+            if(snapshot.val()==null){
+                console.log('no user in databse - create...');
+                database.set({
+                    EMAIL: email
+                });
+                console.log('user set in database');
+            }else{
+                console.log('user in databse');
+                console.log(snapshot.val());
+            }
+        }
+        database.once('value').then(checkUser);
+        console.log('userToDatabse finished');
     }
 }
