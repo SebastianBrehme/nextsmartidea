@@ -67,14 +67,13 @@ export class FirebaseService {
             console.log(data.val());
         }
         console.log('database.on ');
-        database.on('child_added', getData); 
+        database.once('value', getData); 
         console.log('getEvent finished ');
     }
 
     userToDatabase():void{
         console.log('firebaseservice: userToDatabase');
-        console.log(this);
-        let database = firebase.database().ref('/USER/'+this.user.getUser().uid);
+        let database = firebase.database().ref('/USER/'+this.user.getUser().uid+'/EVENTLIST');
         let email = this.user.getUser().email;
         let checkUser = function(snapshot:any){
             if(snapshot.val()==null){
@@ -90,5 +89,23 @@ export class FirebaseService {
         }
         database.once('value').then(checkUser);
         console.log('userToDatabse finished');
+    }
+
+    createEvent(titel:string):void{
+        console.log('firebaseservice: createEvent');
+
+        let eventData = {
+            AUTHOR: this.user.getUser().uid,
+            TITEL: titel,
+        }
+        console.log('create key');
+        let newEventKey = firebase.database().ref('/EVENT/').push().key;
+        console.log(newEventKey);
+        let updates = {};
+        updates['/EVENT/'+newEventKey] = eventData;
+        updates['/USER/'+this.user.getUser().uid+'/EVENTLIST/'+newEventKey] = true;
+        console.log('do update');
+        firebase.database().ref().update(updates);
+        console.log('createEvent finished');
     }
 }
