@@ -73,7 +73,7 @@ export class FirebaseService {
 
     userToDatabase():void{
         console.log('firebaseservice: userToDatabase');
-        let database = firebase.database().ref('/USER/'+this.user.getUser().uid+'/EVENTLIST');
+        let database = firebase.database().ref('/USER/'+this.user.getUser().uid);
         let email = this.user.getUser().email;
         let checkUser = function(snapshot:any){
             if(snapshot.val()==null){
