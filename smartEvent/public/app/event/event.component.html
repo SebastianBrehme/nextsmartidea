@@ -1,2 +1,94 @@
 <nav-bar></nav-bar>
-<h1>Event</h1>
+
+<div class="col-md-2">
+    <h4>My Events</h4>
+    <p>Example 1</p>
+    <p>Example 2</p>
+    <p>Example 3</p>
+    <br/>
+    <br/>
+    <h4>Next Events</h4>
+    <p>Example 1: in 2 days</p>
+    <p>Example 2: in 20 days</p>
+    <p>Example 3: next year</p>
+</div>
+
+<div class="col-md-5">
+    <h1>Create Event</h1>
+    <form>
+  <div class="form-group">
+    <label for="eventName">Name</label>
+    <input type="text" class="form-control" id="eventName" placeholder="My New Event">
+  </div>
+  <div class="form-group">
+    <label for="eventDescription">Description</label>
+    <input type="text" class="form-control" id="eventDescription" placeholder="...">
+  </div>
+  <div class="form-group">
+    <label for="eventType">Type of Event</label>
+    <select class="form-control" id="eventType">
+      <option>Birthday</option>
+      <option>Party</option>
+      <option>Trip</option>
+      <option>Other</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="eventDate">Date (optional)</label>
+    <small id="fileHelp" class="form-text text-muted">Format: Day / Month / Year</small><br/>
+
+    <div class="form-inline">
+      <label for="dateFromLine" class="col-sm-2 col-form-label col-form-label-lg">From</label>
+      <div class="col-sm-10 form-inline" id="dateFromLine">
+        <input type="number" class="form-control" min="1" max="31" id="dateFromDay">
+        <input type="number" class="form-control" min="1" max="12" id="dateFromMonth">
+        <input type="number" class="form-control" min="2016" max="9999" id="dateFromYear">
+      </div>
+    </div>
+    <div class="form-inline">
+      <label for="dateToLine" class="col-sm-2 col-form-label col-form-label-sm">To</label>
+      <div class="col-sm-10 form-inline" id="dateToLine">
+        <input type="number" class="form-control" min="1" max="31" id="dateToDay">
+        <input type="number" class="form-control" min="1" max="12" id="dateToMonth">
+        <input type="number" class="form-control" min="2016" max="9999" id="dateToYear">
+      </div>
+    </div>
+  </div>
+
+  
+  
+
+  <div class="form-group">
+    <label for="eventImage">Event Image</label>
+    <input type="file" class="form-control-file" id="eventImage" aria-describedby="fileHelp">
+    <small id="fileHelp" class="form-text text-muted">This image is optional, it can be used to represent your event</small>
+  </div>
+  <div class="form-group">
+    <label for="eventInvite">Send Invite</label>
+    <select multiple class="form-control" id="eventInvite">
+      <option>Friend1</option>
+      <option>Friend2</option>
+      <option>Friend3</option>
+      <option>Friend4</option>
+      <option>Friend5</option>
+    </select>
+  </div>
+  <div class="form-check">
+    <label class="form-check-label">
+      <input type="checkbox" class="form-check-input">
+      I agree...
+     <!-- I agree that my data will not be handled as private and NextSmartIdea can do with it, whatever the fuck they want to do! -->
+    </label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>
+
+<div class="col-md-5">
+    <h1>Test2</h1>
+    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p> 
+    <br/>
+    <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.</p>
+    <br/>
+    <p>Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. </p>
+</div>

@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
     templateUrl: 'event.component.html'
 })
 
-export class EventComponent{
+export class EventComponent implements OnInit{
 
 
 
@@ -16,6 +16,10 @@ export class EventComponent{
         private firebase: FirebaseService,
         private router: Router,
         ){}
+
+    ngOnInit() { 
+    }
+    
 
     
 
