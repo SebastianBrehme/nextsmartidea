@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
+import { EventDataService} from './event/event-data.service';
+import { Event } from './event/event';
 import { Router } from '@angular/router';
 
 declare var firebase: any;
@@ -12,6 +14,7 @@ export class FirebaseService {
     constructor(
         private router: Router,
         private user: UserService,
+        private events: EventDataService,
     ) { 
          firebase.auth().onAuthStateChanged(this.onAuthStateChanged.bind(this));
          console.log('constructor');
@@ -55,28 +58,43 @@ export class FirebaseService {
             this.router.navigate(['/login']);
         }
     }
-
-    getEvent():void{
+    
+    getEventList():void{
         console.log('firebaseservice: getEvent');
         console.log('database connect ');
         console.log(this.user.getUser().uid);
-        let database = firebase.database().ref('/USER/'+this.user.getUser().uid);
+        let database = firebase.database().ref('/USER/'+this.user.getUser().uid+'/EVENTLIST/');
         console.log('getData function ');
         let getData = function(data:any){
             console.log(data);
             console.log(data.val());
+            console.log('iterate data');
+            data.forEach(function(snap:any){
+                console.log(snap);
+                console.log(snap.val());
+                console.log(snap.key);
+            });
         }
         console.log('database.on ');
-        database.once('value', getData); 
+        database.on('value', getData); 
         console.log('getEvent finished ');
+    }
+
+    getEventData(key:string){
+        let database = firebase.database().ref('EVENT/'+key);
+        let getData = function(data:any){
+            console.log(data.val());
+        }
+        database.once('value',getData);
     }
 
     userToDatabase():void{
         console.log('firebaseservice: userToDatabase');
         let database = firebase.database().ref('/USER/'+this.user.getUser().uid);
         let email = this.user.getUser().email;
+        let tempEvents = this.events;
         let checkUser = function(snapshot:any){
-            if(snapshot.val()==null){
+            if(!snapshot.exists()){
                 console.log('no user in databse - create...');
                 database.set({
                     EMAIL: email
@@ -84,7 +102,19 @@ export class FirebaseService {
                 console.log('user set in database');
             }else{
                 console.log('user in databse');
-                console.log(snapshot.val());
+                snapshot.forEach(function(data:any){
+                    console.log(data.val());
+                    console.log(data.key);
+                });
+
+                for(let key in snapshot.val().EVENTLIST){
+                    console.log(key);
+                    console.log(snapshot.val().EVENTLIST[key]);
+                    let ev = new Event();
+                    ev.id = key;
+                    ev.name = snapshot.val().EVENTLIST[key];
+                    tempEvents.addEvent(ev);
+                }
             }
         }
         database.once('value').then(checkUser);

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FirebaseService } from './firebase.service';
 import { Router } from '@angular/router';
 import { UserService} from './user.service';
+import { EventService} from './event/event.service';
 
 @Component({
     moduleId: module.id,
@@ -16,6 +17,7 @@ export class DashboardComponent {
         private firebase: FirebaseService,
         private router: Router,
         private user: UserService,
+        private event: EventService,
     ) { }
 
 
@@ -29,6 +31,7 @@ export class DashboardComponent {
 
     doEvent(): void{
         console.log('dashboard: doEvent');
-        this.firebase.getEvent();
+        //this.firebase.getEventData('-KVWYeXYJ2YXsdANQwuL');
+        console.log(this.event.getEventList());
     }
 }
