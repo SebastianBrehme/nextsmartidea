@@ -10,7 +10,8 @@ import {Router} from '@angular/router';
 
 export class CreateEventComponent implements OnInit{
 
-    
+    invitesList: Array<string> = [];
+    currentInviteString: string = "";
 
     constructor(
         private firebase: FirebaseService,
@@ -21,8 +22,17 @@ export class CreateEventComponent implements OnInit{
     }
     
     onAddInviteClicked(){
+        this.invitesList.push(this.currentInviteString);
+        this.currentInviteString = "";
     }
 
+    onDeleteInviteClicked(index: number){
+        this.invitesList.splice(index, 1);
+    }
+
+    customTrackBy(index: number, obj: any): any {
+    return index;
+  }
     
 
 }
