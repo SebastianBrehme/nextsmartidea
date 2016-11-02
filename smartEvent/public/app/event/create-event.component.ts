@@ -4,13 +4,13 @@ import {Router} from '@angular/router';
 
 @Component({
     moduleId: module.id,
-    selector: 'event',
-    templateUrl: 'event.component.html'
+    selector: 'create-event',
+    templateUrl: 'create-event.component.html'
 })
 
-export class EventComponent implements OnInit{
+export class CreateEventComponent implements OnInit{
 
-
+    
 
     constructor(
         private firebase: FirebaseService,
@@ -20,6 +20,8 @@ export class EventComponent implements OnInit{
     ngOnInit() { 
     }
     
+    onAddInviteClicked(){
+    }
 
     
 

@@ -54,11 +54,11 @@ export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
     }
     
     onCreateEventClicked():void{
-        this.router.navigate(['/event']);
+        this.router.navigate(['/create-event']);
     }
 
     onJoinEventClicked():void{
-        this.router.navigate(['/event']);
+        this.router.navigate(['/create-event']);
     }
 
     onBrandClicked():void{ //onSmartEventClicked
