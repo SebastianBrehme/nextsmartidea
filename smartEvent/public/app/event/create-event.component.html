@@ -18,7 +18,8 @@
 	<form>
 		<div class="form-group">
 			<label for="eventName">Name</label>
-			<input type="text" class="form-control" id="eventName" placeholder="My New Event">
+			<input [(ngModel)]="inputName" name="inputName" type="text" class="form-control" id="eventName" placeholder="My New Event">
+			<div *ngIf="showWarningName"><small id="eventNameWarning" class="form-text text-danger">please enter a valid event name</small></div>
 		</div>
 		<div class="form-group">
 			<label for="eventDescription">Description</label>
@@ -76,13 +77,12 @@
 				<div class="row" *ngFor="let invite of invitesList; let index = index; trackBy:customTrackBy;">
 					<div class="col-lg-12">
 						<div class="input-group">
-							<input [(ngModel)]="invitesList[index]" [ngModelOptions]="{standalone: true}" type="email" class="form-control" value="invitesList[index]">
+							<input [(ngModel)]="invitesList[index].email" [ngModelOptions]="{standalone: true}" type="email" class="form-control" value="invitesList[index].email">
 							<span class="input-group-btn">
-            	  <button class="btn btn-default" (click)="onDeleteInviteClicked(index)" type="button"><span class="glyphicon glyphicon-minus"></span></button>
-              </span>
-							
+            	  				<button class="btn btn-default" (click)="onDeleteInviteClicked(index)" type="button"><span class="glyphicon glyphicon-minus"></span></button>
+							</span>
 						</div>
-
+						<div *ngIf="!invitesList[index].validated"><small class="form-text text-danger">please enter a valid email</small></div>
 					</div>
 				</div>
 
@@ -94,9 +94,10 @@
 					<div class="input-group">
 						<input [(ngModel)]="currentInviteString" name="currentInviteString" type="email" class="form-control" placeholder="max.mustermann@gmail.com">
 						<span class="input-group-btn">
-              <button class="btn btn-default" (click)="onAddInviteClicked()" type="button"><span class="glyphicon glyphicon-plus"></span></button>
-            </span>
+              				<button class="btn btn-default" (click)="onAddInviteClicked()" type="submit"><span class="glyphicon glyphicon-plus"></span></button>
+						</span>
 					</div>
+					<div *ngIf="showWarningLastInvite"><small class="form-text text-danger">please enter a valid email</small></div>
 				</div>
 			</div>
 
@@ -105,12 +106,14 @@
 
 		<div class="form-check">
 			<label class="form-check-label">
-      <input type="checkbox" class="form-check-input">
+      <input [(ngModel)]="checkboxAgreeSelected" name="checkboxAgree" type="checkbox" class="form-check-input">
       I agree...
      <!-- I agree that my data will not be handled as private and NextSmartIdea can do with it, whatever the fuck they want to do! -->
     </label>
+	<div *ngIf="showWarningCheckboxAgreed"><small class="form-text text-danger">please agree...</small></div>
 		</div>
 
-		<button type="submit" class="btn btn-primary">Submit</button>
+		<button (click)="onSubmitClicked()" type="submit" class="btn btn-primary">Submit</button>
+		
 	</form>
 </div>
