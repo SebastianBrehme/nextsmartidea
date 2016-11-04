@@ -3,6 +3,7 @@ import { FirebaseService } from './firebase.service';
 import { Router } from '@angular/router';
 import { UserService} from './user.service';
 import { EventService} from './event/event.service';
+import { Event } from './event/event';
 
 @Component({
     moduleId: module.id,
@@ -31,7 +32,7 @@ export class DashboardComponent {
 
     doEvent(): void{
         console.log('dashboard: doEvent');
-        //this.firebase.getEventData('-KVWYeXYJ2YXsdANQwuL');
-        console.log(this.event.getEventList());
+                //this.firebase.getEventData('-KVWYeXYJ2YXsdANQwuL');
+        this.event.getEvent('-KVWYlPhWQrQyHBI-HZh').then(event => console.log(event as Event));
     }
 }

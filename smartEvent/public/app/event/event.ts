@@ -8,4 +8,11 @@ export class Event{
     date_from: Date;
     date_to: Date;
     member: Object;
+
+    constructor(obj?:Object){
+        console.log('constructor');
+        if(obj){
+        this.author = obj.AUTHOR;
+        }
+    }
 }

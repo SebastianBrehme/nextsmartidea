@@ -80,12 +80,13 @@ export class FirebaseService {
         console.log('getEvent finished ');
     }
 
-    getEventData(key:string){
+    getEventData(key:string):Promise<Event>{
         let database = firebase.database().ref('EVENT/'+key);
-        let getData = function(data:any){
-            console.log(data.val());
-        }
-        database.once('value',getData);
+        //return database.once('value').then(function(snap:any){
+        //  return snap.val();
+        //});
+        return database.once('value')
+        .then(snap => new Event(snap.val()));
     }
 
     userToDatabase():void{

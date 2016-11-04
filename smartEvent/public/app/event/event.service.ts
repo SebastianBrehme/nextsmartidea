@@ -24,8 +24,8 @@ export class EventService{
        return this.eventdata.getEventList();
     }
 
-    getEvent(id:string):Event{
-        return null;
+    getEvent(id:string):Promise<Event>{
+       return this.firebase.getEventData(id);
     }
 
     createEvent(title:string){
