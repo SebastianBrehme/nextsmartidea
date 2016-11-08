@@ -14,4 +14,8 @@ export class EventDataService{
     setEventList(e:Event[]):void{
         this.eventlist = e;
     }
+
+    clear():void{
+        this.eventlist = [];
+    }
 }

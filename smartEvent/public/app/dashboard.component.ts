@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from './firebase.service';
 import { Router } from '@angular/router';
 import { UserService} from './user.service';
 import { EventService} from './event/event.service';
 import { Event } from './event/event';
+import { EventDataService } from './event/event-data.service';
 
 @Component({
     moduleId: module.id,
@@ -11,16 +12,17 @@ import { Event } from './event/event';
     templateUrl: 'dashboard.component.html'
 })
 
-export class DashboardComponent {
+export class DashboardComponent{
 
+    eventlist:Event[] = [];
 
     constructor(
         private firebase: FirebaseService,
         private router: Router,
         private user: UserService,
         private event: EventService,
+        private eventdata: EventDataService,
     ) { }
-
 
     doLogout(): void {
         let result = this.firebase.signOut();
@@ -32,7 +34,17 @@ export class DashboardComponent {
 
     doEvent(): void{
         console.log('dashboard: doEvent');
-                //this.firebase.getEventData('-KVWYeXYJ2YXsdANQwuL');
-        this.event.getEvent('-KVWYlPhWQrQyHBI-HZh').then(event => console.log(event as Event));
+        this.eventlist = this.eventdata.getEventList();
+        //let e:Event  = new Event();
+        //e.titel= "mein krampf";
+        //this.eventlist.push(e);
+        //this.event.getEventList();
+        //this.event.getEventList();
+        //this.event.getEvent('-KVWYlPhWQrQyHBI-HZh').then(event => console.log(event));
+    }
+
+    donext():void{
+        console.log("mein test");
+        this.eventlist[0].titel="mein test";
     }
 }

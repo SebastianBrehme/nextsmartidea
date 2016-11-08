@@ -1,18 +1,19 @@
-export class Event{
-    id: string;
+export class Event {
+    key: string;
     author: string;
-    
-    name: string;
+
+    titel: string;
     description: string;
     type: string;
     date_from: Date;
     date_to: Date;
     member: Object;
 
-    constructor(obj?:Object){
-        console.log('constructor');
-        if(obj){
-        this.author = obj.AUTHOR;
+    constructor(obj?: any, key?:string) {
+        if (obj && key) {
+            this.key = key;
+            this.author = obj.AUTHOR;
+            this.titel = obj.TITEL;
         }
     }
 }
