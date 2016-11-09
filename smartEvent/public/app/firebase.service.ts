@@ -106,6 +106,7 @@ export class FirebaseService {
                     t.key = key;
                     t.titel = snap.val().EVENTLIST[key];
                     tempEvents.addEvent(t);
+                    tempEvents.test.next("mein krampf");
                 }
             }
         }

@@ -14,7 +14,7 @@ import { EventDataService } from './event/event-data.service';
 
 export class DashboardComponent{
 
-    eventlist:Event[] = [];
+    //eventlist:Event[] = [];
 
     constructor(
         private firebase: FirebaseService,
@@ -22,7 +22,12 @@ export class DashboardComponent{
         private user: UserService,
         private event: EventService,
         private eventdata: EventDataService,
-    ) { }
+    ) { 
+        this.eventdata.test.asObservable().subscribe(function(snap){
+            console.log("subscribe");
+            console.log("snap");
+        });
+    }
 
     doLogout(): void {
         let result = this.firebase.signOut();
@@ -34,7 +39,7 @@ export class DashboardComponent{
 
     doEvent(): void{
         console.log('dashboard: doEvent');
-        this.eventlist = this.eventdata.getEventList();
+        //this.eventlist = this.eventdata.getEventList();
         //let e:Event  = new Event();
         //e.titel= "mein krampf";
         //this.eventlist.push(e);
@@ -45,6 +50,6 @@ export class DashboardComponent{
 
     donext():void{
         console.log("mein test");
-        this.eventlist[0].titel="mein test";
+        //this.eventlist[0].titel="mein test";
     }
 }

@@ -9,7 +9,8 @@
   <button type="button" class="btn btn-default" (click)="doEvent()">Do Something</button>
 </div>
 <button type="button" class="btn btn-default" (click)="donext()">Do Something else </button>
-<div *ngIf="eventlist">
+
+<div> <!--*ngIf="eventlist">-->
   <ul>
     <li *ngFor="let event of this.eventdata.getEventList()">
       <span>{{event.titel}} and {{event.key}} </span>

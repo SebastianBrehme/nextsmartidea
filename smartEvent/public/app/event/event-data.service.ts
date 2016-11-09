@@ -1,7 +1,13 @@
 import {Event} from './event';
+import {Subject} from 'rxjs/Subject';
 
 export class EventDataService{
-    eventlist:Event[] = [];
+    eventlist:Event[];
+    test =new Subject<string>();
+    constructor(){
+        this.eventlist = [];
+        this.test.next("sowas");
+    }
 
     getEventList():Event[]{
         return this.eventlist;
@@ -16,6 +22,6 @@ export class EventDataService{
     }
 
     clear():void{
-        this.eventlist = [];
+        this.eventlist.length = 0;
     }
 }
