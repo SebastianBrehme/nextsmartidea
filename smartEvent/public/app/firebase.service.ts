@@ -100,14 +100,15 @@ export class FirebaseService {
                 console.log('user set in database');
             } else {
                 console.log('user in databse');
-                tempEvents.clear();
+                //tempEvents.clear();
+                let tempList:Event[] = []
                 for (let key in snap.val().EVENTLIST) {
                     let t: Event = new Event();
                     t.key = key;
                     t.titel = snap.val().EVENTLIST[key];
-                    tempEvents.addEvent(t);
-                    tempEvents.test.next("mein krampf");
+                    tempList.push(t);                   
                 }
+                tempEvents.setEventList(tempList);
             }
         }
         database.on('value', checkUser);

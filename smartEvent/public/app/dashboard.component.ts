@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FirebaseService } from './firebase.service';
 import { Router } from '@angular/router';
 import { UserService} from './user.service';
@@ -14,7 +14,7 @@ import { EventDataService } from './event/event-data.service';
 
 export class DashboardComponent{
 
-    //eventlist:Event[] = [];
+    eventlist:Event[];
 
     constructor(
         private firebase: FirebaseService,
@@ -23,10 +23,19 @@ export class DashboardComponent{
         private event: EventService,
         private eventdata: EventDataService,
     ) { 
-        this.eventdata.test.asObservable().subscribe(function(snap){
-            console.log("subscribe");
-            console.log("snap");
-        });
+        this.eventlist =[];
+        this.eventdata.getEventListSubject().asObservable().subscribe(list => this.upddateList(list));
+            //function(list){
+            //console.log("subscribe");
+            //this.eventlist = list;
+        //});
+        
+    }
+
+    upddateList(list:Event[]):void{
+        console.log("subscribe");
+        console.log(list);
+        this.eventlist = list;
     }
 
     doLogout(): void {

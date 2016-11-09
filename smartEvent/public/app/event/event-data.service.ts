@@ -1,27 +1,31 @@
 import {Event} from './event';
-import {Subject} from 'rxjs/Subject';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 export class EventDataService{
-    eventlist:Event[];
-    test =new Subject<string>();
+    eventlistSubject:BehaviorSubject<Event[]>;
     constructor(){
-        this.eventlist = [];
-        this.test.next("sowas");
+        this.eventlistSubject =  new BehaviorSubject<Event[]>([]);
+    }
+
+    getEventListSubject():BehaviorSubject<Event[]>{
+        return this.eventlistSubject;
     }
 
     getEventList():Event[]{
-        return this.eventlist;
+        return this.eventlistSubject.getValue();
     }
 
     addEvent(e:Event):void{
-        this.eventlist.push(e);
+        let temp = this.eventlistSubject.getValue();
+        temp.push(e);
+        this.eventlistSubject.next(temp);
     }
 
     setEventList(e:Event[]):void{
-        this.eventlist = e;
+        this.eventlistSubject.next(e);
     }
 
     clear():void{
-        this.eventlist.length = 0;
+        this.eventlistSubject.next([]);
     }
 }
