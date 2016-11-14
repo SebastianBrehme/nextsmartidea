@@ -20,12 +20,14 @@ export class EventService{
        this.eventdata.setEventList(e);
     }
 
-    getEventList():Event[]{
-       return this.eventdata.getEventList();
+    getEventList():void{//:Event[]{
+       //return this.eventdata.getEventList();
+       this.firebase.getEventList();
     }
 
-    getEvent(id:string):Event{
-        return null;
+    getEvent(id:string):Promise<Event>{
+        return this.firebase.getEventData(id)
+        .then(function(snap:any){return new Event(snap.val(),snap.key);});
     }
 
     createEvent(title:string){
