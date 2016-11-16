@@ -7,7 +7,7 @@ export class Event {
     type: string;
     date_from: Date;
     date_to: Date;
-    member: Object;
+    member: string[];
 
     constructor(obj?: any, key?:string) {
         if (obj && key) {

@@ -59,6 +59,9 @@ export class FirebaseService {
         }
     }
 
+    /*
+        @Deprecated
+    */
     getEventList(): void {
         console.log('firebaseservice: getEvent');
         console.log('database connect ');
@@ -68,7 +71,7 @@ export class FirebaseService {
         console.log('database.on');
         this.events.clear();
         let tevents = this.events;
-        database.on('value', function (snap: any) {
+        database.once('value', function (snap: any) {
             snap.forEach(function (child: any) {
                 let t: Event = new Event();
                 console.log(child.key);
@@ -115,20 +118,33 @@ export class FirebaseService {
         console.log('userToDatabse finished');
     }
 
-    createEvent(titel: string): void {
+    createEvent(e:Event): void {
         console.log('firebaseservice: createEvent');
         let eventData = {
-            AUTHOR: this.user.getUser().uid,
-            TITEL: titel,
+            AUTHOR: e.author,
+            TITEL: e.titel,
+            DESCRIPTION: e.description,
+            TYPE: e.type,
+            FROM: e.date_from,
+            TO: e.date_to,
         }
         console.log('create key');
         let newEventKey = firebase.database().ref('/EVENT/').push().key;
         console.log(newEventKey);
         let updates = {};
         updates['/EVENT/' + newEventKey] = eventData;
-        updates['/USER/' + this.user.getUser().uid + '/EVENTLIST/' + newEventKey] = true;
+        updates['/USER/' + this.user.getUser().uid + '/EVENTLIST/' + newEventKey] = e.titel;
         console.log('do update');
         firebase.database().ref().update(updates);
+
+        for(let m in e.member){
+            this.addMemberToEvent(newEventKey,m);
+        }
         console.log('createEvent finished');
+    }
+
+    addMemberToEvent(ekey:string,member:string):void{
+        console.log("firebaseservice addMemberToEvent");
+
     }
 }
