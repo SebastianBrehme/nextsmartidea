@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Event } from './event';
 import { FirebaseService } from '../firebase.service';
 import { EventDataService} from './event-data.service';
+import { UserService } from '../user.service';
 
 @Injectable()
 export class EventService{
@@ -10,6 +11,7 @@ export class EventService{
     constructor(
         private firebase: FirebaseService,
         private eventdata: EventDataService,
+        private user: UserService,
     ){}
 
     addEvent(e:Event):void{
@@ -30,8 +32,9 @@ export class EventService{
         .then(function(snap:any){return new Event(snap.val(),snap.key);});
     }
 
-    createEvent(title:string){
-
+    createEvent(e:Event){
+        e.author = this.user.getUser().uid;
+        this.firebase.createEvent(e);
     }
 
     deleteEvent(id:string):void{
