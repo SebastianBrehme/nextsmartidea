@@ -14,8 +14,12 @@ export class CreateEventComponent implements OnInit {
     invitesList: Array<inviteWithValidation> = [];
     currentInviteString: string = "";
 
+    dateFrom: Date;
+    dateTo: Date;
+
     inputName: string = "";
 
+/*
     inputDateDayFrom: string = "";
     inputDateMonthFrom: string = "";
     inputDateYearFrom: string = "";
@@ -23,6 +27,12 @@ export class CreateEventComponent implements OnInit {
     inputDateDayTo: string = "";
     inputDateMonthTo: string = "";
     inputDateYearTo: string = "";
+*/
+    inputDateFrom: string;
+    inputDateTo: string;
+
+    inputTimeFrom: string;
+    inputTimeTo: string;
 
     showWarningDateFrom: boolean = false;
     showWarningDateTo: boolean = false;
@@ -109,14 +119,44 @@ export class CreateEventComponent implements OnInit {
         return true;
     }
 
+    transformDate(date: string, time?:string): Date {
+        let dateLocal = new Date();
+        dateLocal.setTime(0);
+
+        dateLocal.setUTCFullYear(Number (date.charAt(0) + date.charAt(1) + date.charAt(2) + date.charAt(3)));
+        dateLocal.setUTCMonth((Number (date.charAt(5) + date.charAt(6))) - 1);
+        dateLocal.setUTCDate(Number (date.charAt(8) + date.charAt(9)));
+
+        if(time){
+            dateLocal.setUTCHours((Number (time.charAt(0) + time.charAt(1))) - 1);
+            dateLocal.setUTCMinutes(Number (time.charAt(3) + time.charAt(4)));
+        }
+        
+
+        console.log("Date: " + dateLocal);
+        console.log("Day: " + dateLocal.getUTCDate());
+        console.log("Month: " + (dateLocal.getUTCMonth() + 1));
+        console.log("Year: " + dateLocal.getUTCFullYear());
+        console.log("Time: " + (dateLocal.getUTCHours() + 1) + ":" + dateLocal.getUTCMinutes());
+
+        return dateLocal;
+    }
+
     checkDate(): boolean {
         let dateFromChecked: boolean = false;
         let dateToChecked: boolean = false;
 
-        if (this.inputDateDayFrom.length > 0 || this.inputDateMonthFrom.length > 0 || this.inputDateYearFrom.length > 0) {
-            if (this.checkDateValidity(this.inputDateYearFrom, this.inputDateMonthFrom, this.inputDateDayFrom)) {
-                dateFromChecked = true;
+        if (this.inputDateFrom) {
+
+            if(this.inputTimeFrom){
+                this.dateFrom = this.transformDate(this.inputDateFrom, this.inputTimeFrom)
+            }else{
+                this.dateFrom = this.transformDate(this.inputDateFrom)
             }
+            
+            
+
+            dateFromChecked = true;
 
             if (dateFromChecked) {
                 this.showWarningDateFrom = false;
@@ -130,9 +170,18 @@ export class CreateEventComponent implements OnInit {
 
 
 
-        if (this.inputDateDayTo.length > 0 || this.inputDateMonthTo.length > 0 || this.inputDateYearTo.length > 0) {
-            if (this.checkDateValidity(this.inputDateYearTo, this.inputDateMonthTo, this.inputDateDayTo)) {
+        if (this.inputDateTo) {
+            
+            if(this.inputTimeTo){
+                this.dateTo = this.transformDate(this.inputDateTo, this.inputTimeTo)
+            }else{
+                this.dateTo = this.transformDate(this.inputDateTo)
+            }
+
+            if(this.dateFrom < this.dateTo){
                 dateToChecked = true;
+            }else{
+                dateToChecked = false;
             }
 
             if (dateToChecked) {

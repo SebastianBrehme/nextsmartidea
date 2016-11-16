@@ -36,26 +36,26 @@
 		</div>
 		<div class="form-group">
 			<label for="eventDate">Date (optional)</label>
-			<small id="fileHelp" class="form-text text-muted">Format: Day / Month / Year</small><br/>
+			<small id="fileHelp" class="form-text text-muted">Format: jjjj-mm-dd  hh:mm</small><br/>
 
+		
 			<div class="form-group row">
 				<label for="dateFromLine" class="col-sm-2">From</label>
-				<div class="col-sm-6" id="dateFromLine">
-					<div class="col-xs-3"><input [(ngModel)]="inputDateDayFrom" name="inputDateDayFrom" class="form-control" id="dateFromDay"></div>
-					<div class="col-xs-3"><input [(ngModel)]="inputDateMonthFrom" name="inputDateMonthFrom" class="form-control" id="dateFromMonth"></div>
-					<div class="col-xs-4"><input [(ngModel)]="inputDateYearFrom" name="inputDateYearFrom" class="form-control" id="dateFromYear"></div>
+				<div class="col-sm-10" id="dateFromLine">
+					<div class="col-xs-7"><input [(ngModel)]="inputDateFrom" name="inputDateFrom" id="inputDateFrom" type="date" class="form-control" placeholder="2016-12-31"></div>
+					<div class="col-xs-5"><input [(ngModel)]="inputTimeFrom" name="inputTimeFrom" id="inputTimeFrom" type="time" class="form-control" placeholder="00:00"></div>
 					<div *ngIf="showWarningDateFrom"><small class="form-text text-danger">invalid Date</small></div>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="dateToLine" class="col-sm-2">To</label>
-				<div class="col-sm-6" id="dateToLine">
-					<div class="col-xs-3"><input [(ngModel)]="inputDateDayTo" name="inputDateDayTo" class="form-control" id="dateToDay"></div>
-					<div class="col-xs-3"><input [(ngModel)]="inputDateMonthTo" name="inputDateMonthTo" class="form-control" id="dateToMonth"></div>
-					<div class="col-xs-4"><input [(ngModel)]="inputDateYearTo" name="inputDateYearTo" class="form-control" id="dateToYear"></div>
-					<div *ngIf="showWarningDateTo"><small class="form-text text-danger">invalid Date</small></div>
+				<div class="col-sm-10" id="dateToLine">
+					<div class="col-xs-7"><input [(ngModel)]="inputDateTo" name="inputDateTo" id="inputDateTo" type="date" class="form-control" placeholder="2016-12-31"></div>
+					<div class="col-xs-5"><input [(ngModel)]="inputTimeTo" name="inputTimeTo" id="inputTimeTo" type="time" class="form-control" placeholder="01:00"></div>
+					<div *ngIf="showWarningDateTo"><small class="form-text text-danger">Date-To has to be bevor Date-From</small></div>
 				</div>
 			</div>
+
 		</div>
 
 
