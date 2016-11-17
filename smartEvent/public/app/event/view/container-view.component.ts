@@ -29,18 +29,19 @@ export class ContainerViewComponent{
 
     ngOnInit(){
         this.eventlist =[];
-        this.eventdata.getEventListSubject().asObservable().subscribe(list => this.upddateList(list));
+        this.updateList();
         
+    }
+    ngAfterViewChecked(){
+        this.updateList();
     }
 
     customTrackBy(index: number, obj: any): any {
         return index;
     }
 
-    upddateList(list:Event[]):void{
-        console.log("subscribe");
-        console.log(list);
-        this.eventlist = list;
+    updateList():void{
+        this.eventdata.getEventListSubject().asObservable().subscribe(list => this.eventlist = list);
         this.showEvents = true;
     }
 

@@ -1,0 +1,57 @@
+{
+  "sessions": [
+    {
+      "id": "eaba0bd6-f223-49a1-94b0-d8460b3db969",
+      "tabLayout": {
+        "type": "stack",
+        "width": 100,
+        "height": 100,
+        "tabs": [
+          {
+            "id": "277aebda-7f9e-48fd-bf7b-cf5b5fe32fae",
+            "relativeUrl": "file://./app/firebase.service.ts",
+            "additionalData": null
+          },
+          {
+            "id": "7dc233f1-cc82-4164-b1e6-30650e932c00",
+            "relativeUrl": "uml://./app/firebase.service.ts",
+            "additionalData": null
+          },
+          {
+            "id": "dfb57029-bc1a-4ea2-853a-0a1ab967924a",
+            "relativeUrl": "uml://./app/app.component.ts",
+            "additionalData": null
+          },
+          {
+            "id": "c93b99db-cc1b-4ed8-9526-f2b9df57c033",
+            "relativeUrl": "file://./app/dashboard.component.ts",
+            "additionalData": null
+          },
+          {
+            "id": "41a0a576-f703-46e5-beda-598eacca2e29",
+            "relativeUrl": "uml://./app/dashboard.component.ts",
+            "additionalData": null
+          },
+          {
+            "id": "0bfa576f-e6f6-4a4f-8dac-e24c3bfc54f5",
+            "relativeUrl": "file://./app/event/create-event.component.ts",
+            "additionalData": null
+          },
+          {
+            "id": "d948a686-132f-4167-8820-06dc17dbaa84",
+            "relativeUrl": "uml://./app/event/create-event.component.ts",
+            "additionalData": null
+          }
+        ],
+        "subItems": [],
+        "activeItemIndex": 0
+      },
+      "lastUsed": 1479377001371,
+      "selectedTabId": "d948a686-132f-4167-8820-06dc17dbaa84",
+      "errorsExpanded": false,
+      "errorsDisplayMode": 1,
+      "fileTreeExpanded": true
+    }
+  ],
+  "relativePathToTsconfig": "./tsconfig.json"
+}

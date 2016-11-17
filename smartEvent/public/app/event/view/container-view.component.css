@@ -6,6 +6,7 @@
       border-radius: 2px;
       margin: 10px;
       word-wrap: break-word;
+      min-width: 230px;
 }
 .module:hover {
       background-color: #EEE;
