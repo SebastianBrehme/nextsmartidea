@@ -1,3 +1,6 @@
 [1114/202526:ERROR:process_reader_win.cc(114)] NtOpenThread: {Zugriff verweigert} Ein Prozess hat einen Zugriff auf ein Objekt angefordert, aber ihm wurden nicht die Rechte für den Zugriff erteilt.  (0xc0000022)
 [1114/202526:ERROR:exception_snapshot_win.cc(87)] thread ID 10476 not found in process
 [1114/202526:WARNING:crash_report_exception_handler.cc(56)] ProcessSnapshotWin::Initialize failed
+[1117/185453:ERROR:process_reader_win.cc(114)] NtOpenThread: {Zugriff verweigert} Ein Prozess hat einen Zugriff auf ein Objekt angefordert, aber ihm wurden nicht die Rechte für den Zugriff erteilt.  (0xc0000022)
+[1117/185453:ERROR:exception_snapshot_win.cc(87)] thread ID 4632 not found in process
+[1117/185453:WARNING:crash_report_exception_handler.cc(56)] ProcessSnapshotWin::Initialize failed
