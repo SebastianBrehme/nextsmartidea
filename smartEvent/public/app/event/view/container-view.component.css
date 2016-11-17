@@ -1,0 +1,16 @@
+.module {
+      padding: 25px;
+      text-align: center;
+      color: #eee;
+      background-color: #5882FA;
+      border-radius: 2px;
+      margin: 10px;
+      word-wrap: break-word;
+}
+.module:hover {
+      background-color: #EEE;
+      cursor: pointer;
+      color: #607d8b;
+}
+
+

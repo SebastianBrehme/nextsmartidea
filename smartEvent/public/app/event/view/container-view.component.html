@@ -1,0 +1,10 @@
+<div *ngIf="showEvents">
+    <div class="container-fluid">
+      <div *ngFor="let event of eventlist; let index = index; trackBy:customTrackBy;" name="eventContainer">
+        <div class="module container-fluid col-sm-3">
+          <div class="row"><h4>{{event.titel}}</h4></div>
+          {{event.key}}
+        </div>
+      </div>
+    </div>
+</div>
