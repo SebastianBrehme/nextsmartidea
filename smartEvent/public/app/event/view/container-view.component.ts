@@ -30,7 +30,6 @@ export class ContainerViewComponent{
     ngOnInit(){
         this.eventlist =[];
         this.updateList();
-        
     }
     ngAfterViewChecked(){
         this.updateList();
