@@ -1,121 +1,104 @@
-<nav-bar></nav-bar>
-
-<div class="col-md-2">
-	<h4>My Events</h4>
-	<p>Example 1</p>
-	<p>Example 2</p>
-	<p>Example 3</p>
-	<br/>
-	<br/>
-	<h4>Next Events</h4>
-	<p>Example 1: in 2 days</p>
-	<p>Example 2: in 20 days</p>
-	<p>Example 3: next year</p>
-</div>
-
-<div class="col-md-6">
-	<h1>Create Event</h1>
-	<form>
-		<div class="form-group">
-			<label for="eventName">Name</label>
-			<input [(ngModel)]="inputName" name="inputName" type="text" class="form-control" id="eventName" placeholder="My New Event">
-			<div *ngIf="showWarningName"><small id="eventNameWarning" class="form-text text-danger">please enter a valid event name</small></div>
-		</div>
-		<div class="form-group">
-			<label for="eventDescription">Description</label>
-			<textarea class="form-control" rows="3" id="eventDescription" placeholder="..."></textarea>
-		</div>
-		<div class="form-group">
-			<label for="eventType">Type of Event</label>
-			<select class="form-control" id="eventType">
+<h1>Create Event</h1>
+<form>
+	<div class="form-group">
+		<label for="eventName">Name</label>
+		<input [(ngModel)]="inputName" name="inputName" type="text" class="form-control" id="eventName" placeholder="My New Event">
+		<div *ngIf="showWarningName"><small id="eventNameWarning" class="form-text text-danger">please enter a valid event name</small></div>
+	</div>
+	<div class="form-group">
+		<label for="eventDescription">Description</label>
+		<textarea class="form-control" rows="3" id="eventDescription" placeholder="..."></textarea>
+	</div>
+	<div class="form-group">
+		<label for="eventType">Type of Event</label>
+		<select class="form-control" id="eventType">
       <option>Birthday</option>
       <option>Party</option>
       <option>Trip</option>
       <option>Other</option>
     </select>
-		</div>
-		<div class="form-group">
-			<label for="eventDate">Date (optional)</label>
-			<small id="fileHelp" class="form-text text-muted">Format: Day / Month / Year</small><br/>
+	</div>
+	<div class="form-group">
+		<label for="eventDate">Date (optional)</label>
+		<small id="fileHelp" class="form-text text-muted">Format: jjjj-mm-dd  hh:mm</small><br/>
 
-			<div class="form-group row">
-				<label for="dateFromLine" class="col-sm-2">From</label>
-				<div class="col-sm-6" id="dateFromLine">
-					<div class="col-xs-3"><input [(ngModel)]="inputDateDayFrom" name="inputDateDayFrom" class="form-control" id="dateFromDay"></div>
-					<div class="col-xs-3"><input [(ngModel)]="inputDateMonthFrom" name="inputDateMonthFrom" class="form-control" id="dateFromMonth"></div>
-					<div class="col-xs-4"><input [(ngModel)]="inputDateYearFrom" name="inputDateYearFrom" class="form-control" id="dateFromYear"></div>
-					<div *ngIf="showWarningDateFrom"><small class="form-text text-danger">invalid Date</small></div>
-				</div>
+
+		<div class="form-group row">
+			<label for="dateFromLine" class="col-sm-2">From</label>
+			<div class="col-sm-10" id="dateFromLine">
+				<div class="col-xs-7"><input [(ngModel)]="inputDateFrom" name="inputDateFrom" id="inputDateFrom" type="date" class="form-control" placeholder="2016-12-31"></div>
+				<div class="col-xs-5"><input [(ngModel)]="inputTimeFrom" name="inputTimeFrom" id="inputTimeFrom" type="time" class="form-control" placeholder="00:00"></div>
+				<div *ngIf="showWarningDateFrom"><small class="form-text text-danger">invalid Date</small></div>
 			</div>
-			<div class="form-group row">
-				<label for="dateToLine" class="col-sm-2">To</label>
-				<div class="col-sm-6" id="dateToLine">
-					<div class="col-xs-3"><input [(ngModel)]="inputDateDayTo" name="inputDateDayTo" class="form-control" id="dateToDay"></div>
-					<div class="col-xs-3"><input [(ngModel)]="inputDateMonthTo" name="inputDateMonthTo" class="form-control" id="dateToMonth"></div>
-					<div class="col-xs-4"><input [(ngModel)]="inputDateYearTo" name="inputDateYearTo" class="form-control" id="dateToYear"></div>
-					<div *ngIf="showWarningDateTo"><small class="form-text text-danger">invalid Date</small></div>
-				</div>
+		</div>
+		<div class="form-group row">
+			<label for="dateToLine" class="col-sm-2">To</label>
+			<div class="col-sm-10" id="dateToLine">
+				<div class="col-xs-7"><input [(ngModel)]="inputDateTo" name="inputDateTo" id="inputDateTo" type="date" class="form-control" placeholder="2016-12-31"></div>
+				<div class="col-xs-5"><input [(ngModel)]="inputTimeTo" name="inputTimeTo" id="inputTimeTo" type="time" class="form-control" placeholder="01:00"></div>
+				<div *ngIf="showWarningDateTo"><small class="form-text text-danger">Date-To has to be bevor Date-From</small></div>
 			</div>
 		</div>
 
+	</div>
 
 
 
-		<div class="form-group">
-			<label for="eventImage">Event Image</label><br/>
-			<label class="btn btn-default btn-file">Browse
+
+	<div class="form-group">
+		<label for="eventImage">Event Image</label><br/>
+		<label class="btn btn-default btn-file">Browse
 				<input type="file" style="display: none;" class="form-control-file" id="eventImage" aria-describedby="fileHelp">
 			</label>
-			<small id="fileHelp" class="form-text text-muted">This image is optional, it can be used to represent your event</small>
-		</div>
+		<small id="fileHelp" class="form-text text-muted">This image is optional, it can be used to represent your event</small>
+	</div>
 
 
-		<div class="form-group">
-			<label for="eventInvite">Send Invite</label>
-			<div *ngIf="invitesList">
+	<div class="form-group">
+		<label for="eventInvite">Send Invite</label>
+		<div *ngIf="invitesList">
 
 
 
-				<div class="row" *ngFor="let invite of invitesList; let index = index; trackBy:customTrackBy;">
-					<div class="col-lg-12">
-						<div class="input-group">
-							<input [(ngModel)]="invitesList[index].email" [ngModelOptions]="{standalone: true}" type="email" class="form-control" value="invitesList[index].email">
-							<span class="input-group-btn">
-            	  				<button class="btn btn-default" (click)="onDeleteInviteClicked(index)" type="button"><span class="glyphicon glyphicon-minus"></span></button>
-							</span>
-						</div>
-						<div *ngIf="!invitesList[index].validated"><small class="form-text text-danger">please enter a valid email</small></div>
-					</div>
-				</div>
-
-			</div>
-
-
-			<div class="row">
+			<div class="row" *ngFor="let invite of invitesList; let index = index; trackBy:customTrackBy;">
 				<div class="col-lg-12">
 					<div class="input-group">
-						<input [(ngModel)]="currentInviteString" name="currentInviteString" type="email" class="form-control" placeholder="max.mustermann@gmail.com">
+						<input [(ngModel)]="invitesList[index].email" [ngModelOptions]="{standalone: true}" type="email" class="form-control" value="invitesList[index].email">
 						<span class="input-group-btn">
-              				<button class="btn btn-default" (click)="onAddInviteClicked()" type="submit"><span class="glyphicon glyphicon-plus"></span></button>
+            	  				<button class="btn btn-default" (click)="onDeleteInviteClicked(index)" type="button"><span class="glyphicon glyphicon-minus"></span></button>
 						</span>
 					</div>
-					<div *ngIf="showWarningLastInvite"><small class="form-text text-danger">please enter a valid email</small></div>
+					<div *ngIf="!invitesList[index].validated"><small class="form-text text-danger">please enter a valid email</small></div>
 				</div>
 			</div>
 
 		</div>
 
 
-		<div class="form-check">
-			<label class="form-check-label">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="input-group">
+					<input [(ngModel)]="currentInviteString" name="currentInviteString" type="email" class="form-control" placeholder="max.mustermann@gmail.com">
+					<span class="input-group-btn">
+              				<button class="btn btn-default" (click)="onAddInviteClicked()" type="submit"><span class="glyphicon glyphicon-plus"></span></button>
+					</span>
+				</div>
+				<div *ngIf="showWarningLastInvite"><small class="form-text text-danger">please enter a valid email</small></div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<div class="form-check">
+		<label class="form-check-label">
       <input [(ngModel)]="checkboxAgreeSelected" name="checkboxAgree" type="checkbox" class="form-check-input">
       I agree...
      <!-- I agree that my data will not be handled as private and NextSmartIdea can do with it, whatever the fuck they want to do! -->
     </label>
-			<div *ngIf="showWarningCheckboxAgreed"><small class="form-text text-danger">please agree...</small></div>
-		</div>
+		<div *ngIf="showWarningCheckboxAgreed"><small class="form-text text-danger">please agree...</small></div>
+	</div>
 
-		<button (click)="onSubmitClicked()" type="submit" class="btn btn-primary">Submit</button>
+	<button (click)="onSubmitClicked()" type="submit" class="btn btn-primary">Submit</button>
 
-	</form>
-</div>
+</form>

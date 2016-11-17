@@ -5,6 +5,7 @@ import { UserService} from './user.service';
 import { EventService} from './event/event.service';
 import { Event } from './event/event';
 import { EventDataService } from './event/event-data.service';
+import { ContainerViewComponent } from './event/view/container-view.component';
 
 @Component({
     moduleId: module.id,
