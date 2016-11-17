@@ -60,5 +60,6 @@ export class DashboardComponent{
     donext():void{
         console.log("mein test");
         //this.eventlist[0].titel="mein test";
+        //this.event.createEvent(null);
     }
 }

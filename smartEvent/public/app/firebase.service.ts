@@ -89,6 +89,7 @@ export class FirebaseService {
         return database.once('value');
     }
 
+    //UID als Pfad und nicht email, da ein Pfad keine Punkt enthalten darf, die Email aber schon
     userToDatabase(): void {
         console.log('firebaseservice: userToDatabase');
         let database = firebase.database().ref('/USER/' + this.user.getUser().uid);
@@ -104,12 +105,13 @@ export class FirebaseService {
             } else {
                 console.log('user in databse');
                 //tempEvents.clear();
-                let tempList:Event[] = []
+                let tempList: Event[] = []
                 for (let key in snap.val().EVENTLIST) {
                     let t: Event = new Event();
                     t.key = key;
                     t.titel = snap.val().EVENTLIST[key];
-                    tempList.push(t);                   
+                    console.log(snap.val());
+                    tempList.push(t);
                 }
                 tempEvents.setEventList(tempList);
             }
@@ -118,7 +120,7 @@ export class FirebaseService {
         console.log('userToDatabse finished');
     }
 
-    createEvent(e:Event): void {
+    createEvent(e: Event): void {
         console.log('firebaseservice: createEvent');
         let eventData = {
             AUTHOR: e.author,
@@ -137,14 +139,30 @@ export class FirebaseService {
         console.log('do update');
         firebase.database().ref().update(updates);
 
-        for(let m in e.member){
-            this.addMemberToEvent(newEventKey,m);
-        }
+        this.addMemberToEvent(newEventKey, e.titel, e.member);
+
         console.log('createEvent finished');
     }
 
-    addMemberToEvent(ekey:string,member:string):void{
+    addMemberToEvent(ekey: string, eTitle: string, member: string[]): void {
         console.log("firebaseservice addMemberToEvent");
-
+        let update = {};
+        let counter:number = 0;
+        for (let m in member) {
+            let database = firebase.database().ref("/USER/").orderByChild("EMAIL").equalTo(member[m]);
+            database.once('value').then(function (snap: any) {
+                if (snap != null) {
+                    for (let n in snap.val()) {
+                        console.log(n);
+                        update['/USER/'+n+'/EVENTLIST/'+ekey] = '';// eTitle;
+                    }
+                }
+                counter++;
+                if(counter===member.length){
+                    firebase.database().ref().update(update);
+                }
+            });
+        }
+        console.log("do update");
     }
 }
