@@ -7,16 +7,16 @@
 	</div>
 	<div class="form-group">
 		<label for="eventDescription">Description</label>
-		<textarea class="form-control" rows="3" id="eventDescription" placeholder="..."></textarea>
+		<textarea [(ngModel)]="inputDescription" class="form-control" rows="3" id="eventDescription" name="eventDescription" placeholder="..."></textarea>
 	</div>
 	<div class="form-group">
 		<label for="eventType">Type of Event</label>
-		<select class="form-control" id="eventType">
-      <option>Birthday</option>
-      <option>Party</option>
-      <option>Trip</option>
-      <option>Other</option>
-    </select>
+		<select [(ngModel)]="selectedType" class="form-control" id="eventType" name="eventType">
+			<option>Party</option>
+			<option>Birthday</option>
+			<option>Trip</option>
+			<option>Other</option>
+    	</select>
 	</div>
 	<div class="form-group">
 		<label for="eventDate">Date (optional)</label>
@@ -36,7 +36,7 @@
 			<div class="col-sm-10" id="dateToLine">
 				<div class="col-xs-7"><input [(ngModel)]="inputDateTo" name="inputDateTo" id="inputDateTo" type="date" class="form-control" placeholder="2016-12-31"></div>
 				<div class="col-xs-5"><input [(ngModel)]="inputTimeTo" name="inputTimeTo" id="inputTimeTo" type="time" class="form-control" placeholder="01:00"></div>
-				<div *ngIf="showWarningDateTo"><small class="form-text text-danger">Date-To has to be bevor Date-From</small></div>
+				<div *ngIf="showWarningDateTo"><small class="form-text text-danger">Date-From has to be bevor Date-To</small></div>
 			</div>
 		</div>
 

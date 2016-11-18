@@ -73,11 +73,10 @@ export class FirebaseService {
         let tevents = this.events;
         database.once('value', function (snap: any) {
             snap.forEach(function (child: any) {
-                let t: Event = new Event();
+                let t: Event = new Event(child.val().TITEL);
                 console.log(child.key);
                 console.log(child.val());
-                t.key = child.key;
-                t.titel = child.val().TITEL;
+                t.setKey(child.key);
                 tevents.addEvent(t);
             });
         });
@@ -107,9 +106,8 @@ export class FirebaseService {
                 //tempEvents.clear();
                 let tempList: Event[] = []
                 for (let key in snap.val().EVENTLIST) {
-                    let t: Event = new Event();
-                    t.key = key;
-                    t.titel = snap.val().EVENTLIST[key];
+                    let t: Event = new Event(snap.val().EVENTLIST[key]);
+                    t.setKey(key);
                     console.log(snap.val());
                     tempList.push(t);
                 }
