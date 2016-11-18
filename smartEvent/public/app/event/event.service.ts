@@ -35,9 +35,9 @@ export class EventService{
 
     createEvent(e:Event){
         e.author = this.user.getUser().uid;
-        if(!e.member){
-            e.member=[];
-        }
+        //if(!e.member){
+        //    e.member=[];
+        //}
         e.member.push(this.user.getUser().email);
         this.firebase.createEvent(e);
         //this.firebase.addMemberToEvent('key','titel',['fail','fbaain@gmail.com','robin.warth@gmail.com']);

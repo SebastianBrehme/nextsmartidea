@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../firebase.service';
 import { Router } from '@angular/router';
 import { Event } from './event';
+import {EventService } from './event.service';
 
 @Component({
     moduleId: module.id,
@@ -43,6 +44,7 @@ export class CreateEventComponent implements OnInit {
     constructor(
         private firebase: FirebaseService,
         private router: Router,
+        private eventservice: EventService,
     ) { }
 
     ngOnInit() {
@@ -114,10 +116,13 @@ export class CreateEventComponent implements OnInit {
 
         console.log("Created Event: " + this.newEvent.getTitle());
         console.log(this.newEvent);
+        this.sendEvent();
         
     }
 
-
+    sendEvent():void{
+        this.eventservice.createEvent(this.newEvent);
+    }
 
 
     /*

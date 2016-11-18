@@ -11,6 +11,13 @@ export class Event {
 
     constructor(title:string) {
         this.titel = title;
+        this.key ='';
+        this.author='';
+        this.description='';
+        this.type='';
+        this.date_from = new Date();
+        this.date_to = new Date();
+        this.member=[];
     }
 
     getKey():string{

@@ -133,8 +133,8 @@ export class FirebaseService {
         console.log(newEventKey);
         let updates = {};
         updates['/EVENT/' + newEventKey] = eventData;
-        updates['/USER/' + this.user.getUser().uid + '/EVENTLIST/' + newEventKey] = e.titel;
-        console.log('do update');
+        updates['/USER/' + this.user.getUser().uid + '/EVENTLIST/' + newEventKey] = e.getTitle();
+        console.log(updates);
         firebase.database().ref().update(updates);
 
         this.addMemberToEvent(newEventKey, e.titel, e.member);
@@ -152,7 +152,7 @@ export class FirebaseService {
                 if (snap != null) {
                     for (let n in snap.val()) {
                         console.log(n);
-                        update['/USER/'+n+'/EVENTLIST/'+ekey] = '';// eTitle;
+                        update['/USER/'+n+'/EVENTLIST/'+ekey] = eTitle;
                     }
                 }
                 counter++;
