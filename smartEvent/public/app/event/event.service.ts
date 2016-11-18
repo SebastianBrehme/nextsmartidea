@@ -28,12 +28,16 @@ export class EventService{
     }
 
     getEvent(id:string):Promise<Event>{
-        return this.firebase.getEventData(id)
-        .then(function(snap:any){return new Event(snap.val(),snap.key);});
+        return null;
+       // return this.firebase.getEventData(id)
+       // .then(function(snap:any){return new Event(snap.val(),snap.key);});
     }
 
     createEvent(e:Event){
         e.author = this.user.getUser().uid;
+        if(!e.member){
+            e.member=[];
+        }
         e.member.push(this.user.getUser().email);
         this.firebase.createEvent(e);
         //this.firebase.addMemberToEvent('key','titel',['fail','fbaain@gmail.com','robin.warth@gmail.com']);
