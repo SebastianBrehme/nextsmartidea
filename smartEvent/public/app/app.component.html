@@ -5,12 +5,12 @@
 </div>
 
 
-<ng2-sidebar [(open)]="_open" closeOnClickOutside=true showOverlay=true defaultStyles=true position="left">
+<ng2-sidebar [(open)]="_open" closeOnClickOutside=true showOverlay=true defaultStyles=true position="top">
       <sidebar-content></sidebar-content>
 	  <a closeSidebar>Closes the sidebar</a>
 </ng2-sidebar>
 
-<div class="visible-xs-block" style="position: fixed; z-index: 1">
+<div class="visible-xs-block" style="position: fixed; bottom: 0px; right: 0px; z-index: 1">
 	<button class="btn btn-default" (click)="_toggleSidebar()"><span class="glyphicon glyphicon-menu-hamburger"></span></button>
 </div>
 

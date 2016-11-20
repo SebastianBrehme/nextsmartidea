@@ -12,7 +12,6 @@ import { SidebarContentComponent } from './sidebar/sidebar-content.component';
 export class AppComponent { 
     loggedIn: boolean = false;
     _open: boolean = false;
-    showFloatingButton:boolean = false;
 
     constructor(
         private user: UserService,
@@ -20,9 +19,6 @@ export class AppComponent {
 
     ngOnInit() { 
         this.checkLoggedIn();
-        if(window.innerWidth < 768){
-            this.showFloatingButton = true;
-        }
     }
 
     ngAfterContentChecked(){
@@ -31,9 +27,6 @@ export class AppComponent {
 
     ngOnChanges() { 
         this.checkLoggedIn();
-        if(window.innerWidth > 767){
-            this.showFloatingButton = false;
-        }
     }
  
   _toggleSidebar() {

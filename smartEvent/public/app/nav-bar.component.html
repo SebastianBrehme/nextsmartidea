@@ -9,6 +9,12 @@
           </button>
           <a (click)="onBrandClicked()" class="navbar-brand" >Smart Event</a>
         </div>
+
+        <div *ngIf="loggedIn" id="subNavbar" style="text-align:center" class="navbar-collapse visible-xs-block">
+          <ul class="nav navbar-nav">
+            <li (click)="_toggleSidebar()" id="subNavbarText">My Events</li>
+          </ul>
+        </div>
         <div id="navbar" class="navbar-collapse collapse">
 
         <div [ngSwitch]="loggedIn">
@@ -38,8 +44,7 @@
 
              <ul *ngSwitchCase="true" class="nav navbar-nav navbar-left">
             <li><a id="createEvent" (click)="onCreateEventClicked()" >Create Event</a></li>
-            <li><a (click)="onJoinEventClicked()" >Join Event</a></li>
-            <li><a (click)="onContactClicked()" >Contact</a></li>
+            <li><a id="contact" (click)="onContactClicked()" >Contact</a></li>
             
             <!--
             <li class="dropdown">
