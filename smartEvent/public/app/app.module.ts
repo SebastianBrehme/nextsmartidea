@@ -14,11 +14,12 @@ import { CreateEventComponent } from './event/create-event.component';
 import { ContactComponent} from './contact/contact.component';
 import { ContainerViewComponent } from './event/view/container-view.component';
 import { DetailViewComponent } from './event/view/detail-view.component';
-
+import { SidebarModule } from 'ng2-sidebar';
+import { SidebarContentComponent } from './sidebar/sidebar-content.component';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, RoutingModule],
-  declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, CreateEventComponent, ContactComponent, ContainerViewComponent, DetailViewComponent],
+  imports: [BrowserModule, FormsModule, RoutingModule, SidebarModule],
+  declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, CreateEventComponent, ContactComponent, ContainerViewComponent, DetailViewComponent, SidebarContentComponent],
   providers: [FirebaseService, UserService, EventService,EventDataService],
   bootstrap: [AppComponent]
 })
