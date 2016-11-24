@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { UserService} from './user.service';
 import { EventService} from './event/event.service';
 import { Event } from './event/event';
-import { EventDataService } from './event/event-data.service';
 import { ContainerViewComponent } from './event/view/container-view.component';
 
 @Component({
@@ -22,11 +21,9 @@ export class DashboardComponent{
         private router: Router,
         private user: UserService,
         private event: EventService,
-        private eventdata: EventDataService,
     ) { 
         this.eventlist =[];
-        this.eventdata.getEventListSubject().asObservable().subscribe(list => this.upddateList(list));
-            //function(list){
+        //function(list){
             //console.log("subscribe");
             //this.eventlist = list;
         //});
