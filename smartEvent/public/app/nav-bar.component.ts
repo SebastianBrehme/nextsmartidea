@@ -2,6 +2,7 @@ import {Component,OnInit,OnChanges, AfterContentChecked} from '@angular/core';
 import {Router} from '@angular/router';
 import {FirebaseService} from './firebase.service';
 import { UserService } from './user.service';
+import { AppComponent } from './app.component';
 
 @Component({
     moduleId: module.id,
@@ -18,6 +19,7 @@ export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
         private firebase: FirebaseService,
         private router: Router,
         private user: UserService,
+        private appComp: AppComponent,
         ){}
 
     ngOnInit() { 
@@ -67,5 +69,9 @@ export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
 
     onContactClicked():void{
         this.router.navigate(['/contact']);
+    }
+
+    _toggleSidebar() {
+        this.appComp._toggleSidebar();
     }
 }

@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
-import { EventDataService } from './event/event-data.service';
 import { Event } from './event/event';
 import { Router } from '@angular/router';
 
@@ -14,7 +13,6 @@ export class FirebaseService {
     constructor(
         private router: Router,
         private user: UserService,
-        private events: EventDataService,
     ) {
         firebase.auth().onAuthStateChanged(this.onAuthStateChanged.bind(this));
         console.log('constructor');
@@ -52,49 +50,37 @@ export class FirebaseService {
             this.user.setUser(user);
             this.user.setLogedIn(true);
             this.router.navigate(['/dashboard']);
-            this.userToDatabase();
+            this.putUserToDatabase();
         } else {
             this.user.setLogedIn(false);
             this.router.navigate(['/login']);
         }
     }
 
-    /*
-        @Deprecated
-    */
-    getEventList(): void {
-        console.log('firebaseservice: getEvent');
-        console.log('database connect ');
+   //TODO callback is a function, use interface(?)
+    getEventList(callback:any): void {
+        console.log('firebaseservice: getEventist');
         console.log(this.user.getUser().uid);
         let database = firebase.database().ref('/USER/' + this.user.getUser().uid + '/EVENTLIST/');
-        console.log('getData function ');
-        console.log('database.on');
-        this.events.clear();
-        let tevents = this.events;
-        database.once('value', function (snap: any) {
-            snap.forEach(function (child: any) {
-                let t: Event = new Event();
-                console.log(child.key);
-                console.log(child.val());
-                t.key = child.key;
-                t.titel = child.val().TITEL;
-                tevents.addEvent(t);
-            });
+        database.on('value', function(snap:any){
+            callback(snap.val());
         });
         console.log('getEvent finished ');
     }
 
-    getEventData(key: string): Promise<Event> {
-        let database = firebase.database().ref('EVENT/' + key);
-        return database.once('value');
+    getEventData(key: string, callback: any): Promise<Event> {
+        let database = firebase.database().ref('/EVENT/' + key);
+        let getEvent = function (snap: any) {
+            console.log(snap);
+        }
+        return database.on('value', callback);
     }
 
     //UID als Pfad und nicht email, da ein Pfad keine Punkt enthalten darf, die Email aber schon
-    userToDatabase(): void {
-        console.log('firebaseservice: userToDatabase');
+    putUserToDatabase(): void {
+        console.log('firebaseservice: putUserToDatabase');
         let database = firebase.database().ref('/USER/' + this.user.getUser().uid);
         let email = this.user.getUser().email;
-        let tempEvents = this.events;
         let checkUser = function (snap: any) {
             if (!snap.exists()) {
                 console.log('no user in databse - create...');
@@ -102,25 +88,13 @@ export class FirebaseService {
                     EMAIL: email
                 });
                 console.log('user set in database');
-            } else {
-                console.log('user in databse');
-                //tempEvents.clear();
-                let tempList: Event[] = []
-                for (let key in snap.val().EVENTLIST) {
-                    let t: Event = new Event();
-                    t.key = key;
-                    t.titel = snap.val().EVENTLIST[key];
-                    console.log(snap.val());
-                    tempList.push(t);
-                }
-                tempEvents.setEventList(tempList);
-            }
+            } 
         }
-        database.on('value', checkUser);
+        database.once('value', checkUser);
         console.log('userToDatabse finished');
     }
 
-    createEvent(e: Event): void {
+    createEvent(e: Event, key?: string): void {
         console.log('firebaseservice: createEvent');
         let eventData = {
             AUTHOR: e.author,
@@ -131,12 +105,17 @@ export class FirebaseService {
             TO: e.date_to,
         }
         console.log('create key');
-        let newEventKey = firebase.database().ref('/EVENT/').push().key;
-        console.log(newEventKey);
+        let newEventKey = '';
+        if (key) {
+            newEventKey = key;
+        } else {
+            newEventKey = firebase.database().ref('/EVENT/').push().key;
+            console.log(newEventKey);
+        }
         let updates = {};
         updates['/EVENT/' + newEventKey] = eventData;
-        updates['/USER/' + this.user.getUser().uid + '/EVENTLIST/' + newEventKey] = e.titel;
-        console.log('do update');
+        updates['/USER/' + this.user.getUser().uid + '/EVENTLIST/' + newEventKey] = e.getTitle();
+        console.log(updates);
         firebase.database().ref().update(updates);
 
         this.addMemberToEvent(newEventKey, e.titel, e.member);
@@ -144,21 +123,27 @@ export class FirebaseService {
         console.log('createEvent finished');
     }
 
+    updateEvent(e: Event): void {
+        if (e.key != '') {
+            this.createEvent(e, e.key);
+        }
+    }
+
     addMemberToEvent(ekey: string, eTitle: string, member: string[]): void {
         console.log("firebaseservice addMemberToEvent");
         let update = {};
-        let counter:number = 0;
+        let counter: number = 0;
         for (let m in member) {
             let database = firebase.database().ref("/USER/").orderByChild("EMAIL").equalTo(member[m]);
             database.once('value').then(function (snap: any) {
                 if (snap != null) {
                     for (let n in snap.val()) {
                         console.log(n);
-                        update['/USER/'+n+'/EVENTLIST/'+ekey] = '';// eTitle;
+                        update['/USER/' + n + '/EVENTLIST/' + ekey] = eTitle;
                     }
                 }
                 counter++;
-                if(counter===member.length){
+                if (counter === member.length) {
                     firebase.database().ref().update(update);
                 }
             });

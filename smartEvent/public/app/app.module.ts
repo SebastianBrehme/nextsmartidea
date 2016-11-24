@@ -9,17 +9,18 @@ import { FirebaseService } from './firebase.service';
 import { NavBarComponent} from './nav-bar.component';
 import { UserService} from './user.service';
 import { EventService } from './event/event.service';
-import { EventDataService} from './event/event-data.service';
 import { CreateEventComponent } from './event/create-event.component';
 import { ContactComponent} from './contact/contact.component';
 import { ContainerViewComponent } from './event/view/container-view.component';
 import { DetailViewComponent } from './event/view/detail-view.component';
-
+import { SidebarModule } from 'ng2-sidebar';
+import { SidebarContentComponent } from './sidebar/sidebar-content.component';
 
 @NgModule({
-  imports: [BrowserModule, FormsModule, RoutingModule],
-  declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, CreateEventComponent, ContactComponent, ContainerViewComponent, DetailViewComponent],
-  providers: [FirebaseService, UserService, EventService,EventDataService],
+
+  imports: [BrowserModule, FormsModule, RoutingModule, SidebarModule],
+  declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, CreateEventComponent, ContactComponent, ContainerViewComponent, DetailViewComponent, SidebarContentComponent],
+  providers: [FirebaseService, UserService, EventService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FirebaseService } from '../firebase.service';
 import { Router } from '@angular/router';
+import { Event } from './event';
+import {EventService } from './event.service';
 
 @Component({
     moduleId: module.id,
@@ -17,17 +19,11 @@ export class CreateEventComponent implements OnInit {
     dateFrom: Date;
     dateTo: Date;
 
+    selectedType: string = "Party";
+
     inputName: string = "";
+    inputDescription: string;
 
-/*
-    inputDateDayFrom: string = "";
-    inputDateMonthFrom: string = "";
-    inputDateYearFrom: string = "";
-
-    inputDateDayTo: string = "";
-    inputDateMonthTo: string = "";
-    inputDateYearTo: string = "";
-*/
     inputDateFrom: string;
     inputDateTo: string;
 
@@ -43,9 +39,12 @@ export class CreateEventComponent implements OnInit {
 
     checkboxAgreeSelected: boolean = false;
 
+    newEvent: Event;
+
     constructor(
         private firebase: FirebaseService,
         private router: Router,
+        private eventservice: EventService,
     ) { }
 
     ngOnInit() {
@@ -89,11 +88,42 @@ export class CreateEventComponent implements OnInit {
 
         if (checkAll) {
             alert("submit succeeded");
+            this.setEvent();
+
         }
     }
 
+    setEvent(){
+        this.newEvent = new Event(this.inputName);
+        this.newEvent.setType(this.selectedType);
+        
+        if(this.inputDescription){
+            this.newEvent.setDescription(this.inputDescription);
+        }
+        if(this.dateFrom){
+            this.newEvent.setDateFrom(this.dateFrom);
+        }
+        if(this.dateTo){
+            this.newEvent.setDateTo(this.dateTo);
+        }
+        if(this.invitesList.length > 0){
+            let memberList:string[] = [];
+            for(let invite of this.invitesList){
+                memberList.push(invite.email);
+            }
+            this.newEvent.setMember(memberList);
+        }
 
+        console.log("Created Event: " + this.newEvent.getTitle());
+        console.log(this.newEvent);
+        this.sendEvent();
+        this.router.navigate(['/dashboard']);
+        
+    }
 
+    sendEvent():void{
+        this.eventservice.createEvent(this.newEvent);
+    }
 
 
     /*

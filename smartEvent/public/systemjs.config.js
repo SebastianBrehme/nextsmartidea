@@ -12,6 +12,7 @@
     map: {
       // our app is within the app folder
       app: 'app',
+      'ng2-sidebar': 'node_modules/ng2-sidebar',
 
       // angular bundles
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
@@ -39,6 +40,10 @@
       },
       'angular-in-memory-web-api': {
         main: './index.js',
+        defaultExtension: 'js'
+      },
+      'ng2-sidebar': {
+        main: 'lib/index',
         defaultExtension: 'js'
       }
     }
