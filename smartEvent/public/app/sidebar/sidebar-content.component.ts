@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { UserService} from './../user.service';
 import { EventService} from '../event/event.service';
 import { Event } from '../event/event';
-import { EventDataService } from '../event/event-data.service';
 
 @Component({
     moduleId: module.id,
@@ -23,7 +22,6 @@ export class SidebarContentComponent{
         private router: Router,
         private user: UserService,
         private event: EventService,
-        private eventdata: EventDataService,
     ) {}
 
     ngOnInit(){
@@ -38,9 +36,9 @@ export class SidebarContentComponent{
         return index;
     }
 
-    updateList():void{
-        this.eventdata.getEventListSubject().asObservable().subscribe(list => this.eventlist = list);
-        this.showEvents = true;
+   updateList():void{
+      //  this.eventdata.getEventListSubject().asObservable().subscribe(list => this.eventlist = list);
+        //this.showEvents = true;
     }
 
     
