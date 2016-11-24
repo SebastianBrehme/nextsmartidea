@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { Event } from './event';
 import { FirebaseService } from '../firebase.service';
-import { EventDataService} from './event-data.service';
 import { UserService } from '../user.service';
 
 @Injectable()
@@ -10,27 +9,28 @@ export class EventService{
 
     constructor(
         private firebase: FirebaseService,
-        private eventdata: EventDataService,
         private user: UserService,
     ){}
 
-    addEvent(e:Event):void{
-       this.eventdata.addEvent(e);
+    //addEvent(e:Event):void{
+      // this.eventdata.addEvent(e);
+    //}
+
+    getEventList(ecallback:any):void{
+        let fcallback = function(data:any){
+            let elist:Event[] = [];
+            for(let key in data){
+                let temp:Event = new Event(data[key]);
+                temp.setKey(key);
+                elist.push(temp);
+            }
+            ecallback(elist);
+        }
+        this.firebase.getEventList(fcallback);
     }
 
-    setEventList(e:Event[]):void{
-       this.eventdata.setEventList(e);
-    }
-
-    getEventList():void{//:Event[]{
-       //return this.eventdata.getEventList();
-       this.firebase.getEventList();
-    }
-
-    getEvent(id:string):Promise<Event>{
-        return null;
-       // return this.firebase.getEventData(id)
-       // .then(function(snap:any){return new Event(snap.val(),snap.key);});
+    getEvent(id:string,callback:any):Promise<Event>{        
+        return this.firebase.getEventData(id,callback);
     }
 
     createEvent(e:Event){
@@ -47,8 +47,14 @@ export class EventService{
 
     }
 
-    updateEvent(id:string,data:Object):void{
+    //updateEvent(id:string,data:Object):void{
 
+    //}
+
+    updateEvent(e:Event):void{
+        if (e.key != '') {
+            this.firebase.createEvent(e, e.key);
+        }
     }
 
 }
