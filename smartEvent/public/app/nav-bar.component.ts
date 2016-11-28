@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 
 export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
 
-    @Input() loggedIn: boolean = false;
+    loggedIn: boolean = false;
 
     constructor(
         private firebase: FirebaseService,
@@ -55,6 +55,8 @@ export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
         this.firebase.signOut();
     }
 
+    //durch fabi ersetzt
+    /*
     checkLoggedIn(): void{
         console.log(this.user.isLogedIn());
         if(this.user.isLogedIn()){
@@ -63,6 +65,7 @@ export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
             this.loggedIn = false;
         }
     }
+    */
     
     onCreateEventClicked():void{
         this.router.navigate(['/create-event']);
