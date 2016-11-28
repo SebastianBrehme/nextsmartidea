@@ -1,4 +1,4 @@
-import {Component,OnInit,OnChanges, AfterContentChecked} from '@angular/core';
+import {Component,OnInit,OnChanges, AfterContentChecked, ChangeDetectorRef, Input} from '@angular/core';
 import {Router} from '@angular/router';
 import {FirebaseService} from './firebase.service';
 import { UserService } from './user.service';
@@ -13,41 +13,50 @@ import { AppComponent } from './app.component';
 
 export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
 
-    loggedIn: boolean = false;
+    @Input() loggedIn: boolean = false;
 
     constructor(
         private firebase: FirebaseService,
         private router: Router,
         private user: UserService,
         private appComp: AppComponent,
+        private ref: ChangeDetectorRef,
         ){}
 
     ngOnInit() { 
-        this.checkLoggedIn();
+        console.log('ngOnInit');
+        //this.ref.markForCheck();
+        //this.checkLoggedIn();
+        this.user.isLogedInCallback(this.test);
+    }
+
+    test = (t:boolean) => {
+        console.log('callback: '+t);
+        this.loggedIn = t;
+        this.ref.markForCheck();
+        this.ref.detectChanges();
     }
 
     ngAfterContentChecked(){
-        this.checkLoggedIn();
+        console.log('ngAfterContentChecked');
+        //this.checkLoggedIn();
     }
 
     ngOnChanges() { 
-        this.checkLoggedIn();
+        console.log('ngOnChanges');
+        //this.checkLoggedIn();
     }
 
     doLogin():void{
-       let response = this.firebase.signIn();
-       if(true){
-           // this.router.navigate(['/dashboard']);    
-       }else{
-           //Fehler anzeigen
-       }
+       this.firebase.signIn();
     }
 
     doLogout(): void {
-        let result = this.firebase.signOut();
+        this.firebase.signOut();
     }
 
     checkLoggedIn(): void{
+        console.log(this.user.isLogedIn());
         if(this.user.isLogedIn()){
             this.loggedIn = this.user.isLogedIn() 
         }else{

@@ -46,6 +46,7 @@ export class DashboardComponent{
 
     doEvent(): void{
         console.log('dashboard: doEvent');
+        this.user.setLogedIn(!this.user.isLogedIn());
         //this.eventlist = this.eventdata.getEventList();
         //let e:Event  = new Event();
         //e.titel= "mein krampf";
@@ -53,11 +54,5 @@ export class DashboardComponent{
         //this.event.getEventList();
         //this.event.getEventList();
         //this.event.getEvent('-KVWYlPhWQrQyHBI-HZh').then(event => console.log(event));
-    }
-
-    donext():void{
-        console.log("mein test");
-        //this.eventlist[0].titel="mein test";
-        //this.event.createEvent(null);
     }
 }

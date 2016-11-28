@@ -2,6 +2,12 @@ export class UserService{
 
     logedIn: boolean;
     user: any;
+    mycallback:any;
+
+    constructor(){
+        this.logedIn = false;
+        this.mycallback = function(t:boolean){}
+    }
     
     isLogedIn():boolean{
         return this.logedIn;
@@ -9,6 +15,12 @@ export class UserService{
 
     setLogedIn(log:boolean):void{
         this.logedIn = log;
+        console.log('set logedIn to: '+this.logedIn);
+        this.mycallback(log);
+    }
+
+    isLogedInCallback(callback:any):void{
+        this.mycallback = callback;
     }
 
     setUser(user:any):void{
