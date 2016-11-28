@@ -1,4 +1,4 @@
-import {Component,OnInit,OnChanges, AfterContentChecked, ChangeDetectorRef, Input} from '@angular/core';
+import {Component,OnInit, ChangeDetectorRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {FirebaseService} from './firebase.service';
 import { UserService } from './user.service';
@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
     styleUrls: ['nav-bar.component.css']
 })
 
-export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
+export class NavBarComponent implements OnInit{
 
     loggedIn: boolean = false;
 
@@ -25,8 +25,6 @@ export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
 
     ngOnInit() { 
         console.log('ngOnInit');
-        //this.ref.markForCheck();
-        //this.checkLoggedIn();
         this.user.setLogedInCallback(this.test);
     }
 
@@ -37,16 +35,6 @@ export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
         this.ref.detectChanges();
     }
 
-    ngAfterContentChecked(){
-        console.log('ngAfterContentChecked');
-        //this.checkLoggedIn();
-    }
-
-    ngOnChanges() { 
-        console.log('ngOnChanges');
-        //this.checkLoggedIn();
-    }
-
     doLogin():void{
        this.firebase.signIn();
     }
@@ -54,18 +42,6 @@ export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
     doLogout(): void {
         this.firebase.signOut();
     }
-
-    //durch fabi ersetzt
-    /*
-    checkLoggedIn(): void{
-        console.log(this.user.isLogedIn());
-        if(this.user.isLogedIn()){
-            this.loggedIn = this.user.isLogedIn() 
-        }else{
-            this.loggedIn = false;
-        }
-    }
-    */
     
     onCreateEventClicked():void{
         this.router.navigate(['/create-event']);

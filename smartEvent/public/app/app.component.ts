@@ -1,6 +1,4 @@
-import {Component,OnInit,OnChanges, AfterContentChecked, ChangeDetectorRef, Input} from '@angular/core';
-//import { NavBarComponent } from './nav-bar.component';
-//import { UserService } from './user.service';
+import {Component,OnInit, ChangeDetectorRef} from '@angular/core';
 import { SidebarContentComponent } from './sidebar/sidebar-content.component';
 import { UserService} from './user.service';
 
@@ -10,8 +8,7 @@ import { UserService} from './user.service';
     selector: 'my-app',
     templateUrl: 'app.component.html'
   })
-export class AppComponent implements OnInit,OnChanges,AfterContentChecked{ 
-    //loggedIn: boolean = false;
+export class AppComponent implements OnInit{ 
     _open: boolean = false;
     loggedIn: boolean = false;
 
@@ -22,19 +19,7 @@ export class AppComponent implements OnInit,OnChanges,AfterContentChecked{
     
     ngOnInit() { 
         console.log('ngOnInit [app.component]');
-        //this.ref.markForCheck();
-        //this.checkLoggedIn();
         this.user.setLogedInCallback(this.test);
-    }
-
-    ngAfterContentChecked(){
-        console.log('ngAfterContentChecked');
-        //this.checkLoggedIn();
-    }
-
-    ngOnChanges() { 
-        console.log('ngOnChanges');
-        //this.checkLoggedIn();
     }
 
 
@@ -46,24 +31,8 @@ export class AppComponent implements OnInit,OnChanges,AfterContentChecked{
         console.log("app.component: loggedIN = true");
     }
 
-    
-        
-/*
-    constructor(
-        private user: UserService,
-        ){}
-*/
-    
   _toggleSidebar() {
     this._open = !this._open;
   }
-/*
-    checkLoggedIn(): void{
-        if(this.user.isLogedIn()){
-            this.loggedIn = this.user.isLogedIn() 
-        }else{
-            this.loggedIn = false;
-        }
-    }
-    */
+
 }

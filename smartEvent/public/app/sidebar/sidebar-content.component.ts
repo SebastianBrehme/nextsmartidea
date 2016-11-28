@@ -1,7 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
-import { FirebaseService } from './../firebase.service';
-import { Router } from '@angular/router';
-import { UserService} from './../user.service';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { EventService} from '../event/event.service';
 import { Event } from '../event/event';
 
@@ -13,24 +10,18 @@ import { Event } from '../event/event';
 
 export class SidebarContentComponent{
 
-    eventlist:Event[];
+    eventList:Event[];
 
     showEvents: boolean = false;
 
     constructor(
-        private firebase: FirebaseService,
-        private router: Router,
-        private user: UserService,
         private event: EventService,
         private ref: ChangeDetectorRef,
     ) {}
 
     ngOnInit(){
-        this.eventlist =[];
+        this.eventList =[];
         this.event.getEventList(this.updateList);
-    }
-    ngAfterViewChecked(){
-        //this.updateList();
     }
 
     customTrackBy(index: number, obj: any): any {
@@ -39,7 +30,7 @@ export class SidebarContentComponent{
 
    updateList = (list:Event[]) => {
         console.log('update: '+list);
-        this.eventlist = list;
+        this.eventList = list;
         this.showEvents = true;
         this.ref.markForCheck();
         this.ref.detectChanges();
