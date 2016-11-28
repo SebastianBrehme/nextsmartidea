@@ -6,7 +6,7 @@ export class UserService{
 
     constructor(){
         this.logedIn = false;
-        this.mycallback.push(function(t:boolean){});
+        this.mycallback = [];
     }
     
     isLogedIn():boolean{
