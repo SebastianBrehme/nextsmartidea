@@ -27,7 +27,7 @@ export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
         console.log('ngOnInit');
         //this.ref.markForCheck();
         //this.checkLoggedIn();
-        this.user.isLogedInCallback(this.test);
+        this.user.setLogedInCallback(this.test);
     }
 
     test = (t:boolean) => {

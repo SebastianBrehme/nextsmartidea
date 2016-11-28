@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FirebaseService } from '../firebase.service';
+//import { FirebaseService } from '../firebase.service';
 import { Router } from '@angular/router';
 import { Event } from './event';
 import {EventService } from './event.service';
@@ -42,7 +42,7 @@ export class CreateEventComponent implements OnInit {
     newEvent: Event;
 
     constructor(
-        private firebase: FirebaseService,
+       // private firebase: FirebaseService,
         private router: Router,
         private eventservice: EventService,
     ) { }

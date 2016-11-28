@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavBarComponent } from './nav-bar.component';
-import { UserService } from './user.service';
+//import { NavBarComponent } from './nav-bar.component';
+//import { UserService } from './user.service';
 import { SidebarContentComponent } from './sidebar/sidebar-content.component';
 
 
@@ -10,29 +10,29 @@ import { SidebarContentComponent } from './sidebar/sidebar-content.component';
     templateUrl: 'app.component.html'
   })
 export class AppComponent { 
-    loggedIn: boolean = false;
+    //loggedIn: boolean = false;
     _open: boolean = false;
-
+/*
     constructor(
         private user: UserService,
         ){}
-
+*/
     ngOnInit() { 
-        this.checkLoggedIn();
+       // this.checkLoggedIn();
     }
 
     ngAfterContentChecked(){
-        this.checkLoggedIn();
+       // this.checkLoggedIn();
     }
 
     ngOnChanges() { 
-        this.checkLoggedIn();
+      //  this.checkLoggedIn();
     }
  
   _toggleSidebar() {
     this._open = !this._open;
   }
-
+/*
     checkLoggedIn(): void{
         if(this.user.isLogedIn()){
             this.loggedIn = this.user.isLogedIn() 
@@ -40,4 +40,5 @@ export class AppComponent {
             this.loggedIn = false;
         }
     }
+    */
 }

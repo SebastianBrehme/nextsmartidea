@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FirebaseService } from './firebase.service';
+//import { FirebaseService } from './firebase.service';
 import { Router } from '@angular/router';
-import { UserService} from './user.service';
-import { EventService} from './event/event.service';
-import { Event } from './event/event';
+//import { UserService} from './user.service';
+//import { EventService} from './event/event.service';
+//import { Event } from './event/event';
 import { ContainerViewComponent } from './event/view/container-view.component';
 
 @Component({
@@ -17,10 +17,10 @@ export class DashboardComponent{
     eventlist:Event[];
 
     constructor(
-        private firebase: FirebaseService,
+        //private firebase: FirebaseService,
         private router: Router,
-        private user: UserService,
-        private event: EventService,
+ //       private user: UserService,
+ //       private event: EventService,
     ) { 
         this.eventlist =[];
         //function(list){
@@ -29,13 +29,14 @@ export class DashboardComponent{
         //});
         
     }
-
+/*
     upddateList(list:Event[]):void{
         console.log("subscribe");
         console.log(list);
         this.eventlist = list;
     }
-
+    */
+/*
     doLogout(): void {
         let result = this.firebase.signOut();
         if(result == true){
@@ -43,10 +44,10 @@ export class DashboardComponent{
             //Todo Fehler anzeigen
         }
     }
-
+*/
     doEvent(): void{
         console.log('dashboard: doEvent');
-        this.user.setLogedIn(!this.user.isLogedIn());
+   //     this.user.setLogedIn(!this.user.isLogedIn());
         //this.eventlist = this.eventdata.getEventList();
         //let e:Event  = new Event();
         //e.titel= "mein krampf";

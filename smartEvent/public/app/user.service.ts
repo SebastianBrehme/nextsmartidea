@@ -19,7 +19,7 @@ export class UserService{
         this.mycallback(log);
     }
 
-    isLogedInCallback(callback:any):void{
+    setLogedInCallback(callback:any):void{
         this.mycallback = callback;
     }
 
