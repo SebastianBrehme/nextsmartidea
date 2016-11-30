@@ -1,63 +1,51 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FirebaseService } from './firebase.service';
-import { Router } from '@angular/router';
-import { UserService} from './user.service';
+import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { EventService} from './event/event.service';
 import { Event } from './event/event';
-import { ContainerViewComponent } from './event/view/container-view.component';
 
 @Component({
     moduleId: module.id,
     selector: 'dashboard',
-    templateUrl: 'dashboard.component.html'
+    templateUrl: 'dashboard.component.html',
+    styleUrls: [ 'dashboard.component.css']
 })
 
 export class DashboardComponent{
 
-    eventlist:Event[];
+    eventList:Event[];
+
+    showEvents: boolean = false;
 
     constructor(
-        private firebase: FirebaseService,
-        private router: Router,
-        private user: UserService,
         private event: EventService,
-    ) { 
-        this.eventlist =[];
-        //function(list){
-            //console.log("subscribe");
-            //this.eventlist = list;
-        //});
-        
+        private ref: ChangeDetectorRef,
+    ) {}
+
+    ngOnInit(){
+        this.eventList =[];
+         this.event.getEventList(this.updateList);
+       
+    }
+    
+    customTrackBy(index: number, obj: any): any {
+        return index;
     }
 
-    upddateList(list:Event[]):void{
-        console.log("subscribe");
-        console.log(list);
-        this.eventlist = list;
-    }
-
-    doLogout(): void {
-        let result = this.firebase.signOut();
-        if(result == true){
-        }else{
-            //Todo Fehler anzeigen
-        }
+    updateList = (list:Event[]) => {
+        console.log('update: '+list);
+        this.eventList = list;
+        this.showEvents = true;
+        this.ref.markForCheck();
+        this.ref.detectChanges();
     }
 
     doEvent(): void{
         console.log('dashboard: doEvent');
-        //this.eventlist = this.eventdata.getEventList();
-        //let e:Event  = new Event();
-        //e.titel= "mein krampf";
-        //this.eventlist.push(e);
-        //this.event.getEventList();
-        //this.event.getEventList();
-        //this.event.getEvent('-KVWYlPhWQrQyHBI-HZh').then(event => console.log(event));
     }
 
-    donext():void{
-        console.log("mein test");
-        //this.eventlist[0].titel="mein test";
-        //this.event.createEvent(null);
+    deleteButtonClicked(index?:any){
+        console.log("deleteButtonClicked: key: " + index);
+        if (!e) var e = window.event;
+        e.cancelBubble = true;
+        if (e.stopPropagation) e.stopPropagation();
     }
 }

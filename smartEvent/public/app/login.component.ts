@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit{
     }
 
     doLogin():void{
-       let response = this.firebase.signIn();
+       this.firebase.signIn();
        if(true){
            // this.router.navigate(['/dashboard']);    
        }else{

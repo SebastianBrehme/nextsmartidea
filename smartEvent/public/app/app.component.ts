@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
-import { NavBarComponent } from './nav-bar.component';
-import { UserService } from './user.service';
+import {Component,OnInit, ChangeDetectorRef} from '@angular/core';
 import { SidebarContentComponent } from './sidebar/sidebar-content.component';
+import { UserService} from './user.service';
 
 
 @Component({
@@ -9,35 +8,31 @@ import { SidebarContentComponent } from './sidebar/sidebar-content.component';
     selector: 'my-app',
     templateUrl: 'app.component.html'
   })
-export class AppComponent { 
-    loggedIn: boolean = false;
+export class AppComponent implements OnInit{ 
     _open: boolean = false;
+    loggedIn: boolean = false;
 
     constructor(
         private user: UserService,
+        private ref: ChangeDetectorRef,
         ){}
-
+    
     ngOnInit() { 
-        this.checkLoggedIn();
+        console.log('ngOnInit [app.component]');
+        this.user.setLogedInCallback(this.test);
     }
 
-    ngAfterContentChecked(){
-        this.checkLoggedIn();
+
+    test = (t:boolean) => {
+        console.log('callback: '+t);
+        this.loggedIn = t;
+        this.ref.markForCheck();
+        this.ref.detectChanges();
+        console.log("app.component: loggedIN = true");
     }
 
-    ngOnChanges() { 
-        this.checkLoggedIn();
-    }
- 
   _toggleSidebar() {
     this._open = !this._open;
   }
 
-    checkLoggedIn(): void{
-        if(this.user.isLogedIn()){
-            this.loggedIn = this.user.isLogedIn() 
-        }else{
-            this.loggedIn = false;
-        }
-    }
 }

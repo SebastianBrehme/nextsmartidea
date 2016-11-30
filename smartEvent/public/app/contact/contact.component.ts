@@ -1,5 +1,4 @@
 import {Component,OnInit} from '@angular/core';
-import {FirebaseService} from '../firebase.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -11,7 +10,6 @@ import {Router} from '@angular/router';
 export class ContactComponent{
 
     constructor(
-        private firebase: FirebaseService,
         private router: Router,
         ){}
 

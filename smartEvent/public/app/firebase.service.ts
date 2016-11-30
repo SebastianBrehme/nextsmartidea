@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 declare var firebase: any;
 
 @Injectable()
-export class FirebaseService {
+export class FirebaseService{
 
     auth: any;
 
@@ -21,10 +21,11 @@ export class FirebaseService {
     signIn(): any {
         console.log('signin');
         let provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithRedirect(provider).then(function (result: any) {
-            console.log('signedin');
+        firebase.auth().signInWithRedirect(provider).then((result:any)=> {
+            
+            console.log('signedin '+result);
             if (result.credential) {
-                //Attention: This code is never executed, don't know why...
+                //Attention: This code is never executed, because result is undefined.....
                 let token = result.credential.accessToken;
                 this.user.setUser(result.user);
                 this.user.setLogedIn(true);
@@ -48,9 +49,11 @@ export class FirebaseService {
         console.log('firebaseservice: onAuthStateChanged');
         if (user) {
             this.user.setUser(user);
+            console.log('logged in true');
             this.user.setLogedIn(true);
-            this.router.navigate(['/dashboard']);
             this.putUserToDatabase();
+            console.log(this.user.isLogedIn());
+            this.router.navigate(['/dashboard']);
         } else {
             this.user.setLogedIn(false);
             this.router.navigate(['/login']);
