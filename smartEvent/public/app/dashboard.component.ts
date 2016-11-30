@@ -41,4 +41,11 @@ export class DashboardComponent{
     doEvent(): void{
         console.log('dashboard: doEvent');
     }
+
+    deleteButtonClicked(index?:any){
+        console.log("deleteButtonClicked: key: " + index);
+        if (!e) var e = window.event;
+        e.cancelBubble = true;
+        if (e.stopPropagation) e.stopPropagation();
+    }
 }
