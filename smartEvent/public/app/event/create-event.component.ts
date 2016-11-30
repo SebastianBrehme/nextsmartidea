@@ -85,7 +85,6 @@ export class CreateEventComponent implements OnInit {
         let checkAll: boolean = checkSubmitName && checkSubmitDescription && checkSubmitDate && checkSubmitImage && checkSubmitInvites && checkSubmitAgree;
 
         if (checkAll) {
-            alert("submit succeeded");
             this.setEvent();
 
         }

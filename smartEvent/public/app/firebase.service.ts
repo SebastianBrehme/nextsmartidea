@@ -124,6 +124,7 @@ export class FirebaseService{
         this.addMemberToEvent(newEventKey, e.titel, e.member);
 
         console.log('createEvent finished');
+        alert('submit succeeded');
     }
 
     updateEvent(e: Event): void {
@@ -143,6 +144,7 @@ export class FirebaseService{
                     for (let n in snap.val()) {
                         console.log(n);
                         update['/USER/' + n + '/EVENTLIST/' + ekey] = eTitle;
+                        update['/EVENT/' + ekey + '/MEMBER/'+ n] = member[m];
                     }
                 }
                 counter++;
