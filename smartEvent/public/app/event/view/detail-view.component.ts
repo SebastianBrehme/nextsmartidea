@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { EventService} from '../event.service';
 import { Event } from '../event';
+import { Location } from '@angular/common'
+import 'rxjs/add/operator/switchMap';
 
 @Component({
     moduleId: module.id,
@@ -9,17 +11,41 @@ import { Event } from '../event';
     templateUrl: 'detail-view.component.html'
 })
 
-export class DetailViewComponent{
+export class DetailViewComponent implements OnInit{
 
     showEvent: boolean = false;
+    event:Event;
+    key:string;
 
     constructor(
         private router: Router,
-        private event: EventService,
+        private activatetRoute: ActivatedRoute,
+        private eventService: EventService,
+        private location: Location
     ) {}
 
-    ngOnInit(){}
+    ngOnInit(): void {
+    console.log("OnInit detail-view");
+    this.activatetRoute.params.switchMap((params: Params) => this.key = params['id']).subscribe();
+    console.log("mein EventKey: " +  this.key);
+    this.eventService.getEvent(this.key, (e:Event) => this.event = e); 
 
-    ngAfterViewChecked(){}
+    if(this.event){
+        console.log(this.event);
+        console.log("Mein Event: " + this.event.getTitle());
+    }
+    
+    
+
+  }
+
+  goBack(): void {
+    this.location.back();
+  }
+
+  eventCallback= (event:Event) =>{
+      console.log("eventCallback: event=" + event);
+      console.log(event);
+  }
 
 }

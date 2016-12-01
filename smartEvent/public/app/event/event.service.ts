@@ -29,7 +29,7 @@ export class EventService{
         this.firebase.getEventData(key,function(data:any){
             data = data.val();
             console.log(data);
-            let e:Event = new Event(data['TYPE']);
+            let e:Event = new Event(data['TITLE']);
             e.setAuthor(data['AUTHOR']);
             if(data['DESCRIPTION']){
                 e.setDescription(data['DESCRIPTION']);
