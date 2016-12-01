@@ -29,7 +29,7 @@ export class EventService{
         this.firebase.getEventData(key,function(data:any){
             data = data.val();
             console.log(data);
-            let e:Event = new Event(data["TITEL"]);
+            let e:Event = new Event(data['TYPE']);
             e.setAuthor(data['AUTHOR']);
             if(data['DESCRIPTION']){
                 e.setDescription(data['DESCRIPTION']);
@@ -59,8 +59,12 @@ export class EventService{
         this.firebase.createEvent(e);
     }
 
-    deleteEvent(id:string):void{
-
+    deleteEvent(key:string):void{
+        let tempfire = this.firebase;
+        let tempuser = this.user;
+        this.getEvent(key,function(e:Event){
+            tempfire.deleteEvent(key,tempuser.getUser().uid == e.getAuthor(),e.getMember());
+        });        
     }
 
     updateEvent(e:Event):void{

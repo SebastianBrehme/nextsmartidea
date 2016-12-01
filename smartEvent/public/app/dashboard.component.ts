@@ -45,10 +45,11 @@ export class DashboardComponent{
         })
     }
 
-    deleteButtonClicked(index?:any){
-        console.log("deleteButtonClicked: key: " + index);
+    deleteButtonClicked(key?:any){
+        console.log("deleteButtonClicked: key: " + key);
         if (!e) var e = window.event;
         e.cancelBubble = true;
         if (e.stopPropagation) e.stopPropagation();
+        this.event.deleteEvent(key);
     }
 }

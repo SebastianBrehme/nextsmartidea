@@ -76,6 +76,21 @@ export class FirebaseService{
         database.on('value', callback);
     }
 
+    deleteEvent(key:string,author:boolean,member:string[]){
+        console.log(key);
+        console.log(author);
+        let updates = {};
+        if(author){
+            this.addMemberToEvent(key,null,member);
+            updates['/EVENT/'+key] = null;
+            updates['/USER/'+this.user.getUser().uid+'/EVENTLIST/'+key] = null;
+        }else{            
+            updates['/USER/'+this.user.getUser().uid+'/EVENTLIST/'+key] = null;
+            updates['/EVENT/'+key+'/MEMBER/'+this.user.getUser().uid] = null;
+        }
+        firebase.database().ref().update(updates);
+    }
+
     //UID als Pfad und nicht email, da ein Pfad keine Punkt enthalten darf, die Email aber schon
     putUserToDatabase(): void {
         console.log('firebaseservice: putUserToDatabase');
@@ -114,14 +129,14 @@ export class FirebaseService{
         }
         let updates = {};
         updates['/EVENT/' + newEventKey] = eventData;
-        updates['/USER/' + this.user.getUser().uid + '/EVENTLIST/' + newEventKey] = e.getTitle();
+        //updates['/USER/' + this.user.getUser().uid + '/EVENTLIST/' + newEventKey] = e.getTitle();
         console.log(updates);
         firebase.database().ref().update(updates);
 
         this.addMemberToEvent(newEventKey, e.titel, e.member);
 
         console.log('createEvent finished');
-        //alert('submit succeeded');
+        alert('submit succeeded');
     }
 
     updateEvent(e: Event): void {
@@ -134,9 +149,11 @@ export class FirebaseService{
         console.log("firebaseservice addMemberToEvent");
         let update = {};
         let counter: number = 0;
+        console.log(member)
         for (let m in member) {
             let database = firebase.database().ref("/USER/").orderByChild("EMAIL").equalTo(member[m]);
             database.once('value').then(function (snap: any) {
+                console.log('addMemberToEvent: '+snap.val());
                 if (snap != null) {
                     for (let n in snap.val()) {
                         console.log(n);
@@ -146,10 +163,12 @@ export class FirebaseService{
                 }
                 counter++;
                 if (counter === member.length) {
+                    console.log(update);
                     firebase.database().ref().update(update);
                 }
             });
         }
         console.log("do update");
     }
+
 }
