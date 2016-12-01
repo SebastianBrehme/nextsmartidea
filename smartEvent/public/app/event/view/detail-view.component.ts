@@ -17,6 +17,9 @@ export class DetailViewComponent implements OnInit{
     event:Event;
     key:string;
 
+    eventTitle:string;
+    eventDescription:string;
+
     constructor(
         private router: Router,
         private activatetRoute: ActivatedRoute,
@@ -25,27 +28,12 @@ export class DetailViewComponent implements OnInit{
     ) {}
 
     ngOnInit(): void {
-    console.log("OnInit detail-view");
     this.activatetRoute.params.switchMap((params: Params) => this.key = params['id']).subscribe();
-    console.log("mein EventKey: " +  this.key);
     this.eventService.getEvent(this.key, (e:Event) => this.event = e); 
-
-    if(this.event){
-        console.log(this.event);
-        console.log("Mein Event: " + this.event.getTitle());
     }
-    
-    
-
-  }
 
   goBack(): void {
     this.location.back();
-  }
-
-  eventCallback= (event:Event) =>{
-      console.log("eventCallback: event=" + event);
-      console.log(event);
   }
 
 }
