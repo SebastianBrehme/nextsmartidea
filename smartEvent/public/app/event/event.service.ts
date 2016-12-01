@@ -25,7 +25,7 @@ export class EventService{
         this.firebase.getEventList(fcallback);
     }
 
-    getEvent(key:string,callback:any):void{        
+    getEvent(key:string,callback:any):void{
         this.firebase.getEventData(key,function(data:any){
             data = data.val();
             console.log(data);

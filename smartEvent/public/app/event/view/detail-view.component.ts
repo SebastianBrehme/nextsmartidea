@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit, OnChanges } from '@angular/core';
+import { Router, ActivatedRoute, Params, Event as NavigationEvent } from '@angular/router';
 import { EventService} from '../event.service';
 import { Event } from '../event';
 import { Location } from '@angular/common'
@@ -25,11 +25,16 @@ export class DetailViewComponent implements OnInit{
         private activatetRoute: ActivatedRoute,
         private eventService: EventService,
         private location: Location
-    ) {}
+    ) {
+        router.events.forEach((event: NavigationEvent) => {this.updateEvent()});
+    }
 
     ngOnInit(): void {
     this.activatetRoute.params.switchMap((params: Params) => this.key = params['id']).subscribe();
-    this.eventService.getEvent(this.key, (e:Event) => this.event = e); 
+    }
+
+    updateEvent(){
+        this.eventService.getEvent(this.key, (e:Event) => this.event = e);
     }
 
   goBack(): void {
