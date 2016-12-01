@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable} from '@angular/core';
 
 import { Event } from './event';
 import { FirebaseService } from '../firebase.service';
@@ -7,12 +7,17 @@ import { UserService } from '../user.service';
 @Injectable()
 export class EventService{
 
+    eventlistcallback:any[];
+
     constructor(
         private firebase: FirebaseService,
         private user: UserService,
-    ){}
+    ){
+        this.eventlistcallback = [];
+    }
 
     getEventList(ecallback:any):void{
+        this.eventlistcallback.push(ecallback);
         let fcallback = function(data:any){
             let elist:Event[] = [];
             for(let key in data){
@@ -76,7 +81,13 @@ export class EventService{
     }
 
     removeCallback(callback:any){
-        this.firebase.doOffCallback(callback);
+       for(let ec in this.eventlistcallback){
+           if(this.eventlistcallback[ec] == callback){
+               console.log('callback gefunden');
+           }else{
+               console.log('callback nicht gefunden');
+           }
+       }
     }
 
     updateEvent(e:Event):void{
