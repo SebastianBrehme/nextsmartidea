@@ -2,7 +2,7 @@ export class Event {
     key: string;
     author: string;
 
-    titel: string;
+    title: string;
     description: string;
     type: string;
     date_from: Date;
@@ -10,7 +10,7 @@ export class Event {
     member: string[];
 
     constructor(title:string) {
-        this.titel = title;
+        this.title = title;
         this.key ='';
         this.author='';
         this.description='';
@@ -35,10 +35,10 @@ export class Event {
     }
 
     getTitle():string{
-        return this.titel;
+        return this.title;
     }
-    setTitel(titel:string){
-        this.titel = titel;
+    setTitel(title:string){
+        this.title = title;
     }
 
     getDescription():string{

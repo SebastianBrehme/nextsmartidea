@@ -113,7 +113,7 @@ export class FirebaseService{
         console.log('firebaseservice: createEvent');
         let eventData = {
             AUTHOR: e.author,
-            TITEL: e.titel,
+            TITLE: e.title,
             DESCRIPTION: e.description,
             TYPE: e.type,
             FROM: e.date_from,
@@ -133,7 +133,7 @@ export class FirebaseService{
         console.log(updates);
         firebase.database().ref().update(updates);
 
-        this.addMemberToEvent(newEventKey, e.titel, e.member);
+        this.addMemberToEvent(newEventKey, e.title, e.member);
 
         console.log('createEvent finished');
         alert('submit succeeded');
