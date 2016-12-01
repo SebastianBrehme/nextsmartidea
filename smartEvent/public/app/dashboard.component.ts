@@ -40,6 +40,9 @@ export class DashboardComponent{
 
     doEvent(): void{
         console.log('dashboard: doEvent');
+        this.event.getEvent('-KVWYeXYJ2YXsdANQwuL',function(e:Event){
+            console.log(e);
+        })
     }
 
     deleteButtonClicked(index?:any){

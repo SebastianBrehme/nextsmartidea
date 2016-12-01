@@ -71,12 +71,9 @@ export class FirebaseService{
         console.log('getEvent finished ');
     }
 
-    getEventData(key: string, callback: any): Promise<Event> {
+    getEventData(key: string, callback: any): void {
         let database = firebase.database().ref('/EVENT/' + key);
-        let getEvent = function (snap: any) {
-            console.log(snap);
-        }
-        return database.on('value', callback);
+        database.on('value', callback);
     }
 
     //UID als Pfad und nicht email, da ein Pfad keine Punkt enthalten darf, die Email aber schon
@@ -124,7 +121,7 @@ export class FirebaseService{
         this.addMemberToEvent(newEventKey, e.titel, e.member);
 
         console.log('createEvent finished');
-        alert('submit succeeded');
+        //alert('submit succeeded');
     }
 
     updateEvent(e: Event): void {

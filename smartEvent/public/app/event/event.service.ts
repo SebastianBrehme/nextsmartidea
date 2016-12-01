@@ -25,8 +25,32 @@ export class EventService{
         this.firebase.getEventList(fcallback);
     }
 
-    getEvent(id:string,callback:any):Promise<Event>{        
-        return this.firebase.getEventData(id,callback);
+    getEvent(key:string,callback:any):void{        
+        this.firebase.getEventData(key,function(data:any){
+            data = data.val();
+            console.log(data);
+            let e:Event = new Event(data["TITEL"]);
+            e.setAuthor(data['AUTHOR']);
+            if(data['DESCRIPTION']){
+                e.setDescription(data['DESCRIPTION']);
+            }
+            if(data['FROM']){
+                e.setDateFrom(data['FROM']);
+            }
+            if(data['TO']){
+                e.setDateTo(data['TO']);
+            }
+            if(data['TYPE']){
+                e.setType(data['TYPE']);
+            }
+            e.setKey(key);
+            let m:string[] = [];
+            for(let n in data['MEMBER']){
+                m.push(data['MEMBER'][n]);
+            }
+            e.setMember(m);
+            callback(e);
+        });
     }
 
     createEvent(e:Event):void{
