@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef} from '@angular/core';
 import { EventService} from './event/event.service';
 import { Event } from './event/event';
 
@@ -9,7 +9,7 @@ import { Event } from './event/event';
     styleUrls: [ 'dashboard.component.css']
 })
 
-export class DashboardComponent{
+export class DashboardComponent implements OnDestroy{
 
     eventList:Event[];
 
@@ -25,6 +25,11 @@ export class DashboardComponent{
          this.event.getEventList(this.updateList);
        
     }
+
+    ngOnDestroy(){
+        this.event.removeCallback(this.updateList);
+    }
+
     
     customTrackBy(index: number, obj: any): any {
         return index;

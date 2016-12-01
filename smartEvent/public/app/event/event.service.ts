@@ -28,8 +28,7 @@ export class EventService{
     getEvent(key:string,callback:any):void{        
         this.firebase.getEventData(key,function(data:any){
             data = data.val();
-            console.log(data);
-            let e:Event = new Event(data['TYPE']);
+            let e:Event = new Event(data['TITLE']);
             e.setAuthor(data['AUTHOR']);
             if(data['DESCRIPTION']){
                 e.setDescription(data['DESCRIPTION']);
@@ -62,9 +61,21 @@ export class EventService{
     deleteEvent(key:string):void{
         let tempfire = this.firebase;
         let tempuser = this.user;
+        let tempthis = this;
         this.getEvent(key,function(e:Event){
+            console.log('inCallback');
+            console.log(e);
+            tempthis.doOffEvent(key);
             tempfire.deleteEvent(key,tempuser.getUser().uid == e.getAuthor(),e.getMember());
         });        
+    }
+
+    doOffEvent(key:string){
+        this.firebase.doOffEvent(key);
+    }
+
+    removeCallback(callback:any){
+        this.firebase.doOffCallback(callback);
     }
 
     updateEvent(e:Event):void{

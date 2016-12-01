@@ -83,7 +83,7 @@ export class FirebaseService{
         if(author){
             this.addMemberToEvent(key,null,member);
             updates['/EVENT/'+key] = null;
-            updates['/USER/'+this.user.getUser().uid+'/EVENTLIST/'+key] = null;
+            //updates['/USER/'+this.user.getUser().uid+'/EVENTLIST/'+key] = null;
         }else{            
             updates['/USER/'+this.user.getUser().uid+'/EVENTLIST/'+key] = null;
             updates['/EVENT/'+key+'/MEMBER/'+this.user.getUser().uid] = null;
@@ -91,6 +91,13 @@ export class FirebaseService{
         firebase.database().ref().update(updates);
     }
 
+    doOffEvent(key:string){
+        firebase.database().ref('/EVENT/'+key).off();
+    }
+
+    doOffCallback(callback:any){
+        firebase.database().ref('/USER/' + this.user.getUser().uid + '/EVENTLIST/').off('value',callback);
+    }
     //UID als Pfad und nicht email, da ein Pfad keine Punkt enthalten darf, die Email aber schon
     putUserToDatabase(): void {
         console.log('firebaseservice: putUserToDatabase');
@@ -158,7 +165,9 @@ export class FirebaseService{
                     for (let n in snap.val()) {
                         console.log(n);
                         update['/USER/' + n + '/EVENTLIST/' + ekey] = eTitle;
-                        update['/EVENT/' + ekey + '/MEMBER/'+ n] = member[m];
+                        if(eTitle){
+                            update['/EVENT/' + ekey + '/MEMBER/'+ n] = member[m];
+                        }
                     }
                 }
                 counter++;
