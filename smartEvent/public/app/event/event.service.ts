@@ -92,6 +92,8 @@ export class EventService{
 
     updateEvent(e:Event):void{
         if (e.key != '') {
+            e.author = this.user.getUser().uid;
+            e.member.push(this.user.getUser().email);
             this.firebase.createEvent(e, e.key);
         }
     }

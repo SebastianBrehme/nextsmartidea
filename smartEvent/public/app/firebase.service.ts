@@ -136,7 +136,7 @@ export class FirebaseService{
         }
         let updates = {};
         updates['/EVENT/' + newEventKey] = eventData;
-        //updates['/USER/' + this.user.getUser().uid + '/EVENTLIST/' + newEventKey] = e.getTitle();
+        //updates['/USER/' + this.user.getUser().uid + '/EVENTLIST/' + newEventKey] = e.getTitle(); //läuft über add Member
         console.log(updates);
         firebase.database().ref().update(updates);
 
