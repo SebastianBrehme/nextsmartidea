@@ -5,4 +5,5 @@
     <p>{{event.date_from}}</p>
     <p>{{event.date_to}}</p>
     <p>{{event.member}}</p>
+    <button class="btn btn-danger button-deleteEvent" [routerLink]="['/update-event', event.key]"><span class="glyphicon glyphicon-pencil"></span></button>
 </div>

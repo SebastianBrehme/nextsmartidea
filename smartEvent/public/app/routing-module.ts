@@ -7,6 +7,7 @@ import {NavBarComponent} from './nav-bar.component';
 import { CreateEventComponent } from './event/create-event.component';
 import { ContactComponent} from './contact/contact.component';
 import { DetailViewComponent } from './event/view/detail-view.component';
+import { UpdateEventComponent } from './event/update-event.component';
 
 const routes:Routes = [
     { path: '',redirectTo:'/login', pathMatch: 'full'},
@@ -14,7 +15,8 @@ const routes:Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'create-event', component: CreateEventComponent},
     { path: 'contact', component: ContactComponent},
-    { path: 'detail/:id', component: DetailViewComponent}
+    { path: 'detail/:id', component: DetailViewComponent},
+    { path: 'update-event/:id', component: UpdateEventComponent}
 ];
 
 @NgModule({

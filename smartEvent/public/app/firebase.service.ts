@@ -143,7 +143,6 @@ export class FirebaseService{
         this.addMemberToEvent(newEventKey, e.title, e.member);
 
         console.log('createEvent finished');
-        alert('submit succeeded');
     }
 
     updateEvent(e: Event): void {
