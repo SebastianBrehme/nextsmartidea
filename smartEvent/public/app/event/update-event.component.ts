@@ -277,7 +277,7 @@ export class UpdateEventComponent implements OnInit {
                 this.dateTo = this.transformDate(this.inputDateTo)
             }
 
-            if(this.dateFrom < this.dateTo){
+            if(this.dateFrom <= this.dateTo){
                 dateToChecked = true;
             }else{
                 dateToChecked = false;
