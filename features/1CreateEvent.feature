@@ -5,17 +5,15 @@ Feature: Create Event
 
  Scenario: Create Event failed
  Given I navigate to "https://smartevent-a3c4f.firebaseapp.com/login"
- And I wait for 1 sec
+ And I wait for 4 sec
  And I click on link having text "Login"
- And I wait for 1 sec
+ And I wait for 2 sec
  And I enter "nextsmartidea@gmail.com" into input field having id "Email"
  And I click on element having id "next"
- And I wait for 1 sec
+ And I wait for 2 sec
  And I enter "ideasmartnext" into input field having id "Passwd"
  And I click on element having id "signIn"
  And I wait for 4 sec
- And I refresh page
- And I wait for 2 sec
  When I click on element having id "createEvent"
  And I wait for 2 sec
  And I enter "New Create Event Test" into input field having id "eventName"
@@ -27,11 +25,11 @@ Feature: Create Event
  And I enter "19:00" into input field having id "inputTimeTo"
  And I check the checkbox having name "checkboxAgree"
  And I click on element having class "btn-primary"
- Then element having class "text-danger" should have text as "Date-To has to be bevor Date-From"
+ Then element having class "text-danger" should have text as "Date-From has to be before Date-To"
 
  Scenario: Create Event failed
  Given I navigate to "https://smartevent-a3c4f.firebaseapp.com/login"
- And I wait for 2 sec
+ And I wait for 4 sec
  When I click on element having id "createEvent"
  And I wait for 2 sec
  And I enter "New Create Event Test" into input field having id "eventName"
@@ -46,7 +44,7 @@ Feature: Create Event
 
  Scenario: Create Event works fine
  Given I navigate to "https://smartevent-a3c4f.firebaseapp.com/login"
- And I wait for 2 sec
+ And I wait for 4 sec
  When I click on element having id "createEvent"
  And I wait for 2 sec
  And I enter "New Create Event Test" into input field having id "eventName"
@@ -57,8 +55,5 @@ Feature: Create Event
  And I enter "10.10.2016" into input field having id "inputDateTo"
  And I enter "20:00" into input field having id "inputTimeTo"
  And I check the checkbox having name "checkboxAgree"
- And I click on element having class "btn-primary"
- Then I should see alert text as "submit succeeded"
- And I accept alert
- And I click on link having text "Logout"
- And I close browser 
+ Then I click on element having class "btn-primary"
+ And I wait for 2 sec
