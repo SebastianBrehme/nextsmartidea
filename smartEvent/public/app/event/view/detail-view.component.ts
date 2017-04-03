@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
+import { Router, ActivatedRoute, Params, Event as NavigationEvent } from '@angular/router';
 import { EventService} from '../event.service';
 import { Event } from '../event';
+import { Location } from '@angular/common'
+import 'rxjs/add/operator/switchMap';
 
 @Component({
     moduleId: module.id,
@@ -9,17 +11,39 @@ import { Event } from '../event';
     templateUrl: 'detail-view.component.html'
 })
 
-export class DetailViewComponent{
+export class DetailViewComponent implements OnInit{
 
     showEvent: boolean = false;
+    event:Event;
+    key:string;
+
+    eventTitle:string;
+    eventDescription:string;
 
     constructor(
         private router: Router,
-        private event: EventService,
-    ) {}
+        private activatetRoute: ActivatedRoute,
+        private eventService: EventService,
+        private location: Location,
+        private ref: ChangeDetectorRef,
+    ) {
+        router.events.forEach((event: NavigationEvent) => {this.updateEvent()});
+    }
 
-    ngOnInit(){}
+    ngOnInit(): void {
+    this.activatetRoute.params.switchMap((params: Params) => this.key = params['id']).subscribe();
+    }
 
-    ngAfterViewChecked(){}
+    updateEvent(){
+        this.eventService.getEvent(this.key, (e:Event) => {
+            this.event = e;
+            this.ref.markForCheck();
+            this.ref.detectChanges();
+        });
+    }
+
+  goBack(): void {
+    this.location.back();
+  }
 
 }

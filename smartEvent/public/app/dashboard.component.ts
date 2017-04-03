@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
 import { EventService} from './event/event.service';
 import { Event } from './event/event';
 
@@ -9,7 +9,7 @@ import { Event } from './event/event';
     styleUrls: [ 'dashboard.component.css']
 })
 
-export class DashboardComponent{
+export class DashboardComponent implements OnDestroy{
 
     eventList:Event[];
 
@@ -22,23 +22,39 @@ export class DashboardComponent{
 
     ngOnInit(){
         this.eventList =[];
-         this.event.getEventList(this.updateList);
+        this.event.getEventList(this.updateList);
        
     }
+
+    ngOnDestroy(){
+        //this.event.removeCallback(this.updateList);
+    }
+
     
     customTrackBy(index: number, obj: any): any {
         return index;
     }
 
     updateList = (list:Event[]) => {
+        if(this && this.ref){
         console.log('update: '+list);
         this.eventList = list;
         this.showEvents = true;
         this.ref.markForCheck();
         this.ref.detectChanges();
+        }
     }
 
     doEvent(): void{
         console.log('dashboard: doEvent');
+        
+    }
+
+    deleteButtonClicked(key?:any){
+        console.log("deleteButtonClicked: key: " + key);
+        if (!e) var e = window.event;
+        e.cancelBubble = true;
+        if (e.stopPropagation) e.stopPropagation();
+        this.event.deleteEvent(key);
     }
 }

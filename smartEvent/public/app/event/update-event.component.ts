@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, Params, Event as NavigationEvent } from '@angular/router';
+import { EventService } from './event.service';
 import { Event } from './event';
-import {EventService } from './event.service';
+import { Location } from '@angular/common';
+import { UserService } from '../user.service';
 
 @Component({
     moduleId: module.id,
-    selector: 'create-event',
-    templateUrl: 'create-event.component.html'
+    selector: 'update-event',
+    templateUrl: 'update-event.component.html'
 })
 
 
-export class CreateEventComponent implements OnInit {
+export class UpdateEventComponent implements OnInit {
 
     invitesList: Array<inviteWithValidation> = [];
     currentInviteString: string = "";
@@ -39,14 +41,81 @@ export class CreateEventComponent implements OnInit {
     checkboxAgreeSelected: boolean = false;
 
     newEvent: Event;
+    key:string;
+    event:Event;
 
     constructor(
         private router: Router,
-        private eventservice: EventService,
-    ) { }
+        private activatetRoute: ActivatedRoute,
+        private eventService: EventService,
+        private location:Location,
+        private user: UserService,
+    ) {
+        router.events.forEach((event: NavigationEvent) => {this.updateEvent()});
+     }
 
-    ngOnInit() {
+    ngOnInit(): void {
+    this.activatetRoute.params.switchMap((params: Params) => this.key = params['id']).subscribe();
     }
+
+    updateEvent(){
+        this.eventService.getEvent(this.key, (e:Event) => this.event = e);
+
+        this.inputName = this.event.getTitle();
+        this.inputDescription = this.event.getDescription();
+        this.selectedType = this.event.getType();
+        let dateFrom:Date = this.event.getDateFrom();
+        let dateTo:Date = this.event.getDateTo();
+
+
+        let dayFrom:string = dateFrom.getUTCDate().toString();
+        if(dayFrom.length < 2){ dayFrom = "0" + dayFrom}
+
+        let monthFrom:string =  (dateFrom.getUTCMonth() + 1).toString();
+        if(monthFrom.length < 2){ monthFrom = "0" + monthFrom}
+
+        this.inputDateFrom = dateFrom.getUTCFullYear() + "-" + monthFrom + "-" + dayFrom;
+        console.log(this.inputDateFrom);
+
+
+        let dayTo:string = dateTo.getUTCDate().toString();
+        if(dayTo.length < 2){ dayTo = "0" + dayTo}
+
+        let monthTo:string = (dateTo.getUTCMonth() + 1).toString();
+        if(monthTo.length < 2){ monthTo = "0" + monthTo}
+
+        this.inputDateTo = dateTo.getUTCFullYear() + "-" + monthTo + "-" + dayTo;
+        console.log(this.inputDateTo);
+        
+        let timeHoursFrom:string = this.event.getDateFrom().getHours().toString();
+        if(timeHoursFrom.length < 2){ timeHoursFrom = "0" + timeHoursFrom}
+
+        let timeMinutesFrom:string = this.event.getDateFrom().getMinutes().toString();
+        if(timeMinutesFrom.length < 2){ timeMinutesFrom = "0" + timeMinutesFrom}
+
+        this.inputTimeFrom = timeHoursFrom + ":" + timeMinutesFrom;
+
+
+        let timeHoursTo:string = this.event.getDateTo().getHours().toString();
+        if(timeHoursTo.length < 2){ timeHoursTo = "0" + timeHoursTo}
+
+        let timeMinutesTo:string = this.event.getDateTo().getMinutes().toString();
+        if(timeMinutesTo.length < 2){ timeMinutesTo = "0" + timeMinutesTo}
+
+        this.inputTimeTo = timeHoursTo + ":" + timeMinutesTo;
+
+
+        for(let member of this.event.getMember()){
+            if(member != this.user.getUser().email){
+                this.invitesList.push({ email: member, validated: true });
+            }
+        }
+    }
+
+    goBack(): void {
+    this.location.back();
+  }
+
 
     customTrackBy(index: number, obj: any): any {
         return index;
@@ -80,9 +149,9 @@ export class CreateEventComponent implements OnInit {
         let checkSubmitDate: boolean = this.checkDate();
         let checkSubmitImage: boolean = this.checkImage();
         let checkSubmitInvites: boolean = this.checkInvites();
-        let checkSubmitAgree: boolean = this.checkAgree();
+       
 
-        let checkAll: boolean = checkSubmitName && checkSubmitDescription && checkSubmitDate && checkSubmitImage && checkSubmitInvites && checkSubmitAgree;
+        let checkAll: boolean = checkSubmitName && checkSubmitDescription && checkSubmitDate && checkSubmitImage && checkSubmitInvites;
 
         if (checkAll) {
             this.setEvent();
@@ -110,16 +179,19 @@ export class CreateEventComponent implements OnInit {
             }
             this.newEvent.setMember(memberList);
         }
+        this.newEvent.setKey(this.key);
 
         console.log("Created Event: " + this.newEvent.getTitle());
         console.log(this.newEvent);
         this.sendEvent();
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/detail', this.key]);
         
     }
 
     sendEvent():void{
-        this.eventservice.createEvent(this.newEvent);
+        console.log("new Evenr:");
+        console.log(this.newEvent);
+        this.eventService.updateEvent(this.newEvent);
     }
 
 
@@ -205,7 +277,7 @@ export class CreateEventComponent implements OnInit {
                 this.dateTo = this.transformDate(this.inputDateTo)
             }
 
-            if(this.dateFrom < this.dateTo){
+            if(this.dateFrom <= this.dateTo){
                 dateToChecked = true;
             }else{
                 dateToChecked = false;
@@ -248,16 +320,6 @@ export class CreateEventComponent implements OnInit {
         return check;
     }
 
-    checkAgree(): boolean {
-        if (this.checkboxAgreeSelected) {
-            this.showWarningCheckboxAgreed = false;
-            return true;
-        } else {
-            this.showWarningCheckboxAgreed = true;
-            return false;
-        }
-
-    }
 
     checkMailValidity(email: string): boolean {
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
