@@ -12,10 +12,6 @@ export class EventService{
         private user: UserService,
     ){}
 
-    //addEvent(e:Event):void{
-      // this.eventdata.addEvent(e);
-    //}
-
     getEventList(ecallback:any):void{
         let fcallback = function(data:any){
             let elist:Event[] = [];
@@ -33,23 +29,15 @@ export class EventService{
         return this.firebase.getEventData(id,callback);
     }
 
-    createEvent(e:Event){
+    createEvent(e:Event):void{
         e.author = this.user.getUser().uid;
-        //if(!e.member){
-        //    e.member=[];
-        //}
         e.member.push(this.user.getUser().email);
         this.firebase.createEvent(e);
-        //this.firebase.addMemberToEvent('key','titel',['fail','fbaain@gmail.com','robin.warth@gmail.com']);
     }
 
     deleteEvent(id:string):void{
 
     }
-
-    //updateEvent(id:string,data:Object):void{
-
-    //}
 
     updateEvent(e:Event):void{
         if (e.key != '') {

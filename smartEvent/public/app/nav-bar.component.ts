@@ -1,7 +1,8 @@
-import {Component,OnInit,OnChanges, AfterContentChecked} from '@angular/core';
+import {Component,OnInit, ChangeDetectorRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {FirebaseService} from './firebase.service';
 import { UserService } from './user.service';
+import { AppComponent } from './app.component';
 
 @Component({
     moduleId: module.id,
@@ -10,7 +11,7 @@ import { UserService } from './user.service';
     styleUrls: ['nav-bar.component.css']
 })
 
-export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
+export class NavBarComponent implements OnInit{
 
     loggedIn: boolean = false;
 
@@ -18,39 +19,28 @@ export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
         private firebase: FirebaseService,
         private router: Router,
         private user: UserService,
+        private appComp: AppComponent,
+        private ref: ChangeDetectorRef,
         ){}
 
     ngOnInit() { 
-        this.checkLoggedIn();
+        console.log('ngOnInit');
+        this.user.setLogedInCallback(this.test);
     }
 
-    ngAfterContentChecked(){
-        this.checkLoggedIn();
-    }
-
-    ngOnChanges() { 
-        this.checkLoggedIn();
+    test = (t:boolean) => {
+        console.log('callback: '+t);
+        this.loggedIn = t;
+        this.ref.markForCheck();
+        this.ref.detectChanges();
     }
 
     doLogin():void{
-       let response = this.firebase.signIn();
-       if(true){
-           // this.router.navigate(['/dashboard']);    
-       }else{
-           //Fehler anzeigen
-       }
+       this.firebase.signIn();
     }
 
     doLogout(): void {
-        let result = this.firebase.signOut();
-    }
-
-    checkLoggedIn(): void{
-        if(this.user.isLogedIn()){
-            this.loggedIn = this.user.isLogedIn() 
-        }else{
-            this.loggedIn = false;
-        }
+        this.firebase.signOut();
     }
     
     onCreateEventClicked():void{
@@ -67,5 +57,9 @@ export class NavBarComponent implements OnInit,OnChanges,AfterContentChecked{
 
     onContactClicked():void{
         this.router.navigate(['/contact']);
+    }
+
+    _toggleSidebar() {
+        this.appComp._toggleSidebar();
     }
 }

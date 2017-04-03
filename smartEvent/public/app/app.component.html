@@ -1,17 +1,24 @@
 <nav-bar></nav-bar>
 
-<div *ngIf="loggedIn" class="col-sm-2">
-    <h4>My Events</h4>
-	<p>Example 1</p>
-	<p>Example 2</p>
-	<p>Example 3</p>
-	<br/>
-	<br/>
-	<h4>Next Events</h4>
-	<p>Example 1: in 2 days</p>
-	<p>Example 2: in 20 days</p>
-	<p>Example 3: next year</p>
+<div *ngIf="loggedIn">
+
+<div class="hidden-xs col-sm-2">
+    <sidebar-content></sidebar-content>
 </div>
-<div class="col-sm-10">
+
+<div style="background:#f8f8f8 !important;">
+<ng2-sidebar [(open)]="_open" closeOnClickOutside=true showOverlay=true defaultStyles=false position="top">
+      <sidebar-content></sidebar-content>
+	  <a closeSidebar>Closes the sidebar</a>
+</ng2-sidebar>
+</div>
+
+</div>
+
+<div class="container-fluid col-sm-10 col-xs-12">
+    <div class="visible-xs">
+        <br>
+        <br>
+    </div>
     <router-outlet></router-outlet>
 </div>

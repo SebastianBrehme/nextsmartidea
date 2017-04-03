@@ -1,12 +1,12 @@
 .module {
-      padding: 25px;
+      padding: 10px;
       text-align: center;
       color: #eee;
       background-color: #5882FA;
       border-radius: 2px;
-      margin: 10px;
+      margin: 12px;
       word-wrap: break-word;
-      min-width: 230px;
+      min-width: 250px;
 }
 .module:hover {
       background-color: #EEE;
@@ -14,4 +14,8 @@
       color: #607d8b;
 }
 
-
+.button-deleteEvent{
+      position: absolute;
+      top: 5px;
+      right: 5px;
+}

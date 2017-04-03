@@ -1,15 +1,14 @@
-import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
-import { EventService} from './event/event.service';
-import { Event } from './event/event';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { EventService} from '../event/event.service';
+import { Event } from '../event/event';
 
 @Component({
     moduleId: module.id,
-    selector: 'dashboard',
-    templateUrl: 'dashboard.component.html',
-    styleUrls: [ 'dashboard.component.css']
+    selector: 'sidebar-content',
+    templateUrl: 'sidebar-content.component.html',
 })
 
-export class DashboardComponent{
+export class SidebarContentComponent{
 
     eventList:Event[];
 
@@ -22,15 +21,14 @@ export class DashboardComponent{
 
     ngOnInit(){
         this.eventList =[];
-         this.event.getEventList(this.updateList);
-       
+        this.event.getEventList(this.updateList);
     }
-    
+
     customTrackBy(index: number, obj: any): any {
         return index;
     }
 
-    updateList = (list:Event[]) => {
+   updateList = (list:Event[]) => {
         console.log('update: '+list);
         this.eventList = list;
         this.showEvents = true;
@@ -38,7 +36,5 @@ export class DashboardComponent{
         this.ref.detectChanges();
     }
 
-    doEvent(): void{
-        console.log('dashboard: doEvent');
-    }
+    
 }
