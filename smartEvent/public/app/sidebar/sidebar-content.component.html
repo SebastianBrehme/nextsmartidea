@@ -2,8 +2,8 @@
     <h4>My Events</h4>
     
 
-    <div *ngFor="let event of eventList; let index = index; trackBy:customTrackBy;" [routerLink]="['/detail', event.key]" name="eventContainer">
-        <a style="cursor:pointer;" id="eventSidebar#{{index}}">{{event.titel}}</a>
+    <div *ngFor="let event of eventList; let index = index; trackBy:customTrackBy;" [routerLink]="['/detail', event.key]" name="eventList">
+        <a style="cursor:pointer;" id="eventSidebar#{{index}}">{{event.title}}</a>
     </div>
 
 

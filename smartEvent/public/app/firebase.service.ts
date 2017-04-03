@@ -71,14 +71,33 @@ export class FirebaseService{
         console.log('getEvent finished ');
     }
 
-    getEventData(key: string, callback: any): Promise<Event> {
+    getEventData(key: string, callback: any): void {
         let database = firebase.database().ref('/EVENT/' + key);
-        let getEvent = function (snap: any) {
-            console.log(snap);
-        }
-        return database.on('value', callback);
+        database.on('value', callback);
     }
 
+    deleteEvent(key:string,author:boolean,member:string[]){
+        console.log(key);
+        console.log(author);
+        let updates = {};
+        if(author){
+            this.addMemberToEvent(key,null,member);
+            updates['/EVENT/'+key] = null;
+            //updates['/USER/'+this.user.getUser().uid+'/EVENTLIST/'+key] = null;
+        }else{            
+            updates['/USER/'+this.user.getUser().uid+'/EVENTLIST/'+key] = null;
+            updates['/EVENT/'+key+'/MEMBER/'+this.user.getUser().uid] = null;
+        }
+        firebase.database().ref().update(updates);
+    }
+
+    doOffEvent(key:string){
+        firebase.database().ref('/EVENT/'+key).off();
+    }
+
+    doOffCallback(callback:any){
+        firebase.database().ref('/USER/' + this.user.getUser().uid + '/EVENTLIST/').off('value',callback);
+    }
     //UID als Pfad und nicht email, da ein Pfad keine Punkt enthalten darf, die Email aber schon
     putUserToDatabase(): void {
         console.log('firebaseservice: putUserToDatabase');
@@ -101,7 +120,7 @@ export class FirebaseService{
         console.log('firebaseservice: createEvent');
         let eventData = {
             AUTHOR: e.author,
-            TITEL: e.titel,
+            TITLE: e.title,
             DESCRIPTION: e.description,
             TYPE: e.type,
             FROM: e.date_from,
@@ -117,11 +136,11 @@ export class FirebaseService{
         }
         let updates = {};
         updates['/EVENT/' + newEventKey] = eventData;
-        updates['/USER/' + this.user.getUser().uid + '/EVENTLIST/' + newEventKey] = e.getTitle();
+        //updates['/USER/' + this.user.getUser().uid + '/EVENTLIST/' + newEventKey] = e.getTitle(); //läuft über add Member
         console.log(updates);
         firebase.database().ref().update(updates);
 
-        this.addMemberToEvent(newEventKey, e.titel, e.member);
+        this.addMemberToEvent(newEventKey, e.title, e.member);
 
         console.log('createEvent finished');
     }
@@ -136,21 +155,28 @@ export class FirebaseService{
         console.log("firebaseservice addMemberToEvent");
         let update = {};
         let counter: number = 0;
+        console.log(member)
         for (let m in member) {
             let database = firebase.database().ref("/USER/").orderByChild("EMAIL").equalTo(member[m]);
             database.once('value').then(function (snap: any) {
+                console.log('addMemberToEvent: '+snap.val());
                 if (snap != null) {
                     for (let n in snap.val()) {
                         console.log(n);
                         update['/USER/' + n + '/EVENTLIST/' + ekey] = eTitle;
+                        if(eTitle){
+                            update['/EVENT/' + ekey + '/MEMBER/'+ n] = member[m];
+                        }
                     }
                 }
                 counter++;
                 if (counter === member.length) {
+                    console.log(update);
                     firebase.database().ref().update(update);
                 }
             });
         }
         console.log("do update");
     }
+
 }

@@ -14,11 +14,12 @@ import { ContactComponent} from './contact/contact.component';
 import { DetailViewComponent } from './event/view/detail-view.component';
 import { SidebarModule } from 'ng2-sidebar';
 import { SidebarContentComponent } from './sidebar/sidebar-content.component';
+import { UpdateEventComponent } from './event/update-event.component';
 
 @NgModule({
 
   imports: [BrowserModule, FormsModule, RoutingModule, SidebarModule],
-  declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, CreateEventComponent, ContactComponent, DetailViewComponent, SidebarContentComponent],
+  declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, CreateEventComponent, ContactComponent, DetailViewComponent, SidebarContentComponent, UpdateEventComponent],
   providers: [FirebaseService, UserService, EventService],
   bootstrap: [AppComponent]
 })

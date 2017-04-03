@@ -1,5 +1,5 @@
 <div class="col-lg-11">
-<h1>Create Event</h1>
+<h1>Update Event</h1>
 <form>
 	<div class="form-group">
 		<label for="eventName">Name</label>
@@ -90,15 +90,6 @@
 
 	</div>
 
-
-	<div class="form-check">
-		<label class="form-check-label">
-      <input [(ngModel)]="checkboxAgreeSelected" name="checkboxAgree" type="checkbox" class="form-check-input">
-      I agree...
-     <!-- I agree that my data will not be handled as private and NextSmartIdea can do with it, whatever the fuck they want to do! -->
-    </label>
-		<div *ngIf="showWarningCheckboxAgreed"><small class="form-text text-danger">please agree...</small></div>
-	</div>
 
 	<button (click)="onSubmitClicked()" type="button" class="btn btn-primary">Submit</button>
 
