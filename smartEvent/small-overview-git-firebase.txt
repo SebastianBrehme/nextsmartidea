@@ -32,6 +32,8 @@ Git commands:
 
 -git merge [branchFromWitchYouWantTheThings]	//merging into your branch (branch which is checked out)
 
+npm install --save ng2-sidebar
+
 
 
 
