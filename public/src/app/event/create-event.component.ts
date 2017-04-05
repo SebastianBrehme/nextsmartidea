@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ApplicationRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Event } from './event';
 import {EventService } from './event.service';
@@ -43,6 +43,7 @@ export class CreateEventComponent implements OnInit {
     constructor(
         private router: Router,
         private eventservice: EventService,
+        private ref: ApplicationRef,
     ) { }
 
     ngOnInit() {
@@ -57,10 +58,12 @@ export class CreateEventComponent implements OnInit {
             this.invitesList.push({ email: this.currentInviteString, validated: true });
             this.currentInviteString = "";
             this.showWarningLastInvite = false;
+            this.ref.tick();
         } else if (this.currentInviteString.length < 1) {
             //do nothing
         } else {
             this.showWarningLastInvite = true;
+            this.ref.tick();
         }
 
     }
@@ -68,6 +71,7 @@ export class CreateEventComponent implements OnInit {
     onDeleteInviteClicked(index: number) {
         this.invitesList.splice(index, 1);
         this.checkInvites();
+        this.ref.tick();
     }
 
     onSubmitClicked() {
@@ -84,6 +88,8 @@ export class CreateEventComponent implements OnInit {
 
         let checkAll: boolean = checkSubmitName && checkSubmitDescription && checkSubmitDate && checkSubmitImage && checkSubmitInvites && checkSubmitAgree;
 
+        this.ref.tick();
+        
         if (checkAll) {
             this.setEvent();
 

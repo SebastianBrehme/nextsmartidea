@@ -131,10 +131,12 @@ export class UpdateEventComponent implements OnInit {
             this.invitesList.push({ email: this.currentInviteString, validated: true });
             this.currentInviteString = "";
             this.showWarningLastInvite = false;
+            this.ref.tick();
         } else if (this.currentInviteString.length < 1) {
             //do nothing
         } else {
             this.showWarningLastInvite = true;
+            this.ref.tick();
         }
 
     }
@@ -142,6 +144,7 @@ export class UpdateEventComponent implements OnInit {
     onDeleteInviteClicked(index: number) {
         this.invitesList.splice(index, 1);
         this.checkInvites();
+        this.ref.tick();
     }
 
     onSubmitClicked() {
@@ -157,6 +160,8 @@ export class UpdateEventComponent implements OnInit {
        
 
         let checkAll: boolean = checkSubmitName && checkSubmitDescription && checkSubmitDate && checkSubmitImage && checkSubmitInvites;
+
+        this.ref.tick();
 
         if (checkAll) {
             this.setEvent();
