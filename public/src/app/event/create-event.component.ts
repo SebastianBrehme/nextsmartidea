@@ -114,7 +114,7 @@ export class CreateEventComponent implements OnInit {
         console.log("Created Event: " + this.newEvent.getTitle());
         console.log(this.newEvent);
         this.sendEvent();
-        this.router.navigate(['/login']);
+        this.router.navigate(['']);
         
     }
 

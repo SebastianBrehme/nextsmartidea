@@ -53,10 +53,10 @@ export class FirebaseService{
             this.user.setLogedIn(true);
             this.putUserToDatabase();
             console.log(this.user.isLogedIn());
-            this.router.navigate(['/login']);
+            this.router.navigate(['']);
         } else {
             this.user.setLogedIn(false);
-            this.router.navigate(['/login']);
+            this.router.navigate(['']);
         }
     }
 

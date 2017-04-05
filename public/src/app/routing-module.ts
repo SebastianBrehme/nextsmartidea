@@ -10,8 +10,7 @@ import { DetailViewComponent } from './event/view/detail-view.component';
 import { UpdateEventComponent } from './event/update-event.component';
 
 const routes:Routes = [
-    { path: '',redirectTo:'/login', pathMatch: 'full'},
-    { path: 'login', component: LoginComponent},
+    { path: '', component: LoginComponent},
     { path: 'create-event', component: CreateEventComponent},
     { path: 'contact', component: ContactComponent},
     { path: 'detail/:id', component: DetailViewComponent},
