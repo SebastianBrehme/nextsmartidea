@@ -1,0 +1,76 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header navbar-left">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a (click)="onBrandClicked()" class="navbar-brand" >Smart Event</a>
+        </div>
+
+        <div *ngIf="loggedIn" id="subNavbar" style="text-align:center" class="navbar-collapse visible-xs-block">
+          <ul class="nav navbar-nav">
+            <li (click)="_toggleSidebar()" id="subNavbarText">My Events</li>
+          </ul>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+
+        <div [ngSwitch]="loggedIn">
+          <ul *ngSwitchCase="false" class="nav navbar-nav navbar-left">
+            <li><a (click)="onContactClicked()" >Contact</a></li>
+            
+            <!--
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a>Action</a></li>
+                <li><a>Another action</a></li>
+                <li><a>Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a>Separated link</a></li>
+                <li><a>One more separated link</a></li>
+              </ul>
+            </li>
+            -->
+
+          </ul>
+          
+            <ul *ngSwitchCase="false" class="nav navbar-nav navbar-right">
+                <li><a (click)="doLogin()">Login</a></li>
+            </ul>
+
+             <ul *ngSwitchCase="true" class="nav navbar-nav navbar-left">
+            <li><a id="createEvent" (click)="onCreateEventClicked()" >Create Event</a></li>
+            <li><a id="contact" (click)="onContactClicked()" >Contact</a></li>
+            
+            <!--
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a>Action</a></li>
+                <li><a>Another action</a></li>
+                <li><a>Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a>Separated link</a></li>
+                <li><a>One more separated link</a></li>
+              </ul>
+            </li>
+            -->
+
+          </ul>
+
+            <ul *ngSwitchCase="true" class="nav navbar-nav navbar-right">
+                <li><a (click)="doLogout()">Logout</a></li>
+            </ul>
+          </div>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<br/>
+<br/>
+<br/>

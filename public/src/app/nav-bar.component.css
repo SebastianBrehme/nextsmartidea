@@ -1,0 +1,9 @@
+a{
+    cursor: pointer !important;
+}
+li{
+    cursor: pointer !important;
+}
+.subNavbar:hover{
+    cursor: pointer !important;
+}

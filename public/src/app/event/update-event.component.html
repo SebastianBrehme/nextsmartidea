@@ -1,0 +1,97 @@
+<div class="col-lg-11">
+<h1>Update Event</h1>
+<form>
+	<div class="form-group">
+		<label for="eventName">Name</label>
+		<input [(ngModel)]="inputName" name="inputName" type="text" class="form-control" id="eventName" placeholder="My New Event">
+		<div *ngIf="showWarningName"><small id="eventNameWarning" class="form-text text-danger">please enter a valid event name</small></div>
+	</div>
+	<div class="form-group">
+		<label for="eventDescription">Description</label>
+		<textarea [(ngModel)]="inputDescription" class="form-control" rows="3" id="eventDescription" name="eventDescription" placeholder="..."></textarea>
+	</div>
+	<div class="form-group">
+		<label for="eventType">Type of Event</label>
+		<select [(ngModel)]="selectedType" class="form-control" id="eventType" name="eventType">
+			<option>Party</option>
+			<option>Birthday</option>
+			<option>Trip</option>
+			<option>Other</option>
+    	</select>
+	</div>
+	<div class="form-group">
+		<label for="eventDate">Date (optional)</label>
+		<small id="fileHelp" class="form-text text-muted">Format: jjjj-mm-dd  hh:mm</small><br/>
+
+
+		<div class="form-group row">
+			<label for="dateFromLine" class="col-sm-2">From</label>
+			<div class="col-sm-10" id="dateFromLine">
+				<div class="col-xs-7"><input [(ngModel)]="inputDateFrom" name="inputDateFrom" id="inputDateFrom" type="date" class="form-control" placeholder="2016-12-31"></div>
+				<div class="col-xs-5"><input [(ngModel)]="inputTimeFrom" name="inputTimeFrom" id="inputTimeFrom" type="time" class="form-control" placeholder="00:00"></div>
+				<div *ngIf="showWarningDateFrom"><small class="form-text text-danger">invalid Date</small></div>
+			</div>
+		</div>
+		<div class="form-group row">
+			<label for="dateToLine" class="col-sm-2">To</label>
+			<div class="col-sm-10" id="dateToLine">
+				<div class="col-xs-7"><input [(ngModel)]="inputDateTo" name="inputDateTo" id="inputDateTo" type="date" class="form-control" placeholder="2016-12-31"></div>
+				<div class="col-xs-5"><input [(ngModel)]="inputTimeTo" name="inputTimeTo" id="inputTimeTo" type="time" class="form-control" placeholder="01:00"></div>
+				<div *ngIf="showWarningDateTo"><small class="form-text text-danger">Date-From has to be before Date-To</small></div>
+			</div>
+		</div>
+
+	</div>
+
+
+
+
+	<div class="form-group">
+		<label for="eventImage">Event Image</label><br/>
+		<label class="btn btn-default btn-file">Browse
+				<input type="file" style="display: none;" class="form-control-file" id="eventImage" aria-describedby="fileHelp">
+			</label>
+		<small id="fileHelp" class="form-text text-muted">This image is optional, it can be used to represent your event</small>
+	</div>
+
+
+	<div class="form-group">
+		<label for="eventInvite">Send Invite</label>
+		<div *ngIf="invitesList">
+
+
+
+			<div class="row" *ngFor="let invite of invitesList; let index = index; trackBy:customTrackBy;">
+				<div class="col-lg-12">
+					<div class="input-group">
+						<input [(ngModel)]="invitesList[index].email" [ngModelOptions]="{standalone: true}" type="email" class="form-control" value="invitesList[index].email">
+						<span class="input-group-btn">
+            	  				<button id="buttonMinus#{{index}}" class="btn btn-default" (click)="onDeleteInviteClicked(index)" type="button"><span class="glyphicon glyphicon-minus"></span></button>
+						</span>
+					</div>
+					<div *ngIf="!invitesList[index].validated"><small class="form-text text-danger">please enter a valid email</small></div>
+				</div>
+			</div>
+
+		</div>
+
+
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="input-group">
+					<input [(ngModel)]="currentInviteString" name="currentInviteString" type="email" class="form-control" placeholder="max.mustermann@gmail.com">
+					<span class="input-group-btn">
+              				<button id="buttonPlus" class="btn btn-default" (click)="onAddInviteClicked()" type="submit"><span class="glyphicon glyphicon-plus"></span></button>
+					</span>
+				</div>
+				<div *ngIf="showWarningLastInvite"><small class="form-text text-danger">please enter a valid email</small></div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<button (click)="onSubmitClicked()" type="button" class="btn btn-primary">Submit</button>
+
+</form>
+</div>

@@ -1,0 +1,26 @@
+<nav-bar></nav-bar>
+
+<div *ngIf="loggedIn">
+
+<div class="hidden-xs col-sm-2">
+    <sidebar-content></sidebar-content>
+</div>
+
+<div style="background:#f8f8f8 !important;">
+ <ng-sidebar-container>
+<ng-sidebar [(opened)]="_open" closeOnClickOutside=true showOverlay=true defaultStyles=false position="top">
+      <sidebar-content></sidebar-content>
+	  <a closeSidebar>Closes the sidebar</a>
+</ng-sidebar>
+ </ng-sidebar-container>
+</div>
+
+</div>
+
+<div class="container-fluid col-sm-10 col-xs-12">
+    <div class="visible-xs">
+        <br>
+        <br>
+    </div>
+    <router-outlet></router-outlet>
+</div>
