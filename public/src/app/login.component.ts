@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit{
 
     ngOnInit() { 
         if(this.user.isLogedIn()){
-            this.router.navigate(['/dashboard']);
+            this.router.navigate(['/login']);
         }else{
             //Do nothing
         }
@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit{
     doLogin():void{
        this.firebase.signIn();
        if(true){
-           // this.router.navigate(['/dashboard']);    
+           // this.router.navigate(['/login']);    
        }else{
            //Fehler anzeigen
        }

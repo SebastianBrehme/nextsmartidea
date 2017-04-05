@@ -11,7 +11,6 @@ import { UpdateEventComponent } from './event/update-event.component';
 
 const routes:Routes = [
     { path: '',redirectTo:'/login', pathMatch: 'full'},
-    { path: 'dashboard', component: DashboardComponent },
     { path: 'login', component: LoginComponent},
     { path: 'create-event', component: CreateEventComponent},
     { path: 'contact', component: ContactComponent},
