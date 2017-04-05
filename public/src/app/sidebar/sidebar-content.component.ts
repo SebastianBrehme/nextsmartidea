@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ApplicationRef } from '@angular/core';
 import { EventService} from '../event/event.service';
 import { Event } from '../event/event';
 
@@ -16,7 +16,7 @@ export class SidebarContentComponent{
 
     constructor(
         private event: EventService,
-        private ref: ChangeDetectorRef,
+        private ref: ApplicationRef,
     ) {}
 
     ngOnInit(){
@@ -32,8 +32,8 @@ export class SidebarContentComponent{
         console.log('update: '+list);
         this.eventList = list;
         this.showEvents = true;
-        this.ref.markForCheck();
-        this.ref.detectChanges();
+        this.ref.tick()
+        
     }
 
     

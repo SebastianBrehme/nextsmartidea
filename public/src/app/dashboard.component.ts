@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy} from '@angular/core';
+import { Component, OnInit, OnDestroy, ApplicationRef, ChangeDetectionStrategy} from '@angular/core';
 import { EventService} from './event/event.service';
 import { Event } from './event/event';
 
@@ -17,7 +17,7 @@ export class DashboardComponent implements OnDestroy{
 
     constructor(
         private event: EventService,
-        private ref: ChangeDetectorRef,
+        private ref: ApplicationRef,
     ) {}
 
     ngOnInit(){
@@ -40,8 +40,8 @@ export class DashboardComponent implements OnDestroy{
         console.log('update: '+list);
         this.eventList = list;
         this.showEvents = true;
-        this.ref.markForCheck();
-        this.ref.detectChanges();
+        this.ref.tick()
+        
         }
     }
 

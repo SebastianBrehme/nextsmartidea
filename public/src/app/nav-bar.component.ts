@@ -1,4 +1,4 @@
-import {Component,OnInit, ChangeDetectorRef} from '@angular/core';
+import {Component,OnInit, ApplicationRef} from '@angular/core';
 import {Router} from '@angular/router';
 import {FirebaseService} from './firebase.service';
 import { UserService } from './user.service';
@@ -20,7 +20,7 @@ export class NavBarComponent implements OnInit{
         private router: Router,
         private user: UserService,
         private appComp: AppComponent,
-        private ref: ChangeDetectorRef,
+        private ref: ApplicationRef,
         ){}
 
     ngOnInit() { 
@@ -31,8 +31,8 @@ export class NavBarComponent implements OnInit{
     test = (t:boolean) => {
         console.log('callback: '+t);
         this.loggedIn = t;
-        this.ref.markForCheck();
-        this.ref.detectChanges();
+        this.ref.tick()
+        
     }
 
     doLogin():void{

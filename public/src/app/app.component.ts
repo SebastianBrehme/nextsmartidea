@@ -1,6 +1,7 @@
-import {Component,OnInit, ChangeDetectorRef} from '@angular/core';
+import {Component,OnInit, ApplicationRef} from '@angular/core';
 import { SidebarContentComponent } from './sidebar/sidebar-content.component';
 import { UserService} from './user.service';
+import { SidebarModule } from 'ng-sidebar';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class AppComponent implements OnInit{
 
     constructor(
         private user: UserService,
-        private ref: ChangeDetectorRef,
+        private ref: ApplicationRef,
         ){}
     
     ngOnInit() { 
@@ -26,13 +27,14 @@ export class AppComponent implements OnInit{
     test = (t:boolean) => {
         console.log('callback: '+t);
         this.loggedIn = t;
-        this.ref.markForCheck();
-        this.ref.detectChanges();
+        this.ref.tick()
+        
         console.log("app.component: loggedIN = true");
     }
 
   _toggleSidebar() {
     this._open = !this._open;
+    console.log("open sidebar");
   }
 
 }

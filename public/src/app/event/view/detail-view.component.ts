@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, OnChanges, ApplicationRef } from '@angular/core';
 import { Router, ActivatedRoute, Params, Event as NavigationEvent } from '@angular/router';
 import { EventService} from '../event.service';
 import { Event } from '../event';
@@ -25,7 +25,7 @@ export class DetailViewComponent implements OnInit{
         private activatetRoute: ActivatedRoute,
         private eventService: EventService,
         private location: Location,
-        private ref: ChangeDetectorRef,
+        private ref: ApplicationRef,
     ) {
         router.events.forEach((event: NavigationEvent) => {this.updateEvent()});
     }
@@ -37,8 +37,8 @@ export class DetailViewComponent implements OnInit{
     updateEvent(){
         this.eventService.getEvent(this.key, (e:Event) => {
             this.event = e;
-            this.ref.markForCheck();
-            this.ref.detectChanges();
+            this.ref.tick()
+            
         });
     }
 
