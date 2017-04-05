@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ApplicationRef } from '@angular/core';
 import { Router, ActivatedRoute, Params, Event as NavigationEvent } from '@angular/router';
 import { EventService } from './event.service';
 import { Event } from './event';
@@ -50,6 +50,7 @@ export class UpdateEventComponent implements OnInit {
         private eventService: EventService,
         private location:Location,
         private user: UserService,
+        private ref: ApplicationRef,
     ) {
         router.events.forEach((event: NavigationEvent) => {this.updateEvent()});
      }
@@ -110,6 +111,10 @@ export class UpdateEventComponent implements OnInit {
                 this.invitesList.push({ email: member, validated: true });
             }
         }
+
+        console.log(this.inputName, this.inputDateFrom, this.invitesList);
+        this.ref.tick();
+        
     }
 
     goBack(): void {
