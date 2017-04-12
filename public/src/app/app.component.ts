@@ -35,6 +35,11 @@ export class AppComponent implements OnInit{
   _toggleSidebar() {
     this._open = !this._open;
     console.log("open sidebar");
+    this.ref.tick();
+  }
+  _closeSidebar() {
+      this._open = false;
+      this.ref.tick();
   }
 
 }

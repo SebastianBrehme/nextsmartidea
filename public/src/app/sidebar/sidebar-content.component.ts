@@ -1,4 +1,4 @@
-import { Component, OnInit, ApplicationRef } from '@angular/core';
+import { Component, OnInit, ApplicationRef, Output, EventEmitter } from '@angular/core';
 import { EventService} from '../event/event.service';
 import { Event } from '../event/event';
 
@@ -13,6 +13,8 @@ export class SidebarContentComponent{
     eventList:Event[];
 
     showEvents: boolean = false;
+
+    @Output() closeSidebar: EventEmitter<any> = new EventEmitter();
 
     constructor(
         private event: EventService,
@@ -34,6 +36,11 @@ export class SidebarContentComponent{
         this.showEvents = true;
         this.ref.tick()
         
+    }
+
+    handleEventClicked(){
+        this.closeSidebar.emit();
+        this.ref.tick();
     }
 
     
