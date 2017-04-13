@@ -1,14 +1,15 @@
 <nav-bar></nav-bar>
 
-<div *ngIf="loggedIn">
+<div *ngIf="loggedIn" id="page">
 
-<div class="hidden-xs col-sm-2">
+<div class="hidden-xs col-sm-2" id="mysidebar" flex>
     <sidebar-content></sidebar-content>
 </div>
 
-<div style="background:#f8f8f8 !important;">
+
+<div>
  <ng-sidebar-container>
-    <ng-sidebar [(opened)]="_open" closeOnClickOutside=true position="top">
+    <ng-sidebar [(opened)]="_open" closeOnClickOutside=true position="top" >
         <sidebar-content (closeSidebar)="_closeSidebar()"></sidebar-content>
         <a (click)="_toggleSidebar()">Closes the sidebar</a>
     </ng-sidebar>

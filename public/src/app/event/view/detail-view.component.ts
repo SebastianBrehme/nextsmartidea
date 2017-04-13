@@ -37,7 +37,7 @@ export class DetailViewComponent implements OnInit{
     updateEvent(){
         this.eventService.getEvent(this.key, (e:Event) => {
             this.event = e;
-            this.ref.tick()
+            this.ref.tick();
             
         });
     }

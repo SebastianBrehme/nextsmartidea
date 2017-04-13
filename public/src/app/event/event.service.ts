@@ -54,6 +54,7 @@ export class EventService{
                 m.push(data['MEMBER'][n]);
             }
             e.setMember(m);
+            console.log("TEst", e);
             callback(e);
         });
     }
