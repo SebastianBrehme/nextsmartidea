@@ -1,6 +1,6 @@
 import {Component,OnInit, ApplicationRef} from '@angular/core';
 import {Router} from '@angular/router';
-import {FirebaseService} from './firebase.service';
+import {FirebaseService} from './firebase/firebase.service';
 import { UserService } from './user.service';
 import { AppComponent } from './app.component';
 
@@ -52,6 +52,7 @@ export class NavBarComponent implements OnInit{
     }
 
     onBrandClicked():void{ //onSmartEventClicked
+        console.log("navigate");
         this.router.navigate(['/']);
     }
 

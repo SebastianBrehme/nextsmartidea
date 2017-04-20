@@ -1,67 +1,20 @@
-import { Injectable } from '@angular/core';
-import { UserService } from './user.service';
-import { Event } from './event/event';
-import { Router } from '@angular/router';
-
+import {Injectable} from '@angular/core';
+import {UserService} from '../user.service';
+import {Router} from '@angular/router';
+import {Event} from '../event/event';
 declare var firebase: any;
 
 @Injectable()
-export class FirebaseService{
-
-    auth: any;
+export class FirebaseEventService{
 
     constructor(
         private router: Router,
         private user: UserService,
     ) {
-        firebase.auth().onAuthStateChanged(this.onAuthStateChanged.bind(this));
-        console.log('constructor');
+        console.log('constructor [firebase service]');
     }
 
-    signIn(): any {
-        console.log('signin');
-        let provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithRedirect(provider).then((result:any)=> {
-            
-            console.log('signedin '+result);
-            if (result.credential) {
-                //Attention: This code is never executed, because result is undefined.....
-                let token = result.credential.accessToken;
-                this.user.setUser(result.user);
-                this.user.setLogedIn(true);
-                console.log(result.user.displayName);
-                return true;
-            }
-        }).catch(function (error: any) {
-            return error;
-        });
-    }
-
-    signOut(): any {
-        firebase.auth().signOut().then(function () {
-            return true;
-        }, function (error: any) {
-            return error;
-        });
-    }
-
-    onAuthStateChanged(user: any): void {
-        console.log('firebaseservice: onAuthStateChanged');
-        if (user) {
-            this.user.setUser(user);
-            console.log('logged in true');
-            this.user.setLogedIn(true);
-            this.putUserToDatabase();
-            console.log(this.user.isLogedIn());
-            this.router.navigate(['']);
-        } else {
-            this.user.setLogedIn(false);
-            this.router.navigate(['']);
-        }
-    }
-
-   //TODO callback is a function, use interface(?)
-    getEventList(callback:any): void {
+    getEventList(callback:any){
         console.log('firebaseservice: getEventist');
         console.log(this.user.getUser().uid);
         let database = firebase.database().ref('/USER/' + this.user.getUser().uid + '/EVENTLIST/');
@@ -97,24 +50,7 @@ export class FirebaseService{
 
     doOffCallback(callback:any){
         firebase.database().ref('/USER/' + this.user.getUser().uid + '/EVENTLIST/').off('value',callback);
-    }
-    //UID als Pfad und nicht email, da ein Pfad keine Punkt enthalten darf, die Email aber schon
-    putUserToDatabase(): void {
-        console.log('firebaseservice: putUserToDatabase');
-        let database = firebase.database().ref('/USER/' + this.user.getUser().uid);
-        let email = this.user.getUser().email;
-        let checkUser = function (snap: any) {
-            if (!snap.exists()) {
-                console.log('no user in databse - create...');
-                database.set({
-                    EMAIL: email
-                });
-                console.log('user set in database');
-            } 
-        }
-        database.once('value', checkUser);
-        console.log('userToDatabse finished');
-    }
+    }    
 
     createEvent(e: Event, key?: string): void {
         console.log('firebaseservice: createEvent');
@@ -178,5 +114,4 @@ export class FirebaseService{
         }
         console.log("do update");
     }
-
 }

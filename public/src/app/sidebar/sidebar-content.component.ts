@@ -1,6 +1,7 @@
-import { Component, OnInit, ApplicationRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit,OnDestroy, ApplicationRef, Output, EventEmitter } from '@angular/core';
 import { EventService } from '../event/event.service';
 import { Event } from '../event/event';
+import { Subscription} from 'rxjs';
 
 @Component({
     moduleId: module.id,
@@ -11,7 +12,7 @@ import { Event } from '../event/event';
 export class SidebarContentComponent {
 
     eventList: Event[];
-
+    listSubjectSubscribtion:Subscription;
     showEvents: boolean = false;
 
     @Output() closeSidebar: EventEmitter<any> = new EventEmitter();
@@ -23,7 +24,20 @@ export class SidebarContentComponent {
 
     ngOnInit() {
         this.eventList = [];
-        this.event.getEventList(this.updateList);
+        //this.event.getEventList(this.updateList);
+        this.listSubjectSubscribtion = this.event.getListAsReplaySubject().subscribe(list =>{
+            if(this && this.ref){
+            console.log("dashboard component subscribe");
+            console.log(list);
+            this.eventList = list;
+            this.showEvents = true;
+            //this.ref.tick();
+            }
+        });
+    }
+
+    ngOnDestroy(){
+        this.listSubjectSubscribtion.unsubscribe();
     }
 
     customTrackBy(index: number, obj: any): any {

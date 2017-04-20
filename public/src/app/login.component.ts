@@ -1,5 +1,5 @@
 import {Component,OnInit,OnChanges} from '@angular/core';
-import {FirebaseService} from './firebase.service';
+import {FirebaseService} from './firebase/firebase.service';
 import {Router} from '@angular/router';
 import { UserService} from './user.service';
 

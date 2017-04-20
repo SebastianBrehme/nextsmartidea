@@ -1,22 +1,27 @@
 import { Injectable} from '@angular/core';
 
 import { Event } from './event';
-import { FirebaseService } from '../firebase.service';
+import { FirebaseService } from '../firebase/firebase.service';
 import { UserService } from '../user.service';
+import { ReplaySubject} from 'rxjs';
+
 
 @Injectable()
 export class EventService{
 
     eventlistcallback:any[];
+    eventlist:ReplaySubject<Event[]>;
 
     constructor(
         private firebase: FirebaseService,
         private user: UserService,
     ){
         this.eventlistcallback = [];
+        this.eventlist = new ReplaySubject(1);
     }
 
-    getEventList(ecallback:any):void{
+    //@Deprecated
+    /*getEventList(ecallback:any):void{
         this.eventlistcallback.push(ecallback);
         let fcallback = function(data:any){
             let elist:Event[] = [];
@@ -25,15 +30,42 @@ export class EventService{
                 temp.setKey(key);
                 elist.push(temp);
             }
+            //this.eventlist.next(elist);
             ecallback(elist);
         }
+        this.getNEventList();
         this.firebase.getEventList(fcallback);
+    }*/
+
+    getEventList():void{
+        this.firebase.getEventList(data => {
+            let elist:Event[] = [];
+            for(let key in data){
+                //let temp:Event = new Event(data[key]);
+                //temp.setKey(key);
+                //this.getEvent(key,data => temp=data);
+                //elist.push(temp);
+
+                this.getEvent(key,data => {elist.push(data); this.eventlist.next(elist);});
+                
+            }
+            console.log("event list: print events")
+            for(let k in elist){
+                console.log(elist[k]);
+            }
+            console.log("getEventList: append new List");
+            this.eventlist.next(elist);
+        });
+    }
+
+    getListAsReplaySubject():ReplaySubject<Event[]>{
+        return this.eventlist;
     }
 
     getEvent(key:string,callback:any):void{
-        this.firebase.getEventData(key,function(data:any){
+        this.firebase.getEventData(key,data => {
             data = data.val();
-            console.log(data);
+            //console.log(data);
             let e:Event = new Event(data['TITLE']);
             e.setAuthor(data['AUTHOR']);
             if(data['DESCRIPTION']){
@@ -54,7 +86,7 @@ export class EventService{
                 m.push(data['MEMBER'][n]);
             }
             e.setMember(m);
-            console.log("TEst", e);
+            //console.log("TEst", e);
             callback(e);
         });
     }

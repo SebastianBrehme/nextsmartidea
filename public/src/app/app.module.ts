@@ -5,7 +5,10 @@ import { AppComponent } from './app.component';
 import { RoutingModule } from './routing-module';
 import { DashboardComponent } from './dashboard.component';
 import { LoginComponent } from './login.component';
-import { FirebaseService } from './firebase.service';
+import { FirebaseService } from './firebase/firebase.service';
+import { FirebaseAuthService} from './firebase/firebase-auth.service';
+import { FirebaseEventService} from './firebase/firebase-event.service';
+import { FirebasePollService} from './firebase/firebase-poll.service';
 import { NavBarComponent} from './nav-bar.component';
 import { UserService} from './user.service';
 import { EventService } from './event/event.service';
@@ -20,7 +23,7 @@ import { UpdateEventComponent } from './event/update-event.component';
 
   imports: [BrowserModule, FormsModule, RoutingModule, SidebarModule.forRoot()],
   declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, CreateEventComponent, ContactComponent, DetailViewComponent, SidebarContentComponent, UpdateEventComponent],
-  providers: [FirebaseService, UserService, EventService],
+  providers: [FirebaseService, FirebaseAuthService,FirebaseEventService, FirebasePollService, UserService, EventService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
