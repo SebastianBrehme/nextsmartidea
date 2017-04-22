@@ -48,6 +48,7 @@ export class CreateSurveyComponent {
         else{
             this.showWarningLastAnswer = false;
             this.answerlist.push(this.currentAnswerString);
+            (<HTMLInputElement>document.getElementById("currentAnswerString")).value = "";
             this.ref.tick();
         }
     }
