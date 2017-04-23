@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UserService } from '../user.service';
 import { Event } from '../event/event';
+import { Member} from '../event/member';
 import { Router } from '@angular/router';
 import { FirebaseAuthService} from './firebase-auth.service';
 import { FirebaseEventService} from './firebase-event.service';
@@ -38,7 +39,7 @@ export class FirebaseService{
         this.fevent.getEventData(key, callback);
     }
 
-    deleteEvent(key:string,author:boolean,member:string[]){
+    deleteEvent(key:string,author:boolean,member:Member[]){
         this.fevent.deleteEvent(key, author, member);
     }
 
@@ -48,17 +49,24 @@ export class FirebaseService{
 
     doOffCallback(callback:any){
         this.fevent.doOffCallback(callback);
-    }    
-
+    }  
     createEvent(e: Event, key?: string): void {
         this.fevent.createEvent(e,key);
     }
 
     updateEvent(e: Event): void {
        this.fevent.updateEvent(e);
+    }  
+/*
+    createEvent(e: Event): void {
+        this.fevent.createEvent(e);
     }
 
-    addMemberToEvent(ekey: string, eTitle: string, member: string[]): void {
+    updateEvent(newEvent: Event,oldEvent:Event): void {
+       this.fevent.updateEvent(newEvent, oldEvent);
+    }
+*/
+    addMemberToEvent(ekey: string, eTitle: string, member: Member[]): void {
         this.fevent.addMemberToEvent(ekey, eTitle, member);
     }
 

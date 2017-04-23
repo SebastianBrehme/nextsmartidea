@@ -2,6 +2,7 @@ import { Component, OnInit, ApplicationRef } from '@angular/core';
 import { Router, ActivatedRoute, Params, Event as NavigationEvent } from '@angular/router';
 import { EventService } from './event.service';
 import { Event } from './event';
+import { Member } from './member';
 import { Location } from '@angular/common';
 import { UserService } from '../user.service';
 
@@ -107,8 +108,8 @@ export class UpdateEventComponent implements OnInit {
 
 
         for(let member of this.event.getMember()){
-            if(member != this.user.getUser().email){
-                this.invitesList.push({ email: member, validated: true });
+            if(member.getEmail() != this.user.getUser().email){
+                this.invitesList.push({ email: member.getEmail(), validated: true });
             }
         }
 
@@ -183,9 +184,9 @@ export class UpdateEventComponent implements OnInit {
             this.newEvent.setDateTo(this.dateTo);
         }
         if(this.invitesList.length > 0){
-            let memberList:string[] = [];
+            let memberList:Member[] = [];
             for(let invite of this.invitesList){
-                memberList.push(invite.email);
+                memberList.push(new Member(invite.email,''));
             }
             this.newEvent.setMember(memberList);
         }
@@ -202,6 +203,7 @@ export class UpdateEventComponent implements OnInit {
         console.log("new Evenr:");
         console.log(this.newEvent);
         this.eventService.updateEvent(this.newEvent);
+        //this.eventService.updateEvent(this.newEvent, this.event);
     }
 
 

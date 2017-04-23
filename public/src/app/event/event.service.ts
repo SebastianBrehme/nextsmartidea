@@ -1,6 +1,7 @@
 import { Injectable} from '@angular/core';
 
 import { Event } from './event';
+import { Member} from './member';
 import { FirebaseService } from '../firebase/firebase.service';
 import { UserService } from '../user.service';
 import { ReplaySubject} from 'rxjs';
@@ -81,9 +82,10 @@ export class EventService{
                 e.setType(data['TYPE']);
             }
             e.setKey(key);
-            let m:string[] = [];
+            let m:Member[] = [];
             for(let n in data['MEMBER']){
-                m.push(data['MEMBER'][n]);
+                console.log(n);
+                m.push(new Member(data['MEMBER'][n],n));
             }
             e.setMember(m);
             //console.log("TEst", e);
@@ -123,6 +125,12 @@ export class EventService{
        }
     }
 
+    /*updateEvent(newEvent:Event, oldEvent:Event):void{
+        if (newEvent.key != '') {
+            newEvent.author = oldEvent.author;
+            this.firebase.updateEvent(newEvent,oldEvent);
+        }
+    }*/
     updateEvent(e:Event):void{
         if (e.key != '') {
             e.author = this.user.getUser().uid;

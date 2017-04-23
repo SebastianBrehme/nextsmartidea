@@ -1,6 +1,7 @@
 import { Component, OnInit, ApplicationRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { Event } from './event';
+import { Member } from './member';
 import {EventService } from './event.service';
 
 @Component({
@@ -110,9 +111,9 @@ export class CreateEventComponent implements OnInit {
             this.newEvent.setDateTo(this.dateTo);
         }
         if(this.invitesList.length > 0){
-            let memberList:string[] = [];
+            let memberList:Member[] = [];
             for(let invite of this.invitesList){
-                memberList.push(invite.email);
+                memberList.push(new Member(invite.email,''));
             }
             this.newEvent.setMember(memberList);
         }

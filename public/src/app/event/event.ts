@@ -1,3 +1,4 @@
+import {Member} from './member';
 export class Event {
     key: string;
     author: string;
@@ -7,7 +8,7 @@ export class Event {
     type: string;
     date_from: Date;
     date_to: Date;
-    member: string[];
+    member: Member[];
 
     constructor(title:string) {
         this.title = title;
@@ -69,10 +70,10 @@ export class Event {
         this.date_to = new Date(date_to);
     }
 
-    getMember():string[]{
+    getMember():Member[]{
         return this.member;
     }
-    setMember(member:string[]){
+    setMember(member:Member[]){
         this.member = member;
     }
 

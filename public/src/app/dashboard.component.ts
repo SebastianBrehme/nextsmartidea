@@ -30,11 +30,11 @@ export class DashboardComponent implements OnDestroy{
             console.log("new input here");
             this.zone.run(() => {
                 if(this && this.ref){
-                    console.log("dashboard component subscribe");
-                    console.log(list);
-                    for(let k in list){
-                        console.log(list[k]);
-                    }
+                    //console.log("dashboard component subscribe");
+                    //console.log(list);
+                    //for(let k in list){
+                    //    console.log(list[k]);
+                    //}
                     this.eventList = list;
                     this.showEvents = true;
                 //this.ref.tick();
