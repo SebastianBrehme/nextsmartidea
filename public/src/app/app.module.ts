@@ -18,12 +18,14 @@ import { DetailViewComponent } from './event/view/detail-view.component';
 import { SidebarModule } from 'ng-sidebar';
 import { SidebarContentComponent } from './sidebar/sidebar-content.component';
 import { UpdateEventComponent } from './event/update-event.component';
+import { CreateSurveyComponent } from './event/survey/create-survey.component';
 
 @NgModule({
 
   imports: [BrowserModule, FormsModule, RoutingModule, SidebarModule.forRoot()],
-  declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, CreateEventComponent, ContactComponent, DetailViewComponent, SidebarContentComponent, UpdateEventComponent],
+  declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, CreateEventComponent, ContactComponent, DetailViewComponent, SidebarContentComponent, UpdateEventComponent, CreateSurveyComponent],
   providers: [FirebaseService, FirebaseAuthService,FirebaseEventService, FirebasePollService, UserService, EventService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
