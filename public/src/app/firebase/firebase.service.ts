@@ -50,14 +50,8 @@ export class FirebaseService{
     doOffCallback(callback:any){
         this.fevent.doOffCallback(callback);
     }  
-    createEvent(e: Event, key?: string): void {
-        this.fevent.createEvent(e,key);
-    }
+    
 
-    updateEvent(e: Event): void {
-       this.fevent.updateEvent(e);
-    }  
-/*
     createEvent(e: Event): void {
         this.fevent.createEvent(e);
     }
@@ -65,7 +59,7 @@ export class FirebaseService{
     updateEvent(newEvent: Event,oldEvent:Event): void {
        this.fevent.updateEvent(newEvent, oldEvent);
     }
-*/
+
     addMemberToEvent(ekey: string, eTitle: string, member: Member[]): void {
         this.fevent.addMemberToEvent(ekey, eTitle, member);
     }

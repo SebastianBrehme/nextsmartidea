@@ -202,8 +202,7 @@ export class UpdateEventComponent implements OnInit {
     sendEvent():void{
         console.log("new Evenr:");
         console.log(this.newEvent);
-        this.eventService.updateEvent(this.newEvent);
-        //this.eventService.updateEvent(this.newEvent, this.event);
+        this.eventService.updateEvent(this.newEvent, this.event);
     }
 
 

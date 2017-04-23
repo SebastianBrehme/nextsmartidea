@@ -84,7 +84,7 @@ export class EventService{
             e.setKey(key);
             let m:Member[] = [];
             for(let n in data['MEMBER']){
-                console.log(n);
+                //console.log(n);
                 m.push(new Member(data['MEMBER'][n],n));
             }
             e.setMember(m);
@@ -95,7 +95,7 @@ export class EventService{
 
     createEvent(e:Event):void{
         e.author = this.user.getUser().uid;
-        e.member.push(this.user.getUser().email);
+        e.member.push(new Member(this.user.getUser().email,''));
         this.firebase.createEvent(e);
     }
 
@@ -125,17 +125,11 @@ export class EventService{
        }
     }
 
-    /*updateEvent(newEvent:Event, oldEvent:Event):void{
+    updateEvent(newEvent:Event, oldEvent:Event):void{
         if (newEvent.key != '') {
             newEvent.author = oldEvent.author;
+            newEvent.member.push(new Member(this.user.getUser().email, this.user.getUser().uid));
             this.firebase.updateEvent(newEvent,oldEvent);
-        }
-    }*/
-    updateEvent(e:Event):void{
-        if (e.key != '') {
-            e.author = this.user.getUser().uid;
-            e.member.push(this.user.getUser().email);
-            this.firebase.createEvent(e, e.key);
         }
     }
 

@@ -51,42 +51,8 @@ export class FirebaseEventService{
     doOffCallback(callback:any){
         firebase.database().ref('/USER/' + this.user.getUser().uid + '/EVENTLIST/').off('value',callback);
     }   
+    
 
-    createEvent(e: Event, key?: string): void {
-        console.log('firebaseservice: createEvent');
-        let eventData = {
-            AUTHOR: e.author,
-            TITLE: e.title,
-            DESCRIPTION: e.description,
-            TYPE: e.type,
-            FROM: e.date_from,
-            TO: e.date_to,
-        }
-        console.log('create key');
-        let newEventKey = '';
-        if (key) {
-            newEventKey = key;
-        } else {
-            newEventKey = firebase.database().ref('/EVENT/').push().key;
-            console.log(newEventKey);
-        }
-        let updates = {};
-        updates['/EVENT/' + newEventKey] = eventData;
-        //updates['/USER/' + this.user.getUser().uid + '/EVENTLIST/' + newEventKey] = e.getTitle(); //läuft über add Member
-        console.log(updates);
-        firebase.database().ref().update(updates);
-
-        this.addMemberToEvent(newEventKey, e.title, e.member);
-
-        console.log('createEvent finished');
-    } 
-
-    updateEvent(e: Event): void {
-        if (e.key != '') {
-            this.createEvent(e, e.key);
-        }
-    }
-/*
     createEvent(e: Event): void {
         console.log('firebaseservice: createEvent');
         let eventData = {
@@ -113,6 +79,7 @@ export class FirebaseEventService{
         console.log('createEvent finished');
     }
 
+
     updateEvent(newEvent: Event, oldEvent:Event): void {
         let update = {};
         //update['/EVENT/'+newEvent.key+'/AUTHOR'] = newEvent.getAuthor();
@@ -121,17 +88,20 @@ export class FirebaseEventService{
         update['/EVENT/'+newEvent.key+'/TYPE'] = newEvent.getType();
         update['/EVENT/'+newEvent.key+'/FROM'] = newEvent.getDateFrom();
         update['/EVENT/'+newEvent.key+'/TO'] = newEvent.getDateTo();
+        update['/EVENT/'+newEvent.key+'/MEMBER']=null;
         let memberlist = oldEvent.getMember();
         for(let member in memberlist){
-            update['/USER/'+memberlist[member].getID()+'/EVENT/'+oldEvent.key] = null;
+            console.log(memberlist[member].getID());
+            console.log(oldEvent.key);
+            update['/USER/'+memberlist[member].getID()+'/EVENTLIST/'+oldEvent.key] = null;
         }
 
         firebase.database().ref().update(update).then(()=>{
+            console.log("updated");
+            this.addMemberToEvent(newEvent.getKey(), newEvent.getTitle(),newEvent.getMember());
         });
         
-    }
-*/
-    
+    } 
 
     addMemberToEvent(ekey: string, eTitle: string, member: Member[]): void {
         console.log("firebaseservice addMemberToEvent");
@@ -149,7 +119,7 @@ export class FirebaseEventService{
                         console.log(n);
                         update['/USER/' + n + '/EVENTLIST/' + ekey] = eTitle;
                         if(eTitle){
-                            update['/EVENT/' + ekey + '/MEMBER/'+ n] = member[m];
+                            update['/EVENT/' + ekey + '/MEMBER/'+ n] = member[m].getEmail();
                         }
                     }
                 }
