@@ -30,7 +30,7 @@
 		<div class="row" *ngFor="let answer of answerlist; let index = index;">
 			<div class="col-lg-12">
 				<div class="input-group">
-					<input [(ngModel)]="answerlist[index]" [ngModelOptions]="{standalone: true}" type="text" class="form-control" value="answerlist[index].answer">
+					<input [(ngModel)]="answerlist[index].answer" [ngModelOptions]="{standalone: true}" type="text" class="form-control" value="answerlist[index].answer">
 					<span class="input-group-btn">
            	  				<button id="buttonMinus#{{index}}" class="btn btn-default" (click)="onDeleteAnswerClicked(index)" type="button"><span class="glyphicon glyphicon-minus"></span></button>
 					</span>
