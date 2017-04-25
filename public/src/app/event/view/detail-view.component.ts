@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params, Event as NavigationEvent } from '@angul
 import { EventService} from '../event.service';
 import { Event } from '../event';
 import { Location } from '@angular/common'
+import { ChatComponent } from '../chat/chat.component'
 import 'rxjs/add/operator/switchMap';
 
 @Component({

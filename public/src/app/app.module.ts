@@ -20,11 +20,14 @@ import { SidebarModule } from 'ng-sidebar';
 import { SidebarContentComponent } from './sidebar/sidebar-content.component';
 import { UpdateEventComponent } from './event/update-event.component';
 import { CreateSurveyComponent } from './event/survey/create-survey.component';
+import { ChatComponent } from './event/chat/chat.component'
 
 @NgModule({
 
   imports: [BrowserModule, FormsModule, RoutingModule, SidebarModule.forRoot()],
-  declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, CreateEventComponent, ContactComponent, DetailViewComponent, SidebarContentComponent, UpdateEventComponent, CreateSurveyComponent],
+  declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, CreateEventComponent, 
+  ContactComponent, DetailViewComponent, SidebarContentComponent, UpdateEventComponent, CreateSurveyComponent,
+  ChatComponent],
   providers: [FirebaseService, FirebaseAuthService,FirebaseEventService, FirebaseSurveyService, UserService, EventService, SurveyService],
 
   bootstrap: [AppComponent]
