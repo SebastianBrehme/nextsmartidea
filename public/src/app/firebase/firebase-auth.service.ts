@@ -13,7 +13,6 @@ export class FirebaseAuthService{
         private user: UserService,
     ) {
         firebase.auth().onAuthStateChanged(this.onAuthStateChanged.bind(this));
-        console.log('constructor [firebase service]');
     }
 
     signIn(): any {

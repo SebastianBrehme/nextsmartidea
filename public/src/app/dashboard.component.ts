@@ -47,11 +47,11 @@ export class DashboardComponent implements OnDestroy{
     ngOnDestroy(){
         //this.event.removeCallback(this.updateList);
         if(this.listSubjectSubscribtion){
-            console.log("eins");
+            //console.log("eins");
             if(typeof this.listSubjectSubscribtion != "undefined"){
-                console.log("zwei");
+                //console.log("zwei");
                 if(!this.listSubjectSubscribtion.closed){
-                    console.log("drei - unsubscribe");
+                    //console.log("drei - unsubscribe");
                     this.listSubjectSubscribtion.unsubscribe();
                 }  
             }
