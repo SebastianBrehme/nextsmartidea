@@ -3,14 +3,17 @@ import { FirebaseService } from '../../firebase/firebase.service';
 import { Survey } from './survey';
 import { Answer } from './answer';
 import { Member } from '../member';
+import { UserService } from '../../user.service';
 
 @Injectable()
 export class SurveyService{
     
     constructor(
-        private firebase:FirebaseService){}
+        private firebase:FirebaseService,
+        private user:UserService){}
 
     createSurvey(sur:Survey, ekey:string){
+        sur.setAuthor(this.user.getUser().email);
         this.firebase.createSurvey(sur,ekey);
     }
 
@@ -27,24 +30,25 @@ export class SurveyService{
     }
 
     convert(data:any):Survey[]{
+        console.log(data);
         let ret:Survey[] = [];
         for(let skey in data){
-            let temp:Survey = new Survey(data['TITLE']);
+            let temp:Survey = new Survey(data[skey]['TITEL']);
             temp.setKey(skey);
-            temp.setQuestion(data['QUESTION']);
-            temp.setMultiple(data['MULTIPLE']);
-            temp.setAuthor(data['AUTHOR']);
+            temp.setQuestion(data[skey]['QUESTION']);
+            temp.setMultiple(data[skey]['MULTIPLE']);
+            temp.setAuthor(data[skey]['AUTHOR']);
 
             let answer:Answer[] = [];
-            for(let akey in data['ANSWER']){
+            for(let akey in data[skey]['ANSWER']){
                 let atemp:Answer = new Answer(akey);
-                console.log(data['ANSWER'][akey]);
-                if(!(data['ANSWER'][akey] instanceof Boolean)){
+                console.log(data[skey]['ANSWER'][akey]);
+                if(data[skey]['ANSWER'][akey] instanceof Object){
                     //there are votes
                     console.log('there are votes');
                     let member:Member[] = []
-                    for(let mkey in data['ANSWER'][akey]){
-                        let mtemp:Member = new Member(data['ANSWER'][akey][mkey],mkey);
+                    for(let mkey in data[skey]['ANSWER'][akey]){
+                        let mtemp:Member = new Member(data[skey]['ANSWER'][akey][mkey],mkey);
                         member.push(mtemp);
                     }
                     atemp.setVotes(member);
@@ -56,6 +60,7 @@ export class SurveyService{
             temp.setAnswers(answer);
             ret.push(temp);
         }
+        console.log(ret);
         return ret;
     }
 

@@ -19,14 +19,15 @@ export class FirebaseSurveyService{
             MULTIPLE: sur.getMultiple()
         }
 
-        let update={};
+        let update={}; 
         update['/EVENT/'+ekey+'/SURVEY/'+newSurKey] = surData;
-        
-        for(let answer of sur.getAnswers()){
-            update['/EVENT/'+ekey+'/SURVEY/'+newSurKey+'/ANSWER/'+answer.getAnswer()] = true;
-        }
-
-        firebase.database().ref().update(update);
+        firebase.database().ref().update(update).then(()=>{
+            let updateAnswer = {};
+            for(let answer of sur.getAnswers()){
+                updateAnswer['/EVENT/'+ekey+'/SURVEY/'+newSurKey+'/ANSWER/'+answer.getAnswer()] = true;
+                firebase.database().ref().update(updateAnswer);
+            }
+        }); 
     }
 
     deleteSurvey(key:string, ekey:string){
