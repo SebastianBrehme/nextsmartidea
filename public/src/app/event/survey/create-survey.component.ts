@@ -4,6 +4,8 @@ import { EventService} from '../event.service';
 import { Event } from '../event';
 import { Location } from '@angular/common'
 import { Survey } from './survey';
+import { Answer } from './answer';
+import { SurveyService} from './survey.service';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -18,7 +20,7 @@ export class CreateSurveyComponent {
     easySelected: boolean=false;
     MultipleSelected: boolean = false;
     question: string ="";
-    answerlist: Array<string> = [];
+    answerlist: Array<Answer> = [];
     currentAnswerString: string ="";
 
     showWarningTitle: boolean = false;
@@ -29,6 +31,7 @@ export class CreateSurveyComponent {
 
 
     newSurvey: Survey;
+    eventKey: string;
 
     constructor(
         private router: Router,
@@ -36,8 +39,13 @@ export class CreateSurveyComponent {
         private eventService: EventService,
         private location: Location,
         private ref: ApplicationRef,
+        private surveyservice: SurveyService
     ) {
        
+    }
+
+    ngOnInit(){
+        this.activatetRoute.params.switchMap((params: Params) => this.eventKey = params['id']).subscribe();
     }
 
     onAddAnswerClicked() {
@@ -47,7 +55,7 @@ export class CreateSurveyComponent {
         }
         else{
             this.showWarningLastAnswer = false;
-            this.answerlist.push(this.currentAnswerString);
+            this.answerlist.push(new Answer(this.currentAnswerString));
             (<HTMLInputElement>document.getElementById("currentAnswerString")).value = "";
             this.ref.tick();
         }
@@ -90,6 +98,7 @@ export class CreateSurveyComponent {
         this.newSurvey.answers.forEach(element => {
             alert(element);
         });
+        this.surveyservice.createSurvey(this.newSurvey,this.eventKey);
         //this.router.navigate([' ']);
     }
 

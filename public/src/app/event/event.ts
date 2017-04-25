@@ -1,4 +1,5 @@
 import {Member} from './member';
+import {Survey} from './survey/survey';
 export class Event {
     key: string;
     author: string;
@@ -9,6 +10,7 @@ export class Event {
     date_from: Date;
     date_to: Date;
     member: Member[];
+    survey: Survey[];
 
     constructor(title:string) {
         this.title = title;
@@ -19,6 +21,7 @@ export class Event {
         this.date_from = new Date();
         this.date_to = new Date();
         this.member=[];
+        this.survey=[];
     }
 
     getKey():string{
@@ -75,6 +78,13 @@ export class Event {
     }
     setMember(member:Member[]){
         this.member = member;
+    }
+
+    getSurvey():Survey[]{
+        return this.survey;
+    }
+    setSurvey(survey:Survey[]){
+        this.survey = survey;
     }
 
 }

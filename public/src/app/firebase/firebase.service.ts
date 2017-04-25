@@ -1,23 +1,21 @@
 import { Injectable } from '@angular/core';
-import { UserService } from '../user.service';
 import { Event } from '../event/event';
 import { Member} from '../event/member';
-import { Router } from '@angular/router';
+import { Survey} from '../event/survey/survey';
+import { Answer} from '../event/survey/answer';
 import { FirebaseAuthService} from './firebase-auth.service';
 import { FirebaseEventService} from './firebase-event.service';
+import { FirebaseSurveyService} from './firebase-survey.service';
 
 declare var firebase: any;
 
 @Injectable()
 export class FirebaseService{
 
-    //auth: any;
-
     constructor(
-        private router: Router,
-        private user: UserService,
         private fauth: FirebaseAuthService,
-        private fevent: FirebaseEventService
+        private fevent: FirebaseEventService,
+        private fsurvey: FirebaseSurveyService
     ) {
         console.log('constructor [firebase service]');
     }
@@ -49,8 +47,7 @@ export class FirebaseService{
 
     doOffCallback(callback:any){
         this.fevent.doOffCallback(callback);
-    }  
-    
+    }      
 
     createEvent(e: Event): void {
         this.fevent.createEvent(e);
@@ -63,5 +60,23 @@ export class FirebaseService{
     addMemberToEvent(ekey: string, eTitle: string, member: Member[]): void {
         this.fevent.addMemberToEvent(ekey, eTitle, member);
     }
+
+    createSurvey(sur:Survey, ekey:string){
+        this.fsurvey.createSurvey(sur,ekey);
+    }
+
+    deleteSurvey(key:string, ekey:string){
+        this.fsurvey.deleteSurvey(key, ekey);
+    }
+
+    vote(ekey:string,skey:string,answerkey:string, member:Member){
+        this.fsurvey.vote(ekey,skey,answerkey,member);
+    }
+
+    unvote(ekey:string,skey:string,answerkey:string, member:Member){
+        this.fsurvey.unvote(ekey,skey,answerkey,member);
+    }
+
+
 
 }

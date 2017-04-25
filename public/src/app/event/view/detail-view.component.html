@@ -29,7 +29,9 @@
         <div class="form-group">
             <label for="eMember" class="col-sm-2 control-label">Member</label>
             <div class="col-sm-10">
-                <p class="form-control-static" *ngFor="let member of event.member">{{member.getEmail()}}</p>
+                <p class="form-control-static">
+                <span *ngFor="let member of event.member">{{member.getEmail()}} </span>
+                </p>
             </div>
         </div>
     

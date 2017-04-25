@@ -15,4 +15,8 @@ export class Member{
     getID():string{
         return this.id;
     }
+
+    equals(member:Member):boolean{
+        return member.email == this.email && member.id == this.id;
+    }
 }

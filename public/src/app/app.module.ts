@@ -8,10 +8,11 @@ import { LoginComponent } from './login.component';
 import { FirebaseService } from './firebase/firebase.service';
 import { FirebaseAuthService} from './firebase/firebase-auth.service';
 import { FirebaseEventService} from './firebase/firebase-event.service';
-import { FirebasePollService} from './firebase/firebase-poll.service';
+import { FirebaseSurveyService} from './firebase/firebase-survey.service';
 import { NavBarComponent} from './nav-bar.component';
 import { UserService} from './user.service';
 import { EventService } from './event/event.service';
+import { SurveyService } from './event/survey/survey.service';
 import { CreateEventComponent } from './event/create-event.component';
 import { ContactComponent} from './contact/contact.component';
 import { DetailViewComponent } from './event/view/detail-view.component';
@@ -24,7 +25,7 @@ import { CreateSurveyComponent } from './event/survey/create-survey.component';
 
   imports: [BrowserModule, FormsModule, RoutingModule, SidebarModule.forRoot()],
   declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, CreateEventComponent, ContactComponent, DetailViewComponent, SidebarContentComponent, UpdateEventComponent, CreateSurveyComponent],
-  providers: [FirebaseService, FirebaseAuthService,FirebaseEventService, FirebasePollService, UserService, EventService],
+  providers: [FirebaseService, FirebaseAuthService,FirebaseEventService, FirebaseSurveyService, UserService, EventService, SurveyService],
 
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,6 @@
+import {Answer} from './answer';
+import {Member} from '../member';
+
 export class Survey {
     key: string;
     author: string;
@@ -5,7 +8,7 @@ export class Survey {
     title: string;
     multiple: boolean;
     question: string;
-    answers: string[];
+    answers: Answer[];
 
     constructor(title: string){
         this.title = title;
@@ -52,11 +55,21 @@ export class Survey {
         this.question = question;
     }
 
-    getAnswers(): string[]{
+    getAnswers(): Answer[]{
         return this.answers;
     }
-    setAnswers(answers:string[]){
+    setAnswers(answers:Answer[]){
         this.answers = answers;
+    }
+
+    hasVoted(member:Member):Answer[]{
+        let ret:Answer[] = [];
+        for(let tanswer of this.answers){
+            if(tanswer.hasVoted(member)){
+                ret.push(tanswer);
+            }
+        }
+        return ret;
     }
 
 }

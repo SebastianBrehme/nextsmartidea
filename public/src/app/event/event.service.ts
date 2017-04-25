@@ -4,6 +4,7 @@ import { Event } from './event';
 import { Member} from './member';
 import { FirebaseService } from '../firebase/firebase.service';
 import { UserService } from '../user.service';
+import { SurveyService } from './survey/survey.service';
 import { ReplaySubject} from 'rxjs';
 
 
@@ -15,6 +16,7 @@ export class EventService{
 
     constructor(
         private firebase: FirebaseService,
+        private survey: SurveyService,
         private user: UserService,
     ){
         this.eventlistcallback = [];
@@ -80,6 +82,9 @@ export class EventService{
             }
             if(data['TYPE']){
                 e.setType(data['TYPE']);
+            }
+            if(data['SURVEY']){
+                e.setSurvey(this.survey.convert(data['SURVEY']));
             }
             e.setKey(key);
             let m:Member[] = [];
