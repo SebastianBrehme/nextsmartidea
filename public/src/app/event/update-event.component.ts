@@ -1,4 +1,4 @@
-import { Component, OnInit, ApplicationRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ApplicationRef } from '@angular/core';
 import { Router, ActivatedRoute, Params, Event as NavigationEvent } from '@angular/router';
 import { EventService } from './event.service';
 import { Event } from './event';
@@ -53,14 +53,21 @@ export class UpdateEventComponent implements OnInit {
         private user: UserService,
         private ref: ApplicationRef,
     ) {
-        router.events.forEach((event: NavigationEvent) => {this.updateEvent()});
+        router.events.forEach((event: NavigationEvent) => {console.log(event, this),this.updateEvent()});
      }
 
     ngOnInit(): void {
-    this.activatetRoute.params.switchMap((params: Params) => this.key = params['id']).subscribe();
+       this.activatetRoute.params.switchMap((params: Params) => this.key = params['id']).subscribe();
+    }
+
+    ngOnDestroy():void{
+        console.info('destroy');
+        this.eventService.doOffEvent(this.key);
+        this.key = null;
     }
 
     updateEvent(){
+        if(!this.key){console.debug("no key set");return;}
         this.eventService.getEvent(this.key, (e:Event) => this.event = e);
 
         this.inputName = this.event.getTitle();
