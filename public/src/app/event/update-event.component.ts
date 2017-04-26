@@ -5,6 +5,8 @@ import { Event } from './event';
 import { Member } from './member';
 import { Location } from '@angular/common';
 import { UserService } from '../user.service';
+import { Subscription } from 'rxjs'
+
 
 @Component({
     moduleId: module.id,
@@ -45,6 +47,8 @@ export class UpdateEventComponent implements OnInit {
     key:string;
     event:Event;
 
+    routerEventsSubscription: Subscription;
+
     constructor(
         private router: Router,
         private activatetRoute: ActivatedRoute,
@@ -53,7 +57,7 @@ export class UpdateEventComponent implements OnInit {
         private user: UserService,
         private ref: ApplicationRef,
     ) {
-        router.events.forEach((event: NavigationEvent) => {console.log(event, this),this.updateEvent()});
+        this.routerEventsSubscription = router.events.subscribe((event: NavigationEvent) => {console.info("router event -update event"); this.updateEvent()});
      }
 
     ngOnInit(): void {
@@ -64,6 +68,7 @@ export class UpdateEventComponent implements OnInit {
         console.info('destroy');
         this.eventService.doOffEvent(this.key);
         this.key = null;
+        this.routerEventsSubscription.unsubscribe();
     }
 
     updateEvent(){

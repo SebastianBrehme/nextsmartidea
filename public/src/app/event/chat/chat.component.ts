@@ -17,6 +17,7 @@ export class ChatComponent implements OnInit{
     @Input() eventKey: string;
 
     messageList: Array<Message> = [];
+    messageListReverse: Array<Message> = [];
     currentMessageString: string = "";
 
 
@@ -39,7 +40,10 @@ export class ChatComponent implements OnInit{
     onSendClicked(){
         console.log(this.userService.getUser().email);
         let email: string = this.userService.getUser().email;
-        this.messageList.push(new Message(this.currentMessageString, email));
+        this.messageList.unshift(new Message(this.currentMessageString, email));
+        let messageListTemp = this.messageList;
+       // messageListTemp.reverse();
+        this.messageListReverse = messageListTemp;
         this.currentMessageString = "";
     }
 
