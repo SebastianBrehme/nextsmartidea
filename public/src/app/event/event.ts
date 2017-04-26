@@ -11,6 +11,7 @@ export class Event {
     date_to: Date;
     member: Member[];
     survey: Survey[];
+    date_fromShortString: string;
 
     constructor(title:string) {
         this.title = title;
@@ -22,6 +23,7 @@ export class Event {
         this.date_to = new Date();
         this.member=[];
         this.survey=[];
+        this.date_fromShortString = '';
     }
 
     getKey():string{
@@ -85,6 +87,13 @@ export class Event {
     }
     setSurvey(survey:Survey[]){
         this.survey = survey;
+    }
+
+    getDateFromShortString():string{
+        return this.date_fromShortString
+    }
+    setDateFromShortString(date_fromString:string){
+        this.date_fromShortString = date_fromString;
     }
 
 }
