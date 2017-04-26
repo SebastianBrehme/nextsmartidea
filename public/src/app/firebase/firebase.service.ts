@@ -16,9 +16,7 @@ export class FirebaseService{
         private fauth: FirebaseAuthService,
         private fevent: FirebaseEventService,
         private fsurvey: FirebaseSurveyService
-    ) {
-        console.log('constructor [firebase service]');
-    }
+    ) {}
 
     signIn():any{
         this.fauth.signIn();

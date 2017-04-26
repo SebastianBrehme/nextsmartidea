@@ -11,13 +11,11 @@ export class FirebaseEventService{
     constructor(
         private router: Router,
         private user: UserService,
-    ) {
-        console.log('constructor [firebase service]');
-    }
+    ) {}
 
     getEventList(callback:any){
         console.log('firebaseservice: getEventist');
-        console.log(this.user.getUser().uid);
+        console.log('UserID: '+this.user.getUser().uid);
         let database = firebase.database().ref('/USER/' + this.user.getUser().uid + '/EVENTLIST/');
         database.on('value', function(snap:any){
             callback(snap.val());
@@ -125,7 +123,7 @@ export class FirebaseEventService{
                 }
                 counter++;
                 if (counter === member.length) {
-                    console.log(update);
+                    console.log('memberupdate',update);
                     firebase.database().ref().update(update);
                 }
             });

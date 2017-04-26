@@ -1,4 +1,4 @@
-import { Component, OnInit,OnDestroy, ApplicationRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit,OnDestroy,NgZone, ApplicationRef, Output, EventEmitter } from '@angular/core';
 import { EventService } from '../event/event.service';
 import { Event } from '../event/event';
 import { Subscription} from 'rxjs';
@@ -20,19 +20,22 @@ export class SidebarContentComponent {
     constructor(
         private event: EventService,
         private ref: ApplicationRef,
+        private zone: NgZone
     ) { }
 
     ngOnInit() {
         this.eventList = [];
         //this.event.getEventList(this.updateList);
         this.listSubjectSubscribtion = this.event.getListAsReplaySubject().subscribe(list =>{
-            if(this && this.ref){
-            console.log("dashboard component subscribe");
-            console.log(list);
-            this.eventList = list;
-            this.showEvents = true;
-            //this.ref.tick();
-            }
+            this.zone.run(() => {
+                if(this && this.ref){
+                    console.log("sidebar component subscribe");
+                    console.log(list);
+                    this.eventList = list;
+                    this.showEvents = true;
+                //this.ref.tick();
+                }
+            });
         });
     }
 
@@ -44,7 +47,7 @@ export class SidebarContentComponent {
         return index;
     }
 
-    updateList = (list: Event[]) => {
+    /*updateList = (list: Event[]) => {
         console.log('update: ' + list);
         this.eventList = list;
         this.showEvents = true;
@@ -52,7 +55,7 @@ export class SidebarContentComponent {
         console.log(this.eventList);
         this.ref.tick()
 
-    }
+    }*/
 
     compare(a, b) {
         a = a.date_from;
