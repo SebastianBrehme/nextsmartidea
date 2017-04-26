@@ -52,11 +52,11 @@ export class EventService{
                 this.getEvent(key,data => {elist.push(data); this.eventlist.next(elist);});
                 
             }
-            console.log("event list: print events")
+            //console.log("event list: print events")
             for(let k in elist){
-                console.log(elist[k]);
+                //console.log(elist[k]);
             }
-            console.log("getEventList: append new List");
+            //console.log("getEventList: append new List");
             this.eventlist.next(elist);
         });
     }
@@ -68,7 +68,7 @@ export class EventService{
     getEvent(key:string,callback:any):void{
         this.firebase.getEventData(key,data => {
             data = data.val();
-            //console.log(data);
+            ////console.log(data);
             let e:Event = new Event(data['TITLE']);
             e.setAuthor(data['AUTHOR']);
             if(data['DESCRIPTION']){
@@ -89,11 +89,11 @@ export class EventService{
             e.setKey(key);
             let m:Member[] = [];
             for(let n in data['MEMBER']){
-                //console.log(n);
+                ////console.log(n);
                 m.push(new Member(data['MEMBER'][n],n));
             }
             e.setMember(m);
-            //console.log("TEst", e);
+            ////console.log("TEst", e);
             callback(e);
         });
     }
@@ -109,8 +109,8 @@ export class EventService{
         let tempuser = this.user;
         let tempthis = this;
         this.getEvent(key,function(e:Event){
-            console.log('inCallback');
-            console.log(e);
+            //console.log('inCallback');
+            //console.log(e);
             tempthis.doOffEvent(key);
             tempfire.deleteEvent(key,tempuser.getUser().uid == e.getAuthor(),e.getMember());
         });        
@@ -123,9 +123,9 @@ export class EventService{
     removeCallback(callback:any){
        for(let ec in this.eventlistcallback){
            if(this.eventlistcallback[ec] == callback){
-               console.log('callback gefunden');
+               //console.log('callback gefunden');
            }else{
-               console.log('callback nicht gefunden');
+               //console.log('callback nicht gefunden');
            }
        }
     }

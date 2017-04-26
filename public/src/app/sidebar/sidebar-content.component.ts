@@ -29,8 +29,6 @@ export class SidebarContentComponent {
         this.listSubjectSubscribtion = this.event.getListAsReplaySubject().subscribe(list =>{
             this.zone.run(() => {
                 if(this && this.ref){
-                    console.log("sidebar component subscribe");
-                    console.log(list);
                     this.eventList = list;
                     this.showEvents = true;
                 //this.ref.tick();
@@ -48,11 +46,11 @@ export class SidebarContentComponent {
     }
 
     /*updateList = (list: Event[]) => {
-        console.log('update: ' + list);
+        //console.log('update: ' + list);
         this.eventList = list;
         this.showEvents = true;
         this.eventList.sort(this.compare);
-        console.log(this.eventList);
+        //console.log(this.eventList);
         this.ref.tick()
 
     }*/

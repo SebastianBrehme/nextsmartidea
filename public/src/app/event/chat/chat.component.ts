@@ -38,7 +38,7 @@ export class ChatComponent implements OnInit{
     }
 
     onSendClicked(){
-        console.log(this.userService.getUser().email);
+        //console.log(this.userService.getUser().email);
         let email: string = this.userService.getUser().email;
         this.messageList.unshift(new Message(this.currentMessageString, email));
         let messageListTemp = this.messageList;

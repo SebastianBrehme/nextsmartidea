@@ -27,19 +27,19 @@ export class DashboardComponent implements OnDestroy{
         //this.event.getEventList(this.updateList);
         this.event.getEventList();
         this.listSubjectSubscribtion = this.event.getListAsReplaySubject().subscribe(list =>{
-            console.log("new input here");
+            //console.log("new input here");
             this.zone.run(() => {
                 if(this && this.ref){
-                    //console.log("dashboard component subscribe");
-                    //console.log(list);
+                    ////console.log("dashboard component subscribe");
+                    ////console.log(list);
                     //for(let k in list){
-                    //    console.log(list[k]);
+                    //    //console.log(list[k]);
                     //}
                     this.eventList = list;
                     this.makeEventDateShorter();
                     this.eventList.sort(this.compare);
                     this.showEvents = true;
-                    console.log("events loaded -dasboard", this.eventList);
+                    //console.log("events loaded -dasboard", this.eventList);
                 //this.ref.tick();
                 }
             });            
@@ -50,11 +50,11 @@ export class DashboardComponent implements OnDestroy{
     ngOnDestroy(){
         //this.event.removeCallback(this.updateList);
         if(this.listSubjectSubscribtion){
-            //console.log("eins");
+            ////console.log("eins");
             if(typeof this.listSubjectSubscribtion != "undefined"){
-                //console.log("zwei");
+                ////console.log("zwei");
                 if(!this.listSubjectSubscribtion.closed){
-                    //console.log("drei - unsubscribe");
+                    ////console.log("drei - unsubscribe");
                     this.listSubjectSubscribtion.unsubscribe();
                 }  
             }
@@ -69,7 +69,7 @@ export class DashboardComponent implements OnDestroy{
 
     updateList = (list:Event[]) => {
         if(this && this.ref){
-        console.log('updateList -dashboard: '+list);
+        //console.log('updateList -dashboard: '+list);
         this.eventList = list;
         this.showEvents = true;
         this.ref.tick()
@@ -78,12 +78,12 @@ export class DashboardComponent implements OnDestroy{
     }
 
     doEvent(): void{
-        console.log('dashboard: doEvent');
+        //console.log('dashboard: doEvent');
         
     }
 
     deleteButtonClicked(key?:any){
-        console.log("deleteButtonClicked: key: " + key);
+        //console.log("deleteButtonClicked: key: " + key);
         if (!e) var e = window.event;
         e.cancelBubble = true;
         if (e.stopPropagation) e.stopPropagation();
@@ -93,7 +93,7 @@ export class DashboardComponent implements OnDestroy{
     makeEventDateShorter(){
         for(let event of this.eventList){
                 let dateComplete = event.date_from.toDateString();
-                console.log("dateString", dateComplete);
+                //console.log("dateString", dateComplete);
                 dateComplete += " " + event.date_from.getHours() + ":" + event.date_from.getMinutes();
                 event.date_fromShortString = dateComplete;
             }

@@ -14,13 +14,13 @@ export class FirebaseEventService{
     ) {}
 
     getEventList(callback:any){
-        console.log('firebaseservice: getEventist');
-        console.log('UserID: '+this.user.getUser().uid);
+        //console.log('firebaseservice: getEventist');
+        //console.log('UserID: '+this.user.getUser().uid);
         let database = firebase.database().ref('/USER/' + this.user.getUser().uid + '/EVENTLIST/');
         database.on('value', function(snap:any){
             callback(snap.val());
         });
-        console.log('getEvent finished ');
+        //console.log('getEvent finished ');
     }
 
     getEventData(key: string, callback: any): void {
@@ -28,8 +28,8 @@ export class FirebaseEventService{
         database.on('value', callback);
     }
         deleteEvent(key:string,author:boolean,member:Member[]){
-        console.log(key);
-        console.log(author);
+        //console.log(key);
+        //console.log(author);
         let updates = {};
         if(author){
             this.addMemberToEvent(key,null,member);
@@ -52,7 +52,7 @@ export class FirebaseEventService{
     
 
     createEvent(e: Event): void {
-        console.log('firebaseservice: createEvent');
+        //console.log('firebaseservice: createEvent');
         let eventData = {
             AUTHOR: e.author,
             TITLE: e.title,
@@ -62,19 +62,19 @@ export class FirebaseEventService{
             TO: e.date_to,
         }
         
-        console.log('create key');
+        //console.log('create key');
         let newEventKey = firebase.database().ref('/EVENT/').push().key;
-        console.log(newEventKey);
+        //console.log(newEventKey);
         
         let updates = {};
         updates['/EVENT/' + newEventKey] = eventData;
         //updates['/USER/' + this.user.getUser().uid + '/EVENTLIST/' + newEventKey] = e.getTitle(); //läuft über add Member
-        console.log(updates);
+        //console.log(updates);
         firebase.database().ref().update(updates);
 
         this.addMemberToEvent(newEventKey, e.title, e.member);
 
-        console.log('createEvent finished');
+        //console.log('createEvent finished');
     }
 
 
@@ -89,32 +89,32 @@ export class FirebaseEventService{
         update['/EVENT/'+newEvent.key+'/MEMBER']=null;
         let memberlist = oldEvent.getMember();
         for(let member in memberlist){
-            console.log(memberlist[member].getID());
-            console.log(oldEvent.key);
+            //console.log(memberlist[member].getID());
+            //console.log(oldEvent.key);
             update['/USER/'+memberlist[member].getID()+'/EVENTLIST/'+oldEvent.key] = null;
         }
 
         firebase.database().ref().update(update).then(()=>{
-            console.log("updated");
+            //console.log("updated");
             this.addMemberToEvent(newEvent.getKey(), newEvent.getTitle(),newEvent.getMember());
         });
         
     } 
 
     addMemberToEvent(ekey: string, eTitle: string, member: Member[]): void {
-        console.log("firebaseservice addMemberToEvent");
+        //console.log("firebaseservice addMemberToEvent");
         let update = {};
         let counter: number = 0;
-        console.log(member)
-        console.log(ekey);
+        //console.log(member)
+        //console.log(ekey);
         
         for (let m in member) {
             let database = firebase.database().ref("/USER/").orderByChild("EMAIL").equalTo(member[m].getEmail());
             database.once('value').then(function (snap: any) {
-                console.log('addMemberToEvent: '+snap.val());
+                //console.log('addMemberToEvent: '+snap.val());
                 if (snap != null) {
                     for (let n in snap.val()) {
-                        console.log(n);
+                        //console.log(n);
                         update['/USER/' + n + '/EVENTLIST/' + ekey] = eTitle;
                         if(eTitle){
                             update['/EVENT/' + ekey + '/MEMBER/'+ n] = member[m].getEmail();
@@ -123,11 +123,11 @@ export class FirebaseEventService{
                 }
                 counter++;
                 if (counter === member.length) {
-                    console.log('memberupdate',update);
+                    //console.log('memberupdate',update);
                     firebase.database().ref().update(update);
                 }
             });
         }
-        console.log("do update");
+        //console.log("do update");
     }
 }

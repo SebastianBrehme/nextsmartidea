@@ -118,8 +118,8 @@ export class CreateEventComponent implements OnInit {
             this.newEvent.setMember(memberList);
         }
 
-        console.log("Created Event: " + this.newEvent.getTitle());
-        console.log(this.newEvent);
+        //console.log("Created Event: " + this.newEvent.getTitle());
+        //console.log(this.newEvent);
         this.sendEvent();
         this.router.navigate(['']);
         
@@ -167,11 +167,11 @@ export class CreateEventComponent implements OnInit {
         }
         
 
-        console.log("Date: " + dateLocal);
-        console.log("Day: " + dateLocal.getUTCDate());
-        console.log("Month: " + (dateLocal.getUTCMonth() + 1));
-        console.log("Year: " + dateLocal.getUTCFullYear());
-        console.log("Time: " + (dateLocal.getUTCHours() + 1) + ":" + dateLocal.getUTCMinutes());
+        //console.log("Date: " + dateLocal);
+        //console.log("Day: " + dateLocal.getUTCDate());
+        //console.log("Month: " + (dateLocal.getUTCMonth() + 1));
+        //console.log("Year: " + dateLocal.getUTCFullYear());
+        //console.log("Time: " + (dateLocal.getUTCHours() + 1) + ":" + dateLocal.getUTCMinutes());
 
         return dateLocal;
     }
@@ -246,7 +246,7 @@ export class CreateEventComponent implements OnInit {
         for (let invite of this.invitesList) {
             if (this.checkMailValidity(invite.email)) {
                 invite.validated = true;
-                console.log("checked " + invite.email);
+                //console.log("checked " + invite.email);
             } else {
                 invite.validated = false;
                 check = false;

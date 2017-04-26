@@ -14,7 +14,7 @@ export class Message{
     }
     set text(text : string) {
         this._text = text;
-        console.log("mesagge-text set");
+        ////console.log("mesagge-text set");
     }
 
     get sender() : string {
@@ -22,7 +22,7 @@ export class Message{
     }
     set sender(sender: string) {
         this._sender = sender;
-        console.log("mesagge-sender set");
+        ////console.log("mesagge-sender set");
     }
 
 }

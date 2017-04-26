@@ -57,7 +57,7 @@ export class UpdateEventComponent implements OnInit {
         private user: UserService,
         private ref: ApplicationRef,
     ) {
-        this.routerEventsSubscription = router.events.subscribe((event: NavigationEvent) => {console.info("router event -update event"); this.updateEvent()});
+        this.routerEventsSubscription = router.events.subscribe((event: NavigationEvent) => {this.updateEvent()});
      }
 
     ngOnInit(): void {
@@ -89,7 +89,7 @@ export class UpdateEventComponent implements OnInit {
         if(monthFrom.length < 2){ monthFrom = "0" + monthFrom}
 
         this.inputDateFrom = dateFrom.getUTCFullYear() + "-" + monthFrom + "-" + dayFrom;
-        console.log(this.inputDateFrom);
+        //console.log(this.inputDateFrom);
 
 
         let dayTo:string = dateTo.getUTCDate().toString();
@@ -99,7 +99,7 @@ export class UpdateEventComponent implements OnInit {
         if(monthTo.length < 2){ monthTo = "0" + monthTo}
 
         this.inputDateTo = dateTo.getUTCFullYear() + "-" + monthTo + "-" + dayTo;
-        console.log(this.inputDateTo);
+        //console.log(this.inputDateTo);
         
         let timeHoursFrom:string = this.event.getDateFrom().getHours().toString();
         if(timeHoursFrom.length < 2){ timeHoursFrom = "0" + timeHoursFrom}
@@ -125,7 +125,7 @@ export class UpdateEventComponent implements OnInit {
             }
         }
 
-        console.log(this.inputName, this.inputDateFrom, this.invitesList);
+        //console.log(this.inputName, this.inputDateFrom, this.invitesList);
         this.ref.tick();
         
     }
@@ -204,16 +204,16 @@ export class UpdateEventComponent implements OnInit {
         }
         this.newEvent.setKey(this.key);
 
-        console.log("Created Event: " + this.newEvent.getTitle());
-        console.log(this.newEvent);
+        //console.log("Created Event: " + this.newEvent.getTitle());
+        //console.log(this.newEvent);
         this.sendEvent();
         this.router.navigate(['/detail', this.key]);
         
     }
 
     sendEvent():void{
-        console.log("new Evenr:");
-        console.log(this.newEvent);
+        //console.log("new Evenr:");
+        //console.log(this.newEvent);
         this.eventService.updateEvent(this.newEvent, this.event);
     }
 
@@ -255,11 +255,11 @@ export class UpdateEventComponent implements OnInit {
         }
         
 
-        console.log("Date: " + dateLocal);
-        console.log("Day: " + dateLocal.getUTCDate());
-        console.log("Month: " + (dateLocal.getUTCMonth() + 1));
-        console.log("Year: " + dateLocal.getUTCFullYear());
-        console.log("Time: " + (dateLocal.getUTCHours() + 1) + ":" + dateLocal.getUTCMinutes());
+        //console.log("Date: " + dateLocal);
+        //console.log("Day: " + dateLocal.getUTCDate());
+        //console.log("Month: " + (dateLocal.getUTCMonth() + 1));
+        //console.log("Year: " + dateLocal.getUTCFullYear());
+        //console.log("Time: " + (dateLocal.getUTCHours() + 1) + ":" + dateLocal.getUTCMinutes());
 
         return dateLocal;
     }
@@ -334,7 +334,7 @@ export class UpdateEventComponent implements OnInit {
         for (let invite of this.invitesList) {
             if (this.checkMailValidity(invite.email)) {
                 invite.validated = true;
-                console.log("checked " + invite.email);
+                //console.log("checked " + invite.email);
             } else {
                 invite.validated = false;
                 check = false;

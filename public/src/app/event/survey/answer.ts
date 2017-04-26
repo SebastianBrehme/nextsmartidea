@@ -47,8 +47,8 @@ export class Answer{
         if(index>-1){
             this.votes.splice(index,1);
         }else{
-            console.log('member not found '+member);
-            console.log('hasVoted '+this.hasVoted(member));
+            //console.log('member not found '+member);
+            //console.log('hasVoted '+this.hasVoted(member));
         }
     }
 

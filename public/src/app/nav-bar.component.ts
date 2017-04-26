@@ -24,12 +24,12 @@ export class NavBarComponent implements OnInit{
         ){}
 
     ngOnInit() { 
-        console.log('ngOnInit');
+        //console.log('ngOnInit');
         this.user.setLogedInCallback(this.test);
     }
 
     test = (t:boolean) => {
-        console.log('callback: '+t);
+        //console.log('callback: '+t);
         this.loggedIn = t;
         this.ref.tick()
         
@@ -52,7 +52,7 @@ export class NavBarComponent implements OnInit{
     }
 
     onBrandClicked():void{ //onSmartEventClicked
-        console.log("navigate");
+        //console.log("navigate");
         this.router.navigate(['/']);
     }
 

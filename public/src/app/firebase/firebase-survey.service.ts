@@ -8,9 +8,9 @@ declare var firebase:any;
 export class FirebaseSurveyService{
 
     createSurvey(sur:Survey, ekey:string){
-        console.log("create a new survey in Database "+sur);
+        //console.log("create a new survey in Database "+sur);
         let newSurKey = firebase.database().ref('/EVENT/'+ekey+'/SURVEY/').push().key;
-        console.log("New Survey Key: "+newSurKey);
+        //console.log("New Survey Key: "+newSurKey);
 
         let surData = {
             AUTHOR: sur.getAuthor(),
@@ -31,26 +31,26 @@ export class FirebaseSurveyService{
     }
 
     deleteSurvey(key:string, ekey:string){
-        console.log("delete survey in database with key: "+key);
+        //console.log("delete survey in database with key: "+key);
         let update = {};
         update['/EVENT/'+ekey+'/SURVEY/'+key] = null;
         firebase.database().update(update);
     }
 
     updateSurvey(sur:Survey){
-        console.log("update survey in database "+sur);
-        console.log("update not implemented...");
+        //console.log("update survey in database "+sur);
+        //console.log("update not implemented...");
     }
 
     vote(ekey:string,skey:string,answerkey:string, member:Member){
-        console.log("voted for "+ answerkey+" in poll "+skey+" by member");
+        //console.log("voted for "+ answerkey+" in poll "+skey+" by member");
         let update={};
         update['/EVENT/'+ekey+'/SURVEY/'+skey+'/ANSWER/'+answerkey+'/'+member.getID()] = member.getEmail();
         firebase.database().update(update);
     }
 
     unvote(ekey:string,skey:string,answerkey:string, member:Member){
-        console.log("unvoted for "+ answerkey+" in poll "+skey+" by member");
+        //console.log("unvoted for "+ answerkey+" in poll "+skey+" by member");
         let update={};
         update['/EVENT/'+ekey+'/SURVEY/'+skey+'/ANSWER/'+answerkey+'/'+member.getID()] = null;
         firebase.database().update(update);

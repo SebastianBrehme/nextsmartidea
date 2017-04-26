@@ -30,7 +30,7 @@ export class SurveyService{
     }
 
     convert(data:any):Survey[]{
-        console.log(data);
+        //console.log(data);
         let ret:Survey[] = [];
         for(let skey in data){
             let temp:Survey = new Survey(data[skey]['TITEL']);
@@ -42,10 +42,10 @@ export class SurveyService{
             let answer:Answer[] = [];
             for(let akey in data[skey]['ANSWER']){
                 let atemp:Answer = new Answer(akey);
-                console.log(data[skey]['ANSWER'][akey]);
+                //console.log(data[skey]['ANSWER'][akey]);
                 if(data[skey]['ANSWER'][akey] instanceof Object){
                     //there are votes
-                    console.log('there are votes');
+                    //console.log('there are votes');
                     let member:Member[] = []
                     for(let mkey in data[skey]['ANSWER'][akey]){
                         let mtemp:Member = new Member(data[skey]['ANSWER'][akey][mkey],mkey);
@@ -53,14 +53,14 @@ export class SurveyService{
                     }
                     atemp.setVotes(member);
                 }else{
-                    console.log('no votes here');
+                    //console.log('no votes here');
                 }
                 answer.push(atemp);
             }
             temp.setAnswers(answer);
             ret.push(temp);
         }
-        console.log(ret);
+        //console.log(ret);
         return ret;
     }
 
