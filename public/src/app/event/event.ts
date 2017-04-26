@@ -43,7 +43,7 @@ export class Event {
     getTitle():string{
         return this.title;
     }
-    setTitel(title:string){
+    setTitle(title:string){
         this.title = title;
     }
 
