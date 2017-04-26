@@ -7,7 +7,8 @@ import { UserService } from '../../user.service';
 @Component({
     moduleId: module.id,
     selector: 'chat',
-    templateUrl: 'chat.component.html'
+    templateUrl: 'chat.component.html',
+    styleUrls: [ 'chat.component.css']
 })
 
 export class ChatComponent implements OnInit{

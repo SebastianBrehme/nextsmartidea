@@ -1,4 +1,4 @@
-<h2>Chat</h2>
+<h3>Chat</h3>
 <form>
 <div class="form-group">
 
@@ -13,20 +13,19 @@
     </div>
 </div>
 
-<form class="form-horizontal">
-<div class="row" *ngFor="let message of messageListReverse; let index = index; trackBy:customTrackBy;">
+<div class="enjoy-css">
+<div class="" *ngFor="let message of messageListReverse; let index = index; trackBy:customTrackBy;">
     <div class="col-lg-12">
        
             <div class="form-group">
-                <label class="col-sm-3 control-label">{{message.sender}}</label>
-                <div class="col-sm-7">
-                    <p class="form-control-static">{{message.text}}</p>
-                </div>
+                <label class="col-sm-4 control-label">{{message.sender}}</label>
+                <label class="col-sm-8 control-label">{{message.text}}</label>
             </div>
         
     </div>
 </div>
-</form>
+</div>
+
 
 </div>
 </form>
