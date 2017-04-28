@@ -14,7 +14,7 @@ import 'rxjs/add/operator/switchMap';
     templateUrl: 'create-survey.component.html'
 })
 
-export class CreateSurveyComponent {
+export class CreateSurveyComponent implements OnInit{
 
     title: string="";
     easySelected: boolean=false;
@@ -27,6 +27,7 @@ export class CreateSurveyComponent {
     showWarningSelection: boolean = false;
     showWarningLessAnswer: boolean = false;
     showWarningLastAnswer: boolean=false;
+    showWarningLastAnswerAvoid: boolean = false;
     showWarningQuestion: boolean=false;
 
 
@@ -49,18 +50,31 @@ export class CreateSurveyComponent {
     }
 
     onAddAnswerClicked() {
-        if(this.currentAnswerString.length < 1){
-            this.showWarningLastAnswer = true;
+        //".", "#", "$", "/", "[", or "]"
+        if(this.currentAnswerString.indexOf(".")>=0 ||
+            this.currentAnswerString.indexOf("#")>=0 ||
+            this.currentAnswerString.indexOf("$")>=0 ||
+            this.currentAnswerString.indexOf("/")>=0 ||
+            this.currentAnswerString.indexOf("[")>=0 ||
+            this.currentAnswerString.indexOf("]")>=0 ){
+            this.showWarningLastAnswerAvoid=true;
             this.ref.tick();
         }
         else{
-            this.showWarningLastAnswer = false;
-            this.answerlist.push(new Answer(this.currentAnswerString));
-            (<HTMLInputElement>document.getElementById("currentAnswerString")).value = "";
-            this.ref.tick();
-        }
+            this.showWarningLastAnswerAvoid=false;
+            if(this.currentAnswerString.length < 1){
+                this.showWarningLastAnswer = true;
+                this.ref.tick();
+            }
+            else{
+                this.showWarningLastAnswer = false;
+                this.answerlist.push(new Answer(this.currentAnswerString));
+                (<HTMLInputElement>document.getElementById("currentAnswerString")).value = "";
+                this.ref.tick();
+            }
+        } 
     }
-    
+
     onDeleteAnswerClicked(index: number) {
         this.answerlist.splice(index, 1);
         this.ref.tick();
