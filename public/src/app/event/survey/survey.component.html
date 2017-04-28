@@ -1,0 +1,26 @@
+<h3>Survey</h3>
+<div>
+    <div *ngFor="let survey of surveyList; let i = index; " name="surveyContainer">
+        <div id="SurveyContainer#{{i}}">
+            <h4>{{surveyList[i].title}}</h4>
+            <h5>{{survey.question}}</h5>
+            <div *ngIf="survey.multiple == false">
+                <fieldset>
+                    <div *ngFor="let answer of survey.getAnswers();let answerIndex = index;  trackBy:customTrackBy;">
+                        <input type="radio" name="selection" id="ea#{{i}}#{{answerIndex}}" >
+                        <label for="ea#{{answerIndex}}">{{answer.getAnswer()}}</label><br>
+                    </div>
+                </fieldset>
+            </div>
+            <div *ngIf="survey.multiple">
+                <fieldset>
+                    <div *ngFor="let answer of survey.getAnswers();let answerIndex = index;  trackBy:customTrackBy;">
+                        <input type="checkbox" id="mul#{{i}}#{{answerIndex}}" >
+                        <label for="mul#{{answerIndex}}">{{answer.getAnswer()}}</label><br>
+                    </div>
+                </fieldset>
+            </div>
+            <button (click)="voteClicked(survey, i)">Vote</button>
+        </div>
+    </div>
+</div>
