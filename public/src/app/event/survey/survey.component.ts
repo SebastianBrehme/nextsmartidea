@@ -11,7 +11,8 @@ import { UserService } from '../../user.service';
 @Component({
     moduleId: module.id,
     selector: 'survey',
-    templateUrl: 'survey.component.html'
+    templateUrl: 'survey.component.html',
+    styleUrls: [ 'survey.component.css' ]
 })
 
 export class SurveyComponent implements OnInit {
@@ -67,5 +68,9 @@ export class SurveyComponent implements OnInit {
         return null;
     }
 
-    
+    /*style function*/
+
+    titleClicked(index: any){
+        document.getElementById("surveyContent#" + index).classList.toggle("show");
+    } 
 }
