@@ -67,14 +67,14 @@ export class Event {
         return this.date_from
     }
     setDateFrom(date_from:Date){
-        this.date_from = new Date(date_from);
+        this.date_from = date_from;//new Date(date_from);
     }
 
     getDateTo():Date{
         return this.date_to
     }
     setDateTo(date_to:Date){
-        this.date_to = new Date(date_to);
+        this.date_to = date_to;//new Date(date_to);
     }
 
     getLocation():string{

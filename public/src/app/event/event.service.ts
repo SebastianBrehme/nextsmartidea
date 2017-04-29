@@ -83,10 +83,10 @@ export class EventService{
                 e.setDescription(data['DESCRIPTION']);
             }
             if(data['FROM']){
-                e.setDateFrom(data['FROM']);
+                e.setDateFrom(new Date(data['FROM']));
             }
             if(data['TO']){
-                e.setDateTo(data['TO']);
+                e.setDateTo(new Date(data['TO']));
             }
             if(data['TYPE']){
                 e.setType(data['TYPE']);
