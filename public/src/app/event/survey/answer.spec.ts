@@ -1,5 +1,5 @@
-import {Answer} from './Answer';
-import {Member} from '../Member';
+import {Answer} from './answer';
+import {Member} from '../member';
 
 describe('Answer',()=>{
     let answer:Answer;
