@@ -1,0 +1,25 @@
+.surveyContentDropdown {
+    display:none;
+    z-index: 1;
+}
+
+.show { display: block; }
+
+.hide { display: none; }
+
+.surveyHeading {
+    cursor: pointer;
+}
+
+.surveyContainer {
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+
+.voteButton {
+    margin-bottom: 2px;
+}
+
+.warning {
+    display: none;
+    z-index: 1;
+}
