@@ -66,7 +66,8 @@ export class DashboardComponent implements OnDestroy{
     customTrackBy(index: number, obj: any): any {
         return index;
     }
-
+    
+    /* OLD AND FATT AND DEPRECATED
     updateList = (list:Event[]) => {
         if(this && this.ref){
         //console.log('updateList -dashboard: '+list);
@@ -75,7 +76,7 @@ export class DashboardComponent implements OnDestroy{
         this.ref.tick()
         
         }
-    }
+    }*/
 
     doEvent(): void{
         //console.log('dashboard: doEvent');

@@ -29,11 +29,11 @@ export class LoginComponent implements OnInit{
 
     doLogin():void{
        this.firebase.signIn();
-       if(true){
+       //if(true){
            // this.router.navigate(['']);    
-       }else{
+       //}else{
            //Fehler anzeigen
-       }
+       //}
     }
 
    }
