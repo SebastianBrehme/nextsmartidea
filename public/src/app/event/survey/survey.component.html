@@ -1,7 +1,7 @@
 <h3>Survey</h3>
 <div>
     <div *ngFor="let survey of surveyList; let i = index; " name="surveyContainer">
-        <div id="SurveyContainer#{{i}}">
+        <div id="SurveyContainer#{{i}}" class="surveyContainer">
             <div>
                 <h4 (click)="titleClicked(i)" class="surveyHeading">{{surveyList[i].title}}</h4>
             </div>
@@ -23,7 +23,9 @@
                         </div>
                     </fieldset>
                 </div>
-                <button class="btn btn-default" (click)="voteClicked(survey, i)">Vote</button>
+                <div id="warningSelection#{{i}}" class="warning"><small class="form-text text-danger">You have to select something</small></div>
+                <button class="btn btn-default voteButton" (click)="voteClicked(survey, i)">Vote</button>
+                <div id="warningVote#{{i}}" class="warning"><small class="form-text text-danger">You have already voted for this survey!</small></div>
             </div>
         </div>
     </div>

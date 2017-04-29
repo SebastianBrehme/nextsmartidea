@@ -21,6 +21,9 @@ export class SurveyComponent implements OnInit {
     @Input() eventKey: string;
     surveyList:Survey[]; 
 
+    showWarningVote: boolean = false;
+    showWarningSelection: boolean = false;
+
     constructor(
         private eventService: EventService,
         private surveyService: SurveyService,
@@ -45,17 +48,45 @@ export class SurveyComponent implements OnInit {
     }
 
     voteClicked(survey: Survey, index: any){
-        let answerCount: number = survey.getAnswers().length;
+        console.log(index);
+        let member: Member = this.getMember();
+        if(survey.multiple || !this.hasVoted(survey, member)){
+            this.showWarningVote = false;
+            this.warningVote(false, index);
+            this.showWarningSelection = false;
+            this.warningSelection(false, index);
+            let answerCount: number = survey.getAnswers().length;
 
-        let selectType: string = "";
-        if(survey.getMultiple()){ selectType="mul"; }
-        else { selectType="ea"; }
+            let selectType: string = "";
+            if(survey.getMultiple()){ selectType="mul"; }
+            else { selectType="ea"; }
 
-        survey.getAnswers().forEach((item, i) => {
-            if((<HTMLInputElement>document.getElementById(selectType + "#" + index + "#" + i)).checked){
-                this.surveyService.vote(this.eventKey, survey.key, item, this.getMember());
+            let selectedSomething: boolean = false;
+            survey.getAnswers().forEach((item, i) => {
+                if((<HTMLInputElement>document.getElementById(selectType + "#" + index + "#" + i)).checked){
+                    selectedSomething = true;
+                    this.surveyService.vote(this.eventKey, survey.key, item, member);
+                }
+            });
+
+            if(!selectedSomething){
+                this.showWarningSelection = true;
+                this.warningSelection(true, index);
             }
-        });
+        }
+        else{
+            this.showWarningVote = true;
+            this.warningVote(true, index);
+        }
+    }
+
+    hasVoted(survey: Survey, member: Member):boolean {
+        for(let a of survey.getAnswers()){
+            if(a.hasVoted(member)){
+                return true;
+            }
+        }
+        return false;
     }
 
     getMember():Member{
@@ -69,6 +100,24 @@ export class SurveyComponent implements OnInit {
     }
 
     /*style function*/
+
+    warningSelection(show: boolean, index: any){
+        if(show){
+            document.getElementById("warningSelection#" + index).classList.toggle("show");
+        }
+        else{
+            document.getElementById("warningSelection#" + index).classList.toggle("hide");
+        }
+    }
+
+    warningVote(show: boolean, index: any){
+        if(show){
+            document.getElementById("warningVote#" + index).classList.toggle("show");
+        }
+        else{
+            document.getElementById("warningVote#" + index).classList.toggle("hide");
+        }
+    }
 
     titleClicked(index: any){
         document.getElementById("surveyContent#" + index).classList.toggle("show");
