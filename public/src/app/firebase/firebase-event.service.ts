@@ -59,6 +59,7 @@ export class FirebaseEventService{
             DESCRIPTION: e.description,
             TYPE: e.type,
             LOCATION: e.location,
+            CHATKEY: e.chatkey,
             FROM: e.date_from,
             TO: e.date_to,
         }

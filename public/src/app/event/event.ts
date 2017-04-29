@@ -12,6 +12,7 @@ export class Event {
     location: string;
     member: Member[];
     survey: Survey[];
+    chatkey:string;
     date_fromShortString: string;
 
     constructor(title:string) {
@@ -23,6 +24,7 @@ export class Event {
         this.date_from = new Date();
         this.date_to = new Date();
         this.location = '';
+        this.chatkey = '';
         this.member=[];
         this.survey=[];
         this.date_fromShortString = '';
@@ -96,6 +98,13 @@ export class Event {
     }
     setSurvey(survey:Survey[]){
         this.survey = survey;
+    }
+
+    getChatKey():string{
+        return this.chatkey;
+    }
+    setChatKey(key:string):void{
+        this.chatkey = key;
     }
 
     getDateFromShortString():string{

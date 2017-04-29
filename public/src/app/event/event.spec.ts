@@ -48,6 +48,13 @@ describe('Event', () =>{
         expect(event.getLocation()).toBe(location);
     });
 
+    it('#Chatkey', ()=>{
+        expect(event.getChatKey()).toBe('');
+        let key = "aksdjg43asökld44";
+        event.setLocation(key);
+        expect(event.getLocation()).toBe(key);
+    });
+
     it('#DateFrom', ()=>{
         let date = new Date();
         event.setDateFrom(date);

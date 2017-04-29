@@ -18,7 +18,7 @@ export class DetailViewComponent implements OnInit{
     showEvent: boolean = false;
     event:Event;
     key:string;
-
+    chatkey:string;
     eventTitle:string;
     eventDescription:string;
 
@@ -45,9 +45,9 @@ export class DetailViewComponent implements OnInit{
     updateEvent(){
         this.eventService.getEvent(this.key, (e:Event) => {
             this.event = e;
+            this.chatkey = this.event.getChatKey();
             this.ref.tick();
             //console.log("updateEvent -detail-view");
-            
         });
     }
 

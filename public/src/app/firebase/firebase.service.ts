@@ -3,9 +3,11 @@ import { Event } from '../event/event';
 import { Member} from '../event/member';
 import { Survey} from '../event/survey/survey';
 import { Answer} from '../event/survey/answer';
+import { Message} from '../event/chat/message';
 import { FirebaseAuthService} from './firebase-auth.service';
 import { FirebaseEventService} from './firebase-event.service';
 import { FirebaseSurveyService} from './firebase-survey.service';
+import { FirebaseChatService} from './firebase-chat.service';
 
 declare var firebase: any;
 
@@ -15,7 +17,8 @@ export class FirebaseService{
     constructor(
         private fauth: FirebaseAuthService,
         private fevent: FirebaseEventService,
-        private fsurvey: FirebaseSurveyService
+        private fsurvey: FirebaseSurveyService,
+        private fchat: FirebaseChatService
     ) {}
 
     signIn():any{
@@ -75,6 +78,19 @@ export class FirebaseService{
         this.fsurvey.unvote(ekey,skey,answerkey,member);
     }
 
+    pushMessage(key:string, msg:Message):void{
+        this.fchat.pushMessage(key, msg);
+    }
 
+    getMessages(key:string, limit:number, callback:any){
+        this.fchat.getMessages(key, limit, callback);
+    }
 
+    getMessagesOff(key:string){
+        this.fchat.getMessagesOff(key);
+    }
+
+    createNewChatKey():string{
+       return this.fchat.createNewChatKey();
+    }
 }

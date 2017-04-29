@@ -5,6 +5,7 @@ import { Member} from './member';
 import { FirebaseService } from '../firebase/firebase.service';
 import { UserService } from '../user.service';
 import { SurveyService } from './survey/survey.service';
+import { ChatService} from './chat/chat.service';
 import { ReplaySubject} from 'rxjs';
 
 
@@ -17,6 +18,7 @@ export class EventService{
     constructor(
         private firebase: FirebaseService,
         private survey: SurveyService,
+        private chat: ChatService,
         private user: UserService,
     ){
         this.eventlistcallback = [];
@@ -97,6 +99,9 @@ export class EventService{
             if(data['LOCATION']){
                 e.setLocation(data['LOCATION']);
             }
+            if(data['CHATKEY']){
+                e.setChatKey(data['CHATKEY']);
+            }
             
             let m:Member[] = [];
             for(let n in data['MEMBER']){
@@ -110,6 +115,7 @@ export class EventService{
     createEvent(e:Event):void{
         e.author = this.user.getUser().uid;
         e.member.push(new Member(this.user.getUser().email,''));
+        e.chatkey = this.chat.generateKey();
         this.firebase.createEvent(e);
     }
 
