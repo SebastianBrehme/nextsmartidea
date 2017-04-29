@@ -58,6 +58,7 @@ export class FirebaseEventService{
             TITLE: e.title,
             DESCRIPTION: e.description,
             TYPE: e.type,
+            LOCATION: e.location,
             FROM: e.date_from,
             TO: e.date_to,
         }
@@ -84,6 +85,7 @@ export class FirebaseEventService{
         update['/EVENT/'+newEvent.key+'/TITLE'] = newEvent.getTitle();
         update['/EVENT/'+newEvent.key+'/DESCRIPTION'] = newEvent.getDescription();
         update['/EVENT/'+newEvent.key+'/TYPE'] = newEvent.getType();
+        update['/EVENT/'+newEvent.key+'/LOCATION'] = newEvent.getLocation();
         update['/EVENT/'+newEvent.key+'/FROM'] = newEvent.getDateFrom();
         update['/EVENT/'+newEvent.key+'/TO'] = newEvent.getDateTo();
         update['/EVENT/'+newEvent.key+'/MEMBER']=null;

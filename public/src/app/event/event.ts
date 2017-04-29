@@ -9,6 +9,7 @@ export class Event {
     type: string;
     date_from: Date;
     date_to: Date;
+    location: string;
     member: Member[];
     survey: Survey[];
     date_fromShortString: string;
@@ -21,6 +22,7 @@ export class Event {
         this.type='';
         this.date_from = new Date();
         this.date_to = new Date();
+        this.location = '';
         this.member=[];
         this.survey=[];
         this.date_fromShortString = '';
@@ -73,6 +75,13 @@ export class Event {
     }
     setDateTo(date_to:Date){
         this.date_to = new Date(date_to);
+    }
+
+    getLocation():string{
+        return this.location;
+    }
+    setLocation(location:string){
+        this.location = location;
     }
 
     getMember():Member[]{

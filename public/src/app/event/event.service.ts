@@ -69,7 +69,15 @@ export class EventService{
         this.firebase.getEventData(key,data => {
             data = data.val();
             ////console.log(data);
-            let e:Event = new Event(data['TITLE']);
+            let e:Event = this.convertDataToEvent(data);
+            e.setKey(key);
+            ////console.log("TEst", e);
+            callback(e);
+        });
+    }
+
+    convertDataToEvent(data:any):Event{
+        let e:Event = new Event(data['TITLE']);
             e.setAuthor(data['AUTHOR']);
             if(data['DESCRIPTION']){
                 e.setDescription(data['DESCRIPTION']);
@@ -86,16 +94,17 @@ export class EventService{
             if(data['SURVEY']){
                 e.setSurvey(this.survey.convert(data['SURVEY']));
             }
-            e.setKey(key);
+            if(data['LOCATION']){
+                e.setLocation(data['LOCATION']);
+            }
+            
             let m:Member[] = [];
             for(let n in data['MEMBER']){
                 ////console.log(n);
                 m.push(new Member(data['MEMBER'][n],n));
             }
             e.setMember(m);
-            ////console.log("TEst", e);
-            callback(e);
-        });
+            return e;
     }
 
     createEvent(e:Event):void{

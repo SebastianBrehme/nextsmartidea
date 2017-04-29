@@ -1,4 +1,4 @@
-import {Event} from './Event';
+import {Event} from './event';
 
 describe('Event', () =>{
     let event: Event;
@@ -39,6 +39,13 @@ describe('Event', () =>{
         let type = "Party";
         event.setType(type);
         expect(event.getType()).toBe(type);
+    });
+
+    it('#Location', ()=>{
+        expect(event.getLocation()).toBe('');
+        let location = "Karlsruhe";
+        event.setLocation(location);
+        expect(event.getLocation()).toBe(location);
     });
 
     it('#DateFrom', ()=>{
