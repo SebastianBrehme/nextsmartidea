@@ -26,7 +26,24 @@
                 <div id="warningSelection#{{i}}" class="warning"><small class="form-text text-danger">You have to select something</small></div>
                 <button class="btn btn-default voteButton" (click)="voteClicked(survey, i)">Vote</button>
                 <div id="warningVote#{{i}}" class="warning"><small class="form-text text-danger">You have already voted for this survey!</small></div>
+                <div>
+                    <h5>Result</h5>
+                    <div class="charts">
+                    <div *ngFor="let answer of survey.getAnswers();let answerIndex = index;  trackBy:customTrackBy;" >
+                        <span><b>{{answer.getAnswer()}} </b>({{answer.getVotesCount()}} Votes)</span><div class="res" [ngStyle]="{'width.%': 100/survey.getAllVotesCount()*answer.getVotesCount()}"></div>
+                    </div>
+                    </div>
+                    <ul id="chartScale">
+                        <li class="halfScale scaleNull">0</li>
+                        <li class="halfScale scaleTwenty">20</li>
+                        <li class="scaleData">40</li>
+                        <li class="scaleData">60</li>
+                        <li class="scaleData">80</li>
+                        <li class="scaleData">100</li>
+                    </ul> 
+                    <br>
+                </div>
             </div>
-        </div>
+        </div>  
     </div>
 </div>

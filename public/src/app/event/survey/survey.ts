@@ -72,4 +72,11 @@ export class Survey {
         return ret;
     }
 
+    getAllVotesCount(): number{
+        let sum: number = 0;
+        for(let tans of this.answers){
+            sum = sum + tans.getVotesCount();
+        }
+        return sum;
+    }
 }
