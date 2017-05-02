@@ -16,4 +16,8 @@ install:
   - npm install -g @angular/cli
   - npm install
 script:
-  - ng test --single-run
+  - ng test --single-run --code-coverage
+  
+after_success:
+  - npm run coveralls
+  
