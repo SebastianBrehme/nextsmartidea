@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/SebastianBrehme/nextsmartidea.svg?branch=master)](https://travis-ci.org/SebastianBrehme/nextsmartidea)
+
 # nextsmartidea
 
 Hey Guys,
