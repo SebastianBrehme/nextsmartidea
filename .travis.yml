@@ -14,5 +14,6 @@ before_script:
 install:
   - npm install -g firebase-tools
   - npm install -g @angular/cli
+  - npm install
 script:
   - ng test
