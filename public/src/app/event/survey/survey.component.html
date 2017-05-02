@@ -30,7 +30,7 @@
                     <h5>Result</h5>
                     <div class="charts">
                     <div *ngFor="let answer of survey.getAnswers();let answerIndex = index;  trackBy:customTrackBy;" >
-                        <span><b>{{answer.getAnswer()}} </b>({{answer.getVotesCount()}} Votes)</span><div class="res" [ngStyle]="{'width.%': 100/survey.getAllVotesCount()*answer.getVotesCount()}"></div>
+                        <span><b>{{answer.getAnswer()}} </b>({{answer.getVotesCount()}} Votes)</span><div *ngIf="survey.getAllVotesCount()>0" class="res" [ngStyle]="{'width.%': 100/survey.getAllVotesCount()*answer.getVotesCount()}"></div>
                     </div>
                     </div>
                     <ul id="chartScale">
