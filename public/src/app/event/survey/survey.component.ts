@@ -1,5 +1,4 @@
 import { Component, OnInit, OnChanges, ApplicationRef, Input, Output } from '@angular/core';
-//import { Router, ActivatedRoute, Params, Event as NavigationEvent } from '@angular/router';
 import { EventService} from '../event.service';
 import { SurveyService } from './survey.service';
 import { Member } from '../member';
@@ -15,7 +14,7 @@ import { UserService } from '../../user.service';
     styleUrls: [ 'survey.component.css' ]
 })
 
-export class SurveyComponent implements OnInit {
+export class SurveyComponent implements OnInit, OnChanges {
 
     event:Event;
     @Input() eventKey: string;
@@ -29,10 +28,13 @@ export class SurveyComponent implements OnInit {
         private surveyService: SurveyService,
         private userService: UserService
     ) {
-        
          }
 
     ngOnInit(): void {
+        this.updateEvent();
+    }
+
+    ngOnChanges(changes: any) {
         this.updateEvent();
     }
 
