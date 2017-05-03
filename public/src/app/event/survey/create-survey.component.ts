@@ -114,6 +114,7 @@ export class CreateSurveyComponent implements OnInit{
         //});
         this.surveyservice.createSurvey(this.newSurvey,this.eventKey);
         //this.router.navigate([' ']);
+        this.goBack();
     }
 
     goBack(): void {
