@@ -20,5 +20,5 @@ script:
   - ng test --single-run --code-coverage
   
 after_success:
-  - npm run coveralls
+  - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
   
