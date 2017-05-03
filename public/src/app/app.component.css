@@ -1,0 +1,6 @@
+#mysidebar{
+    background-color: #F8F8F8;
+    height: calc(100vh - 50px);
+    position: fixed;
+}
+

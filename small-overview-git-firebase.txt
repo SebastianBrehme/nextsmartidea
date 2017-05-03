@@ -1,0 +1,40 @@
+1. Node.js download and install (latest Version v.7..)
+2. open cmd.exe
+3. npm install -g firebase-tools
+4. firebase login 
+5. Go to a location
+6. firbase init
+7. select Hosting...
+8. ...follow steps...
+9. (firbase deploy)
+
+Angular:
+
+1. go in to public-directory
+2. ng serve --open	//for local testing
+3. add <script> for firebase to index.html: look at console.firebase.google for the code
+4. ng build   		//create production folder "dist" with build results for deployment to firebase
+5. edit firebase.json public directory to dist: 
+	"public": "public/dist"
+6. firebase deploy
+
+
+Git commands:
+
+-git add [file]  //adds the file to git
+-git status      //giving status
+-git commit -m "committing with a message" // <--
+-git push        //upload changes after commit
+-git pull        //download changes
+
+
+-git add .	//add everything in this directory
+-git add -A	//add All
+
+
+-git branch  //show my branch
+-git branch [newBranchName] //copy this branch into new branch [newBranchName] 
+-git checkout [newBranchName] //switch to the branch [newBranchName]
+-git push --set-upstream origin [newBranchName]	//push and change the upstream branch to [newBranchName]
+
+-git merge [branchFromWitchYouWantTheThings]	//merging into your branch (branch which is checked out)

@@ -1,0 +1,30 @@
+<nav-bar></nav-bar>
+
+<div *ngIf="loggedIn" id="page">
+
+<div class="hidden-xs col-sm-2" id="mysidebar" flex>
+  <sidebar-content></sidebar-content>
+</div>
+<div class="hidden-xs col-sm-2" flex></div>
+
+
+
+
+<div>
+ <ng-sidebar-container>
+    <ng-sidebar [(opened)]="_open" closeOnClickOutside=true position="top" >
+        <sidebar-content (closeSidebar)="_closeSidebar()"></sidebar-content>
+        <a (click)="_toggleSidebar()">Closes the sidebar</a>
+    </ng-sidebar>
+ </ng-sidebar-container>
+</div>
+
+</div>
+
+<div class="container-fluid col-sm-10 col-xs-12">
+    <div class="visible-xs">
+        <br>
+        <br>
+    </div>
+    <router-outlet></router-outlet>
+</div>

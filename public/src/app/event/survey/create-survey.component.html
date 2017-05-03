@@ -1,0 +1,63 @@
+<h1>Create new Survey</h1>
+<form>
+
+    <div>
+        <h3>Title</h3>
+        <input [(ngModel)]="title" name="currentTitleString" type="text" class="form-control" >
+        <div *ngIf="showWarningTitle"><small id="titleWarning" class="form-text text-danger">please enter a valid name</small></div>
+    </div>
+
+<div>
+<h3>Kind of selection</h3>
+<fieldset>
+    <input [(ngModel)]="easySelected" type="radio" name="selection" id="ea" value="easy">
+    <label for="ea">Easy Selection</label><br>
+    <input [(ngModel)]="MultipleSelected" type="radio" name="selection" id="mul" value="multiple">
+    <label for="mul">Multiple Selection</label><br>
+</fieldset>
+<div *ngIf="showWarningSelection"><small class="form-text text-danger">please select something</small></div>
+</div>
+
+<div>
+    <h3>Question</h3><br>
+    <input class="form-control" type="text" name="question" id="question" [(ngModel)]="question">
+    <div *ngIf="showWarningQuestion"><small id="questionWarning" class="form-text text-danger">please enter a valid question</small></div>
+</div>
+
+<div>
+    <h3>Answers</h3>
+    <div *ngIf="answerlist">
+		<div class="row" *ngFor="let answer of answerlist; let index = index;">
+			<div class="col-lg-12">
+				<div class="input-group">
+					<input [(ngModel)]="answerlist[index].answer" [ngModelOptions]="{standalone: true}" type="text" class="form-control" value="answerlist[index].answer">
+					<span class="input-group-btn">
+           	  				<button id="buttonMinus#{{index}}" class="btn btn-default" (click)="onDeleteAnswerClicked(index)" type="button"><span class="glyphicon glyphicon-minus"></span></button>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+    <div *ngIf="showWarningLessAnswer"><small class="form-text text-danger">You have to give at least two possible answers.</small></div>
+
+
+	<div class="row">
+		<div class="col-lg-12">
+			<div class="input-group">
+				<input [(ngModel)]="currentAnswerString" name="currentAnswerString" id="currentAnswerString" type="text" class="form-control" >
+					<span class="input-group-btn">
+              			<button id="buttonPlus" class="btn btn-default" (click)="onAddAnswerClicked()" type="submit"><span class="glyphicon glyphicon-plus"></span></button>
+					</span>
+			</div>
+			<div *ngIf="showWarningLastAnswer"><small class="form-text text-danger">Please enter a valid answer.</small></div>
+			<div *ngIf="showWarningLastAnswerAvoid"><small class="form-text text-danger">Please avoid the following characters in your answer: ".", "#", "$", "/", "[", or "]"</small></div>
+		</div>
+	</div>
+    
+    <br>
+    <button (click)="onSubmitClicked()" type="button" class="btn btn-primary">Submit</button>
+
+</div>
+
+
+</form>

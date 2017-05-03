@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // Platzieren Sie Ihre Einstellungen in dieser Datei, um Standard- und Benutzereinstellungen zu überschreiben.
 {
     "files.exclude": {
@@ -8,4 +9,8 @@
         "**/*.js": {"when": "$(basename).ts"},
         "**/*.js.map": true
     }
+=======
+{
+    "vsicons.presets.angular": true
+>>>>>>> origin/angular4
 }
