@@ -1,9 +1,10 @@
-import { Component, OnInit,AfterViewChecked, OnChanges, ApplicationRef, Input, Output, NgZone } from '@angular/core';
+import { Component, OnInit,AfterViewChecked, OnChanges, OnDestroy, ApplicationRef, Input, Output, NgZone, EventEmitter } from '@angular/core';
 import { EventService} from '../event.service';
 import { ChatService} from './chat.service';
 import { Event } from '../event';
 import { Message } from './message';
 import { UserService } from '../../user.service';
+import { Subscription} from 'rxjs';
 
 @Component({
     moduleId: module.id,
@@ -12,14 +13,17 @@ import { UserService } from '../../user.service';
     styleUrls: [ 'chat.component.css']
 })
 
-export class ChatComponent implements OnInit, AfterViewChecked{
+export class ChatComponent implements OnInit, OnDestroy{
 
     //event:Event;
-    @Input() chatKey: string;
+    
+    chatKey: string;
 
     messageList: Array<Message> = [];
     messageListReverse: Array<Message> = [];
     currentMessageString: string = "";
+    chatKeyChangedSubsciption: Subscription;
+    getListAsReplaySubjectSubsciption: Subscription;
 
     //workaround
     first:boolean;
@@ -36,19 +40,43 @@ export class ChatComponent implements OnInit, AfterViewChecked{
     }
 
     ngOnInit(): void {
+        this.chatKeyChangedSubsciption = this.chatService.chatKeyChangedEvent.subscribe((key:string) => {
+            this.chatKey = key;
+            this.initializeChat();
+        })
     }
 
-    ngAfterViewChecked():void{
-        if(this.chatKey && this.first){
-            this.first = false;
+    ngOnDestroy(){
+        if(this.chatKeyChangedSubsciption && !this.chatKeyChangedSubsciption.closed){
+            this.chatKeyChangedSubsciption.unsubscribe();
+        }
+        if(this.getListAsReplaySubjectSubsciption && this.getListAsReplaySubjectSubsciption.closed){
+            this.getListAsReplaySubjectSubsciption.unsubscribe();            
+        }
+        
+    }
+
+    chatKeyChanged(event){
+        this.chatKey = event;
+        console.log("chatKey changed");
+        this.initializeChat();
+    }
+
+    initializeChat(){
+        if(this.chatKey){
             this.chatService.getMessage(this.chatKey,50);
-            this.chatService.getListAsReplaySubject().subscribe(msg =>{
+            if(!this.getListAsReplaySubjectSubsciption || this.getListAsReplaySubjectSubsciption.closed){
+                this.getListAsReplaySubjectSubsciption = this.chatService.getListAsReplaySubject().subscribe(msg =>{
                 this.zone.run(() => {
                     if(this && this.ref){
                         this.messageListReverse = msg;
+                        console.log(this.messageListReverse);
                     }
+                    });
                 });
-            });
+
+            }
+            
         }
     }
 

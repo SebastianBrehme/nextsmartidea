@@ -1,10 +1,11 @@
-import { Component, OnInit, OnDestroy, OnChanges, ApplicationRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, ApplicationRef, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, Params, Event as NavigationEvent } from '@angular/router';
 import { EventService} from '../event.service';
 import { Event } from '../event';
-import { Location } from '@angular/common'
-import { ChatComponent } from '../chat/chat.component'
-import { Subscription } from 'rxjs'
+import { Location } from '@angular/common';
+import { ChatComponent } from '../chat/chat.component';
+import { Subscription } from 'rxjs';
+import { ChatService } from '../chat/chat.service';
 import 'rxjs/add/operator/switchMap';
 
 @Component({
@@ -18,7 +19,6 @@ export class DetailViewComponent implements OnInit{
     showEvent: boolean = false;
     event:Event;
     key:string;
-    chatkey:string;
     eventTitle:string;
     eventDescription:string;
 
@@ -30,6 +30,7 @@ export class DetailViewComponent implements OnInit{
         private eventService: EventService,
         private location: Location,
         private ref: ApplicationRef,
+        private chatService: ChatService,
     ) {
         this.routerEventsSubscription = router.events.subscribe((event: NavigationEvent) => {this.updateEvent()});
     }
@@ -45,7 +46,7 @@ export class DetailViewComponent implements OnInit{
     updateEvent(){
         this.eventService.getEvent(this.key, (e:Event) => {
             this.event = e;
-            this.chatkey = this.event.getChatKey();
+            this.chatService.chatKeyChangedEvent.emit(this.event.getChatKey()); 
             this.ref.tick();
             //console.log("updateEvent -detail-view");
         });
