@@ -22,7 +22,8 @@ script:
 after_success:
   - npm run coveralls
   - cd ..
-  - ls
+deploy.skip_cleanup: true
+
 deploy:
   on:
     branch: master
