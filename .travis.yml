@@ -22,9 +22,9 @@ script:
 after_success:
   - npm run coveralls
   - cd ..
-deploy.skip_cleanup: true
 
 deploy:
+  skip_cleanup: true
   on:
     branch: master
   provider: firebase
