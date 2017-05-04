@@ -18,7 +18,17 @@ install:
   - npm install
 script:
   - ng test --single-run --code-coverage
-  
+  - ng build --prod
 after_success:
+<<<<<<< HEAD
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+=======
+  - npm run coveralls
+deploy:
+  on:
+    branch: master
+  provider: firebase
+  token:
+    secure: ${FIREBASE_TOKEN}
+>>>>>>> angular4
   
