@@ -1,0 +1,49 @@
+<h3>Survey</h3>
+<div>
+    <div *ngFor="let survey of surveyList; let i = index; " name="surveyContainer">
+        <div id="SurveyContainer#{{i}}" class="surveyContainer">
+            <div>
+                <h4 (click)="titleClicked(i)" class="surveyHeading">{{surveyList[i].title}}</h4>
+            </div>
+            <div id="surveyContent#{{i}}" class="surveyContentDropdown">
+                <h5>{{survey.question}}</h5>
+                <div *ngIf="survey.multiple == false">
+                    <fieldset>
+                        <div *ngFor="let answer of survey.getAnswers();let answerIndex = index;  trackBy:customTrackBy;">
+                            <input type="radio" name="selection" id="ea#{{i}}#{{answerIndex}}" >
+                            <label for="ea#{{answerIndex}}">{{answer.getAnswer()}}</label><br>
+                        </div>
+                    </fieldset>
+                </div>
+                <div *ngIf="survey.multiple">
+                    <fieldset>
+                        <div *ngFor="let answer of survey.getAnswers();let answerIndex = index;  trackBy:customTrackBy;">
+                            <input type="checkbox" id="mul#{{i}}#{{answerIndex}}" >
+                            <label for="mul#{{answerIndex}}">{{answer.getAnswer()}}</label><br>
+                        </div>
+                    </fieldset>
+                </div>
+                <div id="warningSelection#{{i}}" class="warning"><small class="form-text text-danger">You have to select something</small></div>
+                <button class="btn btn-default voteButton" (click)="voteClicked(survey, i)">Vote</button>
+                <div id="warningVote#{{i}}" class="warning"><small class="form-text text-danger">You have already voted for this survey!</small></div>
+                <div>
+                    <h5>Result</h5>
+                    <div class="charts">
+                    <div *ngFor="let answer of survey.getAnswers();let answerIndex = index;  trackBy:customTrackBy;" >
+                        <span><b>{{answer.getAnswer()}} </b>({{answer.getVotesCount()}} Votes)</span><div *ngIf="survey.getAllVotesCount()>0" class="res" [ngStyle]="{'width.%': 100/survey.getAllVotesCount()*answer.getVotesCount()}"></div>
+                    </div>
+                    </div>
+                    <ul id="chartScale">
+                        <li class="halfScale scaleNull">0</li>
+                        <li class="halfScale scaleTwenty">20</li>
+                        <li class="scaleData">40</li>
+                        <li class="scaleData">60</li>
+                        <li class="scaleData">80</li>
+                        <li class="scaleData">100</li>
+                    </ul> 
+                    <br>
+                </div>
+            </div>
+        </div>  
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<h3>Chat</h3>
+<form>
+<div class="form-group">
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="form-group">
+            <textarea [(ngModel)]="currentMessageString" name="currentMessageString" type="text" class="form-control" placeholder="write message here..."></textarea>
+            
+            <button id="buttonSend" class="btn btn-default" (click)="onSendClicked()" type="submit"><span class="">send</span></button>
+            
+        </div>
+    </div>
+</div>
+
+<div class="enjoy-css">
+<div class="" *ngFor="let message of messageListReverse; let index = index; trackBy:customTrackBy;">
+    <div class="col-lg-12">
+       
+            <div class="form-group">
+                <label class="col-sm-4 control-label">{{message.sender}}</label>
+                <label class="col-sm-8 control-label">{{message.text}}</label>
+            </div>
+        
+    </div>
+</div>
+</div>
+
+
+</div>
+</form>

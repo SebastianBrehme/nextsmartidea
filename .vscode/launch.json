@@ -2,6 +2,7 @@
     "version": "0.2.0",
     "configurations": [
         {
+<<<<<<< HEAD
             "name": "Starten",
             "type": "node",
             "request": "launch",
@@ -48,6 +49,26 @@
             "request": "launch",
             "url": "http://localhost:3000",
             "sourceMaps": false,
+=======
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceRoot}"
+        },
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Launch Chrome against localhost",
+            "url": "http://localhost:4200",
+            "webRoot": "${workspaceRoot}"
+        },
+        {
+            "type": "chrome",
+            "request": "attach",
+            "name": "Attach to Chrome",
+            "port": 9222,
+>>>>>>> origin/angular4
             "webRoot": "${workspaceRoot}"
         }
     ]

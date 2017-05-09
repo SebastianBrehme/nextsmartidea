@@ -1,4 +1,8 @@
-# nextsmartidea
+
+[![Build Status](https://travis-ci.org/SebastianBrehme/nextsmartidea.svg?branch=master)](https://travis-ci.org/SebastianBrehme/nextsmartidea) [![Coverage Status](https://coveralls.io/repos/github/SebastianBrehme/nextsmartidea/badge.svg?branch=master)](https://coveralls.io/github/SebastianBrehme/nextsmartidea?branch=master)
+
+
+# SmartEvent Manager by NextSmartIdea
 
 Hey Guys,
 
