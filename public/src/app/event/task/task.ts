@@ -9,6 +9,10 @@ export class Task {
         this.title = title;
     }
 
+    getTitle(): string{
+        return this.title;
+    }
+
     setSubTasks(sTasks: SubTask[]){
         this.subTasks = sTasks;
     }

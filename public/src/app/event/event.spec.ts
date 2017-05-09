@@ -1,4 +1,6 @@
 import {Event} from './event';
+import {Member} from './member';
+import {Survey} from './survey/survey';
 
 describe('Event', () =>{
     let event: Event;
@@ -51,8 +53,8 @@ describe('Event', () =>{
     it('#Chatkey', ()=>{
         expect(event.getChatKey()).toBe('');
         let key = "aksdjg43asökld44";
-        event.setLocation(key);
-        expect(event.getLocation()).toBe(key);
+        event.setChatKey(key);
+        expect(event.getChatKey()).toBe(key);
     });
 
     it('#DateFrom', ()=>{
@@ -66,21 +68,29 @@ describe('Event', () =>{
         event.setDateTo(date);
         expect(event.getDateTo()).toBe(date);
     });
-/*
+
     it('#Member', ()=>{
-        expect(event.getMember()).toBe([]);
         let member:Member[] = [];
+        member.push(new Member("asd@fgh.de", "qwer1234"));
         event.setMember(member);
         expect(event.getMember()).toBe(member);
+        let member2:Member[] = [];
+        member2.push(new Member("tzui@iop.de", "gbhjn123"));
+        member2.push(new Member("vbn@ghj.com", "67zui"));
+        event.setMember(member2);
+        expect(event.getMember()).toBe(member2);
     });
 
-    it('#setTitle', ()=>{
-        expect(event.getSurvey()).toBe([]);
+    it('#Survey', ()=>{
+        //expect(event.getSurvey()).toBe([]);
         let survey:Survey[] = [];
         event.setSurvey(survey);
         expect(event.getSurvey()).toBe(survey);
+        survey.push(new Survey("title"));
+        event.setSurvey(survey);
+        expect(event.getSurvey()).toBe(survey);
     });
-*/
+
     it('#ShortDateString', ()=>{
         expect(event.getDateFromShortString()).toBe('');
         let date = "Neues Datum";
