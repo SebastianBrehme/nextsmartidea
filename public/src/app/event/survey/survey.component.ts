@@ -20,6 +20,8 @@ export class SurveyComponent implements OnInit, OnChanges {
     @Input() eventKey: string;
     surveyList:Survey[]; 
 
+    first: boolean = true;
+
     showWarningVote: boolean = false;
     showWarningSelection: boolean = false;
 
@@ -45,7 +47,22 @@ export class SurveyComponent implements OnInit, OnChanges {
     updateEvent(){
         this.eventService.getEvent(this.eventKey, (e:Event) => {
             this.event = e;
-            this.surveyList = this.event.getSurvey();            
+            this.surveyList = this.event.getSurvey(); 
+            this.first = true;           
+        });
+    }
+
+    setState(){
+        let me: Member = this.getMember();
+        this.surveyList.forEach((item, i) => {
+            let selectType: string = "";
+            if(item.getMultiple()){ selectType="mul"; }
+            else { selectType="ea"; }
+            item.getAnswers().forEach((answ, ind) => {
+                if(answ.hasVoted(me)){
+                    (<HTMLInputElement>document.getElementById(selectType + "#" + i + "#" + ind)).setAttribute("checked", "checked");
+                }
+            });
         });
     }
 
@@ -122,6 +139,7 @@ export class SurveyComponent implements OnInit, OnChanges {
     }
 
     titleClicked(index: any){
+        if(this.first){this.setState(); this.first = false;}
         document.getElementById("surveyContent#" + index).classList.toggle("show");
     } 
 }
