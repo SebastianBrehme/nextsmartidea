@@ -9,6 +9,7 @@ import { ContactComponent} from './contact/contact.component';
 import { DetailViewComponent } from './event/view/detail-view.component';
 import { UpdateEventComponent } from './event/update-event.component';
 import { CreateSurveyComponent } from './event/survey/create-survey.component';
+import { CreateTaskComponent } from './event/task/create-task.component';
 
 const routes:Routes = [
     { path: '', component: LoginComponent},
@@ -16,7 +17,8 @@ const routes:Routes = [
     { path: 'contact', component: ContactComponent},
     { path: 'detail/:id', component: DetailViewComponent},
     { path: 'update-event/:id', component: UpdateEventComponent},
-    { path: 'create-survey/:id', component: CreateSurveyComponent}
+    { path: 'create-survey/:id', component: CreateSurveyComponent},
+    { path: 'create-task/:id', component: CreateTaskComponent}
 ];
 
 @NgModule({
