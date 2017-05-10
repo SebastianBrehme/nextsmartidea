@@ -10,7 +10,7 @@ export class TaskService {
         private firebase: FirebaseService) { }
 
     createTask(task: Task, ekey: string) {
-
+        this.firebase.createNewTask(task,ekey);
     }
 
     convert(data: any): Task[] {
@@ -25,7 +25,7 @@ export class TaskService {
                 let subTask: SubTask = new SubTask(data[m]['SUBTASK'][n]['TITEL']);
                 subTask.setKey(n);
                 subTask.setDone(data[m]['SUBTASK'][n]['DONE']);
-                subTask.setWho([m]['SUBTASK'][n]['WHO']);
+                subTask.setWho(data[m]['SUBTASK'][n]['WHO']);
                 task.addSubTask(subTask);
             }
         }

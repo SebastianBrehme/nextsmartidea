@@ -5,6 +5,7 @@ import { Event } from '../event';
 import { Location } from '@angular/common';
 import { Task } from './task';
 import { SubTask } from './subTask';
+import { TaskService} from './task.service';
 
 
 @Component({
@@ -36,6 +37,7 @@ export class CreateTaskComponent implements OnInit{
     constructor(
         private activatetRoute: ActivatedRoute,
         private location: Location,
+        private taskservice: TaskService,
         private ref: ApplicationRef
     ){}
 
@@ -78,6 +80,7 @@ export class CreateTaskComponent implements OnInit{
             this.task = new Task(this.title);
             this.task.setSubTasks(this.subTaskList);
 
+            this.taskservice.createTask(this.task,this.eventKey);
 
             this.goBack();
         }

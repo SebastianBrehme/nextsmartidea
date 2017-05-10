@@ -8,6 +8,7 @@ export class Task {
 
     constructor(title: string){
         this.title = title;
+        this.subTasks = [];
     }
 
     getKey():string{

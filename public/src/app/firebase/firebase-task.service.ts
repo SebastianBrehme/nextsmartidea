@@ -5,7 +5,7 @@ import {SubTask} from '../event/task/subTask';
 declare var firebase:any;
 
 @Injectable()
-export class FirebaseSurveyService{
+export class FirebaseTaskService{
 
     createTask(task:Task, ekey:string){
         let newTaskKey = firebase.database().ref('/EVENT/'+ekey+'/TASK/').push().key;
@@ -15,7 +15,7 @@ export class FirebaseSurveyService{
         }
 
         let update={}; 
-        update['/EVENT/'+ekey+'/SURVEY/'+newTaskKey] = taskData;
+        update['/EVENT/'+ekey+'/TASK/'+newTaskKey] = taskData;
         firebase.database().ref().update(update).then(()=>{
             let updateAnswer = {};
             for(let sTasks of task.getSubTasks()){
