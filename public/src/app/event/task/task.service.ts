@@ -4,7 +4,7 @@ import { Task } from './task';
 import { SubTask } from './subTask';
 
 @Injectable()
-export class SurveyService {
+export class TaskService {
 
     constructor(
         private firebase: FirebaseService) { }
