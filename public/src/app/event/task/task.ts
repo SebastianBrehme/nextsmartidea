@@ -2,11 +2,20 @@ import { SubTask } from './subTask';
 
 export class Task {
 
+    key: string;
     title: string;
     subTasks: SubTask[];
 
     constructor(title: string){
         this.title = title;
+    }
+
+    getKey():string{
+        return this.key;
+    }
+
+    setKey(key:string){
+        this.key = key;
     }
 
     getTitle(): string{
@@ -15,6 +24,10 @@ export class Task {
 
     setSubTasks(sTasks: SubTask[]){
         this.subTasks = sTasks;
+    }
+
+    getSubTasks():SubTask[]{
+        return this.subTasks;
     }
 
     addSubTask(sTask: SubTask){

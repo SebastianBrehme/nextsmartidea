@@ -1,11 +1,20 @@
 export class SubTask {
 
+    key: string;
     title: string;
     who: string = "--";
     done: boolean = false;
 
     constructor(title: string){
         this.title = title;
+    }
+
+    getKey():string{
+        return this.key;
+    }
+
+    setKey(key:string){
+        this.key = key;
     }
 
     setWho(mail: string){
