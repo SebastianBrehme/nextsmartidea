@@ -28,11 +28,21 @@ export class FirebaseTaskService{
         }); 
     }
 
-    deleteSubTask(subtask:SubTask){
-
+    deleteSubTask(ekey:string, tkey:string,subtask:SubTask){
+        let update = {};
+        update['/EVENT/'+ekey+'/TASK/'+tkey+'/SUBTASK/'+subtask.getKey] = null;
+        firebase.database().update(update);
     }
 
-    checkDone(){
+    checkDone(ekey:string, tkey:string, stkey:string, done:boolean){
+        let update = {};
+        update['/EVENT/'+ekey+'/TASK/'+tkey+'/SUBTASK/'+stkey+'/DONE'] = done;
+        firebase.database().update(update);
+    }
 
+    setWho(ekey:string, tkey:string, stkey:string, who:string){
+        let update = {};
+        update['/EVENT/'+ekey+'/TASK/'+tkey+'/SUBTASK/'+stkey+'/WHO'] = who;
+        firebase.database().update(update);
     }
 }
