@@ -4,10 +4,12 @@ import { Member} from '../event/member';
 import { Survey} from '../event/survey/survey';
 import { Answer} from '../event/survey/answer';
 import { Message} from '../event/chat/message';
+import { Task} from '../event/task/task';
 import { FirebaseAuthService} from './firebase-auth.service';
 import { FirebaseEventService} from './firebase-event.service';
 import { FirebaseSurveyService} from './firebase-survey.service';
 import { FirebaseChatService} from './firebase-chat.service';
+import { FirebaseTaskService} from './firebase-task.service';
 
 declare var firebase: any;
 
@@ -18,7 +20,8 @@ export class FirebaseService{
         private fauth: FirebaseAuthService,
         private fevent: FirebaseEventService,
         private fsurvey: FirebaseSurveyService,
-        private fchat: FirebaseChatService
+        private fchat: FirebaseChatService,
+        private ftask: FirebaseTaskService
     ) {}
 
     signIn():any{
@@ -92,5 +95,9 @@ export class FirebaseService{
 
     createNewChatKey():string{
        return this.fchat.createNewChatKey();
+    }
+
+    createNewTask(task:Task,ekey:string){
+        this.ftask.createTask(task,ekey);
     }
 }
