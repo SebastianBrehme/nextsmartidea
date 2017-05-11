@@ -5,7 +5,8 @@ import { Member} from './member';
 import { FirebaseService } from '../firebase/firebase.service';
 import { UserService } from '../user.service';
 import { SurveyService } from './survey/survey.service';
-import { ChatService} from './chat/chat.service';
+import { ChatService } from './chat/chat.service';
+import { TaskService } from './task/task.service';
 import { ReplaySubject} from 'rxjs';
 
 
@@ -19,6 +20,7 @@ export class EventService{
         private firebase: FirebaseService,
         private survey: SurveyService,
         private chat: ChatService,
+        private task: TaskService,
         private user: UserService,
     ){
         this.eventlistcallback = [];
@@ -95,6 +97,9 @@ export class EventService{
             }
             if(data['SURVEY']){
                 e.setSurvey(this.survey.convert(data['SURVEY']));
+            }
+            if(data['TASK']){
+                e.setTask(this.task.convert(data['TASK']));
             }
             if(data['LOCATION']){
                 e.setLocation(data['LOCATION']);

@@ -14,4 +14,12 @@ describe('Member', () =>{
         expect(member.equals(member2)).toBeFalsy();
     });
 
+    it('#Getter', ()=>{
+        let mail: string = "abc@def.de";
+        let id: string = "wasd123";
+        let member: Member = new Member(mail, id);
+        expect(member.getEmail()).toBe(mail);
+        expect(member.getID()).toBe(id);
+    });
+
 });

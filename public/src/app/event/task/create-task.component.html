@@ -34,7 +34,7 @@
 
     <h3>Assign All Tasks To:</h3>
     <input [(ngModel)]="allMail" name="currentMailString" type="text" class="form-control" >
-    <div *ngIf="showWarningallMail"><small id="mailWarning" class="form-text text-danger">please enter a valid email</small></div>
+    <div *ngIf="showWarningEmail"><small id="mailWarning" class="form-text text-danger">please enter a valid email</small></div>
 
     <br>
     <button (click)="onSubmitClicked()" type="button" class="btn btn-primary">Submit</button>
