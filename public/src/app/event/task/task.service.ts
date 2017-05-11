@@ -40,6 +40,7 @@ export class TaskService {
                 subTask.setWho(data[m]['SUBTASK'][n]['WHO']);
                 task.addSubTask(subTask);
             }
+            allTasks.push(task);
         }
 
         return allTasks;

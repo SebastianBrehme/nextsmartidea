@@ -1,0 +1,32 @@
+<h3>Tasks</h3>
+<div>
+    <div *ngFor="let task of taskList; let i = index; ">
+        <div id="TaskContainer#{{i}}" class="taskContainer">
+            <div>
+                <h4>{{task.title}}</h4>
+            </div>
+            <div id="taskContent#{{i}}" class="taskContentDropdown">
+                <div class="input-group subtaskInput">
+                    <input class="form-control checkBox" type="checkbox" style="visibility: hidden">
+                    <input type="text" class="form-control textInput" >
+                    <input type="text" class="form-control textInput" >
+                    <span class="input-group-btn">
+           	  		    <button id="buttonPlus#{{index}}" class="btn btn-default" (click)="onAddSubTaskClicked(i)" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+					</span>
+                </div>    
+                <div *ngFor="let subtask of task.getSubTasks(); let in = index">
+                    <div class="input-group subtaskInput">
+                        <input *ngIf="subtask.getDone()" class="form-control checkBox" type="checkbox" checked>
+                        <input *ngIf="subtask.getDone()==false" class="form-control checkBox" type="checkbox">
+                        <input type="text" value="{{subtask.getTitle()}}" class="form-control textInput" readonly>
+                        <input type="text" value="{{subtask.getWho()}}" class="form-control textInput" >
+                        <span class="input-group-btn">
+           	  				<button id="buttonMinus#{{index}}" class="btn btn-default" (click)="onDeleteTaskClicked(i, in)" type="button"><span class="glyphicon glyphicon-minus"></span></button>
+					    </span>
+                    </div>                
+                </div>
+                <button class="btn btn-default saveButton" (click)="saveClicked(task, subtask)">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
