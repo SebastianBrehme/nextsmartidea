@@ -16,8 +16,8 @@
                 </div>    
                 <div *ngFor="let subtask of task.getSubTasks(); let in = index">
                     <div class="input-group subtaskInput">
-                        <input *ngIf="subtask.getDone()" class="form-control checkBox" type="checkbox" checked>
-                        <input *ngIf="subtask.getDone()==false" class="form-control checkBox" type="checkbox">
+                        <input *ngIf="subtask.getDone()" (ngModelChange)="checkBoxChanged(i, in, false)" class="form-control checkBox" type="checkbox" checked>
+                        <input *ngIf="subtask.getDone()==false" (ngModelChange)="checkBoxChanged(i, in, true)" class="form-control checkBox" type="checkbox">
                         <input type="text" value="{{subtask.getTitle()}}" class="form-control textInput" readonly>
                         <input type="text" value="{{subtask.getWho()}}" class="form-control textInput" >
                         <span class="input-group-btn">
@@ -25,7 +25,6 @@
 					    </span>
                     </div>                
                 </div>
-                <button class="btn btn-default saveButton" (click)="saveClicked(task, subtask)">Save</button>
             </div>
         </div>
     </div>

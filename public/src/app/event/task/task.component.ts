@@ -40,4 +40,20 @@ export class TaskComponent implements OnInit, OnChanges {
             this.taskList = this.event.getTask();
         });
     }
+
+    checkBoxChanged(i: number, subi: number, state: boolean){
+        console.log("check");
+        this.taskList[i].getSubTasks()[subi].setDone(state);
+    }
+
+    onAddSubTaskClicked(index: number){
+        //checks
+
+        this.taskList[index].addSubTask(null);
+    }
+
+    onDeleteTaskClicked(i: number, subindex: number){
+        this.taskList[i].removeSubTask(subindex);
+    }
+
 }
