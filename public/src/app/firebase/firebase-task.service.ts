@@ -28,9 +28,9 @@ export class FirebaseTaskService{
         }); 
     }
 
-    deleteSubTask(ekey:string, tkey:string,subtask:SubTask){
+    deleteSubTask(ekey:string, tkey:string,subtaskkey:string){
         let update = {};
-        update['/EVENT/'+ekey+'/TASK/'+tkey+'/SUBTASK/'+subtask.getKey] = null;
+        update['/EVENT/'+ekey+'/TASK/'+tkey+'/SUBTASK/'+subtaskkey] = null;
         firebase.database().update(update);
     }
 

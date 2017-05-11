@@ -97,7 +97,19 @@ export class FirebaseService{
        return this.fchat.createNewChatKey();
     }
 
-    createNewTask(task:Task,ekey:string){
+    createTask(task:Task,ekey:string){
         this.ftask.createTask(task,ekey);
+    }
+
+    deleteSubTask(ekey:string, tkey:string,skey:string){
+        this.ftask.deleteSubTask(ekey, tkey, skey);
+    }
+
+    checkDone(ekey:string, tkey:string, stkey:string, done:boolean){
+       this.ftask.checkDone(ekey, tkey, stkey, done);
+    }
+
+    setWho(ekey:string, tkey:string, stkey:string, who:string){
+        this.ftask.setWho(ekey, tkey, stkey, who);
     }
 }

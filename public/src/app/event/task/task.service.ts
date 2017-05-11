@@ -10,7 +10,19 @@ export class TaskService {
         private firebase: FirebaseService) { }
 
     createTask(task: Task, ekey: string) {
-        this.firebase.createNewTask(task,ekey);
+        this.firebase.createTask(task,ekey);
+    }
+
+    deleteSubTask(ekey:string, tkey:string,subtaskkey:string){
+        this.firebase.deleteSubTask(ekey, tkey, subtaskkey);
+    }
+
+    checkDone(ekey:string, tkey:string, stkey:string, done:boolean){
+       this.firebase.checkDone(ekey, tkey, stkey,done);
+    }
+
+    setWho(ekey:string, tkey:string, stkey:string, who:string){
+       this.firebase.setWho(ekey, tkey, stkey, who);
     }
 
     convert(data: any): Task[] {
