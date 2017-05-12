@@ -5,6 +5,7 @@ import { Survey} from '../event/survey/survey';
 import { Answer} from '../event/survey/answer';
 import { Message} from '../event/chat/message';
 import { Task} from '../event/task/task';
+import { SubTask} from '../event/task/subTask';
 import { FirebaseAuthService} from './firebase-auth.service';
 import { FirebaseEventService} from './firebase-event.service';
 import { FirebaseSurveyService} from './firebase-survey.service';
@@ -103,6 +104,10 @@ export class FirebaseService{
 
     deleteSubTask(ekey:string, tkey:string,skey:string){
         this.ftask.deleteSubTask(ekey, tkey, skey);
+    }
+
+    addSubTask(ekey:string, tkey:string, subtask:SubTask){
+        this.ftask.addSubTask(ekey, tkey, subtask);
     }
 
     checkDone(ekey:string, tkey:string, stkey:string, done:boolean){

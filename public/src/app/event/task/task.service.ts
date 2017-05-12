@@ -25,6 +25,10 @@ export class TaskService {
        this.firebase.setWho(ekey, tkey, stkey, who);
     }
 
+    addSubTask(ekey: string, tkey:string, subtask: SubTask){
+        this.firebase.addSubTask(ekey, tkey, subtask);
+    }
+
     convert(data: any): Task[] {
         let allTasks: Task[] = [];
 

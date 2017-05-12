@@ -31,18 +31,30 @@ export class FirebaseTaskService{
     deleteSubTask(ekey:string, tkey:string,subtaskkey:string){
         let update = {};
         update['/EVENT/'+ekey+'/TASK/'+tkey+'/SUBTASK/'+subtaskkey] = null;
-        firebase.database().update(update);
+        firebase.database().ref().update(update);
     }
 
     checkDone(ekey:string, tkey:string, stkey:string, done:boolean){
         let update = {};
         update['/EVENT/'+ekey+'/TASK/'+tkey+'/SUBTASK/'+stkey+'/DONE'] = done;
-        firebase.database().update(update);
+        firebase.database().ref().update(update);
     }
 
     setWho(ekey:string, tkey:string, stkey:string, who:string){
         let update = {};
         update['/EVENT/'+ekey+'/TASK/'+tkey+'/SUBTASK/'+stkey+'/WHO'] = who;
-        firebase.database().update(update);
+        firebase.database().ref().update(update);
+    }
+
+    addSubTask(ekey: string, tkey:string, subtask:SubTask){
+        let newTaskKey = firebase.database().ref('/EVENT/'+ekey+'/TASK/'+tkey+'/SUBTASK/').push().key;
+        let staskdata = {
+            TITEL: subtask.getTitle(),
+            WHO: subtask.getWho(),
+            DONE: subtask.getDone()
+        }
+        let update = {};
+        update['/EVENT/'+ekey+'/TASK/'+tkey+'/SUBTASK/'+newTaskKey]=staskdata;
+        firebase.database().ref().update(update);
     }
 }
