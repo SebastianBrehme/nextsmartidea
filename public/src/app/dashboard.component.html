@@ -19,7 +19,8 @@
 
       <div *ngFor="let eventMonthList of eventMonthLists;">
 
-        <div class="separator-box">{{eventMonthList.month}} {{eventMonthList.year}}</div>
+        <div class="separator-box hidden-xs">{{eventMonthList.month}} {{eventMonthList.year}}</div>
+        <div class="separator-box-center hidden-sm hidden-md hidden-lg">{{eventMonthList.month}} {{eventMonthList.year}}</div>
 
         <div *ngFor="let event of eventMonthList.eventList; let index = index; trackBy:customTrackBy;" [routerLink]="['/detail', event.key]" name="eventContainer">
           <div id="eventContainer#{{index}}" class="module container col-sm-3">

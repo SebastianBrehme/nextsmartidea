@@ -72,7 +72,6 @@ export class DashboardComponent implements OnDestroy{
             
             for(let eventL of this.eventMonthLists){
                 if(eventL.month === this.monthNumberToString(event.date_from.getMonth() + 1) && eventL.year === event.date_from.getFullYear()){
-                    console.log("Push", event);
                     eventL.eventList.push(event);
                     hit = true;
                 }else{
@@ -80,13 +79,11 @@ export class DashboardComponent implements OnDestroy{
                 }
             }
             if(!hit){
-                console.log("First Push", event);
                 localEventList = [];
                 localEventList.push(event);
                 this.eventMonthLists.push({eventList: localEventList, month: this.monthNumberToString(event.date_from.getMonth()+1), year: event.date_from.getFullYear()});
             }
         }
-        console.log(this.eventMonthLists);
         
     }
 
