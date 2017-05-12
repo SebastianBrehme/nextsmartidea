@@ -6,7 +6,7 @@ I want to edit an event
 Scenario: Edit Event failed
  Given I navigate to "https://smartevent-a3c4f.firebaseapp.com/login"
  And I wait for 4 sec
- When I click on element having id "eventContainer#0" 
+ When I click on element having id "eventContainer#0:0" 
  And I wait for 2 sec
  And I click on element having id "buttonEdit"
  And I wait for 2 sec
@@ -23,7 +23,7 @@ Scenario: Edit Event failed
 Scenario: Edit Event works fine
  Given I navigate to "https://smartevent-a3c4f.firebaseapp.com/login"
  And I wait for 4 sec
- When I click on element having id "eventContainer#0" 
+ When I click on element having id "eventContainer#0:0" 
  And I wait for 2 sec
  And I click on element having id "buttonEdit"
  And I wait for 2 sec
@@ -37,6 +37,6 @@ Scenario: Edit Event works fine
  And I click on element having class "btn-primary"
  And I wait for 2 sec
  And I click on link having text "Smart Event"
- Then element having id "eventContainer#0" should have partial text as "Edit Event Test"
+ Then element having id "eventContainer#0:0" should have partial text as "Edit Event Test"
  And link having partial text "Edit Event Test" should be present
  And I wait for 2 sec

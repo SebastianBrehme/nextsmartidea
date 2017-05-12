@@ -6,7 +6,7 @@ I want to invite someone to my Event
 Scenario: Add Member works fine
  Given I navigate to "https://smartevent-a3c4f.firebaseapp.com/login"
  And I wait for 4 sec 
- When I click on element having id "eventContainer#0" 
+ When I click on element having id "eventContainer#0:0" 
  And I wait for 2 sec
  And I click on element having id "buttonEdit"
  And I wait for 2 sec
