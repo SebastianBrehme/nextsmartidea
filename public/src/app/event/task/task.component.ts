@@ -5,6 +5,7 @@ import { Event } from '../event';
 import { UserService } from '../../user.service';
 import { TaskService } from './task.service';
 import { Task } from './task';
+import { SubTask} from './subTask';
 
 @Component({
     moduleId: module.id,
@@ -42,18 +43,58 @@ export class TaskComponent implements OnInit, OnChanges {
     }
 
     checkBoxChanged(i: number, subi: number, state: boolean){
-        console.log("check");
-        this.taskList[i].getSubTasks()[subi].setDone(state);
+        this.taskService.checkDone(this.eventKey, this.taskList[i].getKey(), this.taskList[i].getSubTasks()[subi].getKey(), state);
     }
 
     onAddSubTaskClicked(index: number){
-        //checks
+        let title: string = "";
+        let who: string = "";
+        title = (<HTMLInputElement>document.getElementById("subtaskWhat#" + index)).value;
+        who = (<HTMLInputElement>document.getElementById("subtaskWho#" + index)).value;
 
-        this.taskList[index].addSubTask(null);
+        if(this.checkTitle(title)){
+            let subt: SubTask = new SubTask(title);
+            if(who.length > 0){
+                if(this.checkWho(who)){
+                    subt.setWho(who);
+                }
+                else{
+                    //show error
+                }
+            }
+            else{ subt.setWho("--"); }
+            this.taskService.addSubTask(this.eventKey, this.taskList[index].getKey(), subt);
+        }
+        else{
+            //show error
+        }
+
+        
     }
 
     onDeleteTaskClicked(i: number, subindex: number){
-        this.taskList[i].removeSubTask(subindex);
+        this.taskService.deleteSubTask(this.eventKey, this.taskList[i].getKey(), this.taskList[i].getSubTasks()[subindex].getKey());
     }
 
+    checkTitle(title: string) : boolean {
+        if(title.length>0){
+            return true;
+        }
+        return false;
+    }
+
+    checkWho(who: string): boolean {
+        if(who.length > 0){
+            if(this.checkMailValidity(who)){
+                return true
+            }
+            return false;
+        }
+        return true;
+    }
+
+    checkMailValidity(email: string): boolean {
+        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    }
 }

@@ -8,16 +8,16 @@
             <div id="taskContent#{{i}}" class="taskContentDropdown">
                 <div class="input-group subtaskInput">
                     <input class="form-control checkBox" type="checkbox" style="visibility: hidden">
-                    <input type="text" class="form-control textInput" >
-                    <input type="text" class="form-control textInput" >
+                    <input type="text" class="form-control textInput" id="subtaskWhat#{{i}}">
+                    <input type="text" class="form-control textInput" id="subtaskWho#{{i}}">
                     <span class="input-group-btn">
            	  		    <button id="buttonPlus#{{index}}" class="btn btn-default" (click)="onAddSubTaskClicked(i)" type="button"><span class="glyphicon glyphicon-plus"></span></button>
 					</span>
                 </div>    
                 <div *ngFor="let subtask of task.getSubTasks(); let in = index">
                     <div class="input-group subtaskInput">
-                        <input *ngIf="subtask.getDone()" (ngModelChange)="checkBoxChanged(i, in, false)" class="form-control checkBox" type="checkbox" checked>
-                        <input *ngIf="subtask.getDone()==false" (ngModelChange)="checkBoxChanged(i, in, true)" class="form-control checkBox" type="checkbox">
+                        <input *ngIf="subtask.getDone()" (click)="checkBoxChanged(i, in, false)" class="form-control checkBox" type="checkbox" checked>
+                        <input *ngIf="subtask.getDone()==false" (click)="checkBoxChanged(i, in, true)" class="form-control checkBox" type="checkbox">
                         <input type="text" value="{{subtask.getTitle()}}" class="form-control textInput" readonly>
                         <input type="text" value="{{subtask.getWho()}}" class="form-control textInput" >
                         <span class="input-group-btn">
