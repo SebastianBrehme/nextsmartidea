@@ -66,6 +66,16 @@ export class SurveyComponent implements OnInit, OnChanges {
         });
     }
 
+    uncheckRadios(index: number, ansindex: number){
+        console.log("drin");
+        let length: number = this.surveyList[index].getAnswers().length;
+        for(let x: number = 0; x < length; x=x+1){
+            if(x != ansindex){
+                (<HTMLInputElement>document.getElementById("ea#" + index + "#" + x)).checked = false;
+            }
+        }
+    }
+
     voteClicked(survey: Survey, index: any){
         console.log(index);
         let member: Member = this.getMember();
