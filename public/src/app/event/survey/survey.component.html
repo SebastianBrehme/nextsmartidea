@@ -25,6 +25,7 @@
                 </div>
                 <div id="warningSelection#{{i}}" class="warning"><small class="form-text text-danger">You have to select something</small></div>
                 <button class="btn btn-default voteButton" (click)="voteClicked(survey, i)">Vote</button>
+                <button class="btn btn-default voteButton" (click)="removeVotes(survey, i)" title="Remove All My Votes For This Survey">Remove Votes</button>
                 <div id="warningVote#{{i}}" class="warning"><small class="form-text text-danger">You have already voted for this survey!</small></div>
                 <div>
                     <h5>Result</h5>

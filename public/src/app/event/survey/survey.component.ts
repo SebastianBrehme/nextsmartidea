@@ -76,8 +76,17 @@ export class SurveyComponent implements OnInit, OnChanges {
         }
     }
 
+    removeVotes(survey:Survey, index: number){
+        let member: Member = this.getMember();
+        let skey: string = survey.getKey();
+        for(let a of survey.getAnswers()){
+            if(a.hasVoted(member)){
+                this.surveyService.unvote(this.eventKey, skey, a, member);
+            }
+        }
+    }
+
     voteClicked(survey: Survey, index: any){
-        console.log(index);
         let member: Member = this.getMember();
         if(survey.multiple || !this.hasVoted(survey, member)){
             this.showWarningVote = false;
@@ -95,6 +104,9 @@ export class SurveyComponent implements OnInit, OnChanges {
                 if((<HTMLInputElement>document.getElementById(selectType + "#" + index + "#" + i)).checked){
                     selectedSomething = true;
                     this.surveyService.vote(this.eventKey, survey.key, item, member);
+                }
+                else{
+                    //this.surveyService.unvote(this.eventKey, survey.getKey(), item, member);
                 }
             });
 
