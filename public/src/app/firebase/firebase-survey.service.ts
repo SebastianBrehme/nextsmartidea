@@ -49,10 +49,14 @@ export class FirebaseSurveyService{
         firebase.database().ref().update(update);
     }
 
-    unvote(ekey:string,skey:string,answerkey:string, member:Member){
+    unvote(ekey:string,skey:string,answerkey:string, member:Member,set:boolean){
         //console.log("unvoted for "+ answerkey+" in poll "+skey+" by member");
         let update={};
-        update['/EVENT/'+ekey+'/SURVEY/'+skey+'/ANSWER/'+answerkey+'/'+member.getID()] = null;
+        if(set){
+             update['/EVENT/'+ekey+'/SURVEY/'+skey+'/ANSWER/'+answerkey] = true;
+        }else{
+            update['/EVENT/'+ekey+'/SURVEY/'+skey+'/ANSWER/'+answerkey+'/'+member.getID()] = null;
+        }
         firebase.database().ref().update(update);
     }
 

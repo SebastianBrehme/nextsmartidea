@@ -26,7 +26,8 @@ export class SurveyService{
     }
 
     unvote(ekey:string,skey:string,answer:Answer, member:Member){
-        this.firebase.unvote(ekey, skey, answer.getAnswer(), member);
+        let set = answer.getVotesCount()==1?true:false;
+        this.firebase.unvote(ekey, skey, answer.getAnswer(), member,set);
     }
 
     convert(data:any):Survey[]{

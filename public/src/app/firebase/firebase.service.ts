@@ -78,8 +78,8 @@ export class FirebaseService{
         this.fsurvey.vote(ekey,skey,answerkey,member);
     }
 
-    unvote(ekey:string,skey:string,answerkey:string, member:Member){
-        this.fsurvey.unvote(ekey,skey,answerkey,member);
+    unvote(ekey:string,skey:string,answerkey:string, member:Member,set:boolean){
+        this.fsurvey.unvote(ekey,skey,answerkey,member,set);
     }
 
     pushMessage(key:string, msg:Message):void{
