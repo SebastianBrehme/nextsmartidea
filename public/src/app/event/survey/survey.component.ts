@@ -67,7 +67,6 @@ export class SurveyComponent implements OnInit, OnChanges {
     }
 
     uncheckRadios(index: number, ansindex: number){
-        console.log("drin");
         let length: number = this.surveyList[index].getAnswers().length;
         for(let x: number = 0; x < length; x=x+1){
             if(x != ansindex){
@@ -84,6 +83,7 @@ export class SurveyComponent implements OnInit, OnChanges {
                 this.surveyService.unvote(this.eventKey, skey, a, member);
             }
         }
+        this.titleClicked(index);
     }
 
     voteClicked(survey: Survey, index: any){
@@ -114,6 +114,7 @@ export class SurveyComponent implements OnInit, OnChanges {
                 this.showWarningSelection = true;
                 this.warningSelection(true, index);
             }
+            this.titleClicked(index);
         }
         else{
             this.showWarningVote = true;
