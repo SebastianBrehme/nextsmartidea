@@ -13,7 +13,10 @@
                     <span class="input-group-btn">
            	  		    <button id="buttonPlus#{{index}}" class="btn btn-default" (click)="onAddSubTaskClicked(i)" type="button"><span class="glyphicon glyphicon-plus"></span></button>
 					</span>
-                </div>    
+                </div>
+                <div id="warningWhat#{{i}}" class="warning what-warning"><small class="form-text text-danger">You have to fill out the name of this task</small></div>
+                <div id="warningWho#{{i}}" class="warning who-warning"><small class="form-text text-danger">The email was wrong</small></div>
+                    
                 <div *ngFor="let subtask of task.getSubTasks(); let in = index">
                     <div class="input-group subtaskInput">
                         <input *ngIf="subtask.getDone()" (click)="checkBoxChanged(i, in, false)" class="form-control checkBox" type="checkbox" checked>

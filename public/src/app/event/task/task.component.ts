@@ -47,26 +47,39 @@ export class TaskComponent implements OnInit, OnChanges {
     }
 
     onAddSubTaskClicked(index: number){
+        this.warningWhat(false, index);
+        this.warningWho(false, index);
         let title: string = "";
         let who: string = "";
         title = (<HTMLInputElement>document.getElementById("subtaskWhat#" + index)).value;
         who = (<HTMLInputElement>document.getElementById("subtaskWho#" + index)).value;
+        console.log(title);
+        console.log(who);
 
         if(this.checkTitle(title)){
+            this.warningWhat(false, index);
             let subt: SubTask = new SubTask(title);
             if(who.length > 0){
                 if(this.checkWho(who)){
+                    this.warningWho(false, index);
                     subt.setWho(who);
+                    this.taskService.addSubTask(this.eventKey, this.taskList[index].getKey(), subt);
                 }
                 else{
                     //show error
+                    this.warningWho(true, index);
+                    //return null;
                 }
             }
-            else{ subt.setWho("--"); }
-            this.taskService.addSubTask(this.eventKey, this.taskList[index].getKey(), subt);
+            else{ 
+                subt.setWho("--"); 
+                this.taskService.addSubTask(this.eventKey, this.taskList[index].getKey(), subt);
+            }
+            
         }
         else{
             //show error
+            this.warningWhat(true, index);
         }
 
         
@@ -96,5 +109,27 @@ export class TaskComponent implements OnInit, OnChanges {
     checkMailValidity(email: string): boolean {
         var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
+    }
+
+    warningWhat(show: boolean, index: any){
+        if(show){
+            document.getElementById("warningWhat#" + index).classList.toggle("show");
+            document.getElementById("warningWhat#" + index).classList.remove("hide");
+        }
+        else{
+            document.getElementById("warningWhat#" + index).classList.toggle("hide");
+            document.getElementById("warningWhat#" + index).classList.remove("show");
+        }
+    }
+
+    warningWho(show: boolean, index: any){
+        if(show){
+            document.getElementById("warningWho#" + index).classList.toggle("show");
+            document.getElementById("warningWho#" + index).classList.remove("hide");
+        }
+        else{
+            document.getElementById("warningWho#" + index).classList.toggle("hide");
+            document.getElementById("warningWho#" + index).classList.remove("show");
+        }
     }
 }
