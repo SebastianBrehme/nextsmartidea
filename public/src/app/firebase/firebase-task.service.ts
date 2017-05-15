@@ -7,7 +7,7 @@ declare var firebase:any;
 @Injectable()
 export class FirebaseTaskService{
 
-    createTask(task:Task, ekey:string){
+    createTask(task:Task, ekey:string): void{
         let newTaskKey = firebase.database().ref('/EVENT/'+ekey+'/TASK/').push().key;
         
         let taskData = {
@@ -28,25 +28,25 @@ export class FirebaseTaskService{
         }); 
     }
 
-    deleteSubTask(ekey:string, tkey:string,subtaskkey:string){
+    deleteSubTask(ekey:string, tkey:string,subtaskkey:string): void{
         let update = {};
         update['/EVENT/'+ekey+'/TASK/'+tkey+'/SUBTASK/'+subtaskkey] = null;
         firebase.database().ref().update(update);
     }
 
-    checkDone(ekey:string, tkey:string, stkey:string, done:boolean){
+    checkDone(ekey:string, tkey:string, stkey:string, done:boolean): void{
         let update = {};
         update['/EVENT/'+ekey+'/TASK/'+tkey+'/SUBTASK/'+stkey+'/DONE'] = done;
         firebase.database().ref().update(update);
     }
 
-    setWho(ekey:string, tkey:string, stkey:string, who:string){
+    setWho(ekey:string, tkey:string, stkey:string, who:string): void{
         let update = {};
         update['/EVENT/'+ekey+'/TASK/'+tkey+'/SUBTASK/'+stkey+'/WHO'] = who;
         firebase.database().ref().update(update);
     }
 
-    addSubTask(ekey: string, tkey:string, subtask:SubTask){
+    addSubTask(ekey: string, tkey:string, subtask:SubTask): void{
         let newTaskKey = firebase.database().ref('/EVENT/'+ekey+'/TASK/'+tkey+'/SUBTASK/').push().key;
         let staskdata = {
             TITEL: subtask.getTitle(),

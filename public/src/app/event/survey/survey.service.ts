@@ -12,20 +12,20 @@ export class SurveyService{
         private firebase:FirebaseService,
         private user:UserService){}
 
-    createSurvey(sur:Survey, ekey:string){
+    createSurvey(sur:Survey, ekey:string):void{
         sur.setAuthor(this.user.getUser().email);
         this.firebase.createSurvey(sur,ekey);
     }
 
-    deleteSurvey(key:string, ekey:string){
+    deleteSurvey(key:string, ekey:string):void{
         this.firebase.deleteSurvey(key, ekey);
     }
 
-    vote(ekey:string,skey:string,answer:Answer, member:Member){
+    vote(ekey:string,skey:string,answer:Answer, member:Member):void{
         this.firebase.vote(ekey,skey,answer.getAnswer(), member);
     }
 
-    unvote(ekey:string,skey:string,answer:Answer, member:Member){
+    unvote(ekey:string,skey:string,answer:Answer, member:Member):void{
         let set = answer.getVotesCount()==1?true:false;
         this.firebase.unvote(ekey, skey, answer.getAnswer(), member,set);
     }
@@ -64,12 +64,4 @@ export class SurveyService{
         //console.log(ret);
         return ret;
     }
-
-    /*TODO
-        get surveys, save them 
-        unvote
-        single - multiselect
-
-        fix update: event mulipletimes visible
-    */
 }

@@ -9,23 +9,23 @@ export class TaskService {
     constructor(
         private firebase: FirebaseService) { }
 
-    createTask(task: Task, ekey: string) {
+    createTask(task: Task, ekey: string):void {
         this.firebase.createTask(task,ekey);
     }
 
-    deleteSubTask(ekey:string, tkey:string,subtaskkey:string){
+    deleteSubTask(ekey:string, tkey:string,subtaskkey:string):void{
         this.firebase.deleteSubTask(ekey, tkey, subtaskkey);
     }
 
-    checkDone(ekey:string, tkey:string, stkey:string, done:boolean){
+    checkDone(ekey:string, tkey:string, stkey:string, done:boolean):void{
        this.firebase.checkDone(ekey, tkey, stkey,done);
     }
 
-    setWho(ekey:string, tkey:string, stkey:string, who:string){
+    setWho(ekey:string, tkey:string, stkey:string, who:string):void{
        this.firebase.setWho(ekey, tkey, stkey, who);
     }
 
-    addSubTask(ekey: string, tkey:string, subtask: SubTask){
+    addSubTask(ekey: string, tkey:string, subtask: SubTask):void{
         this.firebase.addSubTask(ekey, tkey, subtask);
     }
 
