@@ -7,6 +7,7 @@ import { UserService } from '../user.service';
 import { SurveyService } from './survey/survey.service';
 import { ChatService } from './chat/chat.service';
 import { TaskService } from './task/task.service';
+import { SubTask } from './task/subTask';
 import { ReplaySubject} from 'rxjs';
 
 
@@ -163,6 +164,14 @@ export class EventService{
             newEvent.member.push(new Member(this.user.getUser().email, this.user.getUser().uid));
             this.firebase.updateEvent(newEvent,oldEvent);
         }
+    }
+
+    getTaskList(event:Event[]):SubTask[]{
+        let tasks:SubTask[] = [];
+        event.forEach(ev =>{
+           tasks = tasks.concat(this.task.getTaskList(this.user.getUser().email,ev.getTask()));
+        });
+        return tasks;
     }
 
 }

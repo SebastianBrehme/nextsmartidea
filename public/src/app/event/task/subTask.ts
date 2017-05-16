@@ -40,4 +40,10 @@ export class SubTask {
     getTitle(): string {
         return this.title;
     }
+
+    getUserSubTask(user:string, subtasks:SubTask[]):void{
+        if(user == this.who){
+           subtasks.push(this);
+        }
+    }
 }
