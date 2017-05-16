@@ -51,10 +51,10 @@ export class TaskService {
         return allTasks;
     }
 
-    getTaskList(user:string,task:Task[]):SubTask[]{
+    getTaskList(user:string,key:string,task:Task[]):SubTask[]{
         let subtasks:SubTask[] = [];
         task.forEach(temp =>{
-            subtasks = subtasks.concat(temp.getUserSubTasks(user));
+            subtasks = subtasks.concat(temp.getUserSubTasks(user,key));
         })
         return subtasks;
     }

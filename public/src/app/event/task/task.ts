@@ -39,10 +39,10 @@ export class Task {
         this.subTasks.splice(index, 1);
     }
 
-    getUserSubTasks(user:string):SubTask[]{
+    getUserSubTasks(user:string,key:string):SubTask[]{
         let tasks:SubTask[] = [];
         this.getSubTasks().forEach(sub =>{
-            sub.getUserSubTask(user,tasks);
+            sub.getUserSubTask(user,key,tasks);
         });
         return tasks;
     }

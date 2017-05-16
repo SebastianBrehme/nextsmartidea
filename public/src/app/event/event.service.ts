@@ -169,7 +169,7 @@ export class EventService{
     getTaskList(event:Event[]):SubTask[]{
         let tasks:SubTask[] = [];
         event.forEach(ev =>{
-           tasks = tasks.concat(this.task.getTaskList(this.user.getUser().email,ev.getTask()));
+           tasks = tasks.concat(this.task.getTaskList(this.user.getUser().email,ev.getKey(),v.getTask()));
         });
         return tasks;
     }

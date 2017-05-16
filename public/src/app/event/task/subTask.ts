@@ -4,6 +4,7 @@ export class SubTask {
     title: string;
     who: string = "--";
     done: boolean = false;
+    eventkey: string = "";
 
     constructor(title: string){
         this.title = title;
@@ -41,9 +42,14 @@ export class SubTask {
         return this.title;
     }
 
-    getUserSubTask(user:string, subtasks:SubTask[]):void{
+    getEventKey():string{
+        return this.eventkey;
+    }
+
+    getUserSubTask(user:string,key:string, subtasks:SubTask[]):void{
         if(user == this.who){
-           subtasks.push(this);
+            this.eventkey = key;
+            subtasks.push(this);
         }
     }
 }
