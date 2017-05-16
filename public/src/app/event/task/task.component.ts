@@ -53,8 +53,6 @@ export class TaskComponent implements OnInit, OnChanges {
         let who: string = "";
         title = (<HTMLInputElement>document.getElementById("subtaskWhat#" + index)).value;
         who = (<HTMLInputElement>document.getElementById("subtaskWho#" + index)).value;
-        console.log(title);
-        console.log(who);
 
         if(this.checkTitle(title)){
             this.warningWhat(false, index);
@@ -80,9 +78,25 @@ export class TaskComponent implements OnInit, OnChanges {
         else{
             //show error
             this.warningWhat(true, index);
-        }
+        }  
+    }
 
-        
+    onAddWhoClicked(i: number, subindex: number){
+        this.warningSubtaskWho(false, i, subindex);
+        let who: string = (<HTMLInputElement>document.getElementById("subTaskWho#" + i + "#" + subindex)).value;
+        if(who != "--"){
+            if(who.length>0){
+                if(this.checkWho(who)){
+                    this.taskService.setWho(this.eventKey, this.taskList[i].getKey(), this.taskList[i].getSubTasks()[subindex].getKey(), who);
+                }
+                else{
+                    this.warningSubtaskWho(true, i, subindex);
+                }
+            }
+            else{
+                this.taskService.setWho(this.eventKey, this.taskList[i].getKey(), this.taskList[i].getSubTasks()[subindex].getKey(), "--");
+            }
+        }
     }
 
     onDeleteTaskClicked(i: number, subindex: number){
@@ -130,6 +144,17 @@ export class TaskComponent implements OnInit, OnChanges {
         else{
             document.getElementById("warningWho#" + index).classList.toggle("hide");
             document.getElementById("warningWho#" + index).classList.remove("show");
+        }
+    }
+
+    warningSubtaskWho(show: boolean, i: number, sindex: number){
+        if(show){
+            document.getElementById("warningWho#" + i + "#" + sindex).classList.toggle("show");
+            document.getElementById("warningWho#" + i + "#" + sindex).classList.remove("hide");
+        }
+        else{
+            document.getElementById("warningWho#" + i + "#" + sindex).classList.toggle("hide");
+            document.getElementById("warningWho#" + i + "#" + sindex).classList.remove("show");
         }
     }
 }

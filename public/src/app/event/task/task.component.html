@@ -11,6 +11,7 @@
                     <input type="text" class="form-control textInput" id="subtaskWhat#{{i}}">
                     <input type="text" class="form-control textInput" id="subtaskWho#{{i}}">
                     <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" style="visibility: hidden"><span class="glyphicon glyphicon-unchecked"></span></button>
            	  		    <button id="buttonPlus#{{index}}" class="btn btn-default" (click)="onAddSubTaskClicked(i)" type="button"><span class="glyphicon glyphicon-plus"></span></button>
 					</span>
                 </div>
@@ -22,11 +23,13 @@
                         <input *ngIf="subtask.getDone()" (click)="checkBoxChanged(i, in, false)" class="form-control checkBox" type="checkbox" checked>
                         <input *ngIf="subtask.getDone()==false" (click)="checkBoxChanged(i, in, true)" class="form-control checkBox" type="checkbox">
                         <input type="text" value="{{subtask.getTitle()}}" class="form-control textInput" readonly>
-                        <input type="text" value="{{subtask.getWho()}}" class="form-control textInput" >
+                        <input type="text" id="subTaskWho#{{i}}#{{in}}" value="{{subtask.getWho()}}" class="form-control textInput" >
                         <span class="input-group-btn">
+                            <button id="buttonSave#{{index}}" class="btn btn-default" (click)="onAddWhoClicked(i, in)" type="button" title="Save changes for this Subtask"><span class="glyphicon glyphicon-floppy-saved"></span></button>
            	  				<button id="buttonMinus#{{index}}" class="btn btn-default" (click)="onDeleteTaskClicked(i, in)" type="button"><span class="glyphicon glyphicon-minus"></span></button>
 					    </span>
-                    </div>                
+                    </div> 
+                    <div id="warningWho#{{i}}#{{in}}" class="warning who-warning"><small class="form-text text-danger">The email was wrong</small></div>               
                 </div>
             </div>
         </div>
