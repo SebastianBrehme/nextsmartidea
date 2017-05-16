@@ -114,12 +114,13 @@ export class SurveyComponent implements OnInit, OnChanges {
                 this.showWarningSelection = true;
                 this.warningSelection(true, index);
             }
-            this.titleClicked(index);
         }
         else{
             this.showWarningVote = true;
             this.warningVote(true, index);
+            this.titleClicked(index);
         }
+        this.titleClicked(index);
     }
 
     hasVoted(survey: Survey, member: Member):boolean {
