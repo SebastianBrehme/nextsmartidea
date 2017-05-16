@@ -162,8 +162,9 @@ export class CreateEventComponent implements OnInit {
         dateLocal.setUTCDate(Number (date.charAt(8) + date.charAt(9)));
 
         if(time){
-            dateLocal.setUTCHours((Number (time.charAt(0) + time.charAt(1))) - 1);
-            dateLocal.setUTCMinutes(Number (time.charAt(3) + time.charAt(4)));
+            //dateLocal.setUTCHours((Number (time.charAt(0) + time.charAt(1))) - 1);
+            dateLocal.setHours((Number (time.charAt(0) + time.charAt(1))));
+            dateLocal.setMinutes(Number (time.charAt(3) + time.charAt(4)));
         }
         
 
