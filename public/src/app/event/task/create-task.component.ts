@@ -53,7 +53,7 @@ export class CreateTaskComponent implements OnInit{
         if(this.checkCurrentWhat() && this.checkCurrentWho()){
             let newSubTask = new SubTask(this.currentWhat);
             if(this.currentWho.length > 0){
-                //add mail
+                newSubTask.setWho(this.currentWho);
             }
             this.subTaskList.push(newSubTask);
             (<HTMLInputElement>document.getElementById("currentWhat")).value = "";

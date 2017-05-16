@@ -29,6 +29,7 @@ export class Event {
         this.chatkey = '';
         this.member=[];
         this.survey=[];
+        this.task=[];
         this.date_fromShortString = '';
     }
 

@@ -5,6 +5,7 @@ import { Survey} from '../event/survey/survey';
 import { Answer} from '../event/survey/answer';
 import { Message} from '../event/chat/message';
 import { Task} from '../event/task/task';
+import { SubTask} from '../event/task/subTask';
 import { FirebaseAuthService} from './firebase-auth.service';
 import { FirebaseEventService} from './firebase-event.service';
 import { FirebaseSurveyService} from './firebase-survey.service';
@@ -41,15 +42,15 @@ export class FirebaseService{
         this.fevent.getEventData(key, callback);
     }
 
-    deleteEvent(key:string,author:boolean,member:Member[]){
+    deleteEvent(key:string,author:boolean,member:Member[]): void{
         this.fevent.deleteEvent(key, author, member);
     }
 
-    doOffEvent(key:string){
+    doOffEvent(key:string): void{
         this.fevent.doOffEvent(key);
     }
 
-    doOffCallback(callback:any){
+    doOffCallback(callback:any): void{
         this.fevent.doOffCallback(callback);
     }      
 
@@ -65,31 +66,31 @@ export class FirebaseService{
         this.fevent.addMemberToEvent(ekey, eTitle, member);
     }
 
-    createSurvey(sur:Survey, ekey:string){
+    createSurvey(sur:Survey, ekey:string): void{
         this.fsurvey.createSurvey(sur,ekey);
     }
 
-    deleteSurvey(key:string, ekey:string){
+    deleteSurvey(key:string, ekey:string): void{
         this.fsurvey.deleteSurvey(key, ekey);
     }
 
-    vote(ekey:string,skey:string,answerkey:string, member:Member){
+    vote(ekey:string,skey:string,answerkey:string, member:Member): void{
         this.fsurvey.vote(ekey,skey,answerkey,member);
     }
 
-    unvote(ekey:string,skey:string,answerkey:string, member:Member){
-        this.fsurvey.unvote(ekey,skey,answerkey,member);
+    unvote(ekey:string,skey:string,answerkey:string, member:Member,set:boolean): void{
+        this.fsurvey.unvote(ekey,skey,answerkey,member,set);
     }
 
     pushMessage(key:string, msg:Message):void{
         this.fchat.pushMessage(key, msg);
     }
 
-    getMessages(key:string, limit:number, callback:any){
+    getMessages(key:string, limit:number, callback:any): void{
         this.fchat.getMessages(key, limit, callback);
     }
 
-    getMessagesOff(key:string){
+    getMessagesOff(key:string): void{
         this.fchat.getMessagesOff(key);
     }
 
@@ -97,19 +98,23 @@ export class FirebaseService{
        return this.fchat.createNewChatKey();
     }
 
-    createTask(task:Task,ekey:string){
+    createTask(task:Task,ekey:string): void{
         this.ftask.createTask(task,ekey);
     }
 
-    deleteSubTask(ekey:string, tkey:string,skey:string){
+    deleteSubTask(ekey:string, tkey:string,skey:string): void{
         this.ftask.deleteSubTask(ekey, tkey, skey);
     }
 
-    checkDone(ekey:string, tkey:string, stkey:string, done:boolean){
+    addSubTask(ekey:string, tkey:string, subtask:SubTask): void{
+        this.ftask.addSubTask(ekey, tkey, subtask);
+    }
+
+    checkDone(ekey:string, tkey:string, stkey:string, done:boolean): void{
        this.ftask.checkDone(ekey, tkey, stkey, done);
     }
 
-    setWho(ekey:string, tkey:string, stkey:string, who:string){
+    setWho(ekey:string, tkey:string, stkey:string, who:string): void{
         this.ftask.setWho(ekey, tkey, stkey, who);
     }
 }

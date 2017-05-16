@@ -66,8 +66,27 @@ export class SurveyComponent implements OnInit, OnChanges {
         });
     }
 
+    uncheckRadios(index: number, ansindex: number){
+        let length: number = this.surveyList[index].getAnswers().length;
+        for(let x: number = 0; x < length; x=x+1){
+            if(x != ansindex){
+                (<HTMLInputElement>document.getElementById("ea#" + index + "#" + x)).checked = false;
+            }
+        }
+    }
+
+    removeVotes(survey:Survey, index: number){
+        let member: Member = this.getMember();
+        let skey: string = survey.getKey();
+        for(let a of survey.getAnswers()){
+            if(a.hasVoted(member)){
+                this.surveyService.unvote(this.eventKey, skey, a, member);
+            }
+        }
+        this.titleClicked(index);
+    }
+
     voteClicked(survey: Survey, index: any){
-        console.log(index);
         let member: Member = this.getMember();
         if(survey.multiple || !this.hasVoted(survey, member)){
             this.showWarningVote = false;
@@ -86,6 +105,9 @@ export class SurveyComponent implements OnInit, OnChanges {
                     selectedSomething = true;
                     this.surveyService.vote(this.eventKey, survey.key, item, member);
                 }
+                else{
+                    //this.surveyService.unvote(this.eventKey, survey.getKey(), item, member);
+                }
             });
 
             if(!selectedSomething){
@@ -96,7 +118,9 @@ export class SurveyComponent implements OnInit, OnChanges {
         else{
             this.showWarningVote = true;
             this.warningVote(true, index);
+            this.titleClicked(index);
         }
+        this.titleClicked(index);
     }
 
     hasVoted(survey: Survey, member: Member):boolean {

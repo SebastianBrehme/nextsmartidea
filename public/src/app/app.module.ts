@@ -27,13 +27,14 @@ import { CreateSurveyComponent } from './event/survey/create-survey.component';
 import { ChatComponent } from './event/chat/chat.component'
 import { SurveyComponent } from './event/survey/survey.component';
 import { CreateTaskComponent } from './event/task/create-task.component';
+import { TaskComponent } from './event/task/task.component';
 
 @NgModule({
 
   imports: [BrowserModule, FormsModule, RoutingModule, SidebarModule.forRoot()],
   declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, CreateEventComponent, 
   ContactComponent, DetailViewComponent, SidebarContentComponent, UpdateEventComponent, CreateSurveyComponent,
-  ChatComponent, SurveyComponent, CreateTaskComponent],
+  ChatComponent, SurveyComponent, CreateTaskComponent,TaskComponent],
   providers: [FirebaseService, FirebaseAuthService,FirebaseEventService, FirebaseSurveyService,FirebaseChatService, FirebaseTaskService,UserService, EventService, SurveyService, ChatService,TaskService],
 
   bootstrap: [AppComponent]
