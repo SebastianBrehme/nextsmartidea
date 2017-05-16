@@ -20,6 +20,8 @@ export class SurveyComponent implements OnInit, OnChanges {
     @Input() eventKey: string;
     surveyList:Survey[]; 
 
+    first: boolean = true;
+
     showWarningVote: boolean = false;
     showWarningSelection: boolean = false;
 
@@ -45,12 +47,46 @@ export class SurveyComponent implements OnInit, OnChanges {
     updateEvent(){
         this.eventService.getEvent(this.eventKey, (e:Event) => {
             this.event = e;
-            this.surveyList = this.event.getSurvey();            
+            this.surveyList = this.event.getSurvey(); 
+            this.first = true;           
         });
     }
 
+    setState(){
+        let me: Member = this.getMember();
+        this.surveyList.forEach((item, i) => {
+            let selectType: string = "";
+            if(item.getMultiple()){ selectType="mul"; }
+            else { selectType="ea"; }
+            item.getAnswers().forEach((answ, ind) => {
+                if(answ.hasVoted(me)){
+                    (<HTMLInputElement>document.getElementById(selectType + "#" + i + "#" + ind)).setAttribute("checked", "checked");
+                }
+            });
+        });
+    }
+
+    uncheckRadios(index: number, ansindex: number){
+        let length: number = this.surveyList[index].getAnswers().length;
+        for(let x: number = 0; x < length; x=x+1){
+            if(x != ansindex){
+                (<HTMLInputElement>document.getElementById("ea#" + index + "#" + x)).checked = false;
+            }
+        }
+    }
+
+    removeVotes(survey:Survey, index: number){
+        let member: Member = this.getMember();
+        let skey: string = survey.getKey();
+        for(let a of survey.getAnswers()){
+            if(a.hasVoted(member)){
+                this.surveyService.unvote(this.eventKey, skey, a, member);
+            }
+        }
+        this.titleClicked(index);
+    }
+
     voteClicked(survey: Survey, index: any){
-        console.log(index);
         let member: Member = this.getMember();
         if(survey.multiple || !this.hasVoted(survey, member)){
             this.showWarningVote = false;
@@ -69,6 +105,9 @@ export class SurveyComponent implements OnInit, OnChanges {
                     selectedSomething = true;
                     this.surveyService.vote(this.eventKey, survey.key, item, member);
                 }
+                else{
+                    //this.surveyService.unvote(this.eventKey, survey.getKey(), item, member);
+                }
             });
 
             if(!selectedSomething){
@@ -79,7 +118,9 @@ export class SurveyComponent implements OnInit, OnChanges {
         else{
             this.showWarningVote = true;
             this.warningVote(true, index);
+            this.titleClicked(index);
         }
+        this.titleClicked(index);
     }
 
     hasVoted(survey: Survey, member: Member):boolean {
@@ -122,6 +163,7 @@ export class SurveyComponent implements OnInit, OnChanges {
     }
 
     titleClicked(index: any){
+        if(this.first){this.setState(); this.first = false;}
         document.getElementById("surveyContent#" + index).classList.toggle("show");
     } 
 }

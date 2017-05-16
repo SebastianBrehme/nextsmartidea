@@ -1,0 +1,30 @@
+.textInput {
+    width: 46%;
+}
+
+.checkBox {
+    width: 5%;
+    vertical-align: baseline;
+}
+
+.taskContainer {
+    padding-bottom: 3px;
+    border-bottom: 1px solid rgba(0,0,0,0.3);
+}
+
+.show { display: block; }
+
+.hide { display: none; }
+
+.warning {
+    display: none;
+    z-index: 1;
+}
+
+.who-warning {
+    margin-left: 50%;
+}
+
+.what-warning {
+    margin-left: 5%;
+}

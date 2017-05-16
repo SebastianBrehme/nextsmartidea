@@ -49,7 +49,7 @@ export class CreateSurveyComponent implements OnInit{
         this.activatetRoute.params.switchMap((params: Params) => this.eventKey = params['id']).subscribe();
     }
 
-    onAddAnswerClicked() {
+    onAddAnswerClicked():void {
         //".", "#", "$", "/", "[", or "]"
         if(this.currentAnswerString.indexOf(".")>=0 ||
             this.currentAnswerString.indexOf("#")>=0 ||
@@ -75,12 +75,12 @@ export class CreateSurveyComponent implements OnInit{
         } 
     }
 
-    onDeleteAnswerClicked(index: number) {
+    onDeleteAnswerClicked(index: number):void {
         this.answerlist.splice(index, 1);
         this.ref.tick();
     }
 
-    onSubmitClicked() {
+    onSubmitClicked():void {
         let checkTitle: boolean = this.checkTitle();
         let checkSelect: boolean = this.checkSelect();
         let checkQuestion: boolean = this.checkQuestion();
@@ -95,7 +95,7 @@ export class CreateSurveyComponent implements OnInit{
         }
     }
 
-    setSurvey(){
+    setSurvey():void{
         this.newSurvey = new Survey(this.title);
 
         if(this.easySelected){
@@ -114,6 +114,7 @@ export class CreateSurveyComponent implements OnInit{
         //});
         this.surveyservice.createSurvey(this.newSurvey,this.eventKey);
         //this.router.navigate([' ']);
+        this.goBack();
     }
 
     goBack(): void {

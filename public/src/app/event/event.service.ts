@@ -5,7 +5,8 @@ import { Member} from './member';
 import { FirebaseService } from '../firebase/firebase.service';
 import { UserService } from '../user.service';
 import { SurveyService } from './survey/survey.service';
-import { ChatService} from './chat/chat.service';
+import { ChatService } from './chat/chat.service';
+import { TaskService } from './task/task.service';
 import { ReplaySubject} from 'rxjs';
 
 
@@ -19,6 +20,7 @@ export class EventService{
         private firebase: FirebaseService,
         private survey: SurveyService,
         private chat: ChatService,
+        private task: TaskService,
         private user: UserService,
     ){
         this.eventlistcallback = [];
@@ -45,14 +47,17 @@ export class EventService{
     getEventList():void{
         this.firebase.getEventList(data => {
             let elist:Event[] = [];
+            let count:number = 0;
             for(let key in data){
                 //let temp:Event = new Event(data[key]);
                 //temp.setKey(key);
                 //this.getEvent(key,data => temp=data);
                 //elist.push(temp);
-
-                this.getEvent(key,data => {elist.push(data); this.eventlist.next(elist);});
-                
+                this.getEventWithIndex(key,(data,index) => {
+                    elist.splice(index,1,data);        
+                    this.eventlist.next(elist);
+                },count);
+                 count++;
             }
             //console.log("event list: print events")
             for(let k in elist){
@@ -68,13 +73,17 @@ export class EventService{
     }
 
     getEvent(key:string,callback:any):void{
+        this.getEventWithIndex(key,callback,0);
+    }
+
+    getEventWithIndex(key:string,callback:any,index:number):void{
         this.firebase.getEventData(key,data => {
             data = data.val();
             ////console.log(data);
             let e:Event = this.convertDataToEvent(data);
             e.setKey(key);
             ////console.log("TEst", e);
-            callback(e);
+            callback(e,index);
         });
     }
 
@@ -95,6 +104,9 @@ export class EventService{
             }
             if(data['SURVEY']){
                 e.setSurvey(this.survey.convert(data['SURVEY']));
+            }
+            if(data['TASK']){
+                e.setTask(this.task.convert(data['TASK']));
             }
             if(data['LOCATION']){
                 e.setLocation(data['LOCATION']);

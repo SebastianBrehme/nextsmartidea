@@ -13,7 +13,7 @@ export class FirebaseEventService{
         private user: UserService,
     ) {}
 
-    getEventList(callback:any){
+    getEventList(callback:any): void{
         //console.log('firebaseservice: getEventist');
         //console.log('UserID: '+this.user.getUser().uid);
         let database = firebase.database().ref('/USER/' + this.user.getUser().uid + '/EVENTLIST/');

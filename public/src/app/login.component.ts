@@ -16,7 +16,7 @@ export class LoginComponent implements OnInit{
     constructor(
         private firebase: FirebaseService,
         private router: Router,
-        private user: UserService,
+        public user: UserService,
         ){}
 
     ngOnInit() { 

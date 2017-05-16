@@ -1,0 +1,37 @@
+<h3>Tasks</h3>
+<div>
+    <div *ngFor="let task of taskList; let i = index; ">
+        <div id="TaskContainer#{{i}}" class="taskContainer">
+            <div>
+                <h4>{{task.title}}</h4>
+            </div>
+            <div id="taskContent#{{i}}" class="taskContentDropdown">
+                <div class="input-group subtaskInput">
+                    <input class="form-control checkBox" type="checkbox" style="visibility: hidden">
+                    <input type="text" class="form-control textInput" id="subtaskWhat#{{i}}" placeholder="Task?">
+                    <input type="text" class="form-control textInput" id="subtaskWho#{{i}}" placeholder="Assigned To?">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" style="visibility: hidden"><span class="glyphicon glyphicon-unchecked"></span></button>
+           	  		    <button id="buttonPlus#{{index}}" class="btn btn-default" (click)="onAddSubTaskClicked(i)" type="button"><span class="glyphicon glyphicon-plus"></span></button>
+					</span>
+                </div>
+                <div id="warningWhat#{{i}}" class="warning what-warning"><small class="form-text text-danger">You have to fill out the name of this task</small></div>
+                <div id="warningWho#{{i}}" class="warning who-warning"><small class="form-text text-danger">The email was wrong</small></div>
+                    
+                <div *ngFor="let subtask of task.getSubTasks(); let in = index">
+                    <div class="input-group subtaskInput">
+                        <input *ngIf="subtask.getDone()" (click)="checkBoxChanged(i, in, false)" class="form-control checkBox" type="checkbox" checked>
+                        <input *ngIf="subtask.getDone()==false" (click)="checkBoxChanged(i, in, true)" class="form-control checkBox" type="checkbox">
+                        <input type="text" value="{{subtask.getTitle()}}" class="form-control textInput" readonly>
+                        <input type="text" id="subTaskWho#{{i}}#{{in}}" value="{{subtask.getWho()}}" class="form-control textInput" >
+                        <span class="input-group-btn">
+                            <button id="buttonSave#{{index}}" class="btn btn-default" (click)="onAddWhoClicked(i, in)" type="button" title="Save changes for this Subtask"><span class="glyphicon glyphicon-floppy-saved"></span></button>
+           	  				<button id="buttonMinus#{{index}}" class="btn btn-default" (click)="onDeleteTaskClicked(i, in)" type="button"><span class="glyphicon glyphicon-minus"></span></button>
+					    </span>
+                    </div> 
+                    <div id="warningWho#{{i}}#{{in}}" class="warning who-warning"><small class="form-text text-danger">The email was wrong</small></div>               
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

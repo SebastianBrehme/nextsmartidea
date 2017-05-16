@@ -1,5 +1,6 @@
 import {Member} from './member';
 import {Survey} from './survey/survey';
+import {Task}   from './task/task';
 export class Event {
     key: string;
     author: string;
@@ -12,6 +13,7 @@ export class Event {
     location: string;
     member: Member[];
     survey: Survey[];
+    task: Task[];
     chatkey:string;
     date_fromShortString: string;
 
@@ -27,6 +29,7 @@ export class Event {
         this.chatkey = '';
         this.member=[];
         this.survey=[];
+        this.task=[];
         this.date_fromShortString = '';
     }
 
@@ -105,6 +108,14 @@ export class Event {
     }
     setChatKey(key:string):void{
         this.chatkey = key;
+    }
+
+    getTask():Task[]{
+        return this.task;
+    }
+
+    setTask(task:Task[]){
+        this.task = task;
     }
 
     getDateFromShortString():string{

@@ -12,12 +12,12 @@ export class FirebaseChatService{
         });
     }
 
-    getMessages(key:string, limit:number, callback:any){
+    getMessages(key:string, limit:number, callback:any): void{
         firebase.database().ref('/CHAT/'+key).on('value',callback);
         //.limitToLast(limit)
     }
 
-    getMessagesOff(key:string){
+    getMessagesOff(key:string): void{
         firebase.database().ref('/CHAT/'+key).off();
     }
 

@@ -1,0 +1,41 @@
+<h1>Create New Task</h1>
+
+<form>
+    <div>
+        <h3>Title</h3>
+        <input [(ngModel)]="title" name="currentTitleString" type="text" class="form-control" >
+        <div *ngIf="showWarningTitle"><small id="titleWarning" class="form-text text-danger">please enter a valid title</small></div>
+    </div>
+
+    <div>
+        <h3>Tasks</h3>
+        <div>
+            <input [(ngModel)]="currentWhat" id="currentWhat" name="currentWhatString" type="text" class="form-control inputText" placeholder="Task?">
+            <input [(ngModel)]="currentWho" id="currentWho" name="currentWhoString" type="email" class="form-control inputText" placeholder="Assigned To?">
+            <span class="input-group-btn">
+                <button id="buttonPlus" class="btn btn-default" (click)="onAddTaskClicked()" type="submit"><span class="glyphicon glyphicon-plus"></span></button>
+			</span>
+            <div *ngIf="showWarningWhat"><small id="titleWarning" class="form-text text-danger">please enter a valid name</small></div>
+            <div *ngIf="showWarningWho"><small id="titleWarning" class="form-text text-danger">please enter a valid email</small></div>
+        </div>
+        <br>
+        <div class="row" *ngFor="let stask of subTaskList; let index = index;">
+			<div class="col-lg-12">
+				<div class="input-group">
+					<input [(ngModel)]="stask.title" [ngModelOptions]="{standalone: true}" type="text" class="form-control inputText" value="stask.title" readonly>
+                    <input [(ngModel)]="stask.who" [ngModelOptions]="{standalone: true}" type="text" class="form-control inputText" value="stask.who" readonly>
+					<span class="input-group-btn">
+           	  				<button id="buttonMinus#{{index}}" class="btn btn-default" (click)="onDeleteTaskClicked(index)" type="button"><span class="glyphicon glyphicon-minus"></span></button>
+					</span>
+				</div>
+			</div>
+		</div>
+    </div>
+
+    <h3>Assign All Tasks To:</h3>
+    <input [(ngModel)]="allMail" name="currentMailString" type="text" class="form-control" >
+    <div *ngIf="showWarningEmail"><small id="mailWarning" class="form-text text-danger">please enter a valid email</small></div>
+
+    <br>
+    <button (click)="onSubmitClicked()" type="button" class="btn btn-primary">Submit</button>
+</form>
