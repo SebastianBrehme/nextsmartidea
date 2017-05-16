@@ -8,8 +8,8 @@
             <div id="taskContent#{{i}}" class="taskContentDropdown">
                 <div class="input-group subtaskInput">
                     <input class="form-control checkBox" type="checkbox" style="visibility: hidden">
-                    <input type="text" class="form-control textInput" id="subtaskWhat#{{i}}">
-                    <input type="text" class="form-control textInput" id="subtaskWho#{{i}}">
+                    <input type="text" class="form-control textInput" id="subtaskWhat#{{i}}" placeholder="Task?">
+                    <input type="text" class="form-control textInput" id="subtaskWho#{{i}}" placeholder="Assigned To?">
                     <span class="input-group-btn">
                         <button class="btn btn-default" type="button" style="visibility: hidden"><span class="glyphicon glyphicon-unchecked"></span></button>
            	  		    <button id="buttonPlus#{{index}}" class="btn btn-default" (click)="onAddSubTaskClicked(i)" type="button"><span class="glyphicon glyphicon-plus"></span></button>
