@@ -49,6 +49,7 @@ export class TaskComponent implements OnInit, OnChanges
     checkBoxChanged(i: number, subi: number, state: boolean)
     {
         this.taskService.checkDone(this.eventKey, this.taskList[i].getKey(), this.taskList[i].getSubTasks()[subi].getKey(), state);
+        this.keepContentOpen(i);
     }
 
     onAddSubTaskClicked(index: number)
@@ -86,7 +87,8 @@ export class TaskComponent implements OnInit, OnChanges
         else
         {
             this.warningWhat(true, index);
-        }  
+        } 
+        this.keepContentOpen(index); 
     }
 
     onAddWhoClicked(i: number, subindex: number)
@@ -111,11 +113,13 @@ export class TaskComponent implements OnInit, OnChanges
                 this.taskService.setWho(this.eventKey, this.taskList[i].getKey(), this.taskList[i].getSubTasks()[subindex].getKey(), "--");
             }
         }
+        this.keepContentOpen(i);
     }
 
     onDeleteTaskClicked(i: number, subindex: number)
     {
         this.taskService.deleteSubTask(this.eventKey, this.taskList[i].getKey(), this.taskList[i].getSubTasks()[subindex].getKey());
+        this.keepContentOpen(i);
     }
 
     checkTitle(title: string): boolean 
@@ -184,5 +188,18 @@ export class TaskComponent implements OnInit, OnChanges
             document.getElementById("warningWho#" + i + "#" + sindex).classList.toggle("hide");
             document.getElementById("warningWho#" + i + "#" + sindex).classList.remove("show");
         }
+    }
+
+    titleClicked(index: number) 
+    {
+        document.getElementById("taskContent#" + index).classList.toggle("show");   
+    }
+
+    keepContentOpen(index: number)
+    {
+        if(!document.getElementById("taskContent#" + index).classList.contains("show"))
+        {
+            this.titleClicked(index);
+        } 
     }
 }
