@@ -48,8 +48,7 @@ export class FirebaseEventService{
 
     doOffCallback(callback:any){
         firebase.database().ref('/USER/' + this.user.getUser().uid + '/EVENTLIST/').off('value',callback);
-    }   
-    
+    }
 
     createEvent(e: Event): void {
         //console.log('firebaseservice: createEvent');
@@ -62,21 +61,12 @@ export class FirebaseEventService{
             CHATKEY: e.chatkey,
             FROM: e.date_from,
             TO: e.date_to,
-        }
-        
-        //console.log('create key');
+        };
         let newEventKey = firebase.database().ref('/EVENT/').push().key;
-        //console.log(newEventKey);
-        
         let updates = {};
         updates['/EVENT/' + newEventKey] = eventData;
-        //updates['/USER/' + this.user.getUser().uid + '/EVENTLIST/' + newEventKey] = e.getTitle(); //läuft über add Member
-        //console.log(updates);
         firebase.database().ref().update(updates);
-
         this.addMemberToEvent(newEventKey, e.title, e.member);
-
-        //console.log('createEvent finished');
     }
 
 

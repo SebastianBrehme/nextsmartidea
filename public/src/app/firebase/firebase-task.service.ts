@@ -12,7 +12,7 @@ export class FirebaseTaskService{
         
         let taskData = {
             TITEL: task.getTitle()
-        }
+        };
 
         let update={}; 
         update['/EVENT/'+ekey+'/TASK/'+newTaskKey] = taskData;

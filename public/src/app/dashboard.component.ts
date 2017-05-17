@@ -25,24 +25,15 @@ export class DashboardComponent implements OnDestroy{
 
     ngOnInit(){
         this.eventList =[];
-        //this.event.getEventList(this.updateList);
         this.event.getEventList();
         this.listSubjectSubscribtion = this.event.getListAsReplaySubject().subscribe(list =>{
-            //console.log("new input here");
             this.zone.run(() => {
                 if(this && this.ref){
-                    ////console.log("dashboard component subscribe");
-                    ////console.log(list);
-                    //for(let k in list){
-                    //    //console.log(list[k]);
-                    //}
                     this.eventList = list;
                     this.makeEventDateShorter();
                     this.eventList.sort(this.compare);
                     this.createDateSeparator();
                     this.showEvents = true;
-                    //console.log("events loaded -dasboard", this.eventList);
-                //this.ref.tick();
                 }
             });            
         });

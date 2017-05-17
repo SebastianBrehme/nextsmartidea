@@ -28,43 +28,17 @@ export class EventService{
         this.eventlist = new ReplaySubject(1);
     }
 
-    //@Deprecated
-    /*getEventList(ecallback:any):void{
-        this.eventlistcallback.push(ecallback);
-        let fcallback = function(data:any){
-            let elist:Event[] = [];
-            for(let key in data){
-                let temp:Event = new Event(data[key]);
-                temp.setKey(key);
-                elist.push(temp);
-            }
-            //this.eventlist.next(elist);
-            ecallback(elist);
-        }
-        this.getNEventList();
-        this.firebase.getEventList(fcallback);
-    }*/
-
     getEventList():void{
         this.firebase.getEventList(data => {
             let elist:Event[] = [];
             let count:number = 0;
             for(let key in data){
-                //let temp:Event = new Event(data[key]);
-                //temp.setKey(key);
-                //this.getEvent(key,data => temp=data);
-                //elist.push(temp);
                 this.getEventWithIndex(key,(data,index) => {
                     elist.splice(index,1,data);        
                     this.eventlist.next(elist);
                 },count);
                  count++;
             }
-            //console.log("event list: print events")
-            for(let k in elist){
-                //console.log(elist[k]);
-            }
-            //console.log("getEventList: append new List");
             this.eventlist.next(elist);
         });
     }
@@ -169,7 +143,7 @@ export class EventService{
     getTaskList(event:Event[]):SubTask[]{
         let tasks:SubTask[] = [];
         event.forEach(ev =>{
-           tasks = tasks.concat(this.task.getTaskList(this.user.getUser().email,ev.getKey(),v.getTask()));
+           tasks = tasks.concat(this.task.getTaskList(this.user.getUser().email,ev.getKey(),ev.getTask()));
         });
         return tasks;
     }

@@ -33,7 +33,6 @@ export class FirebaseFacade{
         this.fauth.signOut();
     }
 
-   //TODO callback is a function, use interface(?)
     getEventList(callback:any): void {
         this.fevent.getEventList(callback);
     }

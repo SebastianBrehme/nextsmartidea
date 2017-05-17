@@ -31,7 +31,7 @@ export class ChatService{
                 msglist.unshift(new Message(data[msg]['MESSAGE'],data[msg]['AUTHOR']));
             }
             this.chatlist.next(msglist);
-        })
+        });
     }
 
     getListAsReplaySubject():ReplaySubject<Message[]>{
