@@ -1,5 +1,5 @@
 import {Component,OnInit,OnChanges} from '@angular/core';
-import {FirebaseService} from './firebase/firebase.service';
+import {FirebaseFacade} from './firebase/firebase.service';
 import {Router} from '@angular/router';
 import { UserService} from './user.service';
 
@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit{
 
 
     constructor(
-        private firebase: FirebaseService,
+        private firebase: FirebaseFacade,
         private router: Router,
         public user: UserService,
         ){}
@@ -29,11 +29,6 @@ export class LoginComponent implements OnInit{
 
     doLogin():void{
        this.firebase.signIn();
-       //if(true){
-           // this.router.navigate(['']);    
-       //}else{
-           //Fehler anzeigen
-       //}
     }
 
    }

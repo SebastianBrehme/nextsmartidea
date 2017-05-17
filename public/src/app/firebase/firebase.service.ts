@@ -15,7 +15,7 @@ import { FirebaseTaskService} from './firebase-task.service';
 declare var firebase: any;
 
 @Injectable()
-export class FirebaseService{
+export class FirebaseFacade{
 
     constructor(
         private fauth: FirebaseAuthService,
@@ -33,7 +33,6 @@ export class FirebaseService{
         this.fauth.signOut();
     }
 
-   //TODO callback is a function, use interface(?)
     getEventList(callback:any): void {
         this.fevent.getEventList(callback);
     }

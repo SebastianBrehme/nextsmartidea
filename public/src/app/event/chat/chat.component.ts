@@ -86,18 +86,7 @@ export class ChatComponent implements OnInit, OnDestroy{
     }
 
     onSendClicked(){
-        //console.log(this.userService.getUser().email);
         let email: string = this.userService.getUser().email;
-
-        /*Robin
-        this.messageList.unshift(new Message(this.currentMessageString, email));
-        let messageListTemp = this.messageList;
-       // messageListTemp.reverse();
-        this.messageListReverse = messageListTemp;
-        this.currentMessageString = "";
-        */
-
-        //modified by Fabian
         let msg:Message = new Message(this.currentMessageString, email);
         this.currentMessageString = "";
         this.chatService.pushMessage(this.chatKey, msg);

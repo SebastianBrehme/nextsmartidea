@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Message} from '../event/chat/message'
+import {Message} from '../event/chat/message';
 declare var firebase: any;
 
 @Injectable()
@@ -14,7 +14,6 @@ export class FirebaseChatService{
 
     getMessages(key:string, limit:number, callback:any): void{
         firebase.database().ref('/CHAT/'+key).on('value',callback);
-        //.limitToLast(limit)
     }
 
     getMessagesOff(key:string): void{
