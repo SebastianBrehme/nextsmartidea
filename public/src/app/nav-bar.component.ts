@@ -1,6 +1,6 @@
 import {Component,OnInit, ApplicationRef} from '@angular/core';
 import {Router} from '@angular/router';
-import {FirebaseService} from './firebase/firebase.service';
+import {FirebaseFacade} from './firebase/firebase.service';
 import { UserService } from './user.service';
 import { AppComponent } from './app.component';
 
@@ -16,7 +16,7 @@ export class NavBarComponent implements OnInit{
     loggedIn: boolean = false;
 
     constructor(
-        private firebase: FirebaseService,
+        private firebase: FirebaseFacade,
         private router: Router,
         private user: UserService,
         private appComp: AppComponent,

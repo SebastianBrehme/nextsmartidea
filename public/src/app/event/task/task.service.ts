@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FirebaseService } from '../../firebase/firebase.service';
+import { FirebaseFacade } from '../../firebase/firebase.service';
 import { Task } from './task';
 import { SubTask } from './subTask';
 import { Event } from '../event';
@@ -8,7 +8,7 @@ import { Event } from '../event';
 export class TaskService {
 
     constructor(
-        private firebase: FirebaseService) { }
+        private firebase: FirebaseFacade) { }
 
     createTask(task: Task, ekey: string):void {
         this.firebase.createTask(task,ekey);

@@ -2,7 +2,7 @@ import { Injectable} from '@angular/core';
 
 import { Event } from './event';
 import { Member} from './member';
-import { FirebaseService } from '../firebase/firebase.service';
+import { FirebaseFacade } from '../firebase/firebase.service';
 import { UserService } from '../user.service';
 import { SurveyService } from './survey/survey.service';
 import { ChatService } from './chat/chat.service';
@@ -18,7 +18,7 @@ export class EventService{
     eventlist:ReplaySubject<Event[]>;
 
     constructor(
-        private firebase: FirebaseService,
+        private firebase: FirebaseFacade,
         private survey: SurveyService,
         private chat: ChatService,
         private task: TaskService,

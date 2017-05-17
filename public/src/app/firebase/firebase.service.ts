@@ -15,7 +15,7 @@ import { FirebaseTaskService} from './firebase-task.service';
 declare var firebase: any;
 
 @Injectable()
-export class FirebaseService{
+export class FirebaseFacade{
 
     constructor(
         private fauth: FirebaseAuthService,

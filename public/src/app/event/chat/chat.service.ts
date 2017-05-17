@@ -1,5 +1,5 @@
 import {Injectable, Output, EventEmitter} from '@angular/core';
-import {FirebaseService} from '../../firebase/firebase.service';
+import {FirebaseFacade} from '../../firebase/firebase.service';
 import {Message} from './message';
 import {ReplaySubject} from 'rxjs';
 
@@ -10,7 +10,7 @@ export class ChatService{
     @Output() chatKeyChangedEvent: EventEmitter<string> = new EventEmitter();
 
     constructor(
-        private firebase: FirebaseService
+        private firebase: FirebaseFacade
     ){
         this.chatlist = new ReplaySubject(1);
     }
