@@ -41,7 +41,8 @@ export class CreateSurveyComponent implements OnInit{
         private location: Location,
         private ref: ApplicationRef,
         private surveyservice: SurveyService
-    ) {
+    ) 
+    {
        
     }
 
@@ -50,7 +51,7 @@ export class CreateSurveyComponent implements OnInit{
     }
 
     onAddAnswerClicked():void {
-        //".", "#", "$", "/", "[", or "]"
+        // ".", "#", "$", "/", "[", or "]"
         if(this.currentAnswerString.indexOf(".")>=0 ||
             this.currentAnswerString.indexOf("#")>=0 ||
             this.currentAnswerString.indexOf("$")>=0 ||

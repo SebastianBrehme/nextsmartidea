@@ -10,7 +10,8 @@ export class Survey {
     question: string;
     answers: Answer[];
 
-    constructor(title: string){
+    constructor(title: string)
+    {
         this.title = title;
 
         this.key = "";
@@ -20,49 +21,62 @@ export class Survey {
         this.answers = [];
     }
 
-    getKey():string{
-        return this.key
+    getKey():string
+    {
+        return this.key;
     }
-    setKey(key:string){
+    setKey(key:string)
+    {
         this.key = key;
     }
 
-    getAuthor():string{
-        return this.author
+    getAuthor():string
+    {
+        return this.author;
     }
-    setAuthor(author:string){
+    setAuthor(author:string)
+    {
         this.author = author;
     }
 
-    getTitle():string{
+    getTitle():string
+    {
         return this.title;
     }
-    setTitel(title:string){
+    setTitel(title:string)
+    {
         this.title = title;
     }
 
-    getMultiple(): boolean {
+    getMultiple(): boolean
+    {
         return this.multiple;
     }
-    setMultiple(multiple:boolean){
+    setMultiple(multiple:boolean)
+    {
         this.multiple = multiple;
     }
 
-    getQuestion():string{
+    getQuestion():string
+    {
         return this.question;
     }
-    setQuestion(question:string){
+    setQuestion(question:string)
+    {
         this.question = question;
     }
 
-    getAnswers(): Answer[]{
+    getAnswers(): Answer[]
+    {
         return this.answers;
     }
-    setAnswers(answers:Answer[]){
+    setAnswers(answers:Answer[])
+    {
         this.answers = answers;
     }
 
-    hasVoted(member:Member):Answer[]{
+    hasVoted(member:Member):Answer[]
+    {
         let ret:Answer[] = [];
         for(let tanswer of this.answers){
             if(tanswer.hasVoted(member)){
@@ -72,7 +86,8 @@ export class Survey {
         return ret;
     }
 
-    getAllVotesCount(): number{
+    getAllVotesCount(): number
+    {
         let sum: number = 0;
         for(let tans of this.answers){
             sum = sum + tans.getVotesCount();
