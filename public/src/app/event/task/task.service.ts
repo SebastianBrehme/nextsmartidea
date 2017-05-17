@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import { FirebaseService } from '../../firebase/firebase.service';
+import { FirebaseFacade } from '../../firebase/firebase.service';
 import { Task } from './task';
 import { SubTask } from './subTask';
+import { Event } from '../event';
 
 @Injectable()
 export class TaskService {
 
     constructor(
-        private firebase: FirebaseService) { }
+        private firebase: FirebaseFacade) { }
 
     createTask(task: Task, ekey: string):void {
         this.firebase.createTask(task,ekey);
@@ -48,5 +49,13 @@ export class TaskService {
         }
 
         return allTasks;
+    }
+
+    getTaskList(user:string,key:string,task:Task[]):SubTask[]{
+        let subtasks:SubTask[] = [];
+        task.forEach(temp =>{
+            subtasks = subtasks.concat(temp.getUserSubTasks(user,key));
+        })
+        return subtasks;
     }
 }

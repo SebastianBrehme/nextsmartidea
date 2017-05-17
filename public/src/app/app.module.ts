@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { RoutingModule } from './routing-module';
 import { DashboardComponent } from './dashboard.component';
 import { LoginComponent } from './login.component';
-import { FirebaseService } from './firebase/firebase.service';
+import { FirebaseFacade } from './firebase/firebase.service';
 import { FirebaseAuthService} from './firebase/firebase-auth.service';
 import { FirebaseEventService} from './firebase/firebase-event.service';
 import { FirebaseChatService} from './firebase/firebase-chat.service';
@@ -34,8 +34,8 @@ import { TaskComponent } from './event/task/task.component';
   imports: [BrowserModule, FormsModule, RoutingModule, SidebarModule.forRoot()],
   declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, CreateEventComponent, 
   ContactComponent, DetailViewComponent, SidebarContentComponent, UpdateEventComponent, CreateSurveyComponent,
-  ChatComponent, SurveyComponent, CreateTaskComponent,TaskComponent],
-  providers: [FirebaseService, FirebaseAuthService,FirebaseEventService, FirebaseSurveyService,FirebaseChatService, FirebaseTaskService,UserService, EventService, SurveyService, ChatService,TaskService],
+  ChatComponent, SurveyComponent, CreateTaskComponent, TaskComponent],
+  providers: [FirebaseFacade, FirebaseAuthService,FirebaseEventService, FirebaseSurveyService,FirebaseChatService, FirebaseTaskService,UserService, EventService, SurveyService, ChatService,TaskService],
 
   bootstrap: [AppComponent]
 })

@@ -1,5 +1,5 @@
 
-[![Build Status](https://travis-ci.org/SebastianBrehme/nextsmartidea.svg?branch=master)](https://travis-ci.org/SebastianBrehme/nextsmartidea) [![Coverage Status](https://coveralls.io/repos/github/SebastianBrehme/nextsmartidea/badge.svg?branch=master)](https://coveralls.io/github/SebastianBrehme/nextsmartidea?branch=master)
+[![Build Status](https://travis-ci.org/SebastianBrehme/nextsmartidea.svg?branch=master)](https://travis-ci.org/SebastianBrehme/nextsmartidea) [![Coverage Status](https://coveralls.io/repos/github/SebastianBrehme/nextsmartidea/badge.svg?branch=master)](https://coveralls.io/github/SebastianBrehme/nextsmartidea?branch=master) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/770fe9cdd0814f1cbdd9f56536dc7725)](https://www.codacy.com/app/nextsmartidea/nextsmartidea?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=SebastianBrehme/nextsmartidea&amp;utm_campaign=Badge_Grade)
 
 
 # SmartEvent Manager by NextSmartIdea

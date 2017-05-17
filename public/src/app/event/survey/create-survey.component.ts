@@ -41,7 +41,8 @@ export class CreateSurveyComponent implements OnInit{
         private location: Location,
         private ref: ApplicationRef,
         private surveyservice: SurveyService
-    ) {
+    ) 
+    {
        
     }
 
@@ -50,7 +51,7 @@ export class CreateSurveyComponent implements OnInit{
     }
 
     onAddAnswerClicked():void {
-        //".", "#", "$", "/", "[", or "]"
+        // ".", "#", "$", "/", "[", or "]"
         if(this.currentAnswerString.indexOf(".")>=0 ||
             this.currentAnswerString.indexOf("#")>=0 ||
             this.currentAnswerString.indexOf("$")>=0 ||
@@ -106,14 +107,7 @@ export class CreateSurveyComponent implements OnInit{
         }
         this.newSurvey.setQuestion(this.question);
         this.newSurvey.setAnswers(this.answerlist);
-
-        //send survey
-        //alert(this.newSurvey.multiple + " " + this.newSurvey.question + " " + this.newSurvey.title + " " + this.newSurvey.answers.length);
-        //this.newSurvey.answers.forEach(element => {
-        //    alert(element);
-        //});
         this.surveyservice.createSurvey(this.newSurvey,this.eventKey);
-        //this.router.navigate([' ']);
         this.goBack();
     }
 

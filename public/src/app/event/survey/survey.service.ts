@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FirebaseService } from '../../firebase/firebase.service';
+import { FirebaseFacade } from '../../firebase/firebase.service';
 import { Survey } from './survey';
 import { Answer } from './answer';
 import { Member } from '../member';
@@ -9,7 +9,7 @@ import { UserService } from '../../user.service';
 export class SurveyService{
     
     constructor(
-        private firebase:FirebaseService,
+        private firebase:FirebaseFacade,
         private user:UserService){}
 
     createSurvey(sur:Survey, ekey:string):void{

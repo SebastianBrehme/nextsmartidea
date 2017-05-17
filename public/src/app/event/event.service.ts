@@ -2,11 +2,12 @@ import { Injectable} from '@angular/core';
 
 import { Event } from './event';
 import { Member} from './member';
-import { FirebaseService } from '../firebase/firebase.service';
+import { FirebaseFacade } from '../firebase/firebase.service';
 import { UserService } from '../user.service';
 import { SurveyService } from './survey/survey.service';
 import { ChatService } from './chat/chat.service';
 import { TaskService } from './task/task.service';
+import { SubTask } from './task/subTask';
 import { ReplaySubject} from 'rxjs';
 
 
@@ -17,7 +18,7 @@ export class EventService{
     eventlist:ReplaySubject<Event[]>;
 
     constructor(
-        private firebase: FirebaseService,
+        private firebase: FirebaseFacade,
         private survey: SurveyService,
         private chat: ChatService,
         private task: TaskService,
@@ -27,43 +28,17 @@ export class EventService{
         this.eventlist = new ReplaySubject(1);
     }
 
-    //@Deprecated
-    /*getEventList(ecallback:any):void{
-        this.eventlistcallback.push(ecallback);
-        let fcallback = function(data:any){
-            let elist:Event[] = [];
-            for(let key in data){
-                let temp:Event = new Event(data[key]);
-                temp.setKey(key);
-                elist.push(temp);
-            }
-            //this.eventlist.next(elist);
-            ecallback(elist);
-        }
-        this.getNEventList();
-        this.firebase.getEventList(fcallback);
-    }*/
-
     getEventList():void{
         this.firebase.getEventList(data => {
             let elist:Event[] = [];
             let count:number = 0;
             for(let key in data){
-                //let temp:Event = new Event(data[key]);
-                //temp.setKey(key);
-                //this.getEvent(key,data => temp=data);
-                //elist.push(temp);
                 this.getEventWithIndex(key,(data,index) => {
                     elist.splice(index,1,data);        
                     this.eventlist.next(elist);
                 },count);
                  count++;
             }
-            //console.log("event list: print events")
-            for(let k in elist){
-                //console.log(elist[k]);
-            }
-            //console.log("getEventList: append new List");
             this.eventlist.next(elist);
         });
     }
@@ -163,6 +138,14 @@ export class EventService{
             newEvent.member.push(new Member(this.user.getUser().email, this.user.getUser().uid));
             this.firebase.updateEvent(newEvent,oldEvent);
         }
+    }
+
+    getTaskList(event:Event[]):SubTask[]{
+        let tasks:SubTask[] = [];
+        event.forEach(ev =>{
+           tasks = tasks.concat(this.task.getTaskList(this.user.getUser().email,ev.getKey(),ev.getTask()));
+        });
+        return tasks;
     }
 
 }
