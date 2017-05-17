@@ -13,6 +13,7 @@ import { Subscription} from 'rxjs';
 export class DashboardComponent implements OnDestroy{
 
     eventList:Event[];
+    eventMonthLists: EventMonthList[] = [];
     listSubjectSubscribtion:Subscription;
     showEvents: boolean = false;
 
@@ -38,6 +39,7 @@ export class DashboardComponent implements OnDestroy{
                     this.eventList = list;
                     this.makeEventDateShorter();
                     this.eventList.sort(this.compare);
+                    this.createDateSeparator();
                     this.showEvents = true;
                     //console.log("events loaded -dasboard", this.eventList);
                 //this.ref.tick();
@@ -62,6 +64,65 @@ export class DashboardComponent implements OnDestroy{
         
     }
 
+    createDateSeparator(){
+        let localEventList: Event[];
+        let hit: boolean = false;
+        this.eventMonthLists = [];
+        for(let event of this.eventList){
+            
+            for(let eventL of this.eventMonthLists){
+                if(eventL.month === this.monthNumberToString(event.date_from.getMonth() + 1) && eventL.year === event.date_from.getFullYear()){
+                    eventL.eventList.push(event);
+                    hit = true;
+                }else{
+                    hit = false;
+                }
+            }
+            if(!hit){
+                localEventList = [];
+                localEventList.push(event);
+                this.eventMonthLists.push({eventList: localEventList, month: this.monthNumberToString(event.date_from.getMonth()+1), year: event.date_from.getFullYear()});
+            }
+        }
+        
+    }
+
+
+    monthNumberToString(month:number){
+        let b:string;
+        switch(month){
+        case 1: b = "January";
+            break;
+        case 2: b = "February";
+            break;
+        case 3: b = "March";
+            break;
+        case 4: b = "April";
+            break;
+        case 5: b = "May";
+            break;
+        case 6: b = "June"; 
+            break;
+        case 7: b = "July";
+            break;
+        case 8: b = "August";
+            break;
+        case 9: b = "September";
+            break;
+        case 10: b = "October";
+            break;
+        case 11: b = "November";
+            break;
+        case 12: b = "December";
+            break;
+        }
+        return b;
+    }
+
+
+    daydiff(first:any, second:any) {
+        return Math.round((second-first)/(1000*60*60*24));
+    }
     
     customTrackBy(index: number, obj: any): any {
         return index;
@@ -94,8 +155,14 @@ export class DashboardComponent implements OnDestroy{
     makeEventDateShorter(){
         for(let event of this.eventList){
                 let dateComplete = event.date_from.toDateString();
-                //console.log("dateString", dateComplete);
-                dateComplete += " " + event.date_from.getHours() + ":" + event.date_from.getMinutes();
+
+                let hours:string = event.date_from.getHours().toString();
+                let minutes:string = event.date_from.getMinutes().toString();
+
+                if(hours.length < 2){ hours = "0" + hours;}
+                if(minutes.length < 2){ minutes = "0" + minutes;}
+
+                dateComplete += " " + hours + ":" + minutes;
                 event.date_fromShortString = dateComplete;
             }
     }
@@ -112,4 +179,10 @@ export class DashboardComponent implements OnDestroy{
         // a muss gleich b sein
         return 0;
     }
+}
+
+interface EventMonthList {
+    eventList: Event[];
+    month: any;
+    year: any;
 }

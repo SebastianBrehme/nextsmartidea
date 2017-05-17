@@ -23,6 +23,7 @@ export class CreateEventComponent implements OnInit {
 
     inputName: string = "";
     inputDescription: string;
+    inputLocation: string;
 
     inputDateFrom: string;
     inputDateTo: string;
@@ -34,6 +35,7 @@ export class CreateEventComponent implements OnInit {
     showWarningDateTo: boolean = false;
 
     showWarningName: boolean = false;
+    showWarningLocation: boolean = false;
     showWarningLastInvite: boolean = false;
     showWarningCheckboxAgreed: boolean = false;
 
@@ -79,15 +81,16 @@ export class CreateEventComponent implements OnInit {
 
         //add the last invite to invitesList
         this.onAddInviteClicked();
-
+    
         let checkSubmitName: boolean = this.checkName();
+        let checkSubmitLocation: boolean = this.checkLocation();
         let checkSubmitDescription: boolean = this.checkDescription();
         let checkSubmitDate: boolean = this.checkDate();
         let checkSubmitImage: boolean = this.checkImage();
         let checkSubmitInvites: boolean = this.checkInvites();
         let checkSubmitAgree: boolean = this.checkAgree();
 
-        let checkAll: boolean = checkSubmitName && checkSubmitDescription && checkSubmitDate && checkSubmitImage && checkSubmitInvites && checkSubmitAgree;
+        let checkAll: boolean = checkSubmitName && checkSubmitLocation && checkSubmitDescription && checkSubmitDate && checkSubmitImage && checkSubmitInvites && checkSubmitAgree;
 
         this.ref.tick();
         
@@ -103,6 +106,9 @@ export class CreateEventComponent implements OnInit {
         
         if(this.inputDescription){
             this.newEvent.setDescription(this.inputDescription);
+        }
+        if(this.inputLocation){
+            this.newEvent.setLocation(this.inputLocation);
         }
         if(this.dateFrom){
             this.newEvent.setDateFrom(this.dateFrom);
@@ -145,6 +151,11 @@ export class CreateEventComponent implements OnInit {
 
     }
 
+    checkLocation(): boolean {
+        this.showWarningLocation = false;
+        return true;
+    }
+
     checkDescription(): boolean {
         return true;
     }
@@ -162,8 +173,9 @@ export class CreateEventComponent implements OnInit {
         dateLocal.setUTCDate(Number (date.charAt(8) + date.charAt(9)));
 
         if(time){
-            dateLocal.setUTCHours((Number (time.charAt(0) + time.charAt(1))) - 1);
-            dateLocal.setUTCMinutes(Number (time.charAt(3) + time.charAt(4)));
+            //dateLocal.setUTCHours((Number (time.charAt(0) + time.charAt(1))) - 1);
+            dateLocal.setHours((Number (time.charAt(0) + time.charAt(1))));
+            dateLocal.setMinutes(Number (time.charAt(3) + time.charAt(4)));
         }
         
 
@@ -224,7 +236,8 @@ export class CreateEventComponent implements OnInit {
                 this.showWarningDateTo = true;
             }
         }else{
-            //date is optional
+            this.dateTo = new Date(this.dateFrom.getTime());
+            this.dateTo.setHours(this.dateTo.getHours() + 1);
             dateToChecked = true;
         }
 

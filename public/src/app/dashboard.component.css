@@ -19,3 +19,35 @@
       top: 5px;
       right: 5px;
 }
+
+.separator-box {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  margin: 5px;
+  padding: 5px;
+  overflow: hidden;
+  border: none;
+  font: normal 25px/1;
+  color: rgba(119,118,118,1);
+  text-align: left;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  clear: both;
+}
+
+.separator-box-center {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  margin: 5px;
+  padding: 5px;
+  overflow: hidden;
+  border: none;
+  font: normal 25px/1;
+  color: rgba(119,118,118,1);
+  text-align: center;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  clear: both;
+}
