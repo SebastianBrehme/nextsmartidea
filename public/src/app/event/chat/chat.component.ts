@@ -41,6 +41,7 @@ export class ChatComponent implements OnInit, OnDestroy{
 
     ngOnInit(): void {
         this.chatKeyChangedSubsciption = this.chatService.chatKeyChangedEvent.subscribe((key:string) => {
+            this.unsubscribeSubscriptions();
             this.chatKey = key;
             this.initializeChat();
         })
@@ -50,17 +51,18 @@ export class ChatComponent implements OnInit, OnDestroy{
         if(this.chatKeyChangedSubsciption && !this.chatKeyChangedSubsciption.closed){
             this.chatKeyChangedSubsciption.unsubscribe();
         }
-        if(this.getListAsReplaySubjectSubsciption && this.getListAsReplaySubjectSubsciption.closed){
-            this.getListAsReplaySubjectSubsciption.unsubscribe();            
-        }
-        
+
+        this.unsubscribeSubscriptions();
     }
 
-    chatKeyChanged(event){
-        this.chatKey = event;
-        console.log("chatKey changed");
-        this.initializeChat();
+    unsubscribeSubscriptions(){
+        
+        if(this.getListAsReplaySubjectSubsciption && !this.getListAsReplaySubjectSubsciption.closed){
+            this.getListAsReplaySubjectSubsciption.unsubscribe();            
+        }
     }
+
+    
 
     initializeChat(){
         if(this.chatKey){
@@ -70,7 +72,6 @@ export class ChatComponent implements OnInit, OnDestroy{
                 this.zone.run(() => {
                     if(this && this.ref){
                         this.messageListReverse = msg;
-                        console.log(this.messageListReverse);
                     }
                     });
                 });
