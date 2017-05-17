@@ -323,7 +323,10 @@ export class UpdateEventComponent implements OnInit {
                 this.showWarningDateTo = true;
             }
         }else{
-            this.dateTo = new Date(this.dateFrom.getTime());
+            if(this.inputDateFrom){
+                this.dateTo = new Date(this.dateFrom.getTime());
+                this.dateTo.setHours(this.dateTo.getHours() + 1);
+            }
             this.dateTo.setHours(this.dateTo.getHours() + 1);
             dateToChecked = true;
         }

@@ -236,8 +236,11 @@ export class CreateEventComponent implements OnInit {
                 this.showWarningDateTo = true;
             }
         }else{
-            this.dateTo = new Date(this.dateFrom.getTime());
-            this.dateTo.setHours(this.dateTo.getHours() + 1);
+            if(this.inputDateFrom){
+                this.dateTo = new Date(this.dateFrom.getTime());
+                this.dateTo.setHours(this.dateTo.getHours() + 1);
+            }
+            
             dateToChecked = true;
         }
 
