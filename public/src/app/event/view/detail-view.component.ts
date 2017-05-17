@@ -21,6 +21,7 @@ export class DetailViewComponent implements OnInit{
     key:string;
     eventTitle:string;
     eventDescription:string;
+    eventLocation:string;
 
     routerEventsSubscription: Subscription;
 

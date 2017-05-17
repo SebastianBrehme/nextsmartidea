@@ -7,6 +7,11 @@
 		<div *ngIf="showWarningName"><small id="eventNameWarning" class="form-text text-danger">please enter a valid event name</small></div>
 	</div>
 	<div class="form-group">
+		<label for="evenLocation">Location</label>
+		<input [(ngModel)]="inputLocation" name="inputLocation" type="text" class="form-control" id="eventLocation" placeholder="My Location">
+		<div *ngIf="showWarningLocation"><small id="eventLocationWarning" class="form-text text-danger">please enter a valid Location</small></div>
+	</div>
+	<div class="form-group">
 		<label for="eventDescription">Description</label>
 		<textarea [(ngModel)]="inputDescription" class="form-control" rows="3" id="eventDescription" name="eventDescription" placeholder="..."></textarea>
 	</div>
