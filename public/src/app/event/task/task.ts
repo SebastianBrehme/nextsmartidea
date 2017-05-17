@@ -38,4 +38,12 @@ export class Task {
     removeSubTask(index: number){
         this.subTasks.splice(index, 1);
     }
+
+    getUserSubTasks(user:string,key:string):SubTask[]{
+        let tasks:SubTask[] = [];
+        this.getSubTasks().forEach(sub =>{
+            sub.getUserSubTask(user,key,tasks);
+        });
+        return tasks;
+    }
 }

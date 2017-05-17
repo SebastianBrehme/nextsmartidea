@@ -107,7 +107,6 @@ export class CreateSurveyComponent implements OnInit{
         }
         this.newSurvey.setQuestion(this.question);
         this.newSurvey.setAnswers(this.answerlist);
-        
         this.surveyservice.createSurvey(this.newSurvey,this.eventKey);
         this.goBack();
     }

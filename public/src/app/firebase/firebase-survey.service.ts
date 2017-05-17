@@ -17,7 +17,7 @@ export class FirebaseSurveyService{
             TITEL: sur.getTitle(),
             QUESTION: sur.getQuestion(),
             MULTIPLE: sur.getMultiple()
-        }
+        };
 
         let update={}; 
         update['/EVENT/'+ekey+'/SURVEY/'+newSurKey] = surData;
@@ -36,11 +36,6 @@ export class FirebaseSurveyService{
         update['/EVENT/'+ekey+'/SURVEY/'+key] = null;
         firebase.database().update(update);
     }
-
-   // updateSurvey(sur:Survey){
-        //console.log("update survey in database "+sur);
-        //console.log("update not implemented...");
-    //}
 
     vote(ekey:string,skey:string,answerkey:string, member:Member): void{
         //console.log("voted for "+ answerkey+" in poll "+skey+" by member");
