@@ -17,7 +17,7 @@ import { TaskService} from './task.service';
 
 export class CreateTaskComponent implements OnInit
 {
-    title: string = "";;
+    title: string = "";
     task: Task;
     subTaskList: Array<SubTask> = [];
     currentWhat: string = "";

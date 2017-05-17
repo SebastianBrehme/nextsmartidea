@@ -34,7 +34,7 @@ import { TaskComponent } from './event/task/task.component';
   imports: [BrowserModule, FormsModule, RoutingModule, SidebarModule.forRoot()],
   declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, CreateEventComponent, 
   ContactComponent, DetailViewComponent, SidebarContentComponent, UpdateEventComponent, CreateSurveyComponent,
-  ChatComponent, SurveyComponent, CreateTaskComponent,TaskComponent],
+  ChatComponent, SurveyComponent, CreateTaskComponent, TaskComponent],
   providers: [FirebaseService, FirebaseAuthService,FirebaseEventService, FirebaseSurveyService,FirebaseChatService, FirebaseTaskService,UserService, EventService, SurveyService, ChatService,TaskService],
 
   bootstrap: [AppComponent]

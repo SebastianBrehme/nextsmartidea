@@ -82,7 +82,6 @@ describe('Event', () =>{
     });
 
     it('#Survey', ()=>{
-        //expect(event.getSurvey()).toBe([]);
         let survey:Survey[] = [];
         event.setSurvey(survey);
         expect(event.getSurvey()).toBe(survey);
