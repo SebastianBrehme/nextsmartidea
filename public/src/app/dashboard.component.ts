@@ -155,8 +155,14 @@ export class DashboardComponent implements OnDestroy{
     makeEventDateShorter(){
         for(let event of this.eventList){
                 let dateComplete = event.date_from.toDateString();
-                //console.log("dateString", dateComplete);
-                dateComplete += " " + event.date_from.getHours() + ":" + event.date_from.getMinutes();
+
+                let hours:string = event.date_from.getHours().toString();
+                let minutes:string = event.date_from.getMinutes().toString();
+
+                if(hours.length < 2){ hours = "0" + hours;}
+                if(minutes.length < 2){ minutes = "0" + minutes;}
+
+                dateComplete += " " + hours + ":" + minutes;
                 event.date_fromShortString = dateComplete;
             }
     }
