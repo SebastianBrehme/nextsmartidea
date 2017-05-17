@@ -27,6 +27,7 @@ export class UpdateEventComponent implements OnInit {
 
     inputName: string = "";
     inputDescription: string;
+    inputLocation: string;
 
     inputDateFrom: string;
     inputDateTo: string;
@@ -38,6 +39,7 @@ export class UpdateEventComponent implements OnInit {
     showWarningDateTo: boolean = false;
 
     showWarningName: boolean = false;
+    showWarningLocation: boolean = false;
     showWarningLastInvite: boolean = false;
     showWarningCheckboxAgreed: boolean = false;
 
@@ -166,13 +168,13 @@ export class UpdateEventComponent implements OnInit {
         this.onAddInviteClicked();
 
         let checkSubmitName: boolean = this.checkName();
+        let checkSubmitLocation: boolean = this.checkLocation();
         let checkSubmitDescription: boolean = this.checkDescription();
         let checkSubmitDate: boolean = this.checkDate();
         let checkSubmitImage: boolean = this.checkImage();
         let checkSubmitInvites: boolean = this.checkInvites();
-       
 
-        let checkAll: boolean = checkSubmitName && checkSubmitDescription && checkSubmitDate && checkSubmitImage && checkSubmitInvites;
+        let checkAll: boolean = checkSubmitName && checkSubmitLocation && checkSubmitDescription && checkSubmitDate && checkSubmitImage && checkSubmitInvites;
 
         this.ref.tick();
 
@@ -188,6 +190,9 @@ export class UpdateEventComponent implements OnInit {
         
         if(this.inputDescription){
             this.newEvent.setDescription(this.inputDescription);
+        }
+        if(this.inputLocation){
+            this.newEvent.setLocation(this.inputLocation);
         }
         if(this.dateFrom){
             this.newEvent.setDateFrom(this.dateFrom);
@@ -231,6 +236,11 @@ export class UpdateEventComponent implements OnInit {
             return false;
         }
 
+    }
+
+    checkLocation(): boolean {
+        this.showWarningLocation = false;
+        return true;
     }
 
     checkDescription(): boolean {
