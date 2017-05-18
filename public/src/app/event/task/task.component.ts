@@ -20,7 +20,7 @@ export class TaskComponent implements OnInit, OnChanges
     @Input() eventKey: string;
     event: Event;
     taskList: Task[];
-
+    noTask: boolean = true;
 
     constructor(
         private eventService: EventService,
@@ -43,6 +43,8 @@ export class TaskComponent implements OnInit, OnChanges
         {
             this.event = e;
             this.taskList = this.event.getTask();
+            if(this.taskList.length>0) { this.noTask = false; }
+            else { this.noTask = true; }
         });
     }
 

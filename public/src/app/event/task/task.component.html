@@ -34,4 +34,5 @@
             </div>
         </div>
     </div>
+    <div *ngIf="noTask" >0 Tasks found for this Event. Click <a [routerLink]="['/create-task', eventKey]" >here</a> to create a new Task.</div>
 </div>
