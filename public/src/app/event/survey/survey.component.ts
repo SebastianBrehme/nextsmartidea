@@ -101,7 +101,7 @@ export class SurveyComponent implements OnInit, OnChanges {
     uncheckRadios(index: number, ansindex: number) {
         let length: number = this.surveyList[index].getAnswers().length;
         for (let x: number = 0; x < length; x = x + 1) {
-            if (x != ansindex) {
+            if (x !== ansindex) {
                 (<HTMLInputElement>document.getElementById("ea#" + index + "#" + x)).checked = false;
             }
         }
@@ -138,7 +138,7 @@ export class SurveyComponent implements OnInit, OnChanges {
                     this.surveyService.vote(this.eventKey, survey.key, item, member);
                 }
                 else {
-                    //this.surveyService.unvote(this.eventKey, survey.getKey(), item, member);
+                    // this.surveyService.unvote(this.eventKey, survey.getKey(), item, member);
                 }
             });
 
