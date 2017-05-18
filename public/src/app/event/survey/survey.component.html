@@ -63,4 +63,5 @@
             </div>
         </div>
     </div>
+    <div *ngIf="noSurvey">0 Surveys found for this Event. Click <a [routerLink]="['/create-survey', eventKey]">here</a> to create a new Survey.</div>
 </div>

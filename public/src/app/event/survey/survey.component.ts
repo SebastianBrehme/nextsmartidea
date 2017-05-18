@@ -19,6 +19,7 @@ export class SurveyComponent implements OnInit, OnChanges {
     event: Event;
     @Input() eventKey: string;
     surveyList: Survey[];
+    noSurvey: boolean = true;
 
     first: boolean = true;
 
@@ -65,6 +66,8 @@ export class SurveyComponent implements OnInit, OnChanges {
         this.eventService.getEvent(this.eventKey, (e: Event) => {
             this.event = e;
             this.surveyList = this.event.getSurvey();
+            if(this.surveyList.length>0) { this.noSurvey = false; }
+            else { this.noSurvey = true; }
             this.first = true;
             this.setBarChart();
         });
