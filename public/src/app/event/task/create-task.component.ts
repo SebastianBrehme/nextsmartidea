@@ -15,8 +15,7 @@ import { TaskService} from './task.service';
     styleUrls: [ 'create-task.component.css' ]
 })
 
-export class CreateTaskComponent implements OnInit
-{
+export class CreateTaskComponent implements OnInit {
     title: string = "";
     task: Task;
     subTaskList: Array<SubTask> = [];
@@ -34,8 +33,7 @@ export class CreateTaskComponent implements OnInit
         private location: Location,
         private taskservice: TaskService,
         private ref: ApplicationRef
-    )
-    {}
+    ) {}
 
     ngOnInit()
     {
