@@ -28,3 +28,12 @@
 .what-warning {
     margin-left: 5%;
 }
+
+.taskContentDropdown {
+    display: none;
+    z-index: 1;
+}
+
+.taskHeading {
+    cursor: pointer;
+}

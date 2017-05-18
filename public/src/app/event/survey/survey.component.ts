@@ -69,21 +69,20 @@ export class SurveyComponent implements OnInit, OnChanges {
             this.setBarChart();
         });
     }
-
     
-        setBarChart(){
-            this.surveyList.forEach((surv,index) =>{
-                this.barChartLabels[index] = [];
-                let votecount:number[] = [];
-                surv.getAnswers().forEach(ans =>{
-                    this.barChartLabels[index].push(ans.getAnswer());
-                    votecount.push(ans.getVotesCount());
-                })
-                this.barChartData[index] = [{
-                    data: votecount, label: 'Votes'
-                }];
-            });            
-        }
+    setBarChart(){
+        this.surveyList.forEach((surv,index) =>{
+            this.barChartLabels[index] = [];
+            let votecount:number[] = [];
+            surv.getAnswers().forEach(ans =>{
+                this.barChartLabels[index].push(ans.getAnswer());
+                votecount.push(ans.getVotesCount());
+            });
+            this.barChartData[index] = [{
+                data: votecount, label: 'Votes'
+            }];
+        });            
+    }
 
     setState() {
         let me: Member = this.getMember();
