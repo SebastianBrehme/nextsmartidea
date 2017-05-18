@@ -30,11 +30,23 @@ export class EventService{
 
     getEventList():void{
         this.firebase.getEventList(data => {
+            //FG console.log(data);
             let elist:Event[] = [];
+            let test:Map<string, Event> = new Map<string,Event>();
             let count:number = 0;
             for(let key in data){
+                console.log(count, data[key]);
                 this.getEventWithIndex(key,(data,index) => {
-                    elist.splice(index,1,data);        
+                    test.set(key, data); 
+                    elist = Array.from(test.values());
+                    // let iterator = test.keys();
+                    // let mapkey = iterator.next().value;
+                    // while(mapkey !=null){
+                    //    console.log(mapkey);
+                    //    console.log(test.get(mapkey));
+                    //    elist.push(test.get(mapkey));
+                    //    mapkey = iterator.next().value;
+                    // }     
                     this.eventlist.next(elist);
                 },count);
                  count++;
