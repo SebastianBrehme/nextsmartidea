@@ -78,6 +78,7 @@ export class UpdateEventComponent implements OnInit {
         this.eventService.getEvent(this.key, (e:Event) => this.event = e);
 
         this.inputName = this.event.getTitle();
+        this.inputLocation = this.event.getLocation();
         this.inputDescription = this.event.getDescription();
         this.selectedType = this.event.getType();
         let dateFrom:Date = this.event.getDateFrom();
