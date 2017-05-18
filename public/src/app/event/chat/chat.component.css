@@ -24,12 +24,22 @@
   word-wrap: break-word;
   overflow: auto; 
 }
-
-
 .messages {
   overflow-y: auto;
   margin-bottom: 10px;
-  height: calc(100% - 80px);
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 30em;
+  padding: 5px;
+  border: none;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+  box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+  word-wrap: break-word;
 }
 #message-filler {
   flex-grow: 1;
