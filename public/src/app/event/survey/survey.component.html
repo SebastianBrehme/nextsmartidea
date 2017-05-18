@@ -6,7 +6,8 @@
                 <h4 (click)="titleClicked(i)" class="surveyHeading">{{surveyList[i].title}}</h4>
             </div>
             <div id="surveyContent#{{i}}" class="surveyContentDropdown">
-                <h5>{{survey.question}}</h5>
+                <h5>Question: {{survey.question}}</h5>
+                Answers:
                 <div *ngIf="survey.multiple == false">
                     <fieldset>
                         <div *ngFor="let answer of survey.getAnswers();let answerIndex = index;  trackBy:customTrackBy;">
