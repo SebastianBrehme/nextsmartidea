@@ -36,4 +36,13 @@ describe('SubTask', () =>{
         subTask.eventkey = "unrvwubvzeua3wr7824gh";
         expect(subTask.getEventKey()).toBe("unrvwubvzeua3wr7824gh");
     });
+
+    it('#Who', () => 
+    {
+        subTask.setWho("max@mustermann.de");
+        expect(subTask.getWho()).toBe("max@mustermann.de");
+        let mail: string = "test@test.com";
+        subTask.setWho(mail);
+        expect(subTask.getWho()).toBe(mail);
+    });
 });
