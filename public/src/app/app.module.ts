@@ -28,10 +28,11 @@ import { ChatComponent } from './event/chat/chat.component'
 import { SurveyComponent } from './event/survey/survey.component';
 import { CreateTaskComponent } from './event/task/create-task.component';
 import { TaskComponent } from './event/task/task.component';
+import { ChartsModule} from 'ng2-charts';
 
 @NgModule({
 
-  imports: [BrowserModule, FormsModule, RoutingModule, SidebarModule.forRoot()],
+  imports: [BrowserModule, FormsModule, RoutingModule, SidebarModule.forRoot(),ChartsModule],
   declarations: [AppComponent, DashboardComponent, LoginComponent, NavBarComponent, CreateEventComponent, 
   ContactComponent, DetailViewComponent, SidebarContentComponent, UpdateEventComponent, CreateSurveyComponent,
   ChatComponent, SurveyComponent, CreateTaskComponent, TaskComponent],

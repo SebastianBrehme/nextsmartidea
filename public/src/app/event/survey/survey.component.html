@@ -6,7 +6,8 @@
                 <h4 (click)="titleClicked(i)" class="surveyHeading">{{surveyList[i].title}}</h4>
             </div>
             <div id="surveyContent#{{i}}" class="surveyContentDropdown">
-                <h5>{{survey.question}}</h5>
+                <h5>Question: {{survey.question}}</h5>
+                Answers:
                 <div *ngIf="survey.multiple == false">
                     <fieldset>
                         <div *ngFor="let answer of survey.getAnswers();let answerIndex = index;  trackBy:customTrackBy;">
@@ -18,7 +19,7 @@
                 <div *ngIf="survey.multiple">
                     <fieldset>
                         <div *ngFor="let answer of survey.getAnswers();let answerIndex = index;  trackBy:customTrackBy;">
-                            <input type="checkbox" id="mul#{{i}}#{{answerIndex}}" >
+                            <input type="checkbox" id="mul#{{i}}#{{answerIndex}}">
                             <label for="mul#{{answerIndex}}">{{answer.getAnswer()}}</label><br>
                         </div>
                     </fieldset>
@@ -27,12 +28,28 @@
                 <button class="btn btn-default voteButton" (click)="voteClicked(survey, i)">Vote</button>
                 <button class="btn btn-default voteButton" (click)="removeVotes(survey, i)" title="Remove All My Votes For This Survey">Remove Votes</button>
                 <div id="warningVote#{{i}}" class="warning"><small class="form-text text-danger">You have already voted for this survey!</small></div>
+
                 <div>
+                    <div style="display: block">
+                        <canvas baseChart 
+                        [datasets]="barChartData[i]" 
+                        [labels]="barChartLabels[i]" 
+                        [options]="barChartOptions" 
+                        [legend]="barChartLegend"
+                        [chartType]="barChartType">
+                        </canvas>
+                    </div>
+                    
+                </div>
+
+                <!--     <div>
                     <h5>Result</h5>
                     <div class="charts">
-                    <div *ngFor="let answer of survey.getAnswers();let answerIndex = index;  trackBy:customTrackBy;" >
-                        <span><b>{{answer.getAnswer()}} </b>({{answer.getVotesCount()}} Votes)</span><div *ngIf="survey.getAllVotesCount()>0" class="res" [ngStyle]="{'width.%': 100/survey.getAllVotesCount()*answer.getVotesCount()}"></div>
-                    </div>
+                        <div *ngFor="let answer of survey.getAnswers();let answerIndex = index;  trackBy:customTrackBy;">
+                            <span><b>{{answer.getAnswer()}} </b>({{answer.getVotesCount()}} Votes)</span>
+                            <div *ngIf="survey.getAllVotesCount()>0"
+                                class="res" [ngStyle]="{'width.%': 100/survey.getAllVotesCount()*answer.getVotesCount()}"></div>
+                        </div>
                     </div>
                     <ul id="chartScale">
                         <li class="halfScale scaleNull">0</li>
@@ -41,10 +58,11 @@
                         <li class="scaleData">60</li>
                         <li class="scaleData">80</li>
                         <li class="scaleData">100</li>
-                    </ul> 
+                    </ul>
                     <br>
-                </div>
+                </div>-->
             </div>
-        </div>  
+        </div>
     </div>
+    <div *ngIf="noSurvey">0 Surveys found for this Event. Click <a [routerLink]="['/create-survey', eventKey]">here</a> to create a new Survey.</div>
 </div>

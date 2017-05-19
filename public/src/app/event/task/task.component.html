@@ -3,7 +3,7 @@
     <div *ngFor="let task of taskList; let i = index; ">
         <div id="TaskContainer#{{i}}" class="taskContainer">
             <div>
-                <h4>{{task.title}}</h4>
+                <h4 (click)="titleClicked(i)" class="taskHeading">{{task.title}}</h4>
             </div>
             <div id="taskContent#{{i}}" class="taskContentDropdown">
                 <div class="input-group subtaskInput">
@@ -34,4 +34,5 @@
             </div>
         </div>
     </div>
+    <div *ngIf="noTask" >0 Tasks found for this Event. Click <a [routerLink]="['/create-task', eventKey]" >here</a> to create a new Task.</div>
 </div>

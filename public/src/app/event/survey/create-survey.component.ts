@@ -2,7 +2,7 @@ import { Component, OnInit, OnChanges, ApplicationRef } from '@angular/core';
 import { Router, ActivatedRoute, Params, Event as NavigationEvent } from '@angular/router';
 import { EventService} from '../event.service';
 import { Event } from '../event';
-import { Location } from '@angular/common'
+import { Location } from '@angular/common';
 import { Survey } from './survey';
 import { Answer } from './answer';
 import { SurveyService} from './survey.service';
@@ -14,7 +14,8 @@ import 'rxjs/add/operator/switchMap';
     templateUrl: 'create-survey.component.html'
 })
 
-export class CreateSurveyComponent implements OnInit{
+export class CreateSurveyComponent implements OnInit
+{
 
     title: string="";
     easySelected: boolean=false;
