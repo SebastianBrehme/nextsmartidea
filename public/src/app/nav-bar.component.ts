@@ -31,7 +31,7 @@ export class NavBarComponent implements OnInit{
     test = (t:boolean) => {
         //console.log('callback: '+t);
         this.loggedIn = t;
-        this.ref.tick()
+        this.ref.tick();
         
     }
 

@@ -55,28 +55,28 @@ export class Event {
     }
 
     getDescription():string{
-        return this.description
+        return this.description;
     }
     setDescription(description:string){
         this.description = description;
     }
 
     getType():string{
-        return this.type
+        return this.type;
     }
     setType(type:string){
         this.type = type;
     }
 
     getDateFrom():Date{
-        return this.date_from
+        return this.date_from;
     }
     setDateFrom(date_from:Date){
         this.date_from = date_from;//new Date(date_from);
     }
 
     getDateTo():Date{
-        return this.date_to
+        return this.date_to;
     }
     setDateTo(date_to:Date){
         this.date_to = date_to;//new Date(date_to);
@@ -119,7 +119,7 @@ export class Event {
     }
 
     getDateFromShortString():string{
-        return this.date_fromShortString
+        return this.date_fromShortString;
     }
     setDateFromShortString(date_fromString:string){
         this.date_fromShortString = date_fromString;

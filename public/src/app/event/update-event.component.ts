@@ -5,7 +5,7 @@ import { Event } from './event';
 import { Member } from './member';
 import { Location } from '@angular/common';
 import { UserService } from '../user.service';
-import { Subscription } from 'rxjs'
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -86,38 +86,38 @@ export class UpdateEventComponent implements OnInit {
 
 
         let dayFrom:string = dateFrom.getUTCDate().toString();
-        if(dayFrom.length < 2){ dayFrom = "0" + dayFrom}
+        if(dayFrom.length < 2){ dayFrom = "0" + dayFrom; }
 
         let monthFrom:string =  (dateFrom.getUTCMonth() + 1).toString();
-        if(monthFrom.length < 2){ monthFrom = "0" + monthFrom}
+        if(monthFrom.length < 2){ monthFrom = "0" + monthFrom; }
 
         this.inputDateFrom = dateFrom.getUTCFullYear() + "-" + monthFrom + "-" + dayFrom;
         //console.log(this.inputDateFrom);
 
 
         let dayTo:string = dateTo.getUTCDate().toString();
-        if(dayTo.length < 2){ dayTo = "0" + dayTo}
+        if(dayTo.length < 2){ dayTo = "0" + dayTo; }
 
         let monthTo:string = (dateTo.getUTCMonth() + 1).toString();
-        if(monthTo.length < 2){ monthTo = "0" + monthTo}
+        if(monthTo.length < 2){ monthTo = "0" + monthTo; }
 
         this.inputDateTo = dateTo.getUTCFullYear() + "-" + monthTo + "-" + dayTo;
         //console.log(this.inputDateTo);
         
         let timeHoursFrom:string = this.event.getDateFrom().getHours().toString();
-        if(timeHoursFrom.length < 2){ timeHoursFrom = "0" + timeHoursFrom}
+        if(timeHoursFrom.length < 2){ timeHoursFrom = "0" + timeHoursFrom; }
 
         let timeMinutesFrom:string = this.event.getDateFrom().getMinutes().toString();
-        if(timeMinutesFrom.length < 2){ timeMinutesFrom = "0" + timeMinutesFrom}
+        if(timeMinutesFrom.length < 2){ timeMinutesFrom = "0" + timeMinutesFrom; }
 
         this.inputTimeFrom = timeHoursFrom + ":" + timeMinutesFrom;
 
 
         let timeHoursTo:string = this.event.getDateTo().getHours().toString();
-        if(timeHoursTo.length < 2){ timeHoursTo = "0" + timeHoursTo}
+        if(timeHoursTo.length < 2){ timeHoursTo = "0" + timeHoursTo; }
 
         let timeMinutesTo:string = this.event.getDateTo().getMinutes().toString();
-        if(timeMinutesTo.length < 2){ timeMinutesTo = "0" + timeMinutesTo}
+        if(timeMinutesTo.length < 2){ timeMinutesTo = "0" + timeMinutesTo; }
 
         this.inputTimeTo = timeHoursTo + ":" + timeMinutesTo;
 
@@ -283,9 +283,9 @@ export class UpdateEventComponent implements OnInit {
         if (this.inputDateFrom) {
 
             if(this.inputTimeFrom){
-                this.dateFrom = this.transformDate(this.inputDateFrom, this.inputTimeFrom)
+                this.dateFrom = this.transformDate(this.inputDateFrom, this.inputTimeFrom);
             }else{
-                this.dateFrom = this.transformDate(this.inputDateFrom)
+                this.dateFrom = this.transformDate(this.inputDateFrom);
             }
             
             
@@ -307,9 +307,9 @@ export class UpdateEventComponent implements OnInit {
         if (this.inputDateTo) {
             
             if(this.inputTimeTo){
-                this.dateTo = this.transformDate(this.inputDateTo, this.inputTimeTo)
+                this.dateTo = this.transformDate(this.inputDateTo, this.inputTimeTo);
             }else{
-                this.dateTo = this.transformDate(this.inputDateTo)
+                this.dateTo = this.transformDate(this.inputDateTo);
             }
 
             if(this.dateFrom <= this.dateTo){
@@ -361,7 +361,7 @@ export class UpdateEventComponent implements OnInit {
 
 
     checkMailValidity(email: string): boolean {
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
     }
 

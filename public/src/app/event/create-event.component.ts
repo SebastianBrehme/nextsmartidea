@@ -195,9 +195,9 @@ export class CreateEventComponent implements OnInit {
         if (this.inputDateFrom) {
 
             if(this.inputTimeFrom){
-                this.dateFrom = this.transformDate(this.inputDateFrom, this.inputTimeFrom)
+                this.dateFrom = this.transformDate(this.inputDateFrom, this.inputTimeFrom);
             }else{
-                this.dateFrom = this.transformDate(this.inputDateFrom)
+                this.dateFrom = this.transformDate(this.inputDateFrom);
             }
             
             
@@ -219,9 +219,9 @@ export class CreateEventComponent implements OnInit {
         if (this.inputDateTo) {
             
             if(this.inputTimeTo){
-                this.dateTo = this.transformDate(this.inputDateTo, this.inputTimeTo)
+                this.dateTo = this.transformDate(this.inputDateTo, this.inputTimeTo);
             }else{
-                this.dateTo = this.transformDate(this.inputDateTo)
+                this.dateTo = this.transformDate(this.inputDateTo);
             }
 
             if(this.dateFrom < this.dateTo){
@@ -283,7 +283,7 @@ export class CreateEventComponent implements OnInit {
     }
 
     checkMailValidity(email: string): boolean {
-        var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return re.test(email);
     }
 

@@ -35,7 +35,7 @@ export class SurveyComponent implements OnInit, OnChanges {
     public barChartType: string = 'bar';
     public barChartLegend: boolean = true;
 
-    public barChartData: any[][] = []
+    public barChartData: any[][] = [];
        
 
     constructor(

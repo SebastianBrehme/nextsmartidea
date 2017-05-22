@@ -55,7 +55,7 @@ export class TaskService {
         let subtasks:SubTask[] = [];
         task.forEach(temp =>{
             subtasks = subtasks.concat(temp.getUserSubTasks(user,key));
-        })
+        });
         return subtasks;
     }
 }

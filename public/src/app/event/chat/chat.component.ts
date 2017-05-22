@@ -44,7 +44,7 @@ export class ChatComponent implements OnInit, OnDestroy{
             this.unsubscribeSubscriptions();
             this.chatKey = key;
             this.initializeChat();
-        })
+        });
     }
 
     ngOnDestroy(){

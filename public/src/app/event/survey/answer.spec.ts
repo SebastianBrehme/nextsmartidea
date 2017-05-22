@@ -7,7 +7,7 @@ describe('Answer',()=>{
     let members:Member[] = [];
     
     beforeEach(()=>{
-        answer = new Answer(astring)
+        answer = new Answer(astring);
         members.push(new Member('eins','id'));
         members.push(new Member('zwei','ida'));
     });
