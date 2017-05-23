@@ -15,7 +15,6 @@ export class UserService{
 
     setLogedIn(log:boolean):void{
         this.logedIn = log;
-        //console.log('set logedIn to: '+this.logedIn);
         for(let callbacks in this.mycallback){
             this.mycallback[callbacks](log);
         }

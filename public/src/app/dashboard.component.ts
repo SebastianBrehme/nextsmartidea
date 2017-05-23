@@ -41,13 +41,9 @@ export class DashboardComponent implements OnDestroy{
     }
 
     ngOnDestroy(){
-        //this.event.removeCallback(this.updateList);
         if(this.listSubjectSubscribtion){
-            ////console.log("eins");
             if(typeof this.listSubjectSubscribtion != "undefined"){
-                ////console.log("zwei");
                 if(!this.listSubjectSubscribtion.closed){
-                    ////console.log("drei - unsubscribe");
                     this.listSubjectSubscribtion.unsubscribe();
                 }  
             }
@@ -118,25 +114,12 @@ export class DashboardComponent implements OnDestroy{
     customTrackBy(index: number, obj: any): any {
         return index;
     }
-    
-    /* OLD AND FATT AND DEPRECATED
-    updateList = (list:Event[]) => {
-        if(this && this.ref){
-        //console.log('updateList -dashboard: '+list);
-        this.eventList = list;
-        this.showEvents = true;
-        this.ref.tick()
-        
-        }
-    }*/
 
     doEvent(): void{
-        //console.log('dashboard: doEvent');
         
     }
 
     deleteButtonClicked(key?:any){
-        //console.log("deleteButtonClicked: key: " + key);
         if (!e) var e = window.event;
         e.cancelBubble = true;
         if (e.stopPropagation) e.stopPropagation();
@@ -167,7 +150,6 @@ export class DashboardComponent implements OnDestroy{
         if (a > b) {
             return 1;
         }
-        // a muss gleich b sein
         return 0;
     }
 }

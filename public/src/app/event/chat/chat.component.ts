@@ -15,8 +15,6 @@ import { Subscription} from 'rxjs';
 
 export class ChatComponent implements OnInit, OnDestroy{
 
-    //event:Event;
-    
     chatKey: string;
 
     messageList: Array<Message> = [];
@@ -25,9 +23,7 @@ export class ChatComponent implements OnInit, OnDestroy{
     chatKeyChangedSubsciption: Subscription;
     getListAsReplaySubjectSubsciption: Subscription;
 
-    //workaround
     first:boolean;
-
 
     constructor(
         private eventService: EventService,

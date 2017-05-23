@@ -8,9 +8,7 @@ declare var firebase:any;
 export class FirebaseSurveyService{
 
     createSurvey(sur:Survey, ekey:string): void{
-        //console.log("create a new survey in Database "+sur);
         let newSurKey = firebase.database().ref('/EVENT/'+ekey+'/SURVEY/').push().key;
-        //console.log("New Survey Key: "+newSurKey);
 
         let surData = {
             AUTHOR: sur.getAuthor(),
@@ -31,21 +29,18 @@ export class FirebaseSurveyService{
     }
 
     deleteSurvey(key:string, ekey:string): void{
-        //console.log("delete survey in database with key: "+key);
         let update = {};
         update['/EVENT/'+ekey+'/SURVEY/'+key] = null;
         firebase.database().update(update);
     }
 
     vote(ekey:string,skey:string,answerkey:string, member:Member): void{
-        //console.log("voted for "+ answerkey+" in poll "+skey+" by member");
         let update={};
         update['/EVENT/'+ekey+'/SURVEY/'+skey+'/ANSWER/'+answerkey+'/'+member.getID()] = member.getEmail();
         firebase.database().ref().update(update);
     }
 
     unvote(ekey:string,skey:string,answerkey:string, member:Member,set:boolean): void{
-        //console.log("unvoted for "+ answerkey+" in poll "+skey+" by member");
         let update={};
         if(set){
              update['/EVENT/'+ekey+'/SURVEY/'+skey+'/ANSWER/'+answerkey] = true;

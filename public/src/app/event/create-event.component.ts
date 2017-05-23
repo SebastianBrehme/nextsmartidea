@@ -63,7 +63,6 @@ export class CreateEventComponent implements OnInit {
             this.showWarningLastInvite = false;
             this.ref.tick();
         } else if (this.currentInviteString.length < 1) {
-            //do nothing
         } else {
             this.showWarningLastInvite = true;
             this.ref.tick();
@@ -78,8 +77,6 @@ export class CreateEventComponent implements OnInit {
     }
 
     onSubmitClicked() {
-
-        //add the last invite to invitesList
         this.onAddInviteClicked();
     
         let checkSubmitName: boolean = this.checkName();
@@ -96,7 +93,6 @@ export class CreateEventComponent implements OnInit {
         
         if (checkAll) {
             this.setEvent();
-
         }
     }
 
@@ -123,9 +119,6 @@ export class CreateEventComponent implements OnInit {
             }
             this.newEvent.setMember(memberList);
         }
-
-        //console.log("Created Event: " + this.newEvent.getTitle());
-        //console.log(this.newEvent);
         this.sendEvent();
         this.router.navigate(['']);
         
@@ -173,18 +166,10 @@ export class CreateEventComponent implements OnInit {
         dateLocal.setUTCDate(Number (date.charAt(8) + date.charAt(9)));
 
         if(time){
-            //dateLocal.setUTCHours((Number (time.charAt(0) + time.charAt(1))) - 1);
             dateLocal.setHours((Number (time.charAt(0) + time.charAt(1))));
             dateLocal.setMinutes(Number (time.charAt(3) + time.charAt(4)));
         }
         
-
-        //console.log("Date: " + dateLocal);
-        //console.log("Day: " + dateLocal.getUTCDate());
-        //console.log("Month: " + (dateLocal.getUTCMonth() + 1));
-        //console.log("Year: " + dateLocal.getUTCFullYear());
-        //console.log("Time: " + (dateLocal.getUTCHours() + 1) + ":" + dateLocal.getUTCMinutes());
-
         return dateLocal;
     }
 
@@ -210,7 +195,6 @@ export class CreateEventComponent implements OnInit {
                 this.showWarningDateFrom = true;
             }
         }else{
-            //date is optional
             dateFromChecked = true;
         }
 
@@ -262,7 +246,6 @@ export class CreateEventComponent implements OnInit {
         for (let invite of this.invitesList) {
             if (this.checkMailValidity(invite.email)) {
                 invite.validated = true;
-                //console.log("checked " + invite.email);
             } else {
                 invite.validated = false;
                 check = false;

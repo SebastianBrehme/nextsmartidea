@@ -102,7 +102,6 @@ export class UpdateEventComponent implements OnInit {
         if(monthTo.length < 2){ monthTo = "0" + monthTo; }
 
         this.inputDateTo = dateTo.getUTCFullYear() + "-" + monthTo + "-" + dayTo;
-        //console.log(this.inputDateTo);
         
         let timeHoursFrom:string = this.event.getDateFrom().getHours().toString();
         if(timeHoursFrom.length < 2){ timeHoursFrom = "0" + timeHoursFrom; }
@@ -128,9 +127,7 @@ export class UpdateEventComponent implements OnInit {
             }
         }
 
-        //console.log(this.inputName, this.inputDateFrom, this.invitesList);
         this.ref.tick();
-        
     }
 
     goBack(): void {
@@ -149,7 +146,7 @@ export class UpdateEventComponent implements OnInit {
             this.showWarningLastInvite = false;
             this.ref.tick();
         } else if (this.currentInviteString.length < 1) {
-            //do nothing
+            // do nothing
         } else {
             this.showWarningLastInvite = true;
             this.ref.tick();
@@ -165,7 +162,7 @@ export class UpdateEventComponent implements OnInit {
 
     onSubmitClicked() {
 
-        //add the last invite to invitesList
+        // add the last invite to invitesList
         this.onAddInviteClicked();
 
         let checkSubmitName: boolean = this.checkName();
@@ -210,16 +207,12 @@ export class UpdateEventComponent implements OnInit {
         }
         this.newEvent.setKey(this.key);
 
-        //console.log("Created Event: " + this.newEvent.getTitle());
-        //console.log(this.newEvent);
         this.sendEvent();
         this.router.navigate(['/detail', this.key]);
         
     }
 
     sendEvent():void{
-        //console.log("new Evenr:");
-        //console.log(this.newEvent);
         this.eventService.updateEvent(this.newEvent, this.event);
     }
 
@@ -261,17 +254,15 @@ export class UpdateEventComponent implements OnInit {
         dateLocal.setUTCDate(Number (date.charAt(8) + date.charAt(9)));
 
         if(time){
-            //dateLocal.setUTCHours((Number (time.charAt(0) + time.charAt(1))) - 1);
             dateLocal.setHours((Number (time.charAt(0) + time.charAt(1))));
             dateLocal.setMinutes(Number (time.charAt(3) + time.charAt(4)));
         }
         
-
-        //console.log("Date: " + dateLocal);
-        //console.log("Day: " + dateLocal.getUTCDate());
-        //console.log("Month: " + (dateLocal.getUTCMonth() + 1));
-        //console.log("Year: " + dateLocal.getUTCFullYear());
-        //console.log("Time: " + (dateLocal.getUTCHours() + 1) + ":" + dateLocal.getUTCMinutes());
+        // console.log("Date: " + dateLocal);
+        // console.log("Day: " + dateLocal.getUTCDate());
+        // console.log("Month: " + (dateLocal.getUTCMonth() + 1));
+        // console.log("Year: " + dateLocal.getUTCFullYear());
+        // console.log("Time: " + (dateLocal.getUTCHours() + 1) + ":" + dateLocal.getUTCMinutes());
 
         return dateLocal;
     }
@@ -298,7 +289,7 @@ export class UpdateEventComponent implements OnInit {
                 this.showWarningDateFrom = true;
             }
         }else{
-            //date is optional
+            // date is optional
             dateFromChecked = true;
         }
 

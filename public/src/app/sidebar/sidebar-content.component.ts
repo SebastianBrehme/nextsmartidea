@@ -25,14 +25,12 @@ export class SidebarContentComponent {
 
     ngOnInit() {
         this.eventList = [];
-        //this.event.getEventList(this.updateList);
         this.listSubjectSubscribtion = this.event.getListAsReplaySubject().subscribe(list =>{
             this.zone.run(() => {
                 if(this && this.ref){
                      list = list.sort(this.compare);
                     this.eventList = list;                   
-                    this.showEvents = true;                    
-                //this.ref.tick();
+                    this.showEvents = true;    
                 }
             });
         });
@@ -65,7 +63,6 @@ export class SidebarContentComponent {
         if (a > b) {
             return 1;
         }
-        // a muss gleich b sein
         return 0;
     }
 

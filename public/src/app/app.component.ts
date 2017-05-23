@@ -20,27 +20,21 @@ export class AppComponent implements OnInit{
         ){}
     
     ngOnInit() { 
-        //console.log('ngOnInit [app.component]');
         this.user.setLogedInCallback(this.test);
     }
 
 
     test = (t:boolean) => {
-        //console.log('callback: '+t);
         this.loggedIn = t;
         this.ref.tick();
-        
-        //console.log("app.component: loggedIN = true");
     }
 
   _toggleSidebar() {
     this._open = !this._open;
-    //console.log("open sidebar");
     this.ref.tick();
   }
   _closeSidebar() {
       this._open = false;
       this.ref.tick();
   }
-
 }

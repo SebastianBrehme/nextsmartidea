@@ -49,7 +49,6 @@ export class DetailViewComponent implements OnInit{
             this.event = e;
             this.chatService.chatKeyChangedEvent.emit(this.event.getChatKey()); 
             this.ref.tick();
-            //console.log("updateEvent -detail-view");
         });
     }
 
