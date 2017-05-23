@@ -33,7 +33,7 @@ export class Answer{
         let n = 0;
         for(let tmember in this.votes){           
             if(this.votes[tmember].equals(member)){
-                this.votes.splice(n,1)
+                this.votes.splice(n,1);
             }
             n++;
         }

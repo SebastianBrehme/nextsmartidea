@@ -24,7 +24,7 @@ import { SidebarModule } from 'ng-sidebar';
 import { SidebarContentComponent } from './sidebar/sidebar-content.component';
 import { UpdateEventComponent } from './event/update-event.component';
 import { CreateSurveyComponent } from './event/survey/create-survey.component';
-import { ChatComponent } from './event/chat/chat.component'
+import { ChatComponent } from './event/chat/chat.component';
 import { SurveyComponent } from './event/survey/survey.component';
 import { CreateTaskComponent } from './event/task/create-task.component';
 import { TaskComponent } from './event/task/task.component';

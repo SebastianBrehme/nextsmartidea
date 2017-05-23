@@ -47,7 +47,7 @@ export class SurveyService{
                 if(data[skey]['ANSWER'][akey] instanceof Object){
                     //there are votes
                     //console.log('there are votes');
-                    let member:Member[] = []
+                    let member:Member[] = [];
                     for(let mkey in data[skey]['ANSWER'][akey]){
                         let mtemp:Member = new Member(data[skey]['ANSWER'][akey][mkey],mkey);
                         member.push(mtemp);

@@ -34,14 +34,14 @@ export class Event {
     }
 
     getKey():string{
-        return this.key
+        return this.key;
     }
     setKey(key:string){
         this.key = key;
     }
 
     getAuthor():string{
-        return this.author
+        return this.author;
     }
     setAuthor(author:string){
         this.author = author;
