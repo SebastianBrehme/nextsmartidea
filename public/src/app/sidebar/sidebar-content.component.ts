@@ -15,6 +15,7 @@ export class SidebarContentComponent {
     listSubjectSubscribtion:Subscription;
     showEvents: boolean = false;
     myTaskList: any[] = [];
+    tasksPerEventList: TasksEvent[] = [];
 
     @Output() closeSidebar: EventEmitter<any> = new EventEmitter();
 
@@ -48,6 +49,44 @@ export class SidebarContentComponent {
     getTasks(){
         this.myTaskList = this.event.getTaskList(this.eventList);
         console.log(this.myTaskList);
+
+        this.sortTasks();
+    }
+
+    sortTasks(){
+        let hit: boolean = false;
+        let localTaskList: any = [];
+        this.tasksPerEventList = [];
+
+        for(let task of this.myTaskList){
+            
+            for(let eTask of this.tasksPerEventList){
+                if(eTask.eventKey == task.eventkey){
+                    eTask.tasks.push(task);
+                    hit = true;
+                }else{
+                    hit = false;
+                }
+            }
+            if(!hit){
+                localTaskList = [];
+                localTaskList.push(task);
+                this.tasksPerEventList.push({eventKey: task.eventkey, name: "...", tasks: localTaskList});
+                this.event.getEvent(task.eventkey, this.callbackGetEvent);
+            }
+
+        }
+    }
+
+    callbackGetEvent = (any) => {
+        if(typeof this.tasksPerEventList !== "undefined"){
+            for(let taskList of this.tasksPerEventList){
+                if(taskList.eventKey == any.key){
+                    taskList.name = any.title;
+                }
+        }
+        }
+        
     }
 
     /*updateList = (list: Event[]) => {
@@ -78,4 +117,9 @@ export class SidebarContentComponent {
     }
 
 
+}
+interface TasksEvent {
+    eventKey: string;
+    name: any;
+    tasks: any[];
 }

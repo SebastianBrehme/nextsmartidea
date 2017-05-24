@@ -10,10 +10,23 @@
     <br>
     <br>
     <h4>My Tasks</h4>
-
+<!--
     <div *ngFor="let task of myTaskList; let index = index; trackBy:customTrackBy;" [routerLink]="['/detail', task.eventkey]" name="myTaskList" (click)="handleEventClicked()">
         <a style="cursor:pointer;" id="taskSidebar#{{index}}">{{task.title}}</a>
     </div>
+-->
+<div *ngIf="tasksPerEventList">
+    <div *ngFor="let taskList of tasksPerEventList; let index = index; trackBy:customTrackBy;" name="myTaskPerEventList">
+       
+        <div *ngFor="let task of taskList.tasks; let i = index; trackBy:customTrackBy;" [routerLink]="['/detail', task.eventkey]" name="myTaskEventList" (click)="handleEventClicked()">
+            <a style="cursor:pointer;" id="taskSidebar#{{index}}{{i}}">{{task.title}}</a>
+        </div>
+            <small >&nbsp; -{{taskList.name}}</small>
+         <br>
+         <br>
+    </div>
+
+    </div>
+</div>
 
 <br>
-</div>
