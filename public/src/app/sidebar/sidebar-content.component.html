@@ -6,5 +6,14 @@
         <a style="cursor:pointer;" id="eventSidebar#{{index}}">{{event.title}}</a>
     </div>
 
+
+    <br>
+    <br>
+    <h4>My Tasks</h4>
+
+    <div *ngFor="let task of myTaskList; let index = index; trackBy:customTrackBy;" [routerLink]="['/detail', task.eventkey]" name="myTaskList" (click)="handleEventClicked()">
+        <a style="cursor:pointer;" id="taskSidebar#{{index}}">{{task.title}}</a>
+    </div>
+
 <br>
 </div>

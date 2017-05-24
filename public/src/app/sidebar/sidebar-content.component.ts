@@ -14,6 +14,7 @@ export class SidebarContentComponent {
     eventList: Event[];
     listSubjectSubscribtion:Subscription;
     showEvents: boolean = false;
+    myTaskList: any[] = [];
 
     @Output() closeSidebar: EventEmitter<any> = new EventEmitter();
 
@@ -28,7 +29,8 @@ export class SidebarContentComponent {
         this.listSubjectSubscribtion = this.event.getListAsReplaySubject().subscribe(list =>{
             this.zone.run(() => {
                 if(this && this.ref){
-                     list = list.sort(this.compare);
+                    list = list.sort(this.compare);
+                    this.getTasks();
                     this.eventList = list;                   
                     this.showEvents = true;    
                 }
@@ -42,6 +44,10 @@ export class SidebarContentComponent {
 
     customTrackBy(index: number, obj: any): any {
         return index;
+    }
+    getTasks(){
+        this.myTaskList = this.event.getTaskList(this.eventList);
+        console.log(this.myTaskList);
     }
 
     /*updateList = (list: Event[]) => {
