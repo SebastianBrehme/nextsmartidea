@@ -2,7 +2,7 @@ require 'rubygems'
 require 'selenium-cucumber'
 
 # Store command line arguments
-$browser_type = ENV['BROWSER'] || 'chrome'
+$browser_type = ENV['BROWSER'] || 'ff'
 $platform = ENV['PLATFORM'] || 'desktop'
 $os_version = ENV['OS_VERSION']
 $device_name = ENV['DEVICE_NAME']
