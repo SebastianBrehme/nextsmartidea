@@ -6,7 +6,7 @@ Feature: Create Event
  Scenario: Create Event failed
  Given I navigate to "https://smartevent-a3c4f.firebaseapp.com/login"
  And I wait for 4 sec
- And I click on link having text "Logintestestest"
+ And I click on link having text "Login"
  And I wait for 2 sec
  And I enter "nextsmartidea@gmail.com" into input field having id "Email"
  And I click on element having id "next"
