@@ -4,7 +4,7 @@ Feature: Create Event
  I want to create a Event
 
  Scenario: Create Event failed
- Given I navigate to "localhost:4200/login"
+ Given I navigate to "http://localhost:4200/login"
  And I wait for 4 sec
  And I click on link having text "Login"
  And I wait for 2 sec
@@ -28,7 +28,7 @@ Feature: Create Event
  Then element having class "text-danger" should have text as "Date-From has to be before Date-To"
 
  Scenario: Create Event failed
- Given I navigate to "localhost:4200/login"
+ Given I navigate to "http://localhost:4200/login"
  And I wait for 4 sec
  When I click on element having id "createEvent"
  And I wait for 2 sec
@@ -43,7 +43,7 @@ Feature: Create Event
  Then element having class "text-danger" should have text as "please agree..."
 
  Scenario: Create Event works fine
- Given I navigate to "localhost:4200/login"
+ Given I navigate to "http://localhost:4200/login"
  And I wait for 4 sec
  When I click on element having id "createEvent"
  And I wait for 2 sec
