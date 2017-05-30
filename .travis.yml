@@ -22,7 +22,9 @@ install:
   - gem install selenium-webdriver
   - gem install cucumber
 script:
+  - cd ..
   - cucumber
+  - cd public
   - ng test --single-run --code-coverage
   - ng build --prod
 after_success:
