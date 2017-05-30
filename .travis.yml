@@ -31,7 +31,7 @@ install:
   - gem list
 script:
   - cd ..
-  - cucumber
+  - sudo cucumber
   - cd public
   - ng test --single-run --code-coverage
   - ng build --prod
