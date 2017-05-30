@@ -20,6 +20,7 @@ install:
   - npm install coveralls --save-dev
   - npm install
 script:
+  - cucumber
   - ng test --single-run --code-coverage
   - ng build --prod
 after_success:
