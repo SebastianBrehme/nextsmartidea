@@ -20,7 +20,10 @@ install:
   - npm install coveralls --save-dev
   - npm install
   - gem install selenium-webdriver
+  - gem install selenium-cucumber
+  - gem install rspec
   - gem install cucumber
+  - gem list
 script:
   - cd ..
   - cucumber
