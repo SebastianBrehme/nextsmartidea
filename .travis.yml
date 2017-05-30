@@ -9,9 +9,9 @@ env:
     - DISPLAY=:99.0
     - CHROME_BIN=chromium-browser
 before_install: 
-  - wget https://github.com/mozilla/geckodriver/releases/download/v0.11.1/geckodriver-v0.11.1-linux64.tar.gz
+  - wget https://github.com/mozilla/geckodriver/releases/download/v0.16.1/geckodriver-v0.16.1-linux64.tar.gz
   - mkdir geckodriver
-  - tar -xzf geckodriver-v0.11.1-linux64.tar.gz -C geckodriver
+  - tar -xzf geckodriver-v0.16.1-linux64.tar.gz -C geckodriver
   - export PATH=$PATH:$PWD/geckodriver
   - cd public
 before_script:
@@ -26,8 +26,6 @@ install:
   - npm install
   - gem install selenium-webdriver
   - gem install selenium-cucumber
-  - gem install rspec
-  - gem install cucumber
   - gem list
 script:
   - cd ..
