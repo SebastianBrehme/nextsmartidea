@@ -11,6 +11,9 @@ env:
 before_install: cd public
 before_script:
   - sh -e /etc/init.d/xvfb start
+  - sleep 3
+  - rackup
+  - sleep 3
 install:
   - npm install -g firebase-tools
   - npm install -g @angular/cli
@@ -23,6 +26,11 @@ after_success:
   - npm run coveralls
   - cd ..
 
+addons:
+  sauce_connect:
+    username: ${SAUCEUSER}
+    access_key: ${SAUCEKEY}
+    
 deploy:
   skip_cleanup: true
   on:
