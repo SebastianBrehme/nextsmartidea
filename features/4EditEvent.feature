@@ -4,7 +4,7 @@ As Member
 I want to edit an event
 
 Scenario: Edit Event failed
- Given I navigate to "https://smartevent-a3c4f.firebaseapp.com/login"
+ Given I navigate to "http://localhost:4200/login"
  And I wait for 4 sec
  When I click on element having id "eventContainer#0:0" 
  And I wait for 2 sec
@@ -21,7 +21,7 @@ Scenario: Edit Event failed
  Then element having class "text-danger" should have text as "Date-From has to be before Date-To"
 
 Scenario: Edit Event works fine
- Given I navigate to "https://smartevent-a3c4f.firebaseapp.com/login"
+ Given I navigate to "http://localhost:4200/login"
  And I wait for 4 sec
  When I click on element having id "eventContainer#0:0" 
  And I wait for 2 sec

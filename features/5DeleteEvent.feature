@@ -4,7 +4,7 @@ As member
 I want to delete an event
 
 Scenario: Delete Event works fine
- Given I navigate to "https://smartevent-a3c4f.firebaseapp.com/login"
+ Given I navigate to "http://localhost:4200/login"
  And I wait for 4 sec
  When I click on element having class "button-deleteEvent"
  And I wait for 2 sec

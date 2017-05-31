@@ -4,7 +4,7 @@ As Member
 I want to invite someone to my Event
  
 Scenario: Add Member works fine
- Given I navigate to "https://smartevent-a3c4f.firebaseapp.com/login"
+ Given I navigate to "http://localhost:4200/login"
  And I wait for 4 sec 
  When I click on element having id "eventContainer#0:0" 
  And I wait for 2 sec

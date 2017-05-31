@@ -5,20 +5,23 @@ Feature: Create Event
 
  Scenario: Get Green
  Given I navigate to "http://localhost:4200/login"
-
- Scenario: Create Event failed
- Given I navigate to "http://localhost:4200/login"
  And I wait for 4 sec
  And I click on link having text "Login"
  And I wait for 2 sec
+
+ Scenario: Create Event failed
+ Given I navigate to "http://localhost:4200/login"
+ And I wait for 8 sec
+ And I click on link having text "Login"
+ And I wait for 8 sec
  And I enter "nextsmartidea@gmail.com" into input field having id "identifierId"
  And I click on element having class "CwaK9"
- And I wait for 2 sec
- And I enter "ideasmartnext" into input field having class "whsOnd zHQkBf"
- And I click on element having id "signIn"
- And I wait for 4 sec
+ And I wait for 8 sec
+ And I enter "PASSWORD_ENCRYPT" into input field having name "password"
+ And I click on element having class "ZFr60d"
+ And I wait for 8 sec
  When I click on element having id "createEvent"
- And I wait for 2 sec
+ And I wait for 8 sec
  And I enter "New Create Event Test" into input field having id "eventName"
  And I enter "Description Text" into input field having id "eventDescription"
  And I select "Party" option by text from dropdown having id "eventType"

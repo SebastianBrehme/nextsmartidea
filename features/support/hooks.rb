@@ -33,7 +33,7 @@ Before do |scenario|
     #puts platform[:version]
     #puts platform[:platform]
 
-    run platform[:browserName],platform[:version],platform[:platform],scenario
+   # run platform[:browserName],platform[:version],platform[:platform],scenario
   end
 end
 
@@ -60,18 +60,18 @@ def run (browser,version,platform,scenario)
 end
 
 After do |scenario|
-    sessionid = @browser.send(:bridge).session_id
-  jobname = "#{scenario.feature.name} - #{scenario.name}"
+ #   sessionid = @browser.send(:bridge).session_id
+ # jobname = "#{scenario.feature.name} - #{scenario.name}"
 
-  puts "SauceOnDemandSessionID=#{sessionid} job-name=#{jobname}"
+ # puts "SauceOnDemandSessionID=#{sessionid} job-name=#{jobname}"
 
-  @browser.quit
+ # @browser.quit
 
-  if scenario.passed?
-    SauceWhisk::Jobs.pass_job sessionid
-  else
-    SauceWhisk::Jobs.fail_job sessionid
-  end
+ # if scenario.passed?
+ #   SauceWhisk::Jobs.pass_job sessionid
+ # else
+ #   SauceWhisk::Jobs.fail_job sessionid
+ # end
 end
 
 #Tagged hooks
