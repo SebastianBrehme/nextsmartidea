@@ -1,5 +1,9 @@
 #Cucumber provides a number of hooks which allow us to run blocks at various points in the Cucumber test cycle
+begin require 'rspec/expectations'; rescue LoadError; require 'spec/expectations'; end
 require 'selenium-webdriver'
+require 'sauce_whisk'
+#require_relative '../page_objects/home_page'
+
 
 Before do
   # Do something before each scenario.
@@ -17,7 +21,7 @@ Before do |scenario|
   build_name = ENV['JENKINS_BUILD_NUMBER'] || ENV['SAUCE_BAMBOO_BUILDNUMBER'] || ENV['SAUCE_TC_BUILDNUMBER'] || ENV['SAUCE_BUILD_NAME']
   capabilities_config[:build] = build_name unless build_name.nil?
 
-  capabilities = Selenium::WebDriver::Remote::Capabilities.send(ENV['browserName'].to_sym, capabilities_config)
+  capabilities = Selenium::WebDriver::Remote::Capabilities.send('firefox'.to_sym, capabilities_config)
 
   url = "https://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}@ondemand.saucelabs.com:443/wd/hub".strip
 
