@@ -27,8 +27,6 @@ Before do |scenario|
   @browser = Selenium::WebDriver.for(:remote, :url => url, :desired_capabilities => capabilities, :http_client => client)
 end
 
-end
-
 After do |scenario|
     sessionid = @browser.send(:bridge).session_id
   jobname = "#{scenario.feature.name} - #{scenario.name}"
