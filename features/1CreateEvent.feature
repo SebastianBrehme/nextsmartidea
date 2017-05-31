@@ -3,6 +3,9 @@ Feature: Create Event
  As a member 
  I want to create a Event
 
+ Scenario: Get Green
+ Given I navigate to "http://localhost:4200/login"
+
  Scenario: Create Event failed
  Given I navigate to "http://localhost:4200/login"
  And I wait for 4 sec
