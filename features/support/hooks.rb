@@ -1,7 +1,7 @@
 #Cucumber provides a number of hooks which allow us to run blocks at various points in the Cucumber test cycle
 begin require 'rspec/expectations'; rescue LoadError; require 'spec/expectations'; end
 require 'selenium-webdriver'
-require 'sauce_whisk'
+#require 'sauce_whisk'
 #require_relative '../page_objects/home_page'
 
 
