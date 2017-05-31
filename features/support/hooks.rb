@@ -15,10 +15,10 @@ PLATFORMS = [
      },
     {'browserName': 'chrome',
      'version': '57',
-     'platform': 'LINUX',
+     'platform': 'win10',
      },
     {'browserName': 'chrome',
-     'version': '57',
+     'version': '56',
      'platform': 'win10',
      },
 ]
