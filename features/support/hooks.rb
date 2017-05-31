@@ -14,8 +14,8 @@ Before do |scenario|
   # description, or name (title + description) of the scenario that is about to be
   # executed.
   capabilities_config = {
-    :version => "57"#"#{ENV['version']}",
-    :platform => "win10" #"#{ENV['platform']}",
+    :version => "57",#"#{ENV['version']}",
+    :platform => "win10", #"#{ENV['platform']}",
     :name => "#{scenario.feature.name} - #{scenario.name}"
   }
   build_name = ENV['JENKINS_BUILD_NUMBER'] || ENV['SAUCE_BAMBOO_BUILDNUMBER'] || ENV['SAUCE_TC_BUILDNUMBER'] || ENV['SAUCE_BUILD_NAME']
