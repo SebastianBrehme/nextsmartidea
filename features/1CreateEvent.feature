@@ -11,10 +11,10 @@ Feature: Create Event
  And I wait for 4 sec
  And I click on link having text "Login"
  And I wait for 2 sec
- And I enter "nextsmartidea@gmail.com" into input field having id "Email"
- And I click on element having id "next"
+ And I enter "nextsmartidea@gmail.com" into input field having id "identifierId"
+ And I click on element having class "CwaK9"
  And I wait for 2 sec
- And I enter "ideasmartnext" into input field having id "Passwd"
+ And I enter "ideasmartnext" into input field having class "whsOnd zHQkBf"
  And I click on element having id "signIn"
  And I wait for 4 sec
  When I click on element having id "createEvent"
