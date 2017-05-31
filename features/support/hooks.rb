@@ -4,24 +4,52 @@ require 'selenium-webdriver'
 require 'sauce_whisk'
 #require_relative '../page_objects/home_page'
 
+PLATFORMS = [
+    {'browserName': 'firefox',
+     'version': '53',
+     'platform': 'android',
+     },
+    {'browserName': 'firefox',
+     'version': '53',
+     'platform': 'win10',
+     },
+    {'browserName': 'chrome',
+     'version': '57',
+     'platform': 'LINUX',
+     },
+    {'browserName': 'chrome',
+     'version': '57',
+     'platform': 'win10',
+     },
+]
 
 Before do
   # Do something before each scenario.
 end
 
 Before do |scenario|
+  for platform in PLATFORMS
+    puts platform[:browserName]
+    puts platform[:version]
+    puts platform[:platform]
+
+    run platform[:browserName],platform[:version],platform[:platform],scenario
+  end
+end
+
+def run (browser,version,platform,scenario)
   # The +scenario+ argument is optional, but if you use it, you can get the title,
   # description, or name (title + description) of the scenario that is about to be
   # executed.
   capabilities_config = {
-    :version => "57",#"#{ENV['version']}",
-    :platform => "win10", #"#{ENV['platform']}",
+    :version => version,#"#{ENV['version']}",
+    :platform => platform, #"#{ENV['platform']}",
     :name => "#{scenario.feature.name} - #{scenario.name}"
   }
   build_name = ENV['JENKINS_BUILD_NUMBER'] || ENV['SAUCE_BAMBOO_BUILDNUMBER'] || ENV['SAUCE_TC_BUILDNUMBER'] || ENV['SAUCE_BUILD_NAME']
   capabilities_config[:build] = build_name unless build_name.nil?
 
-  capabilities = Selenium::WebDriver::Remote::Capabilities.send('chrome'.to_sym, capabilities_config)
+  capabilities = Selenium::WebDriver::Remote::Capabilities.send(browser.to_sym, capabilities_config)
 
   url = "https://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}@ondemand.saucelabs.com:443/wd/hub".strip
 
