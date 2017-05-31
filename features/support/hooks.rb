@@ -5,9 +5,9 @@ require 'sauce_whisk'
 #require_relative '../page_objects/home_page'
 
 PLATFORMS = [
-    {'browserName': 'firefox',
-     'version': '53',
-     'platform': 'android',
+    {'browserName': 'chrome',
+     'version': '57',
+     'platform': 'win10',
      },
     {'browserName': 'firefox',
      'version': '53',
