@@ -75,6 +75,8 @@ export class EventService{
     }
 
     convertDataToEvent(data:any):Event{
+        console.log("data");
+        console.log(data);
         let e:Event = new Event(data['TITLE']);
             e.setAuthor(data['AUTHOR']);
             if(data['DESCRIPTION']){
@@ -90,9 +92,13 @@ export class EventService{
                 e.setType(data['TYPE']);
             }
             if(data['SURVEY']){
+                console.log("survey");
+                console.log(data['SURVEY']);
                 e.setSurvey(this.survey.convert(data['SURVEY']));
             }
             if(data['TASK']){
+                console.log("task");
+                console.log(data['TASK']);
                 e.setTask(this.task.convert(data['TASK']));
             }
             if(data['LOCATION']){
