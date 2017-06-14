@@ -9,7 +9,7 @@ WORKDIR nextsmartidea/public
 #COPY public/package.json /usr/src/app/
 #RUN npm install -g angular/cli
 #RUN npm install -g firebase-tools
-RUN npm install -g angular-cli@1.0.0-beta.28.3 && npm cache clean
+RUN npm install -g @angular/cli && npm cache clean
 RUN npm install -g firebase-tools
 RUN npm install
 
