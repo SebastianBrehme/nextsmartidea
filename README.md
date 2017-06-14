@@ -9,3 +9,20 @@ Hey Guys,
 you can find information about our project here: https://nextsmartidea.wordpress.com/
 
 link to our web-app: https://smartevent-a3c4f.firebaseapp.com/
+
+# Install this to run it locally
+- Make sure you have installed Nodejs Version 6.9 or higher
+- Clone this repository
+- Navigate in the public folder
+- Run the following commands (should be the same on every platform)
+```
+npm install -g @angular/cli
+npm install -g firebase-tools
+npm install
+```
+# RUN IT!
+Still in the public folder
+```
+ng serve
+```
+*Congrats you made it!*
