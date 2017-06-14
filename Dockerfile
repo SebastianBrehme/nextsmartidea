@@ -17,6 +17,6 @@ RUN npm install
 # Bundle app source
 
 
-EXPOSE 8080
+EXPOSE 4200
 
 CMD cd ./../../../../../nextsmartidea/public/ &&  ng serve
