@@ -19,4 +19,4 @@ RUN npm install
 
 EXPOSE 8080
 
-CMD cd ./nextsmartidea/public/ &&  ng serve
+CMD cd ./../../../../../nextsmartidea/public/ &&  ng serve
