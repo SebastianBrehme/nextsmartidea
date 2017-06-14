@@ -38,4 +38,4 @@ All you need to do:
 ```
 docker run --rm --name smartevent -p 4200:4200 nextsmartidea/nextsmartidea
 ```
-(Feel free to configer as you wish...)
+(Feel free to configuer docker params as you wish...)
