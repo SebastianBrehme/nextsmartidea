@@ -32,14 +32,14 @@ Before do |scenario|
   # description, or name (title + description) of the scenario that is about to be
   # executed.
   capabilities_config = {
-    :version => "54",#"#{ENV['version']}",
+    :version => "57",#"#{ENV['version']}",
     :platform => "win10", #"#{ENV['platform']}",
     :name => "#{scenario.feature.name} - #{scenario.name}"
   }
   build_name = ENV['JENKINS_BUILD_NUMBER'] || ENV['SAUCE_BAMBOO_BUILDNUMBER'] || ENV['SAUCE_TC_BUILDNUMBER'] || ENV['SAUCE_BUILD_NAME']
   capabilities_config[:build] = build_name unless build_name.nil?
 
-  capabilities = Selenium::WebDriver::Remote::Capabilities.send("firefox".to_sym, capabilities_config)
+  capabilities = Selenium::WebDriver::Remote::Capabilities.send("chrome".to_sym, capabilities_config)
 
   url = "https://#{ENV['SAUCE_USERNAME']}:#{ENV['SAUCE_ACCESS_KEY']}@ondemand.saucelabs.com:443/wd/hub".strip
 

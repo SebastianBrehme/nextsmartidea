@@ -10,9 +10,16 @@ Scenario: Add Member works fine
  And I wait for 2 sec
  And I click on element having id "buttonEdit"
  And I wait for 2 sec
- And I enter "fbaain@gmail.com" into input field having name "currentInviteString"
+  And I clear input field having id "inputDateFrom"
+ And I clear input field having id "inputTimeFrom"
+ And I clear input field having id "inputDateTo"
+ And I clear input field having id "inputTimeTo"
+ And I enter "10.10.2016" into input field having id "inputDateFrom"
+ And I enter "19:00" into input field having id "inputTimeFrom"
+ And I enter "10.10.2016" into input field having id "inputDateTo"
+ And I enter "20:00" into input field having id "inputTimeTo"
+ And I enter "nextsmartidea@gmail.com" into input field having name "currentInviteString"
  And I click on element having class "btn-primary"
- And I wait for 2 sec
+ And I wait for 30 sec
  Then element having class "container" should have partial text as "nextsmartidea@gmail.com"
- And element having class "container" should have partial text as "fbaain@gmail.com"
  And I wait for 2 sec

@@ -24,7 +24,7 @@ Feature: Create Event
  And I wait for 8 sec
  And I enter "New Create Event Test" into input field having id "eventName"
  And I enter "Description Text" into input field having id "eventDescription"
- And I select "Party" option by text from dropdown having id "eventType"
+# And I select "Party" option by text from dropdown having id "eventType"
  And I enter "10.10.2016" into input field having id "inputDateFrom"
  And I enter "19:00" into input field having id "inputTimeFrom"
  And I enter "10.10.2016" into input field having id "inputDateTo"
@@ -40,7 +40,7 @@ Feature: Create Event
  And I wait for 2 sec
  And I enter "New Create Event Test" into input field having id "eventName"
  And I enter "Description Text" into input field having id "eventDescription"
- And I select "Party" option by text from dropdown having id "eventType"
+ #And I select "Party" option by text from dropdown having id "eventType"
  And I enter "10.10.2016" into input field having id "inputDateFrom"
  And I enter "19:00" into input field having id "inputTimeFrom"
  And I enter "10.10.2016" into input field having id "inputDateTo"
@@ -55,7 +55,7 @@ Feature: Create Event
  And I wait for 2 sec
  And I enter "New Create Event Test" into input field having id "eventName"
  And I enter "Description Text" into input field having id "eventDescription"
- And I select "Party" option by text from dropdown having id "eventType"
+ #And I select "Party" option by text from dropdown having id "eventType"
  And I enter "10.10.2016" into input field having id "inputDateFrom"
  And I enter "19:00" into input field having id "inputTimeFrom"
  And I enter "10.10.2016" into input field having id "inputDateTo"
