@@ -5,8 +5,8 @@ require 'sauce_whisk'
 #require_relative '../page_objects/home_page'
 
 PLATFORMS = [
-    {'browserName': 'chrome',
-     'version': '57',
+    {'browserName': 'firefox',
+     'version': '54',
      'platform': 'win10',
      },
     #{'browserName': 'firefox',
@@ -28,16 +28,6 @@ Before do
 end
 
 Before do |scenario|
-  for platform in PLATFORMS
-    #puts platform[:browserName]
-    #puts platform[:version]
-    #puts platform[:platform]
-
-   # run platform[:browserName],platform[:version],platform[:platform],scenario
-  end
-end
-
-def run (browser,version,platform,scenario)
   # The +scenario+ argument is optional, but if you use it, you can get the title,
   # description, or name (title + description) of the scenario that is about to be
   # executed.
