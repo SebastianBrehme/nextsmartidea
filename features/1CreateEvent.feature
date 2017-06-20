@@ -14,10 +14,10 @@ Feature: Create Event
  And I wait for 8 sec
  And I click on link having text "Login"
  And I wait for 8 sec
- And I enter "nextsmartidea@gmail.com" into input field having id "identifierId"
+ And I enter "projecttestdummy@gmail.com" into input field having id "identifierId"
  And I click on element having class "CwaK9"
  And I wait for 8 sec
- And I enter "PASSWORD_ENCRYPT" into input field having name "password"
+ And I enter "pl,okmij" into input field having name "password"
  And I click on element having class "ZFr60d"
  And I wait for 8 sec
  When I click on element having id "createEvent"
