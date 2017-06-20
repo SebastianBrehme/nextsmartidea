@@ -31,6 +31,8 @@ Before do |scenario|
   # The +scenario+ argument is optional, but if you use it, you can get the title,
   # description, or name (title + description) of the scenario that is about to be
   # executed.
+end
+def runbefore
   capabilities_config = {
     :version => "57",#"#{ENV['version']}",
     :platform => "win10", #"#{ENV['platform']}",
@@ -50,6 +52,9 @@ Before do |scenario|
 end
 
 After do |scenario|
+
+end
+def runafter
     sessionid = @browser.send(:bridge).session_id
   jobname = "#{scenario.feature.name} - #{scenario.name}"
 

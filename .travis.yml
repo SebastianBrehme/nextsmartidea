@@ -40,9 +40,9 @@ after_success:
 
 addons:
   firefox: "latest"
-  sauce_connect:
-    username: ${SAUCEUSER}
-    access_key: ${SAUCEKEY}
+  #sauce_connect:
+  #  username: ${SAUCEUSER}
+  #  access_key: ${SAUCEKEY}
     
 deploy:
   skip_cleanup: true
